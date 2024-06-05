@@ -23,4 +23,12 @@
     <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="8.0.0" />
   </ItemGroup>
 
+  <Target Name="CopyWebRootToBin" AfterTargets="Build">
+    <ItemGroup>
+      <FilesToCopy Include="wwwroot\build\**\*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(FilesToCopy)"
+      DestinationFolder="$(OutputPath)wwwroot\build\%(RecursiveDir)" />
+  </Target>
+
 </Project>
