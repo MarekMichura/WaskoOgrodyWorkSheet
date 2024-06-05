@@ -2,7 +2,7 @@ using Microsoft.Extensions.FileProviders;
 
 public class SinglePageApplicationEndPoint : IEndPoint, IService
 {
-  private const string AppPath = "wwwroot/build";
+  private const string AppPath = "build";
   public short Priority => short.MinValue;
 
   public void DefineEndpoint(WebApplication app)

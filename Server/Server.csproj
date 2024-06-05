@@ -1,0 +1,54 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>9d58c642-0f72-459e-8f30-adb2608aa958</UserSecretsId>
+  </PropertyGroup>
+
+    
+  <Target Name="CreateDatabase" BeforeTargets="Build" Condition="!Exists('wwwroot/database.db') And !Exists('wwwroot/database.lock')">
+    <MakeDir Directories="wwwroot" Condition="!Exists('wwwroot')" />
+    <Exec Command="echo lock &gt; database.lock" WorkingDirectory=".\wwwroot" /> 
+    <Exec Command="dotnet ef migrations add InitialCreate" WorkingDirectory="." Condition="!Exists('Migrations')" /> 
+    <Exec Command="dotnet ef database update" WorkingDirectory="." />
+  </Target>
+  
+  <Target Name="PreBuild" BeforeTargets="Build" Condition="'$(Configuration)' == 'Release'">
+    <Exec Command="npm install" WorkingDirectory="..\Client" />
+    <Exec Command="npm run build" WorkingDirectory="..\Client" />
+
+    <ItemGroup>
+      <GeneratedFiles Include="..\Client\build\**\*" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(GeneratedFiles)" DestinationFolder="$(OutputPath)\build\%(RecursiveDir)" />
+  </Target>
+
+
+  <Target Name="PostPublish" AfterTargets="Publish">
+    <ItemGroup>
+      <GeneratedFiles Include="..\Client\build\**\*" />
+    </ItemGroup>
+
+    <Copy SourceFiles="@(GeneratedFiles)" DestinationFolder="$(PublishDir)\build\%(RecursiveDir)" />
+  </Target>
+
+  <ItemGroup>
+    <!-- Entity framework -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="8.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="2.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.6" />
+    <!-- SPA -->
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="8.0.6" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="8.0.0" />
+  </ItemGroup>
+
+</Project>
