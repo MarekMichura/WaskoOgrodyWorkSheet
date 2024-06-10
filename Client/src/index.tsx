@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import Login from './Login/index';
+import SetRole from './Login/setRole';
+
 import './css.css';
 
 const root = ReactDOM.createRoot(
@@ -11,10 +14,8 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<div>path/ <Outlet /></div>}>
-          <Route path='div' element={<div>div</div>} />
-          <Route path='dom' element={<div>dom</div>} />
-        </Route>
+        <Route path='/' element={<Login />} />
+        <Route path='/Role' element={<SetRole />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

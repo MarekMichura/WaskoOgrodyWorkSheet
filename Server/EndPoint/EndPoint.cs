@@ -43,7 +43,10 @@ public static partial class EXTERN
   public static void UseMiddleware(this WebApplication app)
   {
     if (!app.Environment.IsDevelopment())
+    {
       app.UseHsts();
+    }
+    app.MapControllers();
 
     app.UseHttpsRedirection();
     app.UseStaticFiles();
@@ -52,5 +55,7 @@ public static partial class EXTERN
     app.UseSession();
     app.UseAuthentication();
     app.UseAuthorization();
+
+    app.UseEndpoints(endpoint => { });
   }
 }

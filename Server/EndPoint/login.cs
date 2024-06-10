@@ -1,5 +1,6 @@
 
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
 
 class LoginEndPoint : IEndPoint
 {
@@ -7,7 +8,9 @@ class LoginEndPoint : IEndPoint
 
   public void DefineEndpoint(WebApplication app)
   {
-    app.MapPost("/Login", Login);
+    app.MapPost("/Login", Login)
+      .Accepts<LoginModel>("application/json")
+      .WithTags("Login");
 
     app.MapGet("/Logout", Logout);
   }
@@ -24,7 +27,7 @@ class LoginEndPoint : IEndPoint
     var user = await userManager.FindByNameAsync(model.Login);
 
     if (user is not null && (await signInManager.PasswordSignInAsync(user, model.Password, false, false)).Succeeded)
-      return Results.Ok();
+      return Results.Ok(await userManager.GetRolesAsync(user));
     return Results.Unauthorized();
   }
 
