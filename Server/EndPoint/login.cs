@@ -1,6 +1,9 @@
 
+using System.Net.Http.Headers;
+using System.Security.Principal;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
+using Microsoft.IdentityModel.Tokens;
 
 class LoginEndPoint : IEndPoint
 {
@@ -10,6 +13,8 @@ class LoginEndPoint : IEndPoint
   {
     app.MapPost("/Login", Login)
       .Accepts<LoginModel>("application/json")
+      .WithTags("Login");
+    app.MapGet("Login", GetLogin)
       .WithTags("Login");
 
     app.MapGet("/Logout", Logout);
@@ -21,13 +26,28 @@ class LoginEndPoint : IEndPoint
     public required string Password { get; set; }
   };
 
-  private static async Task<IResult> Login(LoginModel model, UserManager<ModelUser> userManager, SignInManager<ModelUser> signInManager)
+  private static async Task<IResult> GetLogin(HttpContext context, UserManager<ModelUser> userManager)
+  {
+    if (context.User.Identity is null)
+      return Results.Unauthorized();
+    if (!context.User.Identity.IsAuthenticated)
+      return Results.Unauthorized();
+
+    var user = await userManager.FindByNameAsync(context.User.Identity.Name ?? "");
+    if (user is null)
+      return Results.Unauthorized();
+
+    var roles = await userManager.GetRolesAsync(user);
+    return Results.Ok(roles);
+  }
+
+  private static async Task<IResult> Login(LoginModel model, SignInManager<ModelUser> signInManager)
   {
     await signInManager.SignOutAsync();
-    var user = await userManager.FindByNameAsync(model.Login);
+    var user = await signInManager.UserManager.FindByNameAsync(model.Login);
 
     if (user is not null && (await signInManager.PasswordSignInAsync(user, model.Password, false, false)).Succeeded)
-      return Results.Ok(await userManager.GetRolesAsync(user));
+      return Results.Ok(await signInManager.UserManager.GetRolesAsync(user));
     return Results.Unauthorized();
   }
 

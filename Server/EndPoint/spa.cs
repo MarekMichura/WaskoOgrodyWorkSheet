@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.FileProviders;
 
@@ -11,11 +12,11 @@ public class SinglePageApplicationEndPoint : IEndPoint, IService
   {
     app.UseSpa(spa =>
     {
-
       if (app.Environment.IsDevelopment())
       {
         spa.Options.SourcePath = AppPathDevelopment;
-        spa.UseProxyToSpaDevelopmentServer("http://localhost:3000/");
+        spa.UseReactDevelopmentServer(npmScript: "start");
+        // spa.UseProxyToSpaDevelopmentServer("http://localhost:3000/");
       }
       else
       {

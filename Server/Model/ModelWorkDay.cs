@@ -22,8 +22,6 @@ public class ModelWorkDay
   [DataType(DataType.Time)]
   public TimeSpan EndTime { get; set; }
 
-  [StringLength(50)]
-  public string Comments { get; set; } = string.Empty;
   [DataType(DataType.Currency)]
   public decimal CashRegister { get; set; }
   [DataType(DataType.Currency)]

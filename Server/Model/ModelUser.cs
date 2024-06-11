@@ -119,7 +119,6 @@ public class ModelUser : IdentityUser
   internal static IReadOnlyList<IdentityRole> DefaultRoles = [
     new RoleStorage("User"),
     new RoleStorage("Admin"),
-    new RoleStorage("Owner")
   ];
   private static IReadOnlyList<IdentityUserRole<string>> DefaultUserRoles =
   [
@@ -128,7 +127,6 @@ public class ModelUser : IdentityUser
 
     new IdentityUserRole<string>{UserId = DefaultUserData[1].Id, RoleId = DefaultRoles[0].Id},
     new IdentityUserRole<string>{UserId = DefaultUserData[1].Id, RoleId = DefaultRoles[1].Id},
-    new IdentityUserRole<string>{UserId = DefaultUserData[1].Id, RoleId = DefaultRoles[2].Id},
 
     new IdentityUserRole<string>{UserId = DefaultUserData[2].Id, RoleId = DefaultRoles[0].Id},
     new IdentityUserRole<string>{UserId = DefaultUserData[3].Id, RoleId = DefaultRoles[0].Id},
