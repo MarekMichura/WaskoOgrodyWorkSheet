@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Reflection.Metadata;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,8 +13,13 @@ public class ModelUser : IdentityUser
   public required string LastName { get; set; }
   [Required]
   public bool ChangePassword { get; set; } = true;
+  [DataType(DataType.Upload)]
+  public byte[]? ProfileImage { get; set; } = null;
+  [Required]
+  [DataType(DataType.Date)]
+  public DateOnly StartOfWork { get; set; } = DateOnly.FromDateTime(DateTime.Now);
 
-  public IEnumerable<ModelWorkDay> WorkDays { get; set; } = [];
+  public IEnumerable<ModelWorkDay> WorkDays { get; set; } = new List<ModelWorkDay>();
 
   public static void ModelCreate(ModelBuilder builder)
   {
@@ -27,6 +33,11 @@ public class ModelUser : IdentityUser
       .Ignore(x => x.EmailConfirmed)
       .HasData(DefaultUserData);
 
+    builder.Entity<ModelUser>().Property(a => a.StartOfWork)
+      .HasColumnType("Date")
+      .HasDefaultValueSql("getdate()")
+      .IsRequired();
+
     builder.Entity<IdentityRole>().HasData(DefaultRoles);
     builder.Entity<IdentityUserRole<string>>().HasData(DefaultUserRoles);
   }
@@ -34,11 +45,12 @@ public class ModelUser : IdentityUser
   private class UserModelStorage
   {
     public Guid ID { get; init; }
-    public string UserName { get; init; } = string.Empty;
-    public string Password { get; init; } = string.Empty;
-    public string Email { get; init; } = string.Empty;
-    public string FirstName { get; init; } = string.Empty;
-    public string LastName { get; init; } = string.Empty;
+    public string UserName { get; init; }
+    public string Password { get; init; }
+    public string Email { get; init; }
+    public string FirstName { get; init; }
+    public string LastName { get; init; }
+    public DateOnly WorkStart { get; init; }
 
     public UserModelStorage(string username, string password, string email, string firstName, string lastName)
     {
@@ -48,6 +60,7 @@ public class ModelUser : IdentityUser
       Email = email;
       FirstName = firstName;
       LastName = lastName;
+      WorkStart = DateOnly.FromDateTime(DateTime.Now - new TimeSpan(7, 0, 0, 0, 0));
     }
 
     public static implicit operator ModelUser(UserModelStorage model)
@@ -65,6 +78,7 @@ public class ModelUser : IdentityUser
         NormalizedEmail = model.Email.ToUpper(),
 
         SecurityStamp = Guid.NewGuid().ToString(),
+        StartOfWork = model.WorkStart
       };
 
       user.PasswordHash = passHash.HashPassword(user, model.Password);

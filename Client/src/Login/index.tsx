@@ -1,8 +1,9 @@
 import { Formik } from "formik"
-import { useEffect } from "react"
+import { useContext, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { Center, Content, FormGroup, IconSVG, Input, Form } from "./style"
 import AnimatedButton from "./animatedButton"
+import { IUser, UserContext } from "../app"
 
 export const userIcon = () => {
   return <IconSVG className="icon" viewBox="0 0 1024 1024">
@@ -16,58 +17,46 @@ function passIcon() {
 }
 
 function LoginPage() {
-  const navigate = useNavigate();
-  useEffect(() => {
-    fetch("/Login")
-      .then((response) => response.json())
-      .then((roles: string[]) => {
-        navigate("Role", { state: { roles } });
-      })
-      .catch(() => { console.log("error") })
-  }, [])
+  const { dispatch } = useContext(UserContext.Context)
 
-  return <>
-    <Center>
-      <Content>
-        <Formik initialValues={{ user: "", pass: "" }} onSubmit={(values, { setSubmitting }) => {
-          fetch("/Login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ Login: values.user, Password: values.pass })
-          }).then((response) => response.json())
-            .then((roles: string[]) => {
-              navigate("/Role", { state: { roles } });
-            })
-            .catch(() => { console.log("error") })
-            .finally(() => {
-              setSubmitting(false);
-            })
-        }}>
-          {({
-            values,
-            errors,
-            handleChange,
-            handleBlur,
-            handleSubmit,
-            isSubmitting,
-          }) => (<>
-            <Form onSubmit={handleSubmit}>
-              <AnimatedButton disabled={isSubmitting} onChange={handleChange} onBlur={handleBlur}
-                value={values.user} error={errors.user} name="user" icon={userIcon} type="text" label="Nazwa użytkownika" />
-              <AnimatedButton disabled={isSubmitting} onChange={handleChange} onBlur={handleBlur}
-                value={values.pass} error={errors.pass} name="pass" icon={passIcon} type="password" label="Hasło" />
-              <FormGroup>
-                <Input type="submit" value="Zaloguj się" disabled={isSubmitting} style={{ cursor: isSubmitting ? "not-allowed" : "pointer" }} />
-              </FormGroup>
-            </Form>
-          </>
-          )}
-        </Formik>
-      </Content>
-    </Center >
-  </>
+  return <Center>
+    <Content>
+      <Formik initialValues={{ user: "", pass: "" }} onSubmit={(values, { setSubmitting }) => {
+        fetch("/Login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ Login: values.user, Password: values.pass })
+        }).then((response) => response.json())
+          .then((user: IUser) => {
+            dispatch({ type: "Login", user })
+          })
+          .catch(() => { console.log("error") })
+          .finally(() => {
+            setSubmitting(false);
+          })
+      }}>
+        {({
+          values,
+          errors,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          isSubmitting,
+        }) => (<>
+          <Form onSubmit={handleSubmit}>
+            <AnimatedButton disabled={isSubmitting} onChange={handleChange} onBlur={handleBlur}
+              value={values.user} error={errors.user} name="user" icon={userIcon} type="text" label="Nazwa użytkownika" />
+            <AnimatedButton disabled={isSubmitting} onChange={handleChange} onBlur={handleBlur}
+              value={values.pass} error={errors.pass} name="pass" icon={passIcon} type="password" label="Hasło" />
+            <FormGroup>
+              <Input type="submit" value="Zaloguj się" disabled={isSubmitting} style={{ cursor: isSubmitting ? "not-allowed" : "pointer" }} />
+            </FormGroup>
+          </Form>
+        </>
+        )}
+      </Formik>
+    </Content>
+  </Center >
 }
 
 export default LoginPage
-
-// export default () => { return <></> }

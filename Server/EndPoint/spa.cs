@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.Extensions.FileProviders;
@@ -27,6 +28,8 @@ public class SinglePageApplicationEndPoint : IEndPoint, IService
         });
       }
     });
+    app.UseSwagger();
+    app.UseSwaggerUI();
   }
 
   public void DefineService(WebApplicationBuilder builder)
@@ -35,5 +38,6 @@ public class SinglePageApplicationEndPoint : IEndPoint, IService
       builder.Services.AddSpaStaticFiles(con => con.RootPath = AppPathDevelopment);
     else
       builder.Services.AddSpaStaticFiles(con => con.RootPath = AppPath);
+    builder.Services.AddSwaggerGen(a => { });
   }
 }

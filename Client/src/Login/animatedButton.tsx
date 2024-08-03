@@ -8,7 +8,7 @@ export interface IAnimatedButton {
   value: string,
   error?: string,
   disabled: boolean,
-  icon: () => JSX.Element,
+  icon?: () => JSX.Element,
   onBlur: (p: string | React.ChangeEvent<unknown>) => void,
   onChange: (p: string | React.ChangeEvent<unknown>) => void,
 }
@@ -25,9 +25,7 @@ function AnimatedButton(props: IAnimatedButton) {
 
   return <>
     <FormGroup onClick={() => ref.current?.focus()} style={{ cursor: props.disabled ? "not-allowed" : "text", filter: props.disabled ? "brightness(95%)" : "" }}>
-      <IconHolder>
-        <props.icon />
-      </IconHolder>
+      {props.icon ? <IconHolder><props.icon /></IconHolder> : ""}
       <Input type={props.type} name={props.name} value={props.value} disabled={props.disabled} required
         onChange={change} onFocus={() => setFocus(true)} onBlur={() => setFocus(false)} ref={ref} />
       <Label style={{ opacity: inUsing ? "0" : "100%" }}>{props.label}</Label>

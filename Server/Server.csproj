@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -7,14 +7,16 @@
     <UserSecretsId>9d58c642-0f72-459e-8f30-adb2608aa958</UserSecretsId>
   </PropertyGroup>
 
-    
-  <Target Name="CreateDatabase" BeforeTargets="Build" Condition="!Exists('wwwroot/database.db') And !Exists('wwwroot/database.lock')">
+
+  <Target Name="CreateDatabase" BeforeTargets="Build"
+    Condition="!Exists('wwwroot/database.db') And !Exists('wwwroot/database.lock')">
     <MakeDir Directories="wwwroot" Condition="!Exists('wwwroot')" />
-    <Exec Command="echo lock &gt; database.lock" WorkingDirectory=".\wwwroot" /> 
-    <Exec Command="dotnet ef migrations add InitialCreate" WorkingDirectory="." Condition="!Exists('Migrations')" /> 
+    <Exec Command="echo lock > database.lock" WorkingDirectory=".\wwwroot" />
+    <Exec Command="dotnet ef migrations add InitialCreate" WorkingDirectory="."
+      Condition="!Exists('Migrations')" />
     <Exec Command="dotnet ef database update" WorkingDirectory="." />
   </Target>
-  
+
   <Target Name="PreBuild" BeforeTargets="Build" Condition="'$(Configuration)' == 'Release'">
     <Exec Command="npm install" WorkingDirectory="..\Client" />
     <Exec Command="npm run build" WorkingDirectory="..\Client" />
@@ -49,6 +51,10 @@
     <!-- SPA -->
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="8.0.6" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="8.0.0" />
+
+    <PackageReference Include="ClosedXML" Version="0.102.3" />
+
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
   </ItemGroup>
 
 </Project>

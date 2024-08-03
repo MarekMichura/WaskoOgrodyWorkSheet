@@ -12,7 +12,9 @@ public class ModelChord
   [DataType(DataType.Currency)]
   public required decimal Price { get; set; }
 
-  public IEnumerable<ModelWorkDayChord> WorkDayChords { get; set; } = [];
+  [DataType(DataType.Upload)]
+  public byte[]? ChordImage { get; set; }
+  public IEnumerable<ModelWorkDayChord> WorkDayChords { get; set; } = new List<ModelWorkDayChord>();
 
   public static void ModelCreate(ModelBuilder builder)
   {

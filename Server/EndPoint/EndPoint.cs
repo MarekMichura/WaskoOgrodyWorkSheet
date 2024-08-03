@@ -51,6 +51,7 @@ public static partial class EXTERN
     app.UseHttpsRedirection();
     app.UseStaticFiles();
 
+    app.UseSwagger();
     app.UseRouting();
     app.UseSession();
     app.UseAuthentication();

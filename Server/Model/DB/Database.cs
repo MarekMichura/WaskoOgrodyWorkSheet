@@ -7,6 +7,7 @@ public class DataBaseConnect : IdentityDbContext<ModelUser>
   public DbSet<ModelWorkDay> workDays { get; set; }
   public DbSet<ModelConstruction> Constructions { get; set; }
   public DbSet<ModelWorkDayChord> WorkDayChords { get; set; }
+  public DbSet<ModelDaysOff> DaysOffs { get; set; }
 
   public DataBaseConnect(DbContextOptions<DataBaseConnect> options) : base(options) { }
 
@@ -19,5 +20,6 @@ public class DataBaseConnect : IdentityDbContext<ModelUser>
     ModelWorkDay.ModelCreate(builder);
     ModelConstruction.ModelCreate(builder);
     ModelWorkDayChord.ModelCreate(builder);
+    ModelDaysOff.ModelCreate(builder);
   }
 }

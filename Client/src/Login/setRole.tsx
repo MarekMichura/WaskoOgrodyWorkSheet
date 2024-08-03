@@ -1,43 +1,29 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Center, Content, Input } from "./style";
-import { useEffect } from "react";
-
-type role = "User" | "Admin"
-interface ILocationState {
-  roles: role[]
-}
-
-const mapRoleToRoute = {
-  "User": "/User",
-  "Admin": "/Admin"
-};
+import { useContext, useEffect } from "react";
+import { IRole, UserContext } from "../app";
+import { mapRoleToRoute } from "../router";
 
 const SetRole = () => {
-  const location = useLocation()
-  const locationState = location.state as ILocationState
   const navigate = useNavigate()
-
-  useEffect(() => {
-    if (locationState.roles.length === 1) {
-      navigate(mapRoleToRoute[locationState.roles[0]]);
-    }
-  }, [])
+  const { user, dispatch } = useContext(UserContext.Context);
 
   function logOut() {
     fetch("Logout").then(() => {
       navigate("/");
+      dispatch({ type: "LogOut" })
     }).catch(() => { console.log("error") });
   }
 
   function setRole(e: React.MouseEvent<HTMLInputElement, MouseEvent>) {
     const target = e.target as HTMLInputElement;
-    const role = target.value as role;
+    const role = target.value as IRole;
     navigate(mapRoleToRoute[role]);
   }
 
   return <Center>
     <Content>
-      {locationState.roles.map((role, id) =>
+      {user?.roles.map((role, id) =>
         <Input type="button" onClick={setRole} key={role} value={role} style={{ cursor: "pointer", margin: id === 0 ? "" : "25px 0 0 0" }} />
       )}
       <Input type="button" onClick={logOut} value="Wyloguj się" style={{ cursor: "pointer", margin: "25px 0 0 0" }} />
