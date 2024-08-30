@@ -1,0 +1,53 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": ".NET Core Docker Attach",
+      "type": "coreclr",
+      "request": "attach",
+      "processId": "${command:pickRemoteProcess}",
+      "pipeTransport": {
+        "pipeProgram": "docker",
+        "pipeArgs": [
+          "exec",
+          "-i",
+          "waskoogrody-server-1"
+        ],
+        "debuggerPath": "/remote_debugger/vsdbg",
+        "pipeCwd": "${workspaceRoot}",
+        "quoteArgs": false
+      },
+      "sourceFileMap": {
+        "/Server/": "${workspaceRoot}/Server/src/"
+      }
+    },
+    {
+      "name": "Docker: attach server",
+      "type": "coreclr",
+      "request": "attach",
+      // "processId": "${command:pickRemoteProcess}",
+      "processName": "Server",
+      // "preLaunchTask": "Docker Compose Up",
+      // "postDebugTask": "Docker Compose Down",
+      "pipeTransport": {
+        "pipeProgram": "docker",
+        "pipeArgs": [
+          "exec",
+          "-i",
+          "waskoogrody-server-1"
+        ],
+        "debuggerPath": "/remote_debugger/vsdbg",
+        "pipeCwd": "${workspaceRoot}/",
+        "quoteArgs": false,
+        "pipeEnv": {
+          "ASPNETCORE_ENVIRONMENT": "Release",
+          "CLIENT_TARGET": "client-build",
+          "BUILD_CONFIGURATION": "Release",
+        }
+      },
+      "sourceFileMap": {
+        "/Server/": "${workspaceRoot}/Server/src/"
+      },
+    }
+  ]
+}

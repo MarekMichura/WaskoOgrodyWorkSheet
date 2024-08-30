@@ -1,0 +1,36 @@
+
+# download runner
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS server-base
+USER app
+WORKDIR /Server
+
+# download builder and packages
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS server-build 
+RUN apt-get update && apt-get install -y --no-install-recommends curl && apt-get clean
+RUN curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /remote_debugger
+WORKDIR /Server/
+COPY ["./src/Server.csproj", "./"]
+RUN dotnet restore "Server.csproj"
+COPY ["./src/", "."]
+
+# Build release
+FROM server-build AS server-publish
+WORKDIR /Server/
+RUN dotnet build "Server.csproj" -c release -o ./build
+RUN dotnet publish "./Server.csproj" -c release -o /Server/publish /p:UseAppHost=false
+
+# Copy files  to runner
+FROM server-base AS server-release
+EXPOSE 8080
+EXPOSE 8081
+WORKDIR /Server
+COPY --from=server-publish /Server/publish/ .
+COPY --from=waskoogrody-client /app/build ./wwwroot 
+ENTRYPOINT ["dotnet", "Server.dll"]
+
+# Development server
+FROM server-build AS server-development
+EXPOSE 8080
+EXPOSE 8081
+WORKDIR /Server/
+ENTRYPOINT [ "dotnet", "run" ]
