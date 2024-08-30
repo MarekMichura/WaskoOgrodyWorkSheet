@@ -17,7 +17,8 @@ class DatabaseService : IService, IEndPoint
     builder.Services.AddAuthorization(a =>
     {
       foreach (var b in StorageRole.Roles)
-        a.AddPolicy(b.Name, c => c.RequireRole(b.Name));
+        if (b.Name is not null)
+          a.AddPolicy(b.Name, c => c.RequireRole(b.Name));
     });
   }
 }
