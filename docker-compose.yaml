@@ -3,7 +3,7 @@ services:
     build:
       context: ./Client
       dockerfile: Dockerfile
-      target: ${CLIENT_TARGET}
+      target: ${CLIENT_TARGET:-client-development}
     ports:
       - "3000:3000"
     networks:
@@ -16,12 +16,13 @@ services:
     build:
       context: ./Server
       dockerfile: Dockerfile
-      target: ${SERVER_TARGET}
+      target: ${SERVER_TARGET:-server-development}
       args:
-        - BUILD_CONFIGURATION=$BUILD_CONFIGURATION
-        - ASPNETCORE_ENVIRONMENT=$ASPNETCORE_ENVIRONMENT
+        - BUILD_CONFIGURATION=${BUILD_CONFIGURATION:-debug}
+        - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
     environment:
-      - ASPNETCORE_ENVIRONMENT=$ASPNETCORE_ENVIRONMENT
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
+      - DB_PASSWORD="${DB_PASSWORD:-zaq1@WSX}"
     ports:
       - "80:8080"
       - "443:8081"
@@ -34,7 +35,7 @@ services:
   db:
     image: mcr.microsoft.com/mssql/server:2019-latest
     environment:
-      SA_PASSWORD: "${DB_PASSWORD}"
+      SA_PASSWORD: "${DB_PASSWORD:-zaq1@WSX}"
       ACCEPT_EULA: "Y"
     ports:
       - "1433:1433"
