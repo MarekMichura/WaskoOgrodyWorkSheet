@@ -8,10 +8,12 @@ WORKDIR /Server
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS server-build 
 RUN apt-get update && apt-get install -y --no-install-recommends curl && apt-get clean
 RUN curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /remote_debugger
+RUN dotnet tool install --global dotnet-ef
 WORKDIR /Server/
 COPY ["./src/Server.csproj", "./"]
 RUN dotnet restore "Server.csproj"
 COPY ["./src/", "."]
+RUN chmod +x taskCreateDb.sh && chmod +x wait-for-it.sh
 
 # Build release
 FROM server-build AS server-publish

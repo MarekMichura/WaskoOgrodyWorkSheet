@@ -4,7 +4,7 @@
     {
       "label": "Docker Compose Up",
       "type": "shell",
-      "command": "docker-compose up --build -d server",
+      "command": "docker-compose up --build -d",
       "group": "build",
       "problemMatcher": []
     },
@@ -13,6 +13,20 @@
       "type": "shell",
       "command": "docker-compose down server",
       "problemMatcher": []
+    },
+    {
+      "label": "Create db",
+      "type": "shell",
+      "command": "docker-compose exec server /bin/bash -c '/Server/taskCreateDb.sh ${input:migrationName}'",
+      "problemMatcher": [],
+    },
+  ],
+  "inputs": [
+    {
+      "id": "migrationName",
+      "type": "promptString",
+      "description": "Wprowadź nazwę migracji",
+      "default": ""
     }
   ]
 }

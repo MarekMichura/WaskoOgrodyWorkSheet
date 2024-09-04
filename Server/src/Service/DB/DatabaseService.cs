@@ -7,18 +7,18 @@ class DatabaseService : IService, IEndPoint
 
   public void DefineService(WebApplicationBuilder builder)
   {
-    var connectionStr = builder.Configuration.GetSection("Database")["Connect"];
+    var connectionStr = builder.Configuration.GetSection("Database")["Connect"] ?? throw new NullReferenceException();
+    var password = Environment.GetEnvironmentVariable("DB_PASSWORD");
+    connectionStr = connectionStr.Replace("${PASSWORD}", password);
 
     builder.Services.AddDbContext<DatabaseContext>(a => a.UseSqlServer(connectionStr));
     builder.Services.AddIdentity<ModelUser, ModelRole>()
       .AddDefaultTokenProviders()
       .AddEntityFrameworkStores<DatabaseContext>();
 
-    builder.Services.AddAuthorization(a =>
-    {
-      foreach (var b in StorageRole.Roles)
-        if (b.Name is not null)
-          a.AddPolicy(b.Name, c => c.RequireRole(b.Name));
-    });
+    builder.Services.AddAuthorization(a => StorageRole.Roles
+      .Select(b => b.Name)
+      .Cast<string>()
+      .ForEach(b => a.AddPolicy(b, c => c.RequireRole(b))));
   }
 }

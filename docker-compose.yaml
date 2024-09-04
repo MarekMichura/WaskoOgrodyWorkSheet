@@ -31,16 +31,23 @@ services:
       - db
     networks:
       - app-network
+    volumes:
+      - ./Server/src/Migrations/:/Server/Migrations
 
   db:
-    image: mcr.microsoft.com/mssql/server:2019-latest
+    image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
       SA_PASSWORD: "${DB_PASSWORD:-zaq1@WSX}"
+      MYSQL_USER: "10001:10001"
+      MYSQL_PASS: "${DB_PASSWORD:-zaq1@WSX}"
       ACCEPT_EULA: "Y"
+    user: "10001:10001"
     ports:
       - "1433:1433"
     networks:
       - app-network
+    volumes:
+      - ./DB/:/var/opt/mssql/
 
 networks:
   app-network:
