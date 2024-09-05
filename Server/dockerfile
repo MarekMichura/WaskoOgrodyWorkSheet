@@ -6,6 +6,8 @@ WORKDIR /Server
 
 # download builder and packages
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS server-build 
+ARG BUILD_CONFIGURATION=release
+ENV BUILD_CONFIGURATION=${BUILD_CONFIGURATION}
 RUN apt-get update && apt-get install -y --no-install-recommends curl && apt-get clean
 RUN curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /remote_debugger
 RUN dotnet tool install --global dotnet-ef
@@ -13,13 +15,15 @@ WORKDIR /Server/
 COPY ["./src/Server.csproj", "./"]
 RUN dotnet restore "Server.csproj"
 COPY ["./src/", "."]
+RUN dotnet build "Server.csproj" -c $BUILD_CONFIGURATION -o ./build
 RUN chmod +x taskCreateDb.sh && chmod +x wait-for-it.sh
 
 # Build release
 FROM server-build AS server-publish
+ARG BUILD_CONFIGURATION=release
+ENV BUILD_CONFIGURATION=${BUILD_CONFIGURATION}
 WORKDIR /Server/
-RUN dotnet build "Server.csproj" -c release -o ./build
-RUN dotnet publish "./Server.csproj" -c release -o /Server/publish /p:UseAppHost=false
+RUN dotnet publish "./Server.csproj" -c ${BUILD_CONFIGURATION} -o /Server/publish /p:UseAppHost=false
 
 # Copy files  to runner
 FROM server-base AS server-release
@@ -27,8 +31,15 @@ EXPOSE 8080
 EXPOSE 8081
 WORKDIR /Server
 COPY --from=server-publish /Server/publish/ .
-COPY --from=waskoogrody-client /app/build ./wwwroot 
+COPY --from=html /html/build ./wwwroot 
 ENTRYPOINT ["dotnet", "Server.dll"]
+
+FROM server-publish AS server-release-debug
+EXPOSE 8080
+EXPOSE 8081
+WORKDIR /Server/
+COPY --from=html /html/build ./wwwroot 
+ENTRYPOINT ["dotnet", "run"]
 
 # Development server
 FROM server-build AS server-development

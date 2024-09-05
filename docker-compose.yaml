@@ -1,16 +1,18 @@
 services:
-  client:
+  html:
     build:
-      context: ./Client
+      context: ./HTML
       dockerfile: Dockerfile
-      target: ${CLIENT_TARGET:-client-development}
+      target: ${HTML_TARGET:-html-development}
+    container_name: html
+    image: html
     ports:
       - "3000:3000"
     networks:
       - app-network
     volumes:
-      - ./Client/src/:/app/src/
-      - ./Client/public/:/app/public/
+      - ./HTML/src/:/html/src/
+      - ./HTML/public/:/html/public/
 
   server:
     build:
@@ -20,6 +22,8 @@ services:
       args:
         - BUILD_CONFIGURATION=${BUILD_CONFIGURATION:-debug}
         - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
+    container_name: server
+    image: server
     environment:
       - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
       - DB_PASSWORD="${DB_PASSWORD:-zaq1@WSX}"
@@ -27,7 +31,7 @@ services:
       - "80:8080"
       - "443:8081"
     depends_on:
-      - client
+      - html
       - db
     networks:
       - app-network
@@ -35,19 +39,26 @@ services:
       - ./Server/src/Migrations/:/Server/Migrations
 
   db:
-    image: mcr.microsoft.com/mssql/server:2022-latest
+    build:
+      context: ./DB
+      dockerfile: Dockerfile
+      target: db-base
+    container_name: db
+    image: db
     environment:
-      SA_PASSWORD: "${DB_PASSWORD:-zaq1@WSX}"
+      ACCEPT_EULA: "Y"
       MYSQL_USER: "10001:10001"
       MYSQL_PASS: "${DB_PASSWORD:-zaq1@WSX}"
-      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "${DB_PASSWORD:-zaq1@WSX}"
     user: "10001:10001"
     ports:
       - "1433:1433"
     networks:
       - app-network
     volumes:
-      - ./DB/:/var/opt/mssql/
+      - ./DB/log/:/var/opt/mssql/log
+      - ./DB/data/:/var/opt/mssql/data
+      - ./DB/secrets/:/var/opt/mssql/secrets
 
 networks:
   app-network:

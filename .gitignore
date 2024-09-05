@@ -1,2 +1,4 @@
-DB/**
+DB/data
+DB/log
+DB/secrets
 .env

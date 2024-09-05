@@ -3,7 +3,7 @@ import { useSearchParams, useNavigate, useLocation, Outlet } from "react-router-
 import { ProfilReducer, ProfilContext } from "./Profile/Reducer";
 import { IProfil } from "./Profile/type";
 
-export default function ContextProfil() {
+export default function ContextProfil(props: any) {
   const [profil, dispatch] = useReducer(ProfilReducer, undefined);
   const [search] = useSearchParams()
   const nav = useNavigate()
@@ -14,23 +14,27 @@ export default function ContextProfil() {
       .then(res => res.json())
       .then((profil: IProfil) => {
         dispatch({ type: "Login", profil })
+      })
+      .catch(() => { })
+  }, []);
 
-        const path = loc.pathname.toLowerCase()
-        const returnUrl = search.get("path")
-        if (path == "/login" || path == "/login/") {
-          nav(returnUrl ?? "/")
-        }
-      })
-      .catch(() => {
-        const path = loc.pathname.toLowerCase()
-        if (!(path == "/" || path == "/login" || path == "/login/"))
-          nav("/login?path=" + loc.pathname)
-      })
-  }, [profil]);
+  useEffect(() => {
+    if (profil === undefined) {
+      const path = loc.pathname.toLowerCase()
+      if (!(path == "/login" || path == "/login/"))
+        nav("/login?path=" + loc.pathname)
+    } else {
+      const path = loc.pathname.toLowerCase()
+      const returnUrl = search.get("path")
+      if (path == "/login" || path == "/login/") {
+        nav(returnUrl ?? "/")
+      }
+    }
+  }, [profil])
 
   return (
     <ProfilContext.Provider value={{ dispatch, profil }}>
-      <Outlet />
+      {props.children}
     </ProfilContext.Provider>
   )
 }

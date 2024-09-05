@@ -1,7 +1,7 @@
 import { FormikHelpers } from 'formik';
-import { IProfil } from '../../Profile/type';
+import { IProfil, IProfilContextState } from '../../Profile/type';
 
-interface IValues {
+export interface IValues {
   user: string, password: string
 }
 
@@ -11,17 +11,17 @@ export const Values: IValues = {
 }
 
 interface IResponseSuccess {
-  Authenticated: true,
-  Profil: IProfil
+  authenticated: true,
+  profil: IProfil
 }
 
 interface IResponseFail {
-  Authenticated: false,
+  authenticated: false,
 }
 
 type IResponse = IResponseSuccess | IResponseFail
 
-export function submit(values: IValues, helpers: FormikHelpers<IValues>) {
+export function submit(values: IValues, helpers: FormikHelpers<IValues>, context: IProfilContextState) {
   fetch("/Authenticate", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -29,7 +29,9 @@ export function submit(values: IValues, helpers: FormikHelpers<IValues>) {
   }).then((res) => {
     return res.json()
   }).then((res: IResponse) => {
-    console.log(res);
+    if (res.authenticated == true) {
+      context.dispatch({ type: "Login", profil: res.profil })
+    }
   }).catch(() => {
     console.log("error");
   }).finally(() => {
