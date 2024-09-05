@@ -20,7 +20,7 @@
         "quoteArgs": false,
         "pipeEnv": {
           "ASPNETCORE_ENVIRONMENT": "Release",
-          "CLIENT_TARGET": "client-build",
+          "HTML_TARGET": "html-build",
           "BUILD_CONFIGURATION": "Release",
         }
       },

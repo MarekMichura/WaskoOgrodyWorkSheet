@@ -5,20 +5,21 @@ import { Bottom, Container, Title } from "./style"
 import { userIcon, passIcon, LogoIcon } from "./icon"
 import CustomButton from "../../Common/CustomButton"
 import { useContext } from "react"
-import { ProfilContext } from "../../Profile/Reducer"
+import { contextProfil } from "../../Common/ContextProfil/context"
+import { contextNotification } from "../../Common/ContextNotification/context"
 
 function LoginPage() {
-  const context = useContext(ProfilContext)
+  const conProfil = useContext(contextProfil)
+  const conNotification = useContext(contextNotification)
   const formik = useFormik({
-    initialValues: Values, onSubmit: (values: IValues, helpers: FormikHelpers<IValues>) => {
-      submit(values, helpers, context)
-    }
+    initialValues: Values, onSubmit: (values: IValues, helpers: FormikHelpers<IValues>) =>
+      submit(values, helpers, conProfil, conNotification)
   })
 
   return (
     <Container>
       <LogoIcon />
-      <Title>{context.profil?.UserName ?? "Waśko ogrody"}</Title>
+      <Title>{conProfil.profil?.UserName ?? "Waśko ogrody"}</Title>
       <CustomInput disabled={formik.isSubmitting} onChange={formik.handleChange} onBlur={formik.handleBlur} type="text"
         value={formik.values.user} error={formik.errors.user} name="user" label="Nazwa użytkownika" icon={userIcon} />
       <CustomInput disabled={formik.isSubmitting} onChange={formik.handleChange} onBlur={formik.handleBlur} type="password"

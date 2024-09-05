@@ -1,10 +1,11 @@
-import { useReducer, useEffect } from "react";
-import { useSearchParams, useNavigate, useLocation, Outlet } from "react-router-dom";
-import { ProfilReducer, ProfilContext } from "./Profile/Reducer";
-import { IProfil } from "./Profile/type";
+import { useReducer, useEffect, ReactNode } from "react";
+import { useSearchParams, useNavigate, useLocation } from "react-router-dom";
+import { contextProfil } from "./context";
+import { reducerProfil } from "./reducer";
+import { IProfil } from "./types";
 
-export default function ContextProfil(props: any) {
-  const [profil, dispatch] = useReducer(ProfilReducer, undefined);
+export default function ContextProfil(props: { children?: ReactNode }) {
+  const [profil, dispatch] = useReducer(reducerProfil, undefined);
   const [search] = useSearchParams()
   const nav = useNavigate()
   const loc = useLocation()
@@ -33,8 +34,8 @@ export default function ContextProfil(props: any) {
   }, [profil])
 
   return (
-    <ProfilContext.Provider value={{ dispatch, profil }}>
+    <contextProfil.Provider value={{ dispatch, profil }}>
       {props.children}
-    </ProfilContext.Provider>
+    </contextProfil.Provider>
   )
 }
