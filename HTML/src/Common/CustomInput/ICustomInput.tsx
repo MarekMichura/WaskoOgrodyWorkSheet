@@ -5,7 +5,7 @@ export default interface ICustomInput {
   value: string;
   error?: string;
   disabled: boolean;
-  icon: () => JSX.Element;
+  icon: JSX.Element;
   onBlur: (p: string | React.ChangeEvent<HTMLInputElement>) => void;
   onChange: (p: string | React.ChangeEvent<HTMLInputElement>) => void;
 }

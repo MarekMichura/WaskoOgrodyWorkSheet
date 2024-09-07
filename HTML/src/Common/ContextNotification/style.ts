@@ -8,6 +8,7 @@ export const Container = styled.div`
   top: 15px;
   bottom: 15px;
   overflow: hidden;
+  pointer-events: none; 
 `;
 
 export const NotificationLabel = styled.span`
@@ -42,12 +43,13 @@ export const NotificationSVG = styled.svg`
 `
 
 const fadeOff = keyframes`
-  0%{
+  0% {
     grid-template-rows: 1fr;
     margin: 0 0 20px;
     opacity: 1;
   }
-  100%{
+  
+  100% {
     grid-template-rows: 0fr;
     margin: 0 0 0;
     opacity: 0;
@@ -58,7 +60,8 @@ export const NotificationContainer = styled.div<{ time: number }>`
   display: grid;
   grid-template-rows: 1fr;
   margin: 0 0 20px;
-  animation: ${fadeOff} 2s ease-out ${props => props.time}ms forwards;
+  pointer-events: all; 
+  animation: ${fadeOff} 1s ease-out ${props => props.time}ms forwards;
 `
 
 const Notification = styled.div`
@@ -66,6 +69,7 @@ const Notification = styled.div`
   display: flex;
   width: 300px;
   overflow: hidden;
+  opacity: 0.8;
 
   &:hover ${NotificationCloseButton}{
     display: block;

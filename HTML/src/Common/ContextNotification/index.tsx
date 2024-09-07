@@ -1,8 +1,11 @@
 import { ReactNode, useReducer } from "react";
-import { reducerNotification } from "./reducer";
-import { contextNotification } from "./context";
-import { Container, Error } from "./style";
-import { ErrorNotification, InfoNotification, SuccessNotification, WarnNotification } from "./ErrorNotification";
+import { reducerNotification } from "./Context/reducer";
+import { contextNotification } from "./Context/context";
+import { Container } from "./style";
+import { ErrorNotification } from "./Notification/ErrorNotification";
+import { InfoNotification } from "./Notification/InfoNotification";
+import { WarnNotification } from "./Notification/WarnNotification";
+import { SuccessNotification } from "./Notification/SuccessNotification";
 
 export default function ContextNotification(props: { children?: ReactNode }) {
   const [notifications, dispatch] = useReducer(reducerNotification, { List: [] });

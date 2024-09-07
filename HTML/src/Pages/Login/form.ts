@@ -1,7 +1,7 @@
 import { FormikHelpers } from 'formik';
 import { IProfil, IProfilContextState } from '../../Common/ContextProfil/types';
-import { INotificationContextState } from '../../Common/ContextNotification/types';
-import CreateNotification from '../../Common/ContextNotification/create';
+import CreateNotification from '../../Common/ContextNotification/Context/create';
+import { INotificationContextState } from '../../Common/ContextNotification/Context/types';
 
 export interface IValues {
   user: string, password: string
@@ -33,9 +33,9 @@ export function submit(values: IValues, helpers: FormikHelpers<IValues>, conProf
   }).then((res: IResponse) => {
     if (res.authenticated == true) {
       conProfil.dispatch({ type: "Login", profil: res.profil })
-      CreateNotification({ text: "Zalogowałeś się: " + res.profil.UserName, type: "success", dispatch: conNotification.dispatch });
+      CreateNotification({ text: "Zalogowano jako: " + res.profil.userName, type: "success", dispatch: conNotification.dispatch });
     } else {
-      CreateNotification({ text: "Nie udało się zalogować", type: "error", dispatch: conNotification.dispatch });
+      CreateNotification({ text: "Niepoprawny login lub hasło", type: "error", dispatch: conNotification.dispatch });
     }
   }).catch(() => {
     CreateNotification({ text: "Błąd połączenia z serwerem", type: "error", dispatch: conNotification.dispatch });

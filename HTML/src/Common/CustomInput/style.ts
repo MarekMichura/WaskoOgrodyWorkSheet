@@ -21,7 +21,7 @@ export const Input = styled.input`
   }
 `
 
-export const Label = styled.label < {open: boolean, disabled: boolean} > `
+export const Label = styled.label < { open: boolean, disabled: boolean } > `
   font-size: 14pt;
   position: absolute;
   display: flex;
@@ -37,7 +37,7 @@ export const Label = styled.label < {open: boolean, disabled: boolean} > `
   transition: 0.3s opacity;
 `
 
-export const BottomBorder = styled.div < {$left: boolean, open: boolean} > `
+export const BottomBorder = styled.div < { $left: boolean, open: boolean } > `
   position: absolute;
   height: 2px;
   width: ${(p) => p.open ? '50%' : '0%'};

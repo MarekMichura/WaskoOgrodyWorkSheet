@@ -1,4 +1,12 @@
 import styled from 'styled-components'
+import { WebTarget } from 'styled-components/dist/types'
+
+export const Center = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
+`
 
 export const Container = styled.form`
   display: flex;
@@ -8,6 +16,7 @@ export const Container = styled.form`
   max-width: 350px;
   max-height: 90vh;
   width: 90%;
+  margin: 30px 0;
 
   background-color: #fff;
   border-radius: 5px;
@@ -15,9 +24,9 @@ export const Container = styled.form`
 `
 
 export const SVG = styled.svg`
-  width: 35px;
-  height: 35px;
-  padding: 5px;
+  width: 33px;
+  height: 33px;
+  padding: 7px;
 `
 
 export const Title = styled.h1`

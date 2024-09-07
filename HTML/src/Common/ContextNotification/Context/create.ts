@@ -19,7 +19,7 @@ export default function CreateNotification({ text, dispatch, type = "info", life
   const uID = generateUID()
 
   dispatch({ type: "Add", notification: { uID, text, type, life } });
-  setTimeout(() => {
-    dispatch({ type: "Remove", uID })
+  setTimeout(function () {
+    dispatch({ type: "Remove", uID });
   }, life + 2000)
 }

@@ -15,7 +15,7 @@ function CustomInput(props: ICustomInput) {
 
   return (
     <Content>
-      <props.icon />
+      {props.icon}
       <Input
         type={props.type}
         name={props.name}

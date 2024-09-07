@@ -19,7 +19,6 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="8.0.6" />
     <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="8.0.0" />
-    <!-- <PackageReference Include="ClosedXML" Version="0.102.3" /> -->
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
   </ItemGroup>
 

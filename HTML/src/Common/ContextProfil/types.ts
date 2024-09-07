@@ -6,11 +6,11 @@ export type IUserRole =
   "ConstructionManager";
 
 export interface IProfil {
-  FirstName: string;
-  LastName: string;
-  UserName: string;
-  WorkStartDate: string;
-  Roles: IUserRole[];
+  firstName: string;
+  lastName: string;
+  userName: string;
+  workStartDate: string;
+  roles: IUserRole[];
 }
 
 interface IProfilActionLogin {
