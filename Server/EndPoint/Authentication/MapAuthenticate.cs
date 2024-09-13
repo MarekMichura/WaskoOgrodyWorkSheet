@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Http.HttpResults;
-
 class ModelInputAuthenticate
 {
   public required string Login { get; init; }

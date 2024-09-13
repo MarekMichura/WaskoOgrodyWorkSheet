@@ -1,47 +1,82 @@
-services:
-  html:
-    build:
-      context: ./HTML
-      dockerfile: Dockerfile
-      target: ${HTML_TARGET:-html-development}
-    container_name: html
-    image: html
-    ports:
-      - "3000:3000"
-    networks:
-      - app-network
-    volumes:
-      - ./HTML/src/:/html/src/
-      - ./HTML/public/:/html/public/
+networks:
+  app-network:
+    driver: bridge
 
-  server:
+services:
+  server-development:
     build:
       context: ./Server
-      dockerfile: Dockerfile
-      target: ${SERVER_TARGET:-server-development}
+      dockerfile: dockerfile
+      target: server-development
       args:
-        - BUILD_CONFIGURATION=${BUILD_CONFIGURATION:-debug}
-        - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
-    container_name: server
-    image: server
+        - BUILD_CONFIGURATION=debug
+        - ASPNETCORE_ENVIRONMENT=Development
+    container_name: server-development
+    image: server-development
     environment:
-      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT:-Development}
+      - ASPNETCORE_ENVIRONMENT=Development
       - DB_PASSWORD="${DB_PASSWORD:-zaq1@WSX}"
     ports:
       - "80:8080"
       - "443:8081"
     depends_on:
-      - html
       - db
+      - initialize-db
+      - html-development
     networks:
       - app-network
     volumes:
-      - ./Server/src/Migrations/:/Server/Migrations
+      - ./Server/Migrations/:/Server/Migrations/
+
+  server-release:
+    build:
+      context: ./Server
+      dockerfile: dockerfile
+      target: server-release
+      args:
+        - BUILD_CONFIGURATION=release
+        - ASPNETCORE_ENVIRONMENT=release
+    container_name: server-release
+    image: server-release
+    environment:
+      - ASPNETCORE_ENVIRONMENT=release
+      - DB_PASSWORD="${DB_PASSWORD:-zaq1@WSX}"
+    ports:
+      - "80:8080"
+      - "443:8081"
+    depends_on:
+      - db
+      - html-release
+      - initialize-db
+    networks:
+      - app-network
+
+  html-development:
+    build:
+      context: ./HTML
+      dockerfile: dockerfile
+      target: html-development
+    container_name: html-development
+    image: html-development
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+    volumes:
+      - ./HTML/:/html/
+
+  html-release:
+    build:
+      context: ./HTML
+      dockerfile: dockerfile
+      target: html-release
+    container_name: html-release
+    image: html-release
 
   db:
     build:
       context: ./DB
-      dockerfile: Dockerfile
+      dockerfile: dockerfile
       target: db-base
     container_name: db
     image: db
@@ -60,6 +95,16 @@ services:
       - ./DB/data/:/var/opt/mssql/data
       - ./DB/secrets/:/var/opt/mssql/secrets
 
-networks:
-  app-network:
-    driver: bridge
+  initialize-db:
+    build:
+      context: ./Server
+      dockerfile: dockerfile
+      target: server-update-db
+    container_name: initialize-db
+    image: initialize-db
+    environment:
+      - DB_PASSWORD="${DB_PASSWORD:-zaq1@WSX}"
+    depends_on:
+      - db
+    networks:
+      - app-network

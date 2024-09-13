@@ -5,12 +5,6 @@ partial class ServiceUser
     await _sim.SignOutAsync();
     var user = await _sim.UserManager.FindByNameAsync(login);
 
-    if (user is null)
-      return false;
-    if ((await _sim.PasswordSignInAsync(user, password, false, false)).Succeeded)
-    {
-      return true;
-    }
-    return false;
+    return user is not null && (await _sim.PasswordSignInAsync(user, password, false, false)).Succeeded;
   }
 }

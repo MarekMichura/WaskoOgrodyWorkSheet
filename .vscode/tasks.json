@@ -2,22 +2,48 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Docker Compose Up",
+      "label": "Docker Compose restart development",
       "type": "shell",
-      "command": "docker-compose up --build -d",
+      "command": "docker-compose restart server-development",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Docker Compose Up development",
+      "type": "shell",
+      "command": "docker-compose down server-development server-release && docker-compose up --build -d server-development",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "Docker Compose Up release",
+      "type": "shell",
+      "command": "docker-compose down server-release server-development html-development && docker-compose up --build -d server-release",
       "group": "build",
       "problemMatcher": []
     },
     {
       "label": "Docker Compose Down",
       "type": "shell",
-      "command": "docker-compose down server",
+      "command": "docker-compose down",
       "problemMatcher": []
     },
     {
       "label": "Create db",
       "type": "shell",
       "command": "docker-compose exec server /bin/bash -c '/Server/taskCreateDb.sh ${input:migrationName}'",
+      "problemMatcher": [],
+    },
+    {
+      "label": "Remove db",
+      "type": "shell",
+      "command": "sudo rm -rf ./DB/data/* ./DB/log/* ./DB/secrets/*",
+      "problemMatcher": [],
+    },
+    {
+      "label": "Remove migrations",
+      "type": "shell",
+      "command": "sudo rm -rf ./Server/src/Migrations/*",
       "problemMatcher": [],
     },
   ],

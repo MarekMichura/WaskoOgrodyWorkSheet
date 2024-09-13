@@ -1,5 +1,4 @@
-// var t = Task.Run(async delegate { await Task.Delay(2000); return 42; });
-// t.Wait();
+await Task.Delay(1000);
 
 var builder = WebApplication.CreateBuilder(args);
 builder.DefineServices();

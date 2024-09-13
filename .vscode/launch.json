@@ -5,24 +5,19 @@
       "name": "Docker: attach server",
       "type": "coreclr",
       "request": "attach",
-      "processName": "Server",
-      // "preLaunchTask": "Docker Compose Up",
+      "processName": "dotnet",
+      "preLaunchTask": "Docker Compose Up development",
       // "postDebugTask": "Docker Compose Down",
       "pipeTransport": {
         "pipeProgram": "docker",
         "pipeArgs": [
           "exec",
           "-i",
-          "server"
+          "server-development"
         ],
         "debuggerPath": "/remote_debugger/vsdbg",
         "pipeCwd": "${workspaceRoot}/",
         "quoteArgs": false,
-        "pipeEnv": {
-          "ASPNETCORE_ENVIRONMENT": "Release",
-          "HTML_TARGET": "html-build",
-          "BUILD_CONFIGURATION": "Release",
-        }
       },
       "sourceFileMap": {
         "/Server/": "${workspaceRoot}/Server/src/"

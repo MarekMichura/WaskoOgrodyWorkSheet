@@ -15,7 +15,7 @@ class EndPointSPA : IService, IEndPoint
   private void SpaDevelopment(WebApplication app)
   {
     app.UseSpa(spa =>
-      spa.UseProxyToSpaDevelopmentServer("http://html:3000"));
+      spa.UseProxyToSpaDevelopmentServer("http://html-development:3000"));
   }
 
   private void SpaRelease(WebApplication app)

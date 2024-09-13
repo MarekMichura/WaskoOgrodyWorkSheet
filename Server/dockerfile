@@ -1,49 +1,36 @@
-
-# download runner
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS server-base
-USER app
-WORKDIR /Server
-
-# download builder and packages
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS server-build 
-ARG BUILD_CONFIGURATION=release
-ENV BUILD_CONFIGURATION=${BUILD_CONFIGURATION}
+# install tools for server
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS server-sdk
+WORKDIR /Server/
 RUN apt-get update && apt-get install -y --no-install-recommends curl && apt-get clean
 RUN curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /remote_debugger
 RUN dotnet tool install --global dotnet-ef
-WORKDIR /Server/
-COPY ["./src/Server.csproj", "./"]
+COPY ["./Server.csproj", "./"]
 RUN dotnet restore "Server.csproj"
-COPY ["./src/", "."]
-RUN dotnet build "Server.csproj" -c $BUILD_CONFIGURATION -o ./build
+COPY [".", "."]
 RUN chmod +x taskCreateDb.sh && chmod +x wait-for-it.sh
 
-# Build release
-FROM server-build AS server-publish
-ARG BUILD_CONFIGURATION=release
-ENV BUILD_CONFIGURATION=${BUILD_CONFIGURATION}
+FROM server-sdk AS server-build
 WORKDIR /Server/
-RUN dotnet publish "./Server.csproj" -c ${BUILD_CONFIGURATION} -o /Server/publish /p:UseAppHost=false
+RUN dotnet build "./Server.csproj" -c debug -o ./output/ /p:UseAppHost=false
+ENTRYPOINT [ "dotnet", "./output/Server.dll" ]
 
-# Copy files  to runner
-FROM server-base AS server-release
-EXPOSE 8080
-EXPOSE 8081
-WORKDIR /Server
-COPY --from=server-publish /Server/publish/ .
-COPY --from=html /html/build ./wwwroot 
-ENTRYPOINT ["dotnet", "Server.dll"]
-
-FROM server-publish AS server-release-debug
-EXPOSE 8080
-EXPOSE 8081
-WORKDIR /Server/
-COPY --from=html /html/build ./wwwroot 
-ENTRYPOINT ["dotnet", "run"]
-
-# Development server
 FROM server-build AS server-development
 EXPOSE 8080
 EXPOSE 8081
 WORKDIR /Server/
-ENTRYPOINT [ "dotnet", "run" ]
+ENTRYPOINT [ "dotnet", "./output/Server.dll" ]
+
+FROM server-build AS server-update-db
+WORKDIR /Server/
+ENTRYPOINT [ "./taskCreateDb.sh" ]
+
+FROM server-sdk AS server-publish
+WORKDIR /Server/
+RUN dotnet publish "./Server.csproj" -c release -o /Server/publish /p:UseAppHost=false
+
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS server-release
+USER app
+WORKDIR /Server
+COPY --from=server-publish /Server/publish/ .
+COPY --from=html-release /html/build ./wwwroot 
+ENTRYPOINT ["dotnet", "Server.dll"]
