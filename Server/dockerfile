@@ -9,18 +9,14 @@ RUN dotnet restore "Server.csproj"
 COPY [".", "."]
 RUN chmod +x taskCreateDb.sh && chmod +x wait-for-it.sh
 
-FROM server-sdk AS server-build
+FROM server-sdk AS server-development
+EXPOSE 8080
+EXPOSE 8081
 WORKDIR /Server/
 RUN dotnet build "./Server.csproj" -c debug -o ./output/ /p:UseAppHost=false
 ENTRYPOINT [ "dotnet", "./output/Server.dll" ]
 
-FROM server-build AS server-development
-EXPOSE 8080
-EXPOSE 8081
-WORKDIR /Server/
-ENTRYPOINT [ "dotnet", "./output/Server.dll" ]
-
-FROM server-build AS server-update-db
+FROM server-sdk AS server-update-db
 WORKDIR /Server/
 ENTRYPOINT [ "./taskCreateDb.sh" ]
 

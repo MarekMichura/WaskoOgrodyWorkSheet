@@ -2,48 +2,28 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Docker Compose restart development",
+      "label": "Docker Compose Up",
       "type": "shell",
-      "command": "docker-compose restart server-development",
-      "group": "build",
-      "problemMatcher": []
-    },
-    {
-      "label": "Docker Compose Up development",
-      "type": "shell",
-      "command": "docker-compose down server-development server-release && docker-compose up --build -d server-development",
-      "group": "build",
-      "problemMatcher": []
-    },
-    {
-      "label": "Docker Compose Up release",
-      "type": "shell",
-      "command": "docker-compose down server-release server-development html-development && docker-compose up --build -d server-release",
+      "command": "docker-compose up --build -d ${input:dockerName}",
       "group": "build",
       "problemMatcher": []
     },
     {
       "label": "Docker Compose Down",
       "type": "shell",
-      "command": "docker-compose down",
+      "command": "docker-compose down && yes | docker container prune",
       "problemMatcher": []
     },
     {
       "label": "Create db",
       "type": "shell",
-      "command": "docker-compose exec server /bin/bash -c '/Server/taskCreateDb.sh ${input:migrationName}'",
+      "command": "docker-compose run --build initialize-db ${input:migrationName}",
       "problemMatcher": [],
     },
     {
-      "label": "Remove db",
+      "label": "Delete data",
       "type": "shell",
-      "command": "sudo rm -rf ./DB/data/* ./DB/log/* ./DB/secrets/*",
-      "problemMatcher": [],
-    },
-    {
-      "label": "Remove migrations",
-      "type": "shell",
-      "command": "sudo rm -rf ./Server/src/Migrations/*",
+      "command": "rm -rf ${input:remove}",
       "problemMatcher": [],
     },
   ],
@@ -53,6 +33,27 @@
       "type": "promptString",
       "description": "Wprowadź nazwę migracji",
       "default": ""
+    },
+    {
+      "id": "dockerName",
+      "type": "pickString",
+      "description": "Wybierz opcje",
+      "options": [
+        "server-release",
+        "server-development"
+      ],
+      "default": "server-development"
+    },
+    {
+      "id": "remove",
+      "type": "pickString",
+      "description": "Wybierz opcje",
+      "options": [
+        "./DB/data/* ./DB/log/* ./DB/secrets/* ./Server/Migrations/*",
+        "./DB/data/* ./DB/log/* ./DB/secrets/*",
+        "./Server/Migrations/*",
+      ],
+      "default": "./DB/data/* ./DB/log/* ./DB/secrets/*"
     }
   ]
 }

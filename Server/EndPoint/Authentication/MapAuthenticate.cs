@@ -12,7 +12,7 @@ class ModelResultAuthenticate
 
 static class MapAuthenticate
 {
-  public static async Task<IResult> Authenticate(ModelInputAuthenticate map, IServiceUser rep, SignInManager<ModelUser> _sim)
+  static public async Task<IResult> Authenticate(ModelInputAuthenticate map, IServiceUser rep, SignInManager<ModelUser> _sim)
   {
     if (await rep.Login(map.Login, map.Password))
       return Results.Ok(new ModelResultAuthenticate { Authenticated = true, Profil = rep.GetProfil() });

@@ -9,3 +9,5 @@ global using Microsoft.AspNetCore.Mvc;
 global using System.Security.Claims;
 global using Microsoft.AspNetCore.SpaServices;
 global using System.ComponentModel.DataAnnotations.Schema;
+global using Microsoft.EntityFrameworkCore.ChangeTracking;
+global using Microsoft.EntityFrameworkCore.Diagnostics;

@@ -1,6 +1,6 @@
 static class MapGetProfil
 {
-  public static IResult GetProfil(IServiceUser rep)
+  static public IResult GetProfil(IServiceUser rep)
   {
     return Results.Ok(rep.GetProfil());
   }

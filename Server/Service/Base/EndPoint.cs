@@ -1,4 +1,3 @@
-
 class EndPoint : IEndPoint, IService
 {
   public short Priority => short.MinValue + 2;
