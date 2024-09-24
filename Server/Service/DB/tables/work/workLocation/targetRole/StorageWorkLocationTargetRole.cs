@@ -1,3 +1,5 @@
+namespace Wasko;
+
 class StorageWorkLocationTargetRole
 {
   static private string roleID(string name) =>
@@ -9,12 +11,9 @@ class StorageWorkLocationTargetRole
   static public IEnumerable<ModelWorkLocationTargetRole> WorkLocationRoles = _WorkLocationRoles().ToArray();
   static private IEnumerable<ModelWorkLocationTargetRole> _WorkLocationRoles()
   {
-
-    yield return new() { RoleID = roleID("OfficeWorker"), WorkLocationID = workLocID("Office") };
-
     foreach (var loc in StorageWorkLocations.WorkLocations.Skip(2))
     {
-      yield return new() { RoleID = roleID("Gardener"), WorkLocationID = loc.ID };
+      yield return new() { RoleID = roleID("Ogrodnik"), WorkLocationID = loc.ID };
     }
   }
 }

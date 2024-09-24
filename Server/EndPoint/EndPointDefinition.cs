@@ -1,15 +1,17 @@
-public interface IService
+namespace Wasko;
+
+interface IService
 {
   public void DefineService(WebApplicationBuilder builder);
 }
 
-public interface IEndPoint
+interface IEndPoint
 {
   public short Priority => 0;
   public void DefineEndPoint(WebApplication app);
 }
 
-static public class EndPointDefinition
+static class EndPointDefinition
 {
   static public IEnumerable<T> ForEach<T>(this IEnumerable<T> objs, Action<T> fun)
   {

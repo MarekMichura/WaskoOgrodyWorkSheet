@@ -1,3 +1,5 @@
+namespace Wasko;
+
 class BuilderDayOffDateTargetRole : IBuilder
 {
   public void CreateModel(ModelBuilder builder)

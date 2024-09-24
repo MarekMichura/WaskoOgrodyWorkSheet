@@ -1,3 +1,5 @@
+namespace Wasko;
+
 class StorageWorkLocations
 {
   static public IEnumerable<ModelWorkLocation> WorkLocations = _WorkLocations().ToArray();
@@ -22,4 +24,8 @@ class StorageWorkLocations
     yield return new() { ID = "cf9220d9-b583-4831-aff4-c7517ff84888", Name = "Henniger Graby" };
     yield return new() { ID = "1db06608-e532-45b2-b1a8-3cfeaab85f3d", Name = "klimanowa" };
   }
+
+
+  static public string getID(string name) =>
+    WorkLocations.First(a => a.Name == name).ID;
 }

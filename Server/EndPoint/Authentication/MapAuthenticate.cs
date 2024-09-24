@@ -1,3 +1,5 @@
+namespace Wasko;
+
 class ModelInputAuthenticate
 {
   public required string Login { get; init; }

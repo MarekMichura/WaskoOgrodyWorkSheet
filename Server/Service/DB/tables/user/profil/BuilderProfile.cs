@@ -1,3 +1,5 @@
+namespace Wasko;
+
 class BuilderProfile : IBuilder
 {
   public void CreateModel(ModelBuilder builder)

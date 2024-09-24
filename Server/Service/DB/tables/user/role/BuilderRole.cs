@@ -1,3 +1,5 @@
+namespace Wasko;
+
 class BuilderRole : IBuilder
 {
   public void CreateModel(ModelBuilder builder)
@@ -9,10 +11,11 @@ class BuilderRole : IBuilder
         .IsRequired();
 
       entity.Property(a => a.ConcurrencyStamp)
-        .IsRequired().IsUnicode();
+        .IsRequired();
 
+      entity.HasIndex(a => a.Name).IsUnique();
       entity.Property(a => a.Name)
-        .IsRequired().IsUnicode();
+        .IsRequired();
 
       entity.HasOne(a => a.Author).WithMany(a => a.CreatedRoles)
         .HasForeignKey(a => a.AuthorID)

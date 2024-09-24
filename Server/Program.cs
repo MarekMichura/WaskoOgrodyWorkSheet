@@ -1,3 +1,5 @@
+using Wasko;
+
 await Task.Delay(1000);
 
 var builder = WebApplication.CreateBuilder(args);

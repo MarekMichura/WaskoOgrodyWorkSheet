@@ -1,3 +1,5 @@
+namespace Wasko;
+
 class StorageWorkLocationRole
 {
   static public IEnumerable<ModelWorkLocationRoleWorkLocation> WorkLocationRolesWorkLocation =

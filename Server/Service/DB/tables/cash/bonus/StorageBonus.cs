@@ -1,38 +1,38 @@
+namespace Wasko;
+
 class StorageBonus
 {
-  static private string userID(string name) =>
-    StorageUser.Users.First(a => a.UserName == name).Id;
-
   static public IEnumerable<ModelBonus> Bonuses = _Bonuses().ToArray();
 
   static private IEnumerable<ModelBonus> _Bonuses()
   {
+    if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") != "Development")
+      yield break;
+
     yield return new()
     {
-      ID = "e1d178f4-262a-418f-96c1-a5515b9fb23f",
+      ID = "5a744293-575a-44b5-83bd-91818e8924a4",
       Bonus = 100,
-      BonusDescription = "Za dobre sprawowanie",
-      CreatorID = userID("user0"),
-      TargetID = userID("user0"),
-      BonusRejectionReason = "Wcale nie było dobre",
-      ApproverID = userID("admin")
+      BonusDescription = "Za prace w sobote",
+      CreatorID = StorageUser.getID("Dima"),
+      TargetID = StorageUser.getID("Dima"),
+    };
+
+    yield return new()
+    {
+      ID = "b055128e-a98a-421d-98d5-0ca059552457",
+      Bonus = 50,
+      BonusDescription = "Za prace w sobote",
+      CreatorID = StorageUser.getID("Loszka"),
+      TargetID = StorageUser.getID("Loszka"),
     };
     yield return new()
     {
-      ID = "024162d3-6287-4e05-b0ef-91cfe5854dc0",
-      Bonus = 100,
-      BonusDescription = "Za piękne oczy",
-      CreatorID = userID("user0"),
-      TargetID = userID("user0"),
-    };
-    yield return new()
-    {
-      ID = "07f10e53-1641-415d-9f7e-63e0e8465a83",
-      Bonus = 100,
-      BonusDescription = "Za produktywność",
-      CreatorID = userID("admin"),
-      TargetID = userID("user0"),
-      ApproverID = userID("admin")
+      ID = "66b3fdf2-ebcc-4bc7-8626-ae8c8941cf0b",
+      Bonus = 10,
+      BonusDescription = "Za bycie kierowca",
+      CreatorID = StorageUser.getID("Eryk"),
+      TargetID = StorageUser.getID("Eryk"),
     };
   }
 }

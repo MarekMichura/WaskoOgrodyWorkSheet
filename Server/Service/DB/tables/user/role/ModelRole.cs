@@ -1,3 +1,5 @@
+namespace Wasko;
+
 class ModelRole : IdentityRole
 {
   [Required]

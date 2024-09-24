@@ -1,3 +1,5 @@
+namespace Wasko;
+
 class StorageProfil
 {
   static public IEnumerable<ModelProfil> Profiles = _Profiles().ToArray();
@@ -5,17 +7,35 @@ class StorageProfil
   {
     yield return new()
     {
-      ID = StorageUser.Users.First(a => a.UserName == "admin").Id,
-      FirstName = "admin name",
-      LastName = "admin last name",
-      WorkStartDate = new DateOnly(2023, 7, 1)
+      ID = StorageUser.getID("admin"),
+      FirstName = "Tworca domyslnych danych",
+      LastName = "Brak możliwości logowania",
+      WorkStartDate = new DateOnly(2024, 1, 1)
+    };
+
+    if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") != "Development")
+      yield break;
+
+    yield return new()
+    {
+      ID = StorageUser.getID("Eryk"),
+      FirstName = "Eryk",
+      LastName = "IDK",
+      WorkStartDate = new DateOnly(2024, 8, 1)
     };
     yield return new()
     {
-      ID = StorageUser.Users.First(a => a.UserName == "user0").Id,
-      FirstName = "user name",
-      LastName = "user last name",
-      WorkStartDate = new DateOnly(2023, 4, 1)
+      ID = StorageUser.getID("Loszka"),
+      FirstName = "Loszka",
+      LastName = "IDK",
+      WorkStartDate = new DateOnly(2024, 8, 1)
+    };
+    yield return new()
+    {
+      ID = StorageUser.getID("Dima"),
+      FirstName = "Dima",
+      LastName = "IDK",
+      WorkStartDate = new DateOnly(2024, 8, 1)
     };
   }
 }

@@ -1,3 +1,5 @@
+namespace Wasko;
+
 class ModelDayOffDateTargetRole
 {
   [Required]

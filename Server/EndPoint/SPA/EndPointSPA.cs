@@ -1,3 +1,5 @@
+namespace Wasko;
+
 class EndPointSPA : IService, IEndPoint
 {
   private const string AppPath = "./wwwroot";

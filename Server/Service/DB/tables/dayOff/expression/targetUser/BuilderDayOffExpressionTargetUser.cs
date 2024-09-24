@@ -1,3 +1,5 @@
+namespace Wasko;
+
 class BuilderDayOffExpressionTargetUser : IBuilder
 {
   public void CreateModel(ModelBuilder builder)

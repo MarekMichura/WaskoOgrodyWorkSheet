@@ -1,3 +1,4 @@
+namespace Wasko;
 
 class BuilderWorkLocations : IBuilder
 {

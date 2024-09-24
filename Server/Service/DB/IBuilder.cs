@@ -1,3 +1,5 @@
+namespace Wasko;
+
 interface IBuilder
 {
   public void CreateModel(ModelBuilder builder);

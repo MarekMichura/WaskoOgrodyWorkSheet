@@ -1,3 +1,5 @@
+namespace Wasko;
+
 interface IServiceUser
 {
   ModelUser? GetCurrentUser();

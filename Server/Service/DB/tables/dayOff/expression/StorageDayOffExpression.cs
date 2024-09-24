@@ -1,10 +1,13 @@
+namespace Wasko;
+
 class StorageDayOffExpression
 {
   static private string userID(string name) =>
     StorageUser.Users.First(a => a.UserName == name).Id;
 
-  static public IEnumerable<ModelDayOffExpression> DaysOff = _DaysOff().ToArray();
-  static private IEnumerable<ModelDayOffExpression> _DaysOff()
+  static public IEnumerable<ModelDayOffExpression> DaysOff = _PolishHolidays();
+  static public IEnumerable<ModelDayOffExpression> PolishHolidays = _PolishHolidays();
+  static private IEnumerable<ModelDayOffExpression> _PolishHolidays()
   {
     yield return new()
     {
@@ -166,28 +169,6 @@ class StorageDayOffExpression
 
       Reason = "Boże Ciało",
       DaysAfterEaster = 60,
-    };
-    yield return new()
-    {
-      ID = "3648e584-5e64-43fd-8d55-c0e9d018196d",
-      Off = true,
-      AuthorID = userID("user0"),
-      ApproverID = userID("admin"),
-
-      Reason = "Zaplanowana coroczna wizyta w szpitalu",
-      Month = EnumMonth.September,
-      Day = 15,
-    };
-    yield return new()
-    {
-      ID = "9b43ea0d-da34-4573-b655-7f8800fdcc25",
-      Off = true,
-      AuthorID = userID("admin"),
-      ApproverID = userID("admin"),
-
-      Reason = "Święto z okazji święta",
-      Month = EnumMonth.September,
-      Day = 10,
     };
   }
 }

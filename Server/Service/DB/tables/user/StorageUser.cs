@@ -1,16 +1,20 @@
+namespace Wasko;
+
 class StorageUser
 {
   public string ID { get; set; }
   public string Email { get; set; }
   public string UserName { get; set; }
   public string Password { get; set; }
+  public bool Active { get; set; }
 
-  public StorageUser(string id, string login, string password, string email)
+  public StorageUser(string id, string login, string password, string email, bool active = true)
   {
     ID = id;
     UserName = login;
     Password = password;
     Email = email;
+    Active = active;
   }
 
   static public implicit operator ModelUser(StorageUser user)
@@ -21,6 +25,7 @@ class StorageUser
       UserName = user.UserName,
       NormalizedUserName = user.UserName.ToUpper(),
       Email = user.Email,
+      Active = user.Active,
       NormalizedEmail = user.Email.ToUpper(),
       ConcurrencyStamp = Guid.NewGuid().ToString()
     };
@@ -31,10 +36,16 @@ class StorageUser
   static public IEnumerable<ModelUser> Users = _Users().ToArray();
   static private IEnumerable<ModelUser> _Users()
   {
-    yield return new StorageUser("cc9db47e-bda0-432c-a60e-e7b53183c609", "user0", "zaq1@WSX", "user@gmail.com");
-    yield return new StorageUser("5e3a352b-7057-47ff-ab70-67f02da02973", "user1", "zaq1@WSX", "user@gmail.com");
-    yield return new StorageUser("3548790a-52bf-4ee3-aedc-1d86626f9cc5", "user2", "zaq1@WSX", "user@gmail.com");
-    yield return new StorageUser("f14429ac-76a9-43ec-adba-760f2cef19d2", "user3", "zaq1@WSX", "user@gmail.com");
-    yield return new StorageUser("cb24a0c2-506f-4810-880b-7f6caa1c21b8", "admin", "zaq1@WSX", "admin@gmail.com");
+    yield return new StorageUser("cb24a0c2-506f-4810-880b-7f6caa1c21b8", "admin", "zaq1@WSX", "admin@gmail.com", false);
+
+    if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") != "Development")
+      yield break;
+
+    yield return new StorageUser("68553cdf-0a20-4969-9693-c49315c7df58", "Eryk", "zaq1@WSX", "eryk@gmail.com");
+    yield return new StorageUser("8b4eb9ef-1ddb-49b1-9b25-fc200b63d63f", "Loszka", "zaq1@WSX", "loszka@gmail.com");
+    yield return new StorageUser("ec0f6916-7a14-4dd9-80e9-f20cd09cd6a9", "Dima", "zaq1@WSX", "dima@gmail.com");
   }
+
+  static public string getID(string userName) =>
+    Users.First(a => a.UserName == userName).Id;
 }

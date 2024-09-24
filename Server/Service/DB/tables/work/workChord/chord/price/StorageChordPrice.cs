@@ -1,3 +1,5 @@
+namespace Wasko;
+
 class StorageChordPrice
 {
   static private string chordID(string name) =>
@@ -22,7 +24,23 @@ class StorageChordPrice
       ID = "6d743df0-601f-481b-bafe-7bd70f0212b0",
       CreatorID = userID("admin"),
       Date = new DateOnly(2000, 1, 1),
-      ChordID = chordID("p9/p11/c1,5"),
+      ChordID = chordID("p9"),
+      Price = 1.1m,
+    };
+    yield return new()
+    {
+      ID = "17deb4e8-8a65-47b9-9b24-4717049a46b5",
+      CreatorID = userID("admin"),
+      Date = new DateOnly(2000, 1, 1),
+      ChordID = chordID("p11"),
+      Price = 1.1m,
+    };
+    yield return new()
+    {
+      ID = "ed53c2cf-a9f4-419b-9711-40cda1920588",
+      CreatorID = userID("admin"),
+      Date = new DateOnly(2000, 1, 1),
+      ChordID = chordID("c1,5"),
       Price = 1.1m,
     };
     yield return new()

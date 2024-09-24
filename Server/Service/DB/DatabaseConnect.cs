@@ -1,3 +1,5 @@
+namespace Wasko;
+
 class DatabaseContext : IdentityDbContext<ModelUser, ModelRole, string>
 {
   // =============================================================

@@ -1,4 +1,6 @@
 
+namespace Wasko;
+
 partial class ServiceUser : IServiceUser
 {
   private readonly IHttpContextAccessor _httpContext;

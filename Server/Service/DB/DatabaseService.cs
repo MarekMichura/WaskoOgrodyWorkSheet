@@ -1,3 +1,5 @@
+namespace Wasko;
+
 class DatabaseService : IService, IEndPoint
 {
   public void DefineEndPoint(WebApplication app)

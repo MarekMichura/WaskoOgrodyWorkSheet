@@ -1,3 +1,5 @@
+namespace Wasko;
+
 class ModelFound
 {
   [Key]
@@ -12,7 +14,7 @@ class ModelFound
   public required string FoundDescription { get; set; }
   [Required]
   [DataType(DataType.Date)]
-  public DateOnly Date { get; set; }
+  public DateOnly Date { get; set; } = DateOnly.FromDateTime(DateTime.Now);
 
   [Required]
   [StringLength(36)]

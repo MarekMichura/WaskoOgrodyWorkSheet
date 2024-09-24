@@ -1,9 +1,13 @@
+namespace Wasko;
+
 class ModelWorkChord
 {
   [Key]
   [Required]
   [StringLength(36)]
   public string ID { get; set; } = string.Empty;
+  [Required]
+  public required long Quantity { get; set; }
   [Required]
   public DateTime Date { get; set; } = DateTime.Now;
   [Required]

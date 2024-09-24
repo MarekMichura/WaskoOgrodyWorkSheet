@@ -1,3 +1,5 @@
+namespace Wasko;
+
 class UpdateLastActualization : SaveChangesInterceptor
 {
   public override int SavedChanges(SaveChangesCompletedEventData eventData, int result)

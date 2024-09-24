@@ -1,3 +1,5 @@
+namespace Wasko;
+
 class ModelResultUserProfil
 {
   public required string FirstName { get; set; }

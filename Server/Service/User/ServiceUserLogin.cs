@@ -1,3 +1,5 @@
+namespace Wasko;
+
 partial class ServiceUser
 {
   public async Task<bool> Login(string login, string password)

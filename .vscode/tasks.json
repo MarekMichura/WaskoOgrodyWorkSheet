@@ -4,7 +4,7 @@
     {
       "label": "Docker Compose Up",
       "type": "shell",
-      "command": "docker-compose up --build -d ${input:dockerName}",
+      "command": "docker-compose up --build -d server-${input:dockerName}",
       "group": "build",
       "problemMatcher": []
     },
@@ -17,7 +17,7 @@
     {
       "label": "Create db",
       "type": "shell",
-      "command": "docker-compose run --build initialize-db ${input:migrationName}",
+      "command": "docker-compose run --build initialize-db-${input:dockerName} ${input:migrationName}",
       "problemMatcher": [],
     },
     {
@@ -39,21 +39,21 @@
       "type": "pickString",
       "description": "Wybierz opcje",
       "options": [
-        "server-release",
-        "server-development"
+        "release",
+        "development"
       ],
-      "default": "server-development"
+      "default": "development"
     },
     {
       "id": "remove",
       "type": "pickString",
       "description": "Wybierz opcje",
       "options": [
-        "./DB/data/* ./DB/log/* ./DB/secrets/* ./Server/Migrations/*",
+        "./DB/Migrations/*",
         "./DB/data/* ./DB/log/* ./DB/secrets/*",
-        "./Server/Migrations/*",
+        "./DB/data/* ./DB/log/* ./DB/secrets/* ./DB/Migrations/*",
       ],
-      "default": "./DB/data/* ./DB/log/* ./DB/secrets/*"
+      "default": "./Server/Migrations/*"
     }
   ]
 }
