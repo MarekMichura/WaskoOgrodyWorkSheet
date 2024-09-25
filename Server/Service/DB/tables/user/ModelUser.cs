@@ -9,6 +9,8 @@ class ModelUser : IdentityUser
   public virtual ModelProfil? Profil { get; set; }
   public virtual ICollection<ModelRole> Roles { get; set; } = [];
   public virtual ICollection<ModelRole> CreatedRoles { get; set; } = [];
+  public virtual ICollection<ModelUserSalary> Salary { get; set; } = [];
+  public virtual ICollection<ModelUserSalary> ApprovedSalary { get; set; } = [];
   // ============================= days off =================
   public virtual ICollection<ModelDayOffDate> DaysOffDate { get; set; } = [];
   public virtual ICollection<ModelDayOffDate> DaysOffDateAuthor { get; set; } = [];

@@ -6,8 +6,15 @@ RUN curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /remote_d
 RUN dotnet tool install --global dotnet-ef
 COPY ["./Server.csproj", "./"]
 RUN dotnet restore "Server.csproj"
-COPY [".", "."]
+COPY ["./appsettings.json", "./appsettings.json"]
+COPY ["./taskCreateDb.sh", "./taskCreateDb.sh"]
+COPY ["./wait-for-it.sh", "./wait-for-it.sh"]
 RUN chmod +x taskCreateDb.sh && chmod +x wait-for-it.sh
+COPY ["./wwwroot/", "./wwwroot/"]
+COPY ["./globals.cs", "./globals.cs"]
+COPY ["./Program.cs", "./Program.cs"]
+COPY ["./Service/", "./Service/"]
+COPY ["./EndPoint/", "./EndPoint/"]
 
 FROM server-sdk AS server-development
 EXPOSE 8080

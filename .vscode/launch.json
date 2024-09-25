@@ -6,7 +6,7 @@
       "type": "coreclr",
       "request": "attach",
       "processName": "dotnet",
-      "preLaunchTask": "Docker Compose Up development",
+      "preLaunchTask": "Docker Compose Up",
       // "postDebugTask": "Docker Compose Down",
       "pipeTransport": {
         "pipeProgram": "docker",
@@ -20,7 +20,7 @@
         "quoteArgs": false,
       },
       "sourceFileMap": {
-        "/Server/": "${workspaceRoot}/Server/src/"
+        "/Server/": "${workspaceRoot}/Server/"
       },
     }
   ]
