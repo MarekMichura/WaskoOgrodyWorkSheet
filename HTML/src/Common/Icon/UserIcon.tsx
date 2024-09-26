@@ -1,12 +1,13 @@
 import {createElement} from 'react'
 import IIcon from './IIcon'
 
+
+
+
 function UserIcon(p: IIcon) {
-  const props = {
-    viewBox: '0 0 1024 1024',
-    ...p,
-  }
-  delete props.svg
+  const {SVG, ...props} = p
+
+  props.viewBox = '0 0 1024 1024'
 
   const child = (
     <path
@@ -16,10 +17,10 @@ function UserIcon(p: IIcon) {
     />
   )
 
-  return p.svg === undefined ? (
+  return SVG === undefined ? (
     createElement('svg', props, child)
   ) : (
-    <p.svg {...props}>{child}</p.svg>
+    <SVG {...props}>{child}</SVG>
   )
 }
 

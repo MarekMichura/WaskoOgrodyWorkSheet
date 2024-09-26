@@ -1,14 +1,14 @@
 import {createElement} from 'react'
 import IIcon from './IIcon'
 
+
+
+
 function LogoIcon(p: IIcon) {
-  const props = {
-    xmlns: 'http://www.w3.org/2000/svg',
-    viewBox: '0 0 278 217',
-    fill: '#004f00',
-    ...p,
-  }
-  delete props.svg
+  const {SVG, ...props} = p
+  props.xmlns = 'http://www.w3.org/2000/svg'
+  props.viewBox = '0 0 278 217'
+  props.fill = '#004f00'
 
   const child = (
     <>
@@ -17,10 +17,10 @@ function LogoIcon(p: IIcon) {
     </>
   )
 
-  return p.svg === undefined ? (
+  return SVG === undefined ? (
     createElement('svg', props, child)
   ) : (
-    <p.svg {...props}>{child}</p.svg>
+    <SVG {...props}>{child}</SVG>
   )
 }
 

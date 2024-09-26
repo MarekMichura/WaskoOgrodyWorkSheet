@@ -1,10 +1,13 @@
-import {Outlet} from 'react-router-dom'
 
+
+
+import {Outlet} from 'react-router-dom'
+import {useEffect, useReducer} from 'react'
 import {ACTION_INIT} from './global/ACTIONS'
 import MainReducer from './MainReducer'
 import {context} from './types/IContext'
 import {StateDefault} from './types/IState'
-import {useEffect, useReducer} from 'react'
+
 
 function MainContext() {
   const [state, dispatch] = useReducer(MainReducer, StateDefault)
@@ -14,7 +17,7 @@ function MainContext() {
   }, [])
 
   return (
-    <context.Provider value={{dispatch}}>
+    <context.Provider value={{dispatch, state}}>
       <Outlet />
     </context.Provider>
   )

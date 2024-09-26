@@ -1,7 +1,10 @@
+
+
+import {THEME_DARK} from '../global/THEME'
 import {IAction} from './IAction'
 import {IProfil} from './IProfil'
 import {IThemes} from './IThemes'
-import {THEME_DARK} from '../global/THEME'
+
 
 export interface IState {
   dispatch: React.Dispatch<IAction>
@@ -10,7 +13,7 @@ export interface IState {
 }
 
 export const StateDefault: IState = {
-  dispatch: (value: IAction) => {},
+  dispatch: () => {},
   theme: THEME_DARK,
   profil: undefined,
 }

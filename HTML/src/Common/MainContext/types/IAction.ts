@@ -1,8 +1,7 @@
-import {ILoginValues} from '@Page/Login/types'
 import {FormikErrors} from 'formik'
-
-import {IProfil} from './IProfil'
+import {ILoginValues} from '/Page/Login/types'
 import * as ACTION from '../global/ACTIONS'
+import {IProfil} from './IProfil'
 
 export interface IActionInit {
   action: typeof ACTION.ACTION_INIT

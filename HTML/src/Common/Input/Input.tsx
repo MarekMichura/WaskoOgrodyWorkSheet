@@ -1,8 +1,7 @@
-import IIcon from '@Icon/IIcon'
-
+import {useRef} from 'react'
+import IIcon from '/Icon/IIcon'
 import * as CSS from './css'
 import {IInput} from './IInput'
-import {useRef} from 'react'
 
 interface IProps extends IInput {
   icon: (p: IIcon) => JSX.Element
@@ -22,7 +21,7 @@ function Input(p: IProps) {
     <CSS.ContextInput
       onClick={click}
       style={{cursor: p.disabled ? 'not-allowed' : 'text'}}>
-      <Icon onClick={click} svg={CSS.SVG} />
+      <Icon onClick={click} SVG={CSS.SVG} />
       <CSS.Input ref={ref} {...props} />
       <CSS.Label>{p.placeholder}</CSS.Label>
       <CSS.Error>{error}</CSS.Error>

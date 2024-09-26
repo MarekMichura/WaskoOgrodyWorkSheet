@@ -18,10 +18,10 @@
     "outDir": "./build",
     "baseUrl": "./src",
     "paths": {
-      "@Icon/*": ["Common/Icon/*"],
-      "@Input/*": ["Common/Input/*"],
-      "@Context/*": ["Common/MainContext/*"],
-      "@Page/*": ["Page/*"]
+      "/Icon/*": ["Common/Icon/*"],
+      "/Input/*": ["Common/Input/*"],
+      "/Context/*": ["Common/MainContext/*"],
+      "/Page/*": ["Page/*"]
     }
   },
   "include": ["src", "eslint.config.cjs:"],

@@ -1,12 +1,10 @@
+import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
-
-import InitThemeHTML from '@Context/function/Init'
-import MainContext from '@Context/MainContext'
-import LoginPage from '@Page/Login'
-
+import InitThemeHTML from '/Context/function/Init'
+import MainContext from '/Context/MainContext'
+import LoginPage from '/Page/Login'
 import GlobalStyle from './globalStyle'
-import React from 'react'
 
 InitThemeHTML()
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)

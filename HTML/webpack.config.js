@@ -1,8 +1,11 @@
-const path = require('path')
 
+
+const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+
 
 module.exports = {
   mode: 'development',
@@ -29,10 +32,10 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
     alias: {
-      '@Icon': path.resolve(__dirname, 'src/Common/Icon'),
-      '@Input': path.resolve(__dirname, 'src/Common/Input'),
-      '@Context': path.resolve(__dirname, 'src/Common/MainContext'),
-      '@Page': path.resolve(__dirname, 'src/Page'),
+      '/Icon': path.resolve(__dirname, 'src/Common/Icon'),
+      '/Input': path.resolve(__dirname, 'src/Common/Input'),
+      '/Context': path.resolve(__dirname, 'src/Common/MainContext'),
+      '/Page': path.resolve(__dirname, 'src/Page'),
     },
   },
   devServer: {

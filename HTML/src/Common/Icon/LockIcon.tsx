@@ -1,13 +1,13 @@
-import {createElement} from 'react'
+import React, {createElement} from 'react'
 import IIcon from './IIcon'
 
+
+
+
 function LockIcon(p: IIcon) {
-  const props = {
-    xmlns: 'http://www.w3.org/2000/svg',
-    viewBox: '0 0 24 24',
-    ...p,
-  }
-  delete props.svg
+  const {SVG, ...props} = p
+  props.xmlns = 'http://www.w3.org/2000/svg'
+  props.viewBox = '0 0 24 24'
 
   const child = (
     <path
@@ -17,10 +17,10 @@ function LockIcon(p: IIcon) {
     />
   )
 
-  return p.svg === undefined ? (
+  return SVG === undefined ? (
     createElement('svg', props, child)
   ) : (
-    <p.svg {...props}>{child}</p.svg>
+    <SVG {...props}>{child}</SVG>
   )
 }
 

@@ -1,14 +1,13 @@
 import {Formik, FormikHelpers} from 'formik'
-
-import * as CSS from './css'
-import {defaultLoginValues, ILoginValues} from './types'
-import validationLogin from './validation'
+import React, {useContext} from 'react'
 import {LockIcon, LogoIcon, UserIcon} from '../../Common/Icon'
 import Button from '../../Common/Input/Button'
 import Input from '../../Common/Input/Input'
 import {ACTION_LOGIN} from '../../Common/MainContext/global/ACTIONS'
 import {context} from '../../Common/MainContext/types/IContext'
-import {useContext} from 'react'
+import validationLogin from './validation'
+import {defaultLoginValues, ILoginValues} from './types'
+import * as CSS from './css'
 
 function LoginPage() {
   const {dispatch} = useContext(context)
@@ -84,7 +83,7 @@ function LoginPage() {
       <CSS.Content>
         <CSS.Top>
           <LogoIcon
-            svg={CSS.SVG}
+            SVG={CSS.SVG}
             onClick={() => {
               dispatch({action: 'ChangeTheme'})
             }}
@@ -99,7 +98,7 @@ function LoginPage() {
           onSubmit={sub}
           validate={validationLogin}
           validateOnChange={false}>
-          {({errors, handleChange, isValid, submitForm}) => (
+          {({errors, handleChange, submitForm}) => (
             <>
               <Input
                 icon={UserIcon}
