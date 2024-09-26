@@ -10,18 +10,14 @@
       // "postDebugTask": "Docker Compose Down",
       "pipeTransport": {
         "pipeProgram": "docker",
-        "pipeArgs": [
-          "exec",
-          "-i",
-          "server-development"
-        ],
+        "pipeArgs": ["exec", "-i", "server-development"],
         "debuggerPath": "/remote_debugger/vsdbg",
         "pipeCwd": "${workspaceRoot}/",
-        "quoteArgs": false,
+        "quoteArgs": false
       },
       "sourceFileMap": {
         "/Server/": "${workspaceRoot}/Server/"
-      },
+      }
     }
   ]
 }

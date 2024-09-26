@@ -1,34 +1,22 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
+
+import InitThemeHTML from '@Context/function/Init'
+import MainContext from '@Context/MainContext'
+import LoginPage from '@Page/Login'
+
 import GlobalStyle from './globalStyle'
-import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
-import ContextProfil from './Common/ContextProfil'
-import LoginPage from './Pages/Login'
-import BasePage from './Common/BasePage'
-import ContextNotification from './Common/ContextNotification'
+import React from 'react'
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-)
-
-function Contexts() {
-  return (
-    <ContextProfil>
-      <ContextNotification>
-        <Outlet />
-      </ContextNotification>
-    </ContextProfil>
-  )
-}
+InitThemeHTML()
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 root.render(
   <React.StrictMode>
     <GlobalStyle />
     <BrowserRouter>
       <Routes>
-        <Route path="/" Component={Contexts}>
-          <Route path="/" Component={BasePage}>
-          </Route>
+        <Route path="/" Component={MainContext}>
           <Route path="Login" Component={LoginPage} />
         </Route>
       </Routes>

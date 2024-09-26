@@ -1,7 +1,7 @@
 namespace Wasko;
 
 class StorageDayOffExpressionTargetRole
-{ 
+{
   static public IEnumerable<ModelDayOffExpressionTargetRole> DaysOffTargets = _DaysOffTargets().ToArray();
   static private IEnumerable<ModelDayOffExpressionTargetRole> _DaysOffTargets()
   {

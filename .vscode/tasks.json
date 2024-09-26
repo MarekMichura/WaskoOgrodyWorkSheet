@@ -18,14 +18,14 @@
       "label": "Create db",
       "type": "shell",
       "command": "docker-compose run --build initialize-db-${input:dockerName} ${input:migrationName}",
-      "problemMatcher": [],
+      "problemMatcher": []
     },
     {
       "label": "Delete data",
       "type": "shell",
       "command": "rm -rf ${input:remove}",
-      "problemMatcher": [],
-    },
+      "problemMatcher": []
+    }
   ],
   "inputs": [
     {
@@ -38,10 +38,7 @@
       "id": "dockerName",
       "type": "pickString",
       "description": "Wybierz opcje",
-      "options": [
-        "release",
-        "development"
-      ],
+      "options": ["release", "development"],
       "default": "development"
     },
     {
@@ -51,7 +48,7 @@
       "options": [
         "./DB/Migrations/*",
         "./DB/data/* ./DB/log/* ./DB/secrets/*",
-        "./DB/data/* ./DB/log/* ./DB/secrets/* ./DB/Migrations/*",
+        "./DB/data/* ./DB/log/* ./DB/secrets/* ./DB/Migrations/*"
       ],
       "default": "./Server/Migrations/*"
     }
