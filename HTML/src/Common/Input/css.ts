@@ -1,79 +1,31 @@
 import styled, {keyframes} from 'styled-components'
-
-export const Label = styled.label`
-  font-family: 'Roboto', sans-serif;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  font-size: 15pt;
-  transition: top, bottom, left, transform, font-size;
-  transition-duration: 300ms;
-  transform: translateX(-50%) translateY(-50%);
-  pointer-events: none;
-`
-
-export const Error = styled.label`
-  font-family: 'Roboto', sans-serif;
-  position: absolute;
-  left: 10px;
-  top: 100%;
-  color: red;
-`
-
-export const Input = styled.input`
-  font-family: 'Roboto', sans-serif;
-  background-color: transparent;
-  border: none;
-  outline: none;
-  width: calc(100% - 50px);
-  font-size: 15pt;
-  color: var(--text-900);
-  align-self: flex-end;
-
-  &::placeholder {
-    visibility: hidden;
-  }
-  &:focus + ${Label}, &:valid + ${Label} {
-    top: calc(3px);
-    left: 70px;
-    transform: translateX(-50%);
-    font-size: 10pt;
-  }
-
-  &[type='submit'],
-  &[type='button'] {
-    background-color: var(--primary-500);
-    color: var(--text-950);
-    cursor: pointer;
-    width: fit-content;
-    padding: 15px;
-    height: 100%;
-  }
-
-  [data-theme='dark'] &[type='submit'],
-  [data-theme='dark'] &[type='button'] {
-    background-color: var(--primary-200);
-  }
-
-  &:disabled {
-    cursor: not-allowed;
-  }
-`
+import {IThemes} from '../MainContext/global/THEME'
 
 const Context = styled.div`
   position: relative;
-  height: 40px;
   width: calc(100% - 10px);
+  height: 40px;
 
   display: flex;
   justify-content: center;
   align-items: center;
 `
 
+export const ContextButton = styled(Context)`
+  border-radius: 15px;
+  width: fit-content;
+  height: 54px;
+
+  flex-shrink: 0;
+  align-self: flex-end;
+
+  overflow: hidden;
+`
+
 export const ContextInput = styled(Context)`
-  background-color: var(--background-100);
   padding: 5px 5px;
   gap: 5px;
+  background-color: ${(a) => a.theme.background[100].default};
 
   &::after {
     left: 0;
@@ -90,7 +42,7 @@ export const ContextInput = styled(Context)`
     height: 1px;
 
     transition: 300ms width ease-in-out;
-    background-color: var(--primary);
+    background-color: ${(a) => a.theme.primary.default};
     bottom: 0;
   }
 
@@ -100,42 +52,105 @@ export const ContextInput = styled(Context)`
   }
 
   &:focus-within {
-    background-color: var(--secondary-100);
+    background-color: ${(a) => a.theme.secondary[100].default};
   }
 `
 
-export const SVG = styled.svg`
-  width: 40px;
-  fill: var(--primary);
-`
-
 export const Ripple = keyframes`
+  from{
+    transform: scale(0);
+    opacity: 1;
+  }
   to{
     transform: scale(5);
     opacity: 0;
   }
 `
 
+export const EFFECT_DURATION = 2000
 export const Effect = styled.span`
   position: absolute;
   min-width: 100%;
   min-height: 100%;
   border-radius: 100%;
   aspect-ratio: 1;
-  background-color: var(--text-50);
+  background-color: ${(a) => a.theme.text[50].default};
   pointer-events: none;
   transform: scale(0);
   opacity: 1;
-  /* animation-name: ${Ripple}; */
+  animation-name: ${Ripple};
   animation-duration: 1s;
   animation-fill-mode: forwards;
+  animation-play-state: paused;
+  animation-iteration-count: 1;
 `
 
-export const ContextButton = styled(Context)`
-  flex-shrink: 0;
-  width: fit-content;
+export const Label = styled.label`
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  font-size: 15pt;
+
+  pointer-events: none;
+  font-family: 'Roboto', sans-serif;
+  transform: translateX(-50%) translateY(-50%);
+
+  transition: top, bottom, left, transform, font-size;
+  transition-duration: 300ms;
+`
+
+export const Error = styled.label`
+  position: absolute;
+  left: 10px;
+  top: 100%;
+
+  font-family: 'Roboto', sans-serif;
+  color: red;
+`
+
+export const SVG = styled.svg`
+  width: 40px;
+
+  fill: ${(a) => a.theme.primary.default};
+`
+
+const InputBase = styled.input`
+  font-family: 'Roboto', sans-serif;
+  font-size: 15pt;
+  border: none;
+  outline: none;
+  width: calc(100% - 50px);
+
   align-self: flex-end;
-  height: 54px;
-  border-radius: 15px;
-  overflow: hidden;
+
+  background-color: transparent;
+  color: ${(a) => a.theme.text[900].default};
+  &:disabled {
+    cursor: not-allowed !important;
+  }
+`
+
+export const Button = styled(InputBase)`
+  width: fit-content;
+  padding: 15px;
+  height: 100%;
+
+  cursor: pointer;
+
+  color: ${(a) => a.theme.text[950].default};
+  background-color: ${(a) =>
+    a.theme.name == IThemes.THEME_LIGHT ? a.theme.primary[500].default : a.theme.primary[200].default};
+`
+
+export const Input = styled(InputBase)`
+  &::placeholder {
+    visibility: hidden;
+  }
+
+  &:focus + ${Label}, &:valid + ${Label} {
+    top: calc(3px);
+    left: 70px;
+    transform: translateX(-50%);
+    font-size: 10pt;
+  }
 `

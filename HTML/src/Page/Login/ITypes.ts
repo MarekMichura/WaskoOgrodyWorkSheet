@@ -1,9 +1,9 @@
 export interface ILoginValues {
-  username?: string
+  userName?: string
   password?: string
 }
 
 export const defaultLoginValues: ILoginValues = {
-  username: undefined,
-  password: undefined,
+  userName: '',
+  password: '',
 }

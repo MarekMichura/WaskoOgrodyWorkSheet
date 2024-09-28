@@ -1,9 +1,9 @@
-export type IUserRole =
-  | 'EmployeeManager'
-  | 'Employee'
-  | 'ConstructionManager'
-  | 'DayOffManager'
-  | 'ConstructionManager'
+export enum IUserRole {
+  EmployeeManager,
+  Employee,
+  ConstructionManager,
+  DayOffManager,
+}
 
 export interface IProfil {
   firstName: string

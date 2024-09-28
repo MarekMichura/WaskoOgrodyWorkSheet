@@ -1,2 +1,4 @@
-export const THEME_DARK = 'dark'
-export const THEME_LIGHT = 'light'
+export enum IThemes {
+  THEME_LIGHT = 'light',
+  THEME_DARK = 'dark',
+}

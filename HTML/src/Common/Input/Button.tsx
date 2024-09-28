@@ -1,45 +1,35 @@
-
-
-import {useRef, useState} from 'react'
+import React, {useRef, useState} from 'react'
 import * as CSS from './css'
-import {IInput} from './IInput'
+import {IButton} from './IProps'
 
-
-interface IProps extends IInput {
-  type: 'submit' | 'button'
-}
-
-function Button(p: IProps) {
-  const {onClick, ...props} = p
+function Button({onClick, ...p}: IButton) {
   const effect = useRef<HTMLElement>(null)
   const [ripple, setRipple] = useState<NodeJS.Timeout | undefined>()
 
-  function Click(_e: React.MouseEvent<HTMLInputElement>) {
-    if (onClick) onClick(_e)
+  function click(e: React.MouseEvent<HTMLInputElement>) {
+    if (onClick) onClick(e)
     const current = effect.current
 
-    if (p.disabled == true) return
-    if (current == undefined) return
-    if (current.style.animationPlayState == 'paused') return
-    if (ripple != undefined) {
-      clearTimeout(ripple)
-      current.style.animationName = ''
-    }
+    if (p.disabled == true || current == undefined) return
+    // if (current.style.animationPlayState == 'paused') return
+    current.style.animationName = `a2`
+    clearTimeout(ripple)
 
     setTimeout(() => {
-      current.style.animationName = `${CSS.Ripple.getName()}`
+      current.style.animationName = `${CSS.Ripple.name}`
+      current.style.animationPlayState = `running`
       setRipple(
         setTimeout(() => {
-          current.style.animationName = ''
+          current.style.animationName = `a11`
           setRipple(undefined)
-        }, 1000)
+        }, 100000)
       )
     }, 0)
   }
 
   return (
     <CSS.ContextButton>
-      <CSS.Input {...props} onClick={Click} />
+      <CSS.Button {...p} ref={null} onClick={click} />
       <CSS.Effect ref={effect} />
     </CSS.ContextButton>
   )

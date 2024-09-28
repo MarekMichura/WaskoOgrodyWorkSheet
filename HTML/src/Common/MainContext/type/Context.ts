@@ -1,16 +1,15 @@
-
-
 import React from 'react'
 import {IAction} from './IAction'
-import {IState, StateDefault} from './IState'
-
+import {IState, defState} from './IState'
 
 export interface IContext {
   dispatch: React.Dispatch<IAction>
   state: IState
 }
 
-export const context = React.createContext<IContext>({
+const Context = React.createContext<IContext>({
   dispatch: () => {},
-  state: StateDefault,
+  state: defState,
 })
+
+export default Context

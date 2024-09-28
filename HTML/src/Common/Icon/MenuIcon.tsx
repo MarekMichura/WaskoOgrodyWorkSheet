@@ -1,8 +1,7 @@
 import {createElement} from 'react'
-import IIcon from './IIcon'
+import {IIcon} from './_IIcon'
 
-
-
+const child = <path d="M4 6H20M4 12H20M4 18H20" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
 
 function MenuIcon(p: IIcon) {
   const {SVG, ...props} = p
@@ -11,20 +10,8 @@ function MenuIcon(p: IIcon) {
   props.viewBox = '0 0 24 24'
   props.stroke = '#000'
 
-  const child = (
-    <path
-      d="M4 6H20M4 12H20M4 18H20"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  )
-
-  return SVG === undefined ? (
-    createElement('svg', props, child)
-  ) : (
-    <SVG {...props}>{child}</SVG>
-  )
+  if (SVG === undefined) return createElement('svg', props, child)
+  return <SVG {...props}>{child}</SVG>
 }
 
 export default MenuIcon

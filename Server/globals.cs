@@ -11,3 +11,4 @@ global using Microsoft.AspNetCore.SpaServices;
 global using System.ComponentModel.DataAnnotations.Schema;
 global using Microsoft.EntityFrameworkCore.ChangeTracking;
 global using Microsoft.EntityFrameworkCore.Diagnostics;
+global using Microsoft.AspNetCore.Authentication.Cookies;

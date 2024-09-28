@@ -1,0 +1,4 @@
+export const TIMEOUT_FETCH = 10_0000
+
+export const NOTIFICATION_LOGIN_LIFE = 5_000
+export const NOTIFICATION_INIT_LIFE = 5_000

@@ -1,3 +1,42 @@
 {
-  "cSpell.words": ["ASPNETCORE", "Dima", "rozhodnik", "voda"]
+  "cSpell.words": ["Archivo", "ASPNETCORE", "Dima", "rozhodnik", "voda"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "always"
+  },
+  "eslint.validate": ["javascript"],
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**.sln": true,
+    "**/bin": true,
+    "**/obj": true,
+    "HTML/node_modules": true,
+    "HTML/build": true,
+    "HTML/.babelrc": true,
+    "HTML/.dockerignore": true,
+    "HTML/.gitignore": true,
+    "HTML/yarn.lock": true,
+    "Server/taskCreateDb.sh": true,
+    "Server/wait-for-it.sh": true,
+    "Server/.gitignore": true,
+    "Server/.dockerignore": true,
+    "HTML/.prettierrc": true
+  },
+  "hide-files.files": [
+    "HTML/node_modules",
+    "HTML/build",
+    "HTML/.babelrc",
+    "HTML/.dockerignore",
+    "HTML/.gitignore",
+    "HTML/yarn.lock",
+    "Server/taskCreateDb.sh",
+    "Server/wait-for-it.sh",
+    "Server/.gitignore",
+    "Server/.dockerignore",
+    "HTML/.prettierrc"
+  ]
 }

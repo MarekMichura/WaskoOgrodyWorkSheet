@@ -13,13 +13,5 @@ class DatabaseService : IService, IEndPoint
     connectionStr = connectionStr.Replace("${PASSWORD}", password);
 
     builder.Services.AddDbContext<DatabaseContext>(a => a.UseSqlServer(connectionStr));
-    builder.Services.AddIdentity<ModelUser, ModelRole>()
-      .AddDefaultTokenProviders()
-      .AddEntityFrameworkStores<DatabaseContext>();
-
-    builder.Services.AddAuthorization(a => StorageRole.Roles
-      .Select(b => b.Name)
-      .Cast<string>()
-      .ForEach(b => a.AddPolicy(b, c => c.RequireRole(b))));
   }
 }

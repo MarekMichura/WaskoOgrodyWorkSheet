@@ -18,6 +18,7 @@ const res = [
     rules: {
       ...pluginReact.configs.flat.recommended.rules,
       'react/react-in-jsx-scope': 'off',
+      'react/no-string-refs': 'off',
     },
   },
   {
@@ -33,16 +34,7 @@ const res = [
               group: 'internal',
             },
           ],
-          groups: [
-            'builtin',
-            'external',
-            'internal',
-            'parent',
-            'sibling',
-            'index',
-            'object',
-            'type',
-          ],
+          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
         },
       ],
     },

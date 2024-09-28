@@ -1,127 +1,60 @@
-import {Formik, FormikHelpers} from 'formik'
-import React, {useContext} from 'react'
-import {LockIcon, LogoIcon, UserIcon} from '../../Common/Icon'
-import Button from '../../Common/Input/Button'
-import Input from '../../Common/Input/Input'
-import {ACTION_LOGIN} from '../../Common/MainContext/global/ACTIONS'
-import {context} from '../../Common/MainContext/types/IContext'
-import validationLogin from './validation'
-import {defaultLoginValues, ILoginValues} from './types'
+import {useContext} from 'react'
+import {useFormik} from 'formik'
+import LogoIcon from '/Common/Icon/LogoIcon'
+import Context from '/Common/MainContext/type/Context'
+import {MainAction} from '/Common/MainContext/global/ACTION'
+import Button from '/Common/Input/Button'
+import Input from '/Common/Input/Input'
+import UserIcon from '/Common/Icon/UserIcon'
+import LockIcon from '/Common/Icon/LockIcon'
 import * as CSS from './css'
+import {defaultLoginValues as initialValues} from './ITypes'
+import validate from './validation'
 
 function LoginPage() {
-  const {dispatch} = useContext(context)
-
-  async function sub(
-    {username, password}: ILoginValues,
-    {setErrors, setSubmitting}: FormikHelpers<ILoginValues>
-  ) {
-    if (username == undefined) {
-      setErrors({username: 'Musisz uzupełnić nazwe użytkownika'})
-      return
-    }
-    if (password == undefined) {
-      setErrors({username: 'Musisz uzupełnić hasło'})
-      return
-    }
-
-    setSubmitting(true)
-    dispatch({
-      action: ACTION_LOGIN,
-      username,
-      password,
-      dispatch,
-      setSubmitting,
-      setErrors,
-    })
-    // (await postLogin(values.username, values.password))
-    //   .login((user) => {
-    //     // dispatch({action: 'Login'})
-    //   })
-    //   .tryAgain(() => {})
-    //   .finally(() => {
-    //     setSubmitting(false)
-    //   })
-
-    // .then((res) => {
-    //   if (res.ok) return res.json()
-    //   throw new Error('')
-    // })
-    // .then((res: IResponse) => {
-    //   if (res.authenticated == true) {
-    //     conProfil.dispatch({type: 'Login', profil: res.profil})
-    //     conNotification.dispatch({
-    //       type: 'Add',
-    //       text: successResponse + res.profil.userName,
-    //       nType: 'success',
-    //       life: 5000,
-    //     })
-    //   } else {
-    //     conNotification.dispatch({
-    //       type: 'Add',
-    //       text: failResponse,
-    //       nType: 'error',
-    //       life: 5000,
-    //     })
-    //   }
-    // })
-    // .catch(() => {
-    //   conNotification.dispatch({
-    //     type: 'Add',
-    //     text: lostResponse,
-    //     nType: 'error',
-    //     life: 5000,
-    //   })
-    // })
-    // .finally(() => {
-    //   helpers.setSubmitting(false)
-    // })
+  const {dispatch} = useContext(Context)
+  function changeTheme() {
+    dispatch({action: MainAction.CHANGE_THEME, dispatch})
   }
+
+  const {submitForm, handleChange, errors} = useFormik({
+    initialValues,
+    onSubmit: ({userName, password}) => {
+      if (!userName || !password) return
+      dispatch({action: MainAction.LOGIN, userName, password, dispatch})
+    },
+    validate,
+  })
 
   return (
     <CSS.Center>
       <CSS.Content>
         <CSS.Top>
-          <LogoIcon
-            SVG={CSS.SVG}
-            onClick={() => {
-              dispatch({action: 'ChangeTheme'})
-            }}
-          />
+          <LogoIcon SVG={CSS.SVG} onClick={changeTheme} />
           <div>
             <CSS.Title>Waśko ogrody</CSS.Title>
             <CSS.SubTitle>Zaloguj się</CSS.SubTitle>
           </div>
         </CSS.Top>
-        <Formik
-          initialValues={defaultLoginValues}
-          onSubmit={sub}
-          validate={validationLogin}
-          validateOnChange={false}>
-          {({errors, handleChange, submitForm}) => (
-            <>
-              <Input
-                icon={UserIcon}
-                placeholder="Login"
-                type="text"
-                required
-                name="username"
-                onChange={handleChange}
-                error={errors.username}
-              />
-              <Input
-                icon={LockIcon}
-                placeholder="Hasło"
-                type="password"
-                required
-                name="password"
-                onChange={handleChange}
-                error={errors.password}
-              />
-              <Button type="button" value="Zaloguj się" onClick={submitForm} />
-            </>
-          )}
-        </Formik>
+        <Input
+          icon={UserIcon}
+          placeholder="Login"
+          type="text"
+          required
+          name="userName"
+          onChange={handleChange}
+          error={errors.userName}
+        />
+        <Input
+          icon={LockIcon}
+          placeholder="Hasło"
+          type="password"
+          required
+          name="password"
+          onChange={handleChange}
+          error={errors.password}
+        />
+        <Button type="button" value="Zaloguj się" onClick={submitForm} />
       </CSS.Content>
     </CSS.Center>
   )
