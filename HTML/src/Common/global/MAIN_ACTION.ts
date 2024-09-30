@@ -2,6 +2,7 @@ export enum MainAction {
   INIT = 'Init',
   INIT_END = 'Init end',
   CHANGE_THEME = 'Change theme',
+  CHANGE_TITLE = 'Change title',
 
   LOGIN = 'Login',
   LOG_OUT = 'Log out',
@@ -10,6 +11,8 @@ export enum MainAction {
   NOTIFICATION_ADD = 'Notification add',
   NOTIFICATION_REMOVE = 'Notification remove',
 
-  LOADING_ADD = 'Loading start',
-  LOADING_REMOVE = 'Loading stop',
+  LOADING_ADD = 'Loading add',
+  LOADING_REMOVE = 'Loading remove',
+  LOADING_START = 'Loading start',
+  LOADING_STOP = 'Loading stop',
 }

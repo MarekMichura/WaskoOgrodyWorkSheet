@@ -1,56 +1,56 @@
 {
   "version": "2.0.0",
-  "tasks": [
-    {
-      "label": "Docker Compose Up",
-      "type": "shell",
-      "command": "docker-compose up --build -d server-${input:dockerName}",
-      "group": "build",
-      "problemMatcher": []
-    },
-    {
-      "label": "Docker Compose Down",
-      "type": "shell",
-      "command": "docker-compose down && yes | docker container prune",
-      "problemMatcher": []
-    },
-    {
-      "label": "Create db",
-      "type": "shell",
-      "command": "docker-compose run --build initialize-db-${input:dockerName} ${input:migrationName}",
-      "problemMatcher": []
-    },
-    {
-      "label": "Delete data",
-      "type": "shell",
-      "command": "rm -rf ${input:remove}",
-      "problemMatcher": []
-    }
-  ],
   "inputs": [
     {
-      "id": "migrationName",
-      "type": "promptString",
+      "default": "",
       "description": "Wprowadź nazwę migracji",
-      "default": ""
+      "id": "migrationName",
+      "type": "promptString"
     },
     {
-      "id": "dockerName",
-      "type": "pickString",
+      "default": "./Server/Migrations/*",
       "description": "Wybierz opcje",
-      "options": ["release", "development"],
-      "default": "development"
-    },
-    {
       "id": "remove",
-      "type": "pickString",
-      "description": "Wybierz opcje",
       "options": [
         "./DB/Migrations/*",
-        "./DB/data/* ./DB/log/* ./DB/secrets/*",
-        "./DB/data/* ./DB/log/* ./DB/secrets/* ./DB/Migrations/*"
+        "./DB/data/* ./DB/log/* ./DB/secrets/* ./DB/Migrations/*",
+        "./DB/data/* ./DB/log/* ./DB/secrets/*"
       ],
-      "default": "./Server/Migrations/*"
+      "type": "pickString"
+    },
+    {
+      "default": "development",
+      "description": "Wybierz opcje",
+      "id": "dockerName",
+      "options": ["development", "release"],
+      "type": "pickString"
+    }
+  ],
+  "tasks": [
+    {
+      "command": "docker-compose down && yes | docker container prune",
+      "label": "Docker Compose Down",
+      "problemMatcher": [],
+      "type": "shell"
+    },
+    {
+      "command": "docker-compose run --build initialize-db-${input:dockerName} ${input:migrationName}",
+      "label": "Create db",
+      "problemMatcher": [],
+      "type": "shell"
+    },
+    {
+      "command": "docker-compose up --build -d server-${input:dockerName}",
+      "group": "build",
+      "label": "Docker Compose Up",
+      "problemMatcher": [],
+      "type": "shell"
+    },
+    {
+      "command": "rm -rf ${input:remove}",
+      "label": "Delete data",
+      "problemMatcher": [],
+      "type": "shell"
     }
   ]
 }

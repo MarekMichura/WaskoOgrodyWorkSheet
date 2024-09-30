@@ -1,5 +1,5 @@
 import 'styled-components'
-import {IThemes} from '../global/THEME'
+import {IThemes} from '/global/THEME'
 
 type HSLColor = {
   h: number

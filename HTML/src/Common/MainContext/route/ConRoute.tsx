@@ -1,6 +1,7 @@
 import {lazy, useContext} from 'react'
 import {Route, Routes} from 'react-router-dom'
-import Context from '../type/Context'
+
+import Context from '/MContext'
 
 const Login = lazy(() => import('/Page/Login'))
 const Main = lazy(() => import('/Page/Main'))

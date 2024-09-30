@@ -7,9 +7,10 @@ class EndPointAuthentication : IEndPoint
     app.MapPost("/Authenticate", MapAuthenticate.Authenticate)
       .Accepts<ModelInputAuthenticate>("application/json")
       .WithTags("Authorization");
+    app.MapPost("/Logout", MapAuthenticate.LogOut)
+      .WithTags("Authorization");
     app.MapGet("/GetProfil", MapGetProfil.GetProfil)
       .RequireAuthorization()
       .WithTags("Authorization");
-    // app.MapPost("Logout", () => { });
   }
 }

@@ -1,7 +1,9 @@
 import React from 'react'
-import {MainAction} from '../global/ACTION'
-import {IProfil} from './IProfil'
+
+import {MainAction} from '/global/MAIN_ACTION'
+
 import {INotificationType} from './INotification'
+import {IProfil} from './IProfil'
 
 export interface IActionInit {
   action: MainAction.INIT
@@ -15,6 +17,11 @@ export interface IActionInitEnd {
 export interface IActionChangeTheme {
   action: MainAction.CHANGE_THEME
   dispatch: React.Dispatch<IAction>
+}
+
+export interface IActionChangeTitle {
+  action: MainAction.CHANGE_TITLE
+  title: string
 }
 
 export interface IActionLogin {
@@ -49,18 +56,29 @@ export interface IActionNotificationRemove {
 
 export interface IActionLoadingAdd {
   action: MainAction.LOADING_ADD
+  dispatch: React.Dispatch<IAction>
   key: string
 }
 
 export interface IActionLoadingRemove {
   action: MainAction.LOADING_REMOVE
+  dispatch: React.Dispatch<IAction>
   key: string
+}
+
+export interface IActionLoadingStart {
+  action: MainAction.LOADING_START
+}
+
+export interface IActionLoadingStop {
+  action: MainAction.LOADING_STOP
 }
 
 export type IAction =
   | IActionInit
   | IActionInitEnd
   | IActionChangeTheme
+  | IActionChangeTitle
   | IActionLogin
   | IActionLogout
   | IActionProfilSet
@@ -68,3 +86,5 @@ export type IAction =
   | IActionNotificationRemove
   | IActionLoadingAdd
   | IActionLoadingRemove
+  | IActionLoadingStart
+  | IActionLoadingStop

@@ -11,4 +11,5 @@ export interface IProfil {
   userName: string
   workStartDate: string
   roles: IUserRole[]
+  image?: string
 }

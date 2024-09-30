@@ -1,6 +1,8 @@
 import React, {useRef, useState} from 'react'
-import * as CSS from './css'
+
 import {IButton} from './IProps'
+
+import * as CSS from './css'
 
 function Button({onClick, ...p}: IButton) {
   const effect = useRef<HTMLElement>(null)

@@ -1,9 +1,11 @@
 # install tools for server
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS server-sdk
-WORKDIR /Server/
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS server-with-debugger
 RUN apt-get update && apt-get install -y --no-install-recommends curl && apt-get clean
 RUN curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /remote_debugger
 RUN dotnet tool install --global dotnet-ef
+
+FROM server-with-debugger as server-sdk
+WORKDIR /Server/
 COPY ["./Server.csproj", "./"]
 RUN dotnet restore "Server.csproj"
 COPY ["./appsettings.json", "./appsettings.json"]
@@ -20,8 +22,7 @@ FROM server-sdk AS server-development
 EXPOSE 8080
 EXPOSE 8081
 WORKDIR /Server/
-RUN dotnet build "./Server.csproj" -c debug -o ./output/ /p:UseAppHost=false
-ENTRYPOINT [ "dotnet", "./output/Server.dll" ]
+ENTRYPOINT [ "dotnet", "watch" ]
 
 FROM server-sdk AS server-update-db
 WORKDIR /Server/

@@ -1,4 +1,5 @@
-import {IThemes} from '../global/THEME'
+import {IThemes} from '/global/THEME'
+
 import {darkTheme} from './darkTheme'
 import {lightTheme} from './lightTheme'
 

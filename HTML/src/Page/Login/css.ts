@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import {IThemes} from '/Common/MainContext/global/THEME'
+
+import {IThemes} from '/global/THEME'
 
 export const Center = styled.div`
   min-height: 100dvh;

@@ -1,4 +1,5 @@
-import {IThemes} from '../global/THEME'
+import {IThemes} from '/global/THEME'
+
 import {INotification} from './INotification'
 import {IProfil} from './IProfil'
 
@@ -7,6 +8,7 @@ export interface IState {
   profil?: IProfil
   theme: IThemes
   loading: string[]
+  loadingStart: boolean
   notifications: INotification[]
   init: boolean
 }
@@ -14,7 +16,8 @@ export interface IState {
 export const defState: IState = {
   title: 'Wasko ogrody',
   theme: IThemes.THEME_DARK,
-  loading: ['start'],
+  loading: ['Wczytywanie strony'],
+  loadingStart: true,
   notifications: [],
   init: false,
 }

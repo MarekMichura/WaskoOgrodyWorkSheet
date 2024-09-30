@@ -1,5 +1,6 @@
 import {DefaultTheme} from 'styled-components'
-import {IThemes} from '../global/THEME'
+
+import {IThemes} from '/global/THEME'
 
 export const lightTheme: DefaultTheme = {
   name: IThemes.THEME_LIGHT,

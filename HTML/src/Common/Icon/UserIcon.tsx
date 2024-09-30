@@ -1,21 +1,11 @@
-import {createElement} from 'react'
-import {IIcon} from './_IIcon'
-
-const child = (
-  <path
-    fillRule="evenodd"
-    clipRule="evenodd"
-    d="M288 320a224 224 0 1 0 448 0 224 224 0 1 0-448 0zm544 608H160a32 32 0 0 1-32-32v-96a160 160 0 0 1 160-160h448a160 160 0 0 1 160 160v96a32 32 0 0 1-32 32z"
-  />
-)
+import Icon, {IIcon} from '.'
 
 function UserIcon(p: IIcon) {
-  const {SVG, ...props} = p
-
-  props.viewBox = '0 0 1024 1024'
-
-  if (SVG == undefined) return createElement('svg', props, child)
-  return <SVG {...props}>{child}</SVG>
+  return (
+    <Icon {...p}>
+      <path d="M480.16-502Q395-502 336.5-561T278-704.5q0-84.5 58.34-142.5t143.5-58q85.16 0 143.66 57.89T682-704q0 84-58.34 143t-143.5 59ZM114-86v-159q0-46.77 23.79-84.47Q161.58-367.16 201-387q66-34 136.17-51 70.18-17 142.55-17Q554-455 624-438t135 50q39.42 19.69 63.21 57.11T846-245.05V-86H114Z" />
+    </Icon>
+  )
 }
 
 export default UserIcon

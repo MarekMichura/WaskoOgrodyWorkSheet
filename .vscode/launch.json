@@ -3,21 +3,20 @@
   "configurations": [
     {
       "name": "Docker: attach server",
-      "type": "coreclr",
-      "request": "attach",
-      "processName": "dotnet",
-      "preLaunchTask": "Docker Compose Up",
-      // "postDebugTask": "Docker Compose Down",
       "pipeTransport": {
-        "pipeProgram": "docker",
-        "pipeArgs": ["exec", "-i", "server-development"],
         "debuggerPath": "/remote_debugger/vsdbg",
+        "pipeArgs": ["-i", "exec", "server-development"],
         "pipeCwd": "${workspaceRoot}/",
+        "pipeProgram": "docker",
         "quoteArgs": false
       },
+      "preLaunchTask": "Docker Compose Up",
+      "processName": "dotnet",
+      "request": "attach",
       "sourceFileMap": {
         "/Server/": "${workspaceRoot}/Server/"
-      }
+      },
+      "type": "coreclr"
     }
   ]
 }

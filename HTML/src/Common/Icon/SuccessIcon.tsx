@@ -1,17 +1,11 @@
-import React, {createElement} from 'react'
-import {IIcon} from './_IIcon'
-
-const child = (
-  <path d="M4.63 15.638a1.028 1.028 0 0 1-.79-.37L.36 11.09a1.03 1.03 0 1 1 1.58-1.316l2.535 3.043L9.958 3.32a1.029 1.029 0 0 1 1.783 1.03L5.52 15.122a1.03 1.03 0 0 1-.803.511.89.89 0 0 1-.088.004z" />
-)
+import Icon, {IIcon} from '.'
 
 function SuccessIcon(p: IIcon) {
-  const {SVG, ...props} = p
-  props.xmlns = 'http://www.w3.org/2000/svg'
-  props.viewBox = '-3.5 0 19 19'
-
-  if (SVG === undefined) return createElement('svg', props, child)
-  return <SVG {...props}>{child}</SVG>
+  return (
+    <Icon {...p}>
+      <path d="m421-268 305-306-89-91-216 216-103-103-90 91 193 193Zm59 234q-92.64 0-174.47-34.6-81.82-34.61-142.07-94.86T68.6-305.53Q34-387.36 34-480q0-92.9 34.66-174.45 34.67-81.55 95.02-141.97 60.35-60.41 142.07-95Q387.48-926 480-926q92.89 0 174.43 34.58 81.54 34.59 141.97 95.02 60.43 60.43 95.02 142Q926-572.83 926-479.92q0 92.92-34.58 174.41-34.59 81.48-95 141.83Q736-103.33 654.45-68.66 572.9-34 480-34Z" />
+    </Icon>
+  )
 }
 
 export default SuccessIcon

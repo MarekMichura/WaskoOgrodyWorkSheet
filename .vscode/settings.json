@@ -1,7 +1,24 @@
 {
-  "cSpell.words": ["Archivo", "ASPNETCORE", "Dima", "rozhodnik", "voda"],
+  "cSpell.words": [
+    "Archivo",
+    "ASPNETCORE",
+    "Dima",
+    "Eurovia",
+    "gifsicle",
+    "Henniger",
+    "jpegtran",
+    "klimanowa",
+    "Narama",
+    "optipng",
+    "Pychowicka",
+    "rozhodnik",
+    "tseslint",
+    "voda",
+    "Wasko",
+    "webp"
+  ],
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "always"
+    "source.fixAll.eslint": "explicit"
   },
   "eslint.validate": ["javascript"],
   "files.exclude": {
@@ -14,29 +31,29 @@
     "**.sln": true,
     "**/bin": true,
     "**/obj": true,
-    "HTML/node_modules": true,
-    "HTML/build": true,
     "HTML/.babelrc": true,
     "HTML/.dockerignore": true,
     "HTML/.gitignore": true,
+    "HTML/.prettierrc": true,
+    "HTML/build": true,
+    "HTML/node_modules": true,
     "HTML/yarn.lock": true,
-    "Server/taskCreateDb.sh": true,
-    "Server/wait-for-it.sh": true,
-    "Server/.gitignore": true,
     "Server/.dockerignore": true,
-    "HTML/.prettierrc": true
+    "Server/.gitignore": true,
+    "Server/taskCreateDb.sh": true,
+    "Server/wait-for-it.sh": true
   },
   "hide-files.files": [
-    "HTML/node_modules",
-    "HTML/build",
     "HTML/.babelrc",
     "HTML/.dockerignore",
     "HTML/.gitignore",
+    "HTML/.prettierrc",
+    "HTML/build",
+    "HTML/node_modules",
     "HTML/yarn.lock",
-    "Server/taskCreateDb.sh",
-    "Server/wait-for-it.sh",
-    "Server/.gitignore",
     "Server/.dockerignore",
-    "HTML/.prettierrc"
+    "Server/.gitignore",
+    "Server/taskCreateDb.sh",
+    "Server/wait-for-it.sh"
   ]
 }

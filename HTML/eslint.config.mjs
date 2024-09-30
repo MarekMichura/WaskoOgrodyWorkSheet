@@ -1,8 +1,8 @@
-import globals from 'globals'
 import pluginJs from '@eslint/js'
-import tseslint from 'typescript-eslint'
-import pluginReact from 'eslint-plugin-react'
 import importPlugin from 'eslint-plugin-import'
+import pluginReact from 'eslint-plugin-react'
+import globals from 'globals'
+import tseslint from 'typescript-eslint'
 
 const res = [
   pluginJs.configs.recommended,
@@ -27,14 +27,22 @@ const res = [
       'import/order': [
         'error',
         {
-          'newlines-between': 'never',
+          'newlines-between': 'always',
           pathGroups: [
             {
               pattern: '/**',
               group: 'internal',
             },
+            {
+              pattern: './css',
+              group: 'index',
+            },
           ],
           groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
+          alphabetize: {
+            order: 'asc',
+            caseInsensitive: true,
+          },
         },
       ],
     },

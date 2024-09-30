@@ -1,6 +1,8 @@
-import {MainAction} from '../global/ACTION'
+import {MainAction} from '/global/MAIN_ACTION'
+
 import {IActionNotificationAdd, IActionNotificationRemove} from '../type/IAction'
 import {INotification} from '../type/INotification'
+
 import generateUID from './generateUID'
 
 export function addNotification(state: INotification[], action: IActionNotificationAdd): INotification[] {

@@ -1,5 +1,6 @@
 import styled, {keyframes} from 'styled-components'
-import {IThemes} from '../MainContext/global/THEME'
+
+import {IThemes} from '/global/THEME'
 
 const Context = styled.div`
   position: relative;
@@ -152,5 +153,20 @@ export const Input = styled(InputBase)`
     left: 70px;
     transform: translateX(-50%);
     font-size: 10pt;
+  }
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: ${(a) => a.theme.text[900].default};
+    box-shadow: inset 0 0 20px 20px ${(a) => a.theme.background[100].default};
+  }
+
+  &:-webkit-autofill:focus {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: ${(a) => a.theme.text[900].default};
+    box-shadow: inset 0 0 20px 20px ${(a) => a.theme.secondary[100].default};
   }
 `

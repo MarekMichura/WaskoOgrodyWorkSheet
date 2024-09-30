@@ -6,6 +6,8 @@ class StorageUserSalary
 
   static private IEnumerable<ModelUserSalary> _Salaries()
   {
+    if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") != "Development")
+      yield break;
     yield return new()
     {
       ID = StorageUser.getID("Dima"),

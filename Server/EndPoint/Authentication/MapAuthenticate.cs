@@ -20,4 +20,10 @@ static class MapAuthenticate
       return Results.Ok(new ModelResultAuthenticate { Authenticated = true, Profil = rep.GetProfil() });
     return Results.Ok(new ModelResultAuthenticate { Authenticated = false });
   }
+
+  static public async Task<IResult> LogOut(SignInManager<ModelUser> _sim)
+  {
+    await _sim.SignOutAsync();
+    return Results.Ok();
+  }
 }

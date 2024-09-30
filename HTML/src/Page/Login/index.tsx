@@ -1,21 +1,28 @@
-import {useContext} from 'react'
 import {useFormik} from 'formik'
-import LogoIcon from '/Common/Icon/LogoIcon'
-import Context from '/Common/MainContext/type/Context'
-import {MainAction} from '/Common/MainContext/global/ACTION'
-import Button from '/Common/Input/Button'
-import Input from '/Common/Input/Input'
-import UserIcon from '/Common/Icon/UserIcon'
-import LockIcon from '/Common/Icon/LockIcon'
-import * as CSS from './css'
+import {useContext, useEffect} from 'react'
+
+import {MainAction} from '/global/MAIN_ACTION'
+import KeyIcon from '/Icon/KeyIcon'
+import LogoIcon from '/Icon/LogoIcon'
+import UserIcon from '/Icon/UserIcon'
+import Button from '/Input/Button'
+import Input from '/Input/Input'
+import Context from '/MContext'
+
 import {defaultLoginValues as initialValues} from './ITypes'
 import validate from './validation'
+
+import * as CSS from './css'
 
 function LoginPage() {
   const {dispatch} = useContext(Context)
   function changeTheme() {
     dispatch({action: MainAction.CHANGE_THEME, dispatch})
   }
+
+  useEffect(() => {
+    dispatch({action: MainAction.CHANGE_TITLE, title: 'Logowanie'})
+  }, [])
 
   const {submitForm, handleChange, errors} = useFormik({
     initialValues,
@@ -30,11 +37,9 @@ function LoginPage() {
     <CSS.Center>
       <CSS.Content>
         <CSS.Top>
-          <LogoIcon SVG={CSS.SVG} onClick={changeTheme} />
-          <div>
-            <CSS.Title>Waśko ogrody</CSS.Title>
-            <CSS.SubTitle>Zaloguj się</CSS.SubTitle>
-          </div>
+          <LogoIcon cssSVG={CSS.SVG} onClick={changeTheme} />
+          <CSS.Title>Waśko ogrody</CSS.Title>
+          <CSS.SubTitle>Zaloguj się</CSS.SubTitle>
         </CSS.Top>
         <Input
           icon={UserIcon}
@@ -46,7 +51,7 @@ function LoginPage() {
           error={errors.userName}
         />
         <Input
-          icon={LockIcon}
+          icon={KeyIcon}
           placeholder="Hasło"
           type="password"
           required

@@ -1,4 +1,4 @@
-import {IIcon} from '../Icon/_IIcon'
+import {IIcon} from '/Icon/index'
 
 type IProps = React.HTMLProps<HTMLInputElement>
 

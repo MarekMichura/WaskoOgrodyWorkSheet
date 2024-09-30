@@ -6,8 +6,8 @@ class EndPoint : IEndPoint, IService
 
   public void DefineEndPoint(WebApplication app)
   {
-    if (!app.Environment.IsDevelopment())
-      app.UseHsts();
+    if (!app.Environment.IsDevelopment()) { }
+    app.UseHsts();
 
     app.UseHttpsRedirection();
     app.UseStaticFiles();
@@ -26,5 +26,10 @@ class EndPoint : IEndPoint, IService
     builder.Services.AddControllersWithViews();
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSession();
+
+    builder.Services.AddResponseCompression(options =>
+    {
+      options.EnableForHttps = true;
+    });
   }
 }
