@@ -1,8 +1,7 @@
 export enum IUserRole {
-  EmployeeManager,
-  Employee,
-  ConstructionManager,
-  DayOffManager,
+  Pracownik = 'Pracownik',
+  Ogrodnik = 'Ogrodnik',
+  PolskieSwieta = 'PolskieSwieta',
 }
 
 export interface IProfil {

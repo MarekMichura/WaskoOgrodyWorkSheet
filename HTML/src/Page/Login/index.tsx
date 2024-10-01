@@ -38,8 +38,10 @@ function LoginPage() {
       <CSS.Content>
         <CSS.Top>
           <LogoIcon cssSVG={CSS.SVG} onClick={changeTheme} />
-          <CSS.Title>Waśko ogrody</CSS.Title>
-          <CSS.SubTitle>Zaloguj się</CSS.SubTitle>
+          <div>
+            <CSS.Title>Waśko ogrody</CSS.Title>
+            <CSS.SubTitle>Zaloguj się</CSS.SubTitle>
+          </div>
         </CSS.Top>
         <Input
           icon={UserIcon}

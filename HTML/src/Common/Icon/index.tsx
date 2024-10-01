@@ -7,6 +7,17 @@ export interface IIcon extends React.SVGProps<SVGSVGElement> {
   cssSVG?: IStyledComponentBase<'web', FastOmit<React.SVGProps<SVGSVGElement>, never>>
 }
 
+export const defAnimate = {
+  begin: 'indefinite',
+  fill: 'freeze',
+  attributeName: 'd',
+  dur: '500ms',
+}
+
+export interface IChangeMenu extends IIcon {
+  status?: boolean
+}
+
 function Icon({cssSVG: CssSVG, children: path, ...svgProps}: IIcon) {
   const viewBox = svgProps.viewBox ?? '0 -960 960 960'
   const props = {...svgProps, viewBox, xmlns}

@@ -1,7 +1,7 @@
 import {useContext} from 'react'
 
-import CloseIcon from '/Common/Icon/CloseIcon'
-import WarnIcon from '/Common/Icon/WarnIcon'
+import CloseIcon from '/Icon/CloseIcon'
+import WarnIcon from '/Icon/WarnIcon'
 import {MainAction} from '/global/MAIN_ACTION'
 import Context from '/MContext'
 

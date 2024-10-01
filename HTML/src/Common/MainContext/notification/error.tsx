@@ -1,8 +1,8 @@
 import {useContext} from 'react'
 
-import CloseIcon from '/Common/Icon/CloseIcon'
-import ErrorIcon from '/Common/Icon/ErrorIcon'
 import {MainAction} from '/global/MAIN_ACTION'
+import CloseIcon from '/Icon/CloseIcon'
+import ErrorIcon from '/Icon/ErrorIcon'
 import Context from '/MContext'
 
 import * as CSS from '../css'

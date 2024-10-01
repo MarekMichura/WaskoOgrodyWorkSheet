@@ -1,7 +1,7 @@
 import Icon, {IIcon} from '.'
 
 function LogoIcon(props: IIcon) {
-  const p = {...props, viewBox: '0 0 278 217', fill: '#004f00'}
+  const p = {...props, viewBox: '0 0 278 217', stroke: '#004f00', fill: '#004f00'}
   return (
     <Icon {...p}>
       <path d="M127.444 213H140.444L146.944 198.5H133.444L127.444 213Z" />

@@ -5,6 +5,8 @@ class StorageUsersRole
   static public IEnumerable<IdentityUserRole<string>> UsersRoles = _UsersRoles().ToArray();
   static private IEnumerable<IdentityUserRole<string>> _UsersRoles()
   {
+    yield return new() { UserId = StorageUser.getID("admin"), RoleId = StorageRole.getID("Zarządca pracowników") };
+
     if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") != "Development")
       yield break;
 

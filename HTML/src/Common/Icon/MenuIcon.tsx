@@ -1,6 +1,6 @@
 import {useEffect, useRef} from 'react'
 
-import Icon, {IIcon} from '.'
+import Icon, {defAnimate, IChangeMenu} from '.'
 
 const pathOpen = `
   M74-194L74-328L627-328L627-194L74-194Z
@@ -15,23 +15,12 @@ const pathClose = `
   M74-632L74-766L886-766L886-632L74-632Z
 `
 
-const defAnimate = {
-  begin: 'indefinite',
-  fill: 'freeze',
-  attributeName: 'd',
-  dur: '500ms',
-}
-
-interface IProps extends IIcon {
-  open?: boolean
-}
-
-function MenuIcon({open, ...p}: IProps) {
+function MenuIcon({status, ...p}: IChangeMenu) {
   const animationOpen = useRef<SVGAnimateElement>(null)
   const animationClose = useRef<SVGAnimateElement>(null)
 
   useEffect(() => {
-    switch (open) {
+    switch (status) {
       case true: {
         animationOpen.current?.beginElement()
         break
@@ -41,7 +30,7 @@ function MenuIcon({open, ...p}: IProps) {
         break
       }
     }
-  }, [open, animationClose, animationOpen])
+  }, [status, animationClose, animationOpen])
 
   return (
     <Icon {...p}>

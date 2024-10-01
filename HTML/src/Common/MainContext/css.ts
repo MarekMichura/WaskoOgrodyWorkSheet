@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: "Lato", sans-serif;
 
     color: ${(a) => a.theme.text[950].default};
-    background-color: ${(a) => a.theme.background[50].default};
+    background-color: ${(a) => a.theme.background[100].default};
   }
 `
 export default GlobalStyle

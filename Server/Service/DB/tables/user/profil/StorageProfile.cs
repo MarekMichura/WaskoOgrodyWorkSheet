@@ -8,8 +8,8 @@ class StorageProfil
     yield return new()
     {
       ID = StorageUser.getID("admin"),
-      FirstName = "Tworca domyslnych danych",
-      LastName = "Brak możliwości logowania",
+      FirstName = "admin",
+      LastName = "admin",
       WorkStartDate = new DateOnly(2024, 1, 1)
     };
 

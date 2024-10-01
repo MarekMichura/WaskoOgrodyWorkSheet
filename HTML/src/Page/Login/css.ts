@@ -23,6 +23,7 @@ export const Content = styled.div`
   gap: 20px;
 
   overflow: hidden;
+  background-color: ${(a) => a.theme.background[50].default};
   box-shadow: ${(a) =>
     a.theme.name == IThemes.THEME_LIGHT
       ? `0 0 3px 0 ${a.theme.background[900].default}`

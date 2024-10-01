@@ -16,9 +16,6 @@ const plugins = [
   new HtmlWebpackPlugin({
     template: './public/index.html',
   }),
-]
-
-const productionPlugins = [
   new CopyWebpackPlugin({
     patterns: [
       {
@@ -28,6 +25,9 @@ const productionPlugins = [
       },
     ],
   }),
+]
+
+const productionPlugins = [
   new ForkTsCheckerWebpackPlugin({
     async: !isProduction,
     typescript: {
@@ -131,7 +131,6 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
     alias: {
-      '/Common': path.resolve(__dirname, 'src/Common'),
       '/global': path.resolve(__dirname, 'src/Common/global'),
       '/Icon': path.resolve(__dirname, 'src/Common/Icon'),
       '/Input': path.resolve(__dirname, 'src/Common/Input'),
