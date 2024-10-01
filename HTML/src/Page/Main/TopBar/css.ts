@@ -138,6 +138,13 @@ export const Menu = styled.div`
     grid-template-rows: 1fr;
     padding: 10px;
   }
+
+  @media screen and (max-width: 600px) {
+    right: 5px;
+    left: 5px;
+    top: 65px;
+    width: auto;
+  }
 `
 
 export const MenuBehind = styled.div`

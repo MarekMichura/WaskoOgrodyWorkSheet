@@ -36,13 +36,17 @@ function SideBar({open}: ISideBar) {
         <LogoIcon />
       </CSS.Logo>
       <CSS.MenuContainer>
-        <MenuOption icon={FaceIcon} text="Test" show={true} selected={false} />
-        <MenuOption icon={FaceIcon} text="Test" show={true} selected={true} />
-        <MenuOption icon={FaceIcon} text="Test" show={true} selected={false} />
-        <MenuOption icon={FaceIcon} text="Test" show={true} selected={true} />
-        <MenuOption icon={FaceIcon} text="Test" show={true} selected={true} />
-        <MenuOption icon={FaceIcon} text="Test" show={true} selected={true} />
-        <MenuOption icon={FaceIcon} text="Test" show={true} selected={true} />
+        <CSS.MenuScroll>
+          <MenuOption icon={FaceIcon} text="Test" show={true} selected={false} />
+          <MenuOption icon={FaceIcon} text="Test" show={true} selected={true} />
+          <MenuOption icon={FaceIcon} text="Test" show={true} selected={true} />
+          <MenuOption icon={FaceIcon} text="Test" show={true} selected={true} />
+          <MenuOption icon={FaceIcon} text="Test" show={true} selected={true} />
+          <MenuOption icon={FaceIcon} text="Test" show={true} selected={true} />
+          <MenuOption icon={FaceIcon} text="Test" show={true} selected={true} />
+          <MenuOption icon={FaceIcon} text="Test" show={true} selected={true} />
+          <MenuOption icon={FaceIcon} text="Test" show={true} selected={true} />
+        </CSS.MenuScroll>
       </CSS.MenuContainer>
     </CSS.Container>
   )

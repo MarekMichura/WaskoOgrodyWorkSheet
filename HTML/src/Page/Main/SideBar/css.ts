@@ -11,11 +11,10 @@ export const Container = styled.nav`
   grid-column: 1/2;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 
   overflow: auto;
-  transition:
-    1s width ease-in-out,
-    1s height ease-in-out;
+  transition: 300ms width ease-in-out;
 
   @media screen and (min-width: 600px) {
     &[data-open='true'] {
@@ -28,6 +27,7 @@ export const Container = styled.nav`
     width: 100%;
     flex-direction: row;
     height: 60px;
+    transition: 300ms height ease-in-out;
 
     &[data-open='true'] {
       height: 230px;
@@ -39,8 +39,9 @@ export const Logo = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
+  flex-direction: column;
   flex-shrink: 0;
-  padding: 10px;
+  padding-top: 10px;
 
   @media screen and (max-width: 600px) {
     display: none;
@@ -48,27 +49,55 @@ export const Logo = styled.div`
 `
 
 export const MenuContainer = styled.div`
+  position: relative;
+  padding: 10px;
+  width: calc(100% - 20px);
+  @media screen and (max-width: 600px) {
+    [data-open='true'] & {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: calc(100% - 20px);
+    }
+  }
+  /* min-height: calc(100% - 20px); */
+`
+
+export const MenuScroll = styled.div`
   display: flex;
   gap: 10px;
   flex-direction: column;
-  padding: 10px;
-  width: calc(100% - 20px);
-  min-height: calc(100% - 20px);
+  scroll-snap-type: x mandatory;
 
   @media screen and (max-width: 600px) {
     flex-direction: row;
     justify-content: space-evenly;
+    width: calc(100% - 20px);
 
     [data-open='true'] & {
+      padding: 5px;
       display: grid;
       grid-template-columns: 1fr 1fr;
       overflow-y: scroll;
+      & > * {
+        grid-column: span 2;
+      }
+
+      &:has(:nth-child(9)) {
+        height: calc(100% - 20px);
+      }
+      &:has(:nth-child(5)) {
+        > * {
+          grid-column: span 1;
+        }
+      }
     }
   }
 `
 
 export const MenuOption = styled.div`
   position: relative;
+  min-width: 40px;
   display: grid;
   grid-template-columns: auto 0fr;
   align-items: center;
@@ -90,7 +119,7 @@ export const MenuOption = styled.div`
   background-size: 400% 400%;
   background-position: left;
 
-  transition: 1s ease-in-out background-position;
+  transition: 300ms ease-in-out background-position;
 
   &:hover {
     background-position: right;
@@ -103,6 +132,14 @@ export const MenuOption = styled.div`
 
   [data-selected='true']& {
     box-shadow: 0 0 3px 2px ${(a) => a.theme.primary.default};
+  }
+
+  @media screen and (max-width: 600px) {
+    [data-open='true'] & {
+      &:nth-child(odd):last-child {
+        grid-column: span 2;
+      }
+    }
   }
 `
 
