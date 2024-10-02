@@ -6,7 +6,9 @@ class BuilderDayOffExpressionTargetUser : IBuilder
   {
     builder.Entity<ModelDayOffExpressionTargetUser>(entity =>
     {
+#if DEBUG
       entity.HasData(StorageDayOffExpressionTargetUser.DaysOffTargets);
+#endif
     });
   }
 }

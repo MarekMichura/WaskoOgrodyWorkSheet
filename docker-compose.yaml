@@ -48,11 +48,11 @@ services:
       target: server-release
       args:
         - BUILD_CONFIGURATION=release
-        - ASPNETCORE_ENVIRONMENT=release
+        - ASPNETCORE_ENVIRONMENT=Production
     container_name: server-release
     image: server-release
     environment:
-      - ASPNETCORE_ENVIRONMENT=release
+      - ASPNETCORE_ENVIRONMENT=Production
       - DB_PASSWORD="${DB_PASSWORD:-zaq1@WSX}"
     depends_on:
       - db
@@ -135,16 +135,16 @@ services:
       dockerfile: dockerfile
       target: server-update-db
       args:
-        - BUILD_CONFIGURATION=debug
-        - ASPNETCORE_ENVIRONMENT=Development
+        - BUILD_CONFIGURATION=release
+        - ASPNETCORE_ENVIRONMENT=Production
     container_name: initialize-db-release
     image: initialize-db-release
     environment:
-      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_ENVIRONMENT=Production
       - DB_PASSWORD="${DB_PASSWORD:-zaq1@WSX}"
     depends_on:
       - db
     networks:
       - app-network
     volumes:
-      - ./DB/Migrations/:/Server/Migrations/
+      - ./DB/Migrations/:/Server/Migrations/        

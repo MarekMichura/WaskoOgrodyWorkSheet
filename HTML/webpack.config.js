@@ -135,7 +135,7 @@ module.exports = {
       '/Icon': path.resolve(__dirname, 'src/Common/Icon'),
       '/Input': path.resolve(__dirname, 'src/Common/Input'),
       '/MContext': path.resolve(__dirname, 'src/Common/MainContext/type/Context'),
-      '/Context/': path.resolve(__dirname, 'src/Common/MainContext/'),
+      '/Context': path.resolve(__dirname, 'src/Common/MainContext/type'),
       '/Page': path.resolve(__dirname, 'src/Page'),
     },
   },

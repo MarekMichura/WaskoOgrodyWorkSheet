@@ -1,8 +1,4 @@
-export enum IUserRole {
-  Pracownik = 'Pracownik',
-  Ogrodnik = 'Ogrodnik',
-  PolskieSwieta = 'PolskieSwieta',
-}
+import {IUserRole} from '../../global/ROLE'
 
 export interface IProfil {
   firstName: string

@@ -36,4 +36,6 @@ class ModelUser : IdentityUser
   public virtual ICollection<ModelChordPrice> ChangedChordsPrices { get; set; } = [];
   public virtual ICollection<ModelChord> CreatedChords { get; set; } = [];
   public virtual ICollection<ModelWorkChord> CreatedWorkChords { get; set; } = [];
+  // ============================= Notification==============
+  public virtual ICollection<ModelNotification> Notifications { get; set; } = [];
 }

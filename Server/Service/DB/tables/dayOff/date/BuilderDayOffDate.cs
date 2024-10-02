@@ -37,8 +37,9 @@ class BuilderDayOffDate : IBuilder
       entity.HasOne(a => a.Approver).WithMany(a => a.DaysOffDateApprover)
         .HasForeignKey(a => a.ApproverID)
         .OnDelete(DeleteBehavior.Restrict);
-
+#if DEBUG
       entity.HasData(StorageDayOffDate.DaysOff);
+#endif
     });
   }
 }

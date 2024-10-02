@@ -6,6 +6,7 @@ class ModelRole : IdentityRole
   [StringLength(36)]
   public required string AuthorID { get; set; }
   public ModelUser? Author { get; set; }
+  public required ushort TitleStrength { get; set; }
 
   public virtual ICollection<ModelUser> Users { get; set; } = [];
   public virtual ICollection<ModelWorkLocation> WorkLocations { get; set; } = [];

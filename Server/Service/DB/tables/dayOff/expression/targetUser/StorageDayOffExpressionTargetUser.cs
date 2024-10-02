@@ -1,3 +1,4 @@
+#if DEBUG
 namespace Wasko;
 
 class StorageDayOffExpressionTargetUser
@@ -5,6 +6,11 @@ class StorageDayOffExpressionTargetUser
   static public IEnumerable<ModelDayOffExpressionTargetUser> DaysOffTargets = _DaysOffTargets().ToArray();
   static private IEnumerable<ModelDayOffExpressionTargetUser> _DaysOffTargets()
   {
-    yield break;
+    yield return new()
+    {
+      TargetID = StorageUser.Dima,
+      DayOffID = StorageDayOffExpression.wolne,
+    };
   }
 }
+#endif

@@ -25,7 +25,21 @@ class StorageWorkLocations
     yield return new() { ID = "1db06608-e532-45b2-b1a8-3cfeaab85f3d", Name = "klimanowa" };
   }
 
-
-  static public string getID(string name) =>
-    WorkLocations.First(a => a.Name == name).ID;
+  static public string Drive = WorkLocations.First(a => a.Name == "Drive").ID;
+  static public string Office = WorkLocations.First(a => a.Name == "Office").ID;
+  static public string maja = WorkLocations.First(a => a.Name == "3maja").ID;
+  static public string Pychowicka = WorkLocations.First(a => a.Name == "Pychowicka").ID;
+  static public string Wizjonerów = WorkLocations.First(a => a.Name == "Wizjonerów").ID;
+  static public string Grzegórzecka = WorkLocations.First(a => a.Name == "Grzegórzecka").ID;
+  static public string Tarnów = WorkLocations.First(a => a.Name == "Tarnów Dach").ID;
+  static public string Tarnow = WorkLocations.First(a => a.Name == "Tarnów Eurovia").ID;
+  static public string Quattro = WorkLocations.First(a => a.Name == "Quattro").ID;
+  static public string Rondo = WorkLocations.First(a => a.Name == "Rondo").ID;
+  static public string Narama = WorkLocations.First(a => a.Name == "Narama").ID;
+  static public string Kielce = WorkLocations.First(a => a.Name == "Kielce").ID;
+  static public string Piaskowa = WorkLocations.First(a => a.Name == "Piaskowa").ID;
+  static public string Poleska = WorkLocations.First(a => a.Name == "Poleska").ID;
+  static public string Mogilska = WorkLocations.First(a => a.Name == "Mogilska").ID;
+  static public string Henniger = WorkLocations.First(a => a.Name == "Henniger Graby").ID;
+  static public string klimanowa = WorkLocations.First(a => a.Name == "klimanowa").ID;
 }

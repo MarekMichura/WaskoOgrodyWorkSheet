@@ -20,7 +20,9 @@ class BuilderWorkHour : IBuilder
         .HasForeignKey(a => a.WorkLocationID)
         .OnDelete(DeleteBehavior.Restrict);
 
+#if DEBUG
       entity.HasData(StorageWorkHour.WorkHours);
+#endif
     });
   }
 }

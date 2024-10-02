@@ -24,8 +24,9 @@ class BuilderBonus : IBuilder
 
       entity.Property(a => a.Date)
         .HasDefaultValueSql("GETDATE()");
-
+#if DEBUG
       entity.HasData(StorageBonus.Bonuses);
+#endif
     });
   }
 }

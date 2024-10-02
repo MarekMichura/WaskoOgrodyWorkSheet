@@ -19,8 +19,9 @@ class BuilderWorkChord : IBuilder
       entity.HasOne(a => a.Author).WithMany(a => a.CreatedWorkChords)
         .HasForeignKey(a => a.AuthorID)
         .OnDelete(DeleteBehavior.Restrict);
-
+#if DEBUG
       entity.HasData(StorageWorkChord.WorkChords);
+#endif
     });
   }
 }

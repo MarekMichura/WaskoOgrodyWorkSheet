@@ -20,11 +20,14 @@ class BuilderFound : IBuilder
       entity.HasOne(a => a.Approver).WithMany(a => a.ApprovedFounds)
         .HasForeignKey(a => a.ApproverID)
         .OnDelete(DeleteBehavior.Restrict);
+        
 
       entity.Property(a => a.Date)
         .HasDefaultValueSql("GETDATE()");
 
+#if DEBUG
       entity.HasData(StorageFound.Founds);
+#endif
     });
   }
 }

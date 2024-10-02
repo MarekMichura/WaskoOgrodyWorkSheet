@@ -21,8 +21,9 @@ class BuilderUserSalary : IBuilder
 
       entity.Property(a => a.Date)
         .HasDefaultValueSql("GETDATE()");
-
+#if DEBUG
       entity.HasData(StorageUserSalary.Salaries);
+#endif
     });
   }
 }

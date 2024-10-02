@@ -93,6 +93,16 @@ export const MenuScroll = styled.div`
       }
     }
   }
+
+  @media screen and (max-width: 300px) {
+    [data-open='true'] & {
+      height: 100%;
+      grid-template-columns: 1fr;
+    }
+    & > * {
+      grid-column: 1/1 !important;
+    }
+  }
 `
 
 export const MenuOption = styled.div`
@@ -162,4 +172,11 @@ export const MenuIcon = styled.svg`
 export const MenuText = styled.div`
   overflow: hidden;
   text-align: center;
+  max-height: 0;
+  overflow: hidden;
+
+  [data-open='true'] & {
+    max-height: 1000px;
+    transition: 1s max-height ease-in-out 200ms;
+  }
 `

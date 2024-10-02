@@ -14,7 +14,7 @@
     "noFallthroughCasesInSwitch": true,
     "outDir": "./build",
     "paths": {
-      "/Context/*": ["Common/MainContext/*"],
+      "/Context/*": ["Common/MainContext/type/*"],
       "/global/*": ["Common/global/*"],
       "/Icon/*": ["Common/Icon/*"],
       "/Input/*": ["Common/Input/*"],

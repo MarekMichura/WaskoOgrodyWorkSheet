@@ -7,35 +7,41 @@ class StorageProfil
   {
     yield return new()
     {
-      ID = StorageUser.getID("admin"),
-      FirstName = "admin",
-      LastName = "admin",
-      WorkStartDate = new DateOnly(2024, 1, 1)
+      ID = StorageUser.admin,
+      FirstName = "Marek",
+      LastName = "Michura",
+      WorkStartDate = new DateOnly(2000, 1, 1)
     };
 
-    if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") != "Development")
-      yield break;
-
+#if DEBUG
     yield return new()
     {
-      ID = StorageUser.getID("Eryk"),
+      ID = StorageUser.user,
+      FirstName = "User",
+      LastName = "test",
+      WorkStartDate = new DateOnly(2024, 8, 1)
+    };
+    yield return new()
+    {
+      ID = StorageUser.Eryk,
       FirstName = "Eryk",
       LastName = "IDK",
       WorkStartDate = new DateOnly(2024, 8, 1)
     };
     yield return new()
     {
-      ID = StorageUser.getID("Loszka"),
+      ID = StorageUser.Loszka,
       FirstName = "Loszka",
       LastName = "IDK",
       WorkStartDate = new DateOnly(2024, 8, 1)
     };
     yield return new()
     {
-      ID = StorageUser.getID("Dima"),
+      ID = StorageUser.Dima,
       FirstName = "Dima",
       LastName = "IDK",
       WorkStartDate = new DateOnly(2024, 8, 1)
     };
+#endif
   }
 }
