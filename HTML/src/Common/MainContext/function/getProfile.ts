@@ -9,6 +9,11 @@ import {IActionInit} from '../type/IAction'
 import {INotificationType} from '../type/INotification'
 import {IProfil} from '../type/IProfil'
 
+interface INotificationResponse {
+  type: INotificationType | undefined
+  text: string
+}
+
 function getProfile({dispatch}: IActionInit) {
   const controller = new AbortController()
   let finished = false
@@ -19,70 +24,29 @@ function getProfile({dispatch}: IActionInit) {
     .middlewares([delay(0)])
     .signal(controller)
     .get()
-    .onAbort(() =>
-      dispatch({
-        action: MainAction.NOTIFICATION_ADD,
-        life: NOTIFICATION_INIT_LIFE,
-        type: INotificationType.error,
-        text: 'Przekroczono limit czasu żądania',
-        dispatch,
-      })
-    )
-    .badRequest(() =>
-      dispatch({
-        action: MainAction.NOTIFICATION_ADD,
-        life: NOTIFICATION_INIT_LIFE,
-        type: INotificationType.error,
-        text: 'Nie udało się nawiązać połączenia z serwerem',
-        dispatch,
-      })
-    )
-    .unauthorized(() =>
-      dispatch({
-        action: MainAction.NOTIFICATION_ADD,
-        life: NOTIFICATION_INIT_LIFE,
-        type: INotificationType.info,
-        text: 'Nie jesteś zalogowany',
-        dispatch,
-      })
-    )
-    .notFound(() =>
-      dispatch({
-        action: MainAction.NOTIFICATION_ADD,
-        life: NOTIFICATION_INIT_LIFE,
-        type: INotificationType.error,
-        text: 'Błąd połączenia z serwerem',
-        dispatch,
-      })
-    )
-    .internalError(() =>
-      dispatch({
-        action: MainAction.NOTIFICATION_ADD,
-        life: NOTIFICATION_INIT_LIFE,
-        type: INotificationType.error,
-        text: 'Wystąpił problem po stronie serwera',
-        dispatch,
-      })
-    )
-    .timeout(() =>
-      dispatch({
-        action: MainAction.NOTIFICATION_ADD,
-        life: NOTIFICATION_INIT_LIFE,
-        type: INotificationType.error,
-        text: 'Przekroczono limit czasu żądania',
-        dispatch,
-      })
-    )
+    .onAbort(() => ({type: INotificationType.error, text: 'Przekroczono limit czasu żądania'}))
+    .badRequest(() => ({type: INotificationType.error, text: 'Nie udało się nawiązać połączenia z serwerem'}))
+    .unauthorized(() => ({text: 'Nie jesteś zalogowany'}))
+    .notFound(() => ({life: NOTIFICATION_INIT_LIFE, type: INotificationType.error}))
+    .internalError(() => ({type: INotificationType.error, text: 'Wystąpił problem po stronie serwera'}))
+    .timeout(() => ({type: INotificationType.error, text: 'Przekroczono limit czasu żądania'}))
     .json((profil: IProfil) => {
       dispatch({action: MainAction.PROFIL_SET, profil})
-      dispatch({
-        action: MainAction.NOTIFICATION_ADD,
-        life: NOTIFICATION_INIT_LIFE,
-        type: INotificationType.info,
-        text: 'Jesteś zalogowany',
-        dispatch,
-      })
+      return {type: undefined, text: 'Jesteś zalogowany'}
     })
+    .then(
+      (a: INotificationResponse) =>
+        (a.type &&
+          dispatch({
+            action: MainAction.NOTIFICATION_ADD,
+            life: NOTIFICATION_INIT_LIFE,
+            text: a.text,
+            type: a.type,
+            dispatch,
+          })) ||
+        console.log(a.text)
+    )
+    .catch(() => {})
     .finally(() => {
       dispatch({action: MainAction.LOADING_REMOVE, key: 'Ładowanie profilu', dispatch})
       dispatch({action: MainAction.INIT_END})

@@ -1,3 +1,5 @@
+using System.Runtime.Serialization;
+
 namespace Wasko;
 
 class ModelWorkHour
@@ -37,4 +39,14 @@ class ModelWorkHour
   public virtual ModelUser? Author { get; set; }
 
   public virtual ICollection<ModelWorkChord> Chords { get; set; } = [];
+
+  [IgnoreDataMember]
+  public virtual IEnumerable<ModelDayOffDate> DaysOffDate => User is not null
+    ? User.DaysOffDate.Union(User.Roles.SelectMany(a => a.DaysOffDates))
+    : [];
+
+  [IgnoreDataMember]
+  public virtual IEnumerable<ModelDayOffExpression> DaysOffExpression => User is not null
+    ? User.DaysOffExpression.Union(User.Roles.SelectMany(a => a.DaysOffExpressions))
+    : [];
 }

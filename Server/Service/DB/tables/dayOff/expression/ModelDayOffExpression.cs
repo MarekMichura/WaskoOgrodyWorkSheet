@@ -32,6 +32,7 @@ class ModelDayOffExpression
   public string? ApproverID { get; set; }
   public virtual ModelUser? Approver { get; set; }
 
-  public virtual ICollection<ModelUser>? TargetsUser { get; set; } = [];
-  public virtual ICollection<ModelRole>? TargetsRole { get; set; } = [];
+  public virtual ICollection<ModelUser> TargetsUser { get; set; } = [];
+  public virtual ICollection<ModelRole> TargetsRole { get; set; } = [];
+  public virtual ICollection<ModelWorkHour> WorkHours { get; set; } = [];
 }
