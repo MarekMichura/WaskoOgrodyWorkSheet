@@ -1,10 +1,22 @@
+using System.Runtime.CompilerServices;
 using Wasko;
 
-await Task.Delay(2000);
 
-var builder = WebApplication.CreateBuilder(args);
-builder.DefineServices();
+partial class Program
+{
+  private static WebApplicationBuilder? _builder;
+  private static WebApplication? _app;
+  public static WebApplicationBuilder builder => _builder ?? throw new NullReferenceException();
+  public static WebApplication app => _app ?? throw new NullReferenceException();
 
-var app = builder.Build();
-app.DefineEndPoints();
-app.Run();
+  static void Main(string[] args)
+  {
+    _builder = WebApplication.CreateBuilder();
+    builder.DefineServices();
+
+    _app = builder.Build();
+    app.DefineEndPoints();
+
+    app.Run();
+  }
+}

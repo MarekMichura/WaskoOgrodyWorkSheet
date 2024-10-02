@@ -1,11 +1,15 @@
 import {useContext} from 'react'
 
 import Context from '/Context/Context'
-import {route, routeEN} from '/global/ROUTE'
-import FaceIcon from '/Icon/FaceIcon'
+import {route, routePermission} from '/global/ROUTE'
+import CalendarIcon from '/Icon/CalendarIcon'
+import CashIcon from '/Icon/Cash'
+import CommentIcon from '/Icon/Comment'
+import GardenCardIcon from '/Icon/GardenCardIcon'
+import HourGlassIcon from '/Icon/HourGlassIcon'
 import LogoIcon from '/Icon/LogoIcon'
-
-import {IUserRole} from '../../../Common/global/ROLE'
+import PaymentIcon from '/Icon/Payment'
+import UmbrelaIcon from '/Icon/UmbrelaIcon'
 
 import {ISideBar} from './props'
 import SideBarOption from './SideBarOption'
@@ -17,11 +21,7 @@ function SideBar({open}: ISideBar) {
   if (state.profil == undefined) return
   const {roles} = state.profil
 
-  const isEmployer = roles.includes(IUserRole.Employer)
-  const isGardener = isEmployer && roles.includes(IUserRole.Gardener)
-  const canAskDayOff = isEmployer && !roles.includes(IUserRole.BlockAskingBonus)
-  const canFound = isEmployer && !roles.includes(IUserRole.BlockAskingFound)
-  const canAskBonus = isEmployer && !roles.includes(IUserRole.BlockAskingBonus)
+  const perm = routePermission(roles)
 
   return (
     <CSS.Container data-open={open}>
@@ -30,17 +30,17 @@ function SideBar({open}: ISideBar) {
       </CSS.Logo>
       <CSS.MenuContainer>
         <CSS.MenuScroll>
-          {/* Everyone */}
-          <SideBarOption icon={FaceIcon} text="Zamieść uwagę" show={true} to={routeEN[route.Add_comment]} />
           {/* Employer */}
-          <SideBarOption icon={FaceIcon} text="Godziny pracy" show={isEmployer} to={routeEN[route.Set_working_hours]} />
-          <SideBarOption icon={FaceIcon} text="Pokaż kalendarz" show={isEmployer} to={routeEN[route.Show_calendar]} />
+          <SideBarOption icon={HourGlassIcon} text="Godziny pracy" show={perm} route={route.Set_working_hours} />
+          <SideBarOption icon={CalendarIcon} text="Pokaż kalendarz" show={perm} route={route.Show_calendar} />
           {/* Gardener */}
-          <SideBarOption icon={FaceIcon} text="Uzupełnij akordy" show={isGardener} to={routeEN[route.Set_chord]} />
+          <SideBarOption icon={GardenCardIcon} text="Uzupełnij akordy" show={perm} route={route.Set_chord} />
           {/* Block employer */}
-          <SideBarOption icon={FaceIcon} text="Poproś o wolne" show={canAskDayOff} to={routeEN[route.Ask_day_off]} />
-          <SideBarOption icon={FaceIcon} text="Zgłoś wydatek" show={canFound} to={routeEN[route.Add_found]} />
-          <SideBarOption icon={FaceIcon} text="Poproś o premie" show={canAskBonus} to={routeEN[route.Ask_bonus]} />
+          <SideBarOption icon={UmbrelaIcon} text="Poproś o wolne" show={perm} route={route.Ask_day_off} />
+          <SideBarOption icon={PaymentIcon} text="Zgłoś wydatek" show={perm} route={route.Add_refund} />
+          <SideBarOption icon={CashIcon} text="Poproś o premie" show={perm} route={route.Ask_bonus} />
+
+          <SideBarOption icon={CommentIcon} text="Zamieść uwagę" show={perm} route={route.Add_comment} />
         </CSS.MenuScroll>
       </CSS.MenuContainer>
     </CSS.Container>

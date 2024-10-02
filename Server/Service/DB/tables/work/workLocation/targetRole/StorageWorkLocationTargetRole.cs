@@ -11,6 +11,7 @@ class StorageWorkLocationTargetRole
   static public IEnumerable<ModelWorkLocationTargetRole> WorkLocationRoles = _WorkLocationRoles().ToArray();
   static private IEnumerable<ModelWorkLocationTargetRole> _WorkLocationRoles()
   {
+    yield return new() { RoleID = StorageRole.employer, WorkLocationID = StorageWorkLocations.NotSet };
     yield return new() { RoleID = StorageRole.employer, WorkLocationID = StorageWorkLocations.Drive };
     yield return new() { RoleID = StorageRole.employer, WorkLocationID = StorageWorkLocations.Office };
     yield return new() { RoleID = StorageRole.gardener, WorkLocationID = StorageWorkLocations.maja };

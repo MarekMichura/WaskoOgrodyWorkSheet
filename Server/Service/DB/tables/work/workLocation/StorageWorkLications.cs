@@ -5,6 +5,7 @@ class StorageWorkLocations
   static public IEnumerable<ModelWorkLocation> WorkLocations = _WorkLocations().ToArray();
   static private IEnumerable<ModelWorkLocation> _WorkLocations()
   {
+    yield return new() { ID = "fd9991df-5d66-4b30-92df-a3c6b64748ca", Name = "Nieustawiona" };
     yield return new() { ID = "047921e7-1329-4542-acd3-119bcb645077", Name = "Drive" };
     yield return new() { ID = "b721d3d1-04cd-4244-9fa7-751b085aebfc", Name = "Office" };
 
@@ -25,6 +26,7 @@ class StorageWorkLocations
     yield return new() { ID = "1db06608-e532-45b2-b1a8-3cfeaab85f3d", Name = "klimanowa" };
   }
 
+  static public string NotSet = WorkLocations.First(a => a.Name == "Nieustawiona").ID;
   static public string Drive = WorkLocations.First(a => a.Name == "Drive").ID;
   static public string Office = WorkLocations.First(a => a.Name == "Office").ID;
   static public string maja = WorkLocations.First(a => a.Name == "3maja").ID;

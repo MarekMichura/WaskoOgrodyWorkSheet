@@ -1,3 +1,4 @@
+import {Link} from 'react-router-dom'
 import styled from 'styled-components'
 
 import {IThemes} from '/global/THEME'
@@ -105,7 +106,7 @@ export const MenuScroll = styled.div`
   }
 `
 
-export const MenuOption = styled.div`
+export const MenuOption = styled(Link)`
   position: relative;
   min-width: 40px;
   display: grid;

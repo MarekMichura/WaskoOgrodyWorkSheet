@@ -16,8 +16,6 @@ class ModelDayOffExpression
   public EnumMonth? Month { get; set; }
   [Range(0, 30)]
   public byte? Day { get; set; }
-  [Range(0, 5)]
-  public byte? NthWeek { get; set; }
   public EnumDayOfWeek? DayOfWeek { get; set; }
   public short? DaysAfterEaster { get; set; }
   [Required]

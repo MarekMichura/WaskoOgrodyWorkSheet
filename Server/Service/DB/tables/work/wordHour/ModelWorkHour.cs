@@ -1,5 +1,3 @@
-using System.Runtime.Serialization;
-
 namespace Wasko;
 
 class ModelWorkHour
@@ -16,16 +14,16 @@ class ModelWorkHour
   public required DateOnly Date { get; set; }
   [Required]
   [DataType(DataType.Time)]
-  public required TimeOnly WorkStart { get; set; }
+  public required TimeOnly WorkStart { get; set; } = new TimeOnly(0, 0);
   [Required]
   [DataType(DataType.Time)]
-  public required TimeOnly WorkEnd { get; set; }
+  public required TimeOnly WorkEnd { get; set; } = new TimeOnly(0, 0);
   [Required]
   public bool Active { get; set; } = true;
 
   [Required]
   [StringLength(36)]
-  public required string WorkLocationID { get; set; }
+  public required string WorkLocationID { get; set; } = StorageWorkLocations.NotSet;
   public virtual ModelWorkLocation? WorkLocation { get; set; }
 
   [Required]
@@ -40,13 +38,19 @@ class ModelWorkHour
 
   public virtual ICollection<ModelWorkChord> Chords { get; set; } = [];
 
-  [IgnoreDataMember]
-  public virtual IEnumerable<ModelDayOffDate> DaysOffDate => User is not null
-    ? User.DaysOffDate.Union(User.Roles.SelectMany(a => a.DaysOffDates))
-    : [];
+  public IEnumerable<ModelDayOffDate> DayOffDate(IEnumerable<ModelDayOffDate> Empty) => User is null ? [] :
+    User.DaysOffDate.Union(User.Roles.SelectMany(a => a.DaysOffDates)).Union(Empty)
+      .Where(a => a.StartDate == Date || (a.EndDate is not null && a.StartDate > Date && a.EndDate <= Date));
 
-  [IgnoreDataMember]
-  public virtual IEnumerable<ModelDayOffExpression> DaysOffExpression => User is not null
-    ? User.DaysOffExpression.Union(User.Roles.SelectMany(a => a.DaysOffExpressions))
-    : [];
+  public IEnumerable<ModelDayOffExpression> DayOffExpression(IEnumerable<ModelDayOffExpression> Empty) => User is null ? [] :
+    User.DaysOffExpression.Union(User.Roles.SelectMany(a => a.DaysOffExpressions)).Union(Empty)
+      .Where(a =>
+      {
+        bool year = a.Year is null || a.Year == Date.Year;
+        bool month = a.Month is null || (int)a.Month == Date.Month;
+        bool day = a.Day is null || a.Day == Date.Day;
+        bool week = a.DayOfWeek is null || (int)a.DayOfWeek == (int)Date.DayOfWeek;
+        bool eastern = a.DaysAfterEaster is null || a.DaysAfterEaster == Easter.DaysAfterEaster(Date);
+        return year && month && day && week && eastern;
+      });
 }

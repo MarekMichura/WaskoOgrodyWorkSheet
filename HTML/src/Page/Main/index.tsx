@@ -1,4 +1,5 @@
 import {useContext, useState} from 'react'
+import {Outlet} from 'react-router-dom'
 
 import {MainAction} from '/global/MAIN_ACTION'
 import Context from '/MContext'
@@ -25,7 +26,9 @@ function MainPage() {
   return (
     <CSS.Container>
       <SideBar open={menu} />
-      <CSS.Content></CSS.Content>
+      <CSS.Content>
+        <Outlet />
+      </CSS.Content>
       <TopBar openMenu={menu} changeOpenMenu={changeOpenMenu} />
     </CSS.Container>
   )

@@ -1,6 +1,10 @@
 import styled, {createGlobalStyle, keyframes} from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
+  a {
+    all: unset; 
+  }
+
   body {
     margin: 0;
     padding: 0;

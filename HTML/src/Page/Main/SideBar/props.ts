@@ -1,10 +1,11 @@
+import {route} from '/global/ROUTE'
 import FaceIcon from '/Icon/FaceIcon'
 
 export interface IMenuOption {
   icon: typeof FaceIcon
-  show: boolean
+  show: Record<route, boolean>
   text: string
-  to: string
+  route: route
 }
 
 export interface ISideBar {
