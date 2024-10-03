@@ -1,5 +1,6 @@
 import {LOCAL_STORAGE_THEME} from '/global/LS'
 import {MainAction} from '/global/MAIN_ACTION'
+import {routePermission} from '/global/ROUTE'
 import {IThemes} from '/global/THEME'
 import {LOADING_MIN_TIME} from '/global/TIME'
 
@@ -60,7 +61,8 @@ function MainReducer(state: IState, action: IAction): IState {
       return {...state}
     }
     case MainAction.PROFIL_SET: {
-      return {...state, profil: action.profil}
+      if (action.profil != undefined) action.profil.workStartDate = new Date(action.profil.workStartDate)
+      return {...state, profil: action.profil, permission: routePermission(action.profil?.roles ?? [])}
     }
     case MainAction.NOTIFICATION_ADD: {
       const notifications = addNotification(state.notifications, action)

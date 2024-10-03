@@ -1,3 +1,4 @@
+import {route, routePermission} from '/global/ROUTE'
 import {IThemes} from '/global/THEME'
 
 import {INotification} from './INotification'
@@ -11,6 +12,7 @@ export interface IState {
   loadingStart: boolean
   notifications: INotification[]
   init: boolean
+  permission: Record<route, boolean>
 }
 
 export const defState: IState = {
@@ -20,4 +22,5 @@ export const defState: IState = {
   loadingStart: true,
   notifications: [],
   init: false,
+  permission: routePermission([]),
 }

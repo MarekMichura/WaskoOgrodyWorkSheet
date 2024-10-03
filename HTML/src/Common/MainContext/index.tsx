@@ -47,7 +47,7 @@ function MainContext() {
 
   return (
     <Context.Provider value={{dispatch, state: state}}>
-      <BrowserRouter>
+      <BrowserRouter basename="/">
         <ThemeProvider theme={themeSwitch[theme]}>
           <GlobalStyle />
           <MyRoutes />

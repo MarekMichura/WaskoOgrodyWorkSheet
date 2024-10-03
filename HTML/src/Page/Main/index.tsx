@@ -26,10 +26,10 @@ function MainPage() {
   return (
     <CSS.Container>
       <SideBar open={menu} />
+      <TopBar openMenu={menu} changeOpenMenu={changeOpenMenu} />
       <CSS.Content>
         <Outlet />
       </CSS.Content>
-      <TopBar openMenu={menu} changeOpenMenu={changeOpenMenu} />
     </CSS.Container>
   )
 }

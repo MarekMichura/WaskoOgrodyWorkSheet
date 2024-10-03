@@ -1,11 +1,13 @@
 import {lazy, useContext} from 'react'
 import {Route, Routes} from 'react-router-dom'
 
+import {route, routes} from '/global/ROUTE'
 import Context from '/MContext'
 
-const Login = lazy(() => import('/Page/Login'))
 const Error404 = lazy(() => import('/Page/Error404'))
+const Login = lazy(() => import('/Page/Login'))
 const Main = lazy(() => import('/Page/Main'))
+const CalendarEmployer = lazy(() => import('/Page/EmployerCalendar'))
 
 function MyRoutes() {
   const {state} = useContext(Context)
@@ -16,7 +18,8 @@ function MyRoutes() {
   return (
     <Routes>
       <Route path="*" Component={Main}>
-        <Route path="*" Component={Error404} />
+        <Route path={routes[route.Show_calendar]} Component={CalendarEmployer} />
+        <Route path="*//*" Component={Error404} />
       </Route>
     </Routes>
   )

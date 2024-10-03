@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom'
-import styled from 'styled-components'
+import styled, {keyframes} from 'styled-components'
 
 import {IThemes} from '/global/THEME'
 
@@ -79,7 +79,6 @@ export const MenuScroll = styled.div`
       padding: 5px;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      overflow-y: scroll;
       & > * {
         grid-column: span 2;
       }
@@ -106,7 +105,13 @@ export const MenuScroll = styled.div`
   }
 `
 
-export const MenuOption = styled(Link)`
+const keyframe = keyframes`
+  0%{background-position:10% 0%}
+  50%{background-position:91% 100%}
+  100%{background-position:10% 0%}
+`
+
+export const MenuOption = styled.div`
   position: relative;
   min-width: 40px;
   display: grid;
@@ -114,7 +119,6 @@ export const MenuOption = styled(Link)`
   align-items: center;
   border-radius: 30px;
 
-  background-size: 400% 100%;
   cursor: pointer;
 
   box-shadow: 0 0 5px 0
@@ -129,7 +133,6 @@ export const MenuOption = styled(Link)`
 
   background-size: 400% 400%;
   background-position: left;
-
   transition: 300ms ease-in-out background-position;
 
   &:hover {
@@ -141,16 +144,30 @@ export const MenuOption = styled(Link)`
     padding-right: 10px;
   }
 
-  [data-selected='true']& {
-    box-shadow: 0 0 3px 2px ${(a) => a.theme.primary.default};
-  }
-
   @media screen and (max-width: 600px) {
     [data-open='true'] & {
       &:nth-child(odd):last-child {
         grid-column: span 2;
       }
     }
+  }
+
+  &[data-selected='true']:before {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    bottom: -5px;
+    left: -5px;
+    background: linear-gradient(
+      ${(p) => p.theme.secondary[500].default} 0%,
+      ${(p) => p.theme.primary.default} 50%,
+      ${(p) => p.theme.secondary[500].default} 100%
+    );
+    background-size: 200% 200%;
+    border-radius: inherit;
+    animation: 3s ${keyframe} linear infinite;
   }
 `
 
@@ -174,7 +191,6 @@ export const MenuText = styled.div`
   overflow: hidden;
   text-align: center;
   max-height: 0;
-  overflow: hidden;
 
   [data-open='true'] & {
     max-height: 1000px;

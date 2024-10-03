@@ -85,6 +85,7 @@ module.exports = {
   entry: './src/index.tsx',
   output: {
     filename: '[name].[contenthash].js',
+    publicPath: '/',
     path: path.resolve(__dirname, 'build'),
     clean: true,
   },

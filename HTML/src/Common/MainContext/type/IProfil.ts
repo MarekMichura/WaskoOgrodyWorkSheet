@@ -4,7 +4,7 @@ export interface IProfil {
   firstName: string
   lastName: string
   userName: string
-  workStartDate: string
+  workStartDate: Date
   roles: IUserRole[]
   image?: string
 }
