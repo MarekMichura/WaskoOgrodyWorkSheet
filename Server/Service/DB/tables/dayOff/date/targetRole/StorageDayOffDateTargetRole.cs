@@ -9,7 +9,7 @@ class StorageDayOffDateTargetRole
   {
     yield return new()
     {
-      TargetID = StorageRole.employer,
+      TargetID = StorageRole.employerID,
       DayOffID = StorageDayOffDate.dayOffAuthor
     };
   }

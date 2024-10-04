@@ -41,4 +41,9 @@ public static class Easter
   {
     return date.DayOfYear - EasternDay(date.Year).DayOfYear;
   }
+
+  public static DateOnly DateAfterEastern(int days, int year)
+  {
+    return EasternDay(year).AddDays(days);
+  }
 }

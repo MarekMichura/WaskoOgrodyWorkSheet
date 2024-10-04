@@ -19,7 +19,7 @@ function MyRoutes() {
     <Routes>
       <Route path="*" Component={Main}>
         <Route path={routes[route.Show_calendar]} Component={CalendarEmployer} />
-        <Route path="*//*" Component={Error404} />
+        <Route path="*" Component={Error404} />
       </Route>
     </Routes>
   )
