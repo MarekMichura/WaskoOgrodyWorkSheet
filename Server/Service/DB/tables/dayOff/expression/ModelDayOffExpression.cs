@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace Wasko;
 
 class ModelDayOffExpression
@@ -20,6 +22,7 @@ class ModelDayOffExpression
   public short? DaysAfterEaster { get; set; }
   [Required]
   public byte Order { get; set; } = 128;
+  public DateOnly? StopActive { get; set; }
 
   [Required]
   [StringLength(36)]
@@ -32,7 +35,6 @@ class ModelDayOffExpression
 
   public virtual ICollection<ModelUser> TargetsUser { get; set; } = [];
   public virtual ICollection<ModelRole> TargetsRole { get; set; } = [];
-  public virtual ICollection<ModelWorkHour> WorkHours { get; set; } = [];
 
   public List<DateOnly> convertToDate(int year, EnumMonth month, bool rangeMonth = true)
   {

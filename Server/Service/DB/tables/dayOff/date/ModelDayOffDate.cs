@@ -11,6 +11,7 @@ class ModelDayOffDate
   public required string Reason { get; set; }
   [Required]
   public required bool Off { get; set; }
+  public DateOnly? StopActive { get; set; }
 
   [Required]
   [DataType(DataType.Date)]

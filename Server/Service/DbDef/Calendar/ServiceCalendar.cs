@@ -18,7 +18,7 @@ partial class ServiceCalendar : IServiceCalendar
     var lastDay = firstDay.AddMonths(1);
 
     var DayOffDates = _context.DayOffDates
-      .Where(a => a.StartDate <= lastDay && firstDay <= a.EndDate)
+      .Where(a => a.StartDate <= lastDay && firstDay <= a.EndDate && a.StopActive > firstDay)
       .Include(a => a.TargetsRole)
       .Where(a => a.TargetsRole.Any(b => current.Roles.Contains(b)) || !a.TargetsRole.Any())
       .Include(a => a.TargetsUser)
@@ -28,7 +28,8 @@ partial class ServiceCalendar : IServiceCalendar
     var DayOffExpression = _context.DayOffExpression
       .Where(a =>
         (a.Year == null || a.Year == year) &&
-        (a.Month == null || a.Month == month))
+        (a.Month == null || a.Month == month) &&
+         a.StopActive > firstDay)
       .Include(a => a.TargetsRole)
       .Where(a => a.TargetsRole.Any(b => current.Roles.Contains(b)) || !a.TargetsRole.Any())
       .Include(a => a.TargetsUser)
@@ -36,7 +37,7 @@ partial class ServiceCalendar : IServiceCalendar
       .ToList();
 
     var WorkHours = _context.WorkHours
-      .Where(a => a.UserID == current.Id && a.Date <= lastDay && firstDay <= a.Date)
+      .Where(a => a.UserID == current.Id && a.Date <= lastDay && firstDay <= a.Date && a.Active)
       .Include(a => a.WorkLocation)
       .Include(a => a.Chords)
       .ToList();

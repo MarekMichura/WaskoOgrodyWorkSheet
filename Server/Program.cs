@@ -1,8 +1,6 @@
-using System.Runtime.CompilerServices;
-using Wasko;
+namespace Wasko;
 
-
-partial class Program
+class Program
 {
   private static WebApplicationBuilder? _builder;
   private static WebApplication? _app;

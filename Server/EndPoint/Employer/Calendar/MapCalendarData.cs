@@ -1,14 +1,9 @@
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-
 namespace Wasko;
 
 class ModelInputCalendar
 {
   public required EnumMonth Month { get; init; }
-  public required int year { get; init; }
+  public required int Year { get; init; }
 }
 
 class ModelResultCalendar
@@ -35,9 +30,9 @@ static class MapCalendarData
   public static IResult CalendarData([FromBody] ModelInputCalendar model, [FromServices] IServiceCalendar calendar)
   {
     var result = new Dictionary<DateOnly, ModelResultCalendar>();
-    var data = calendar.GetData(model.Month, model.year);
+    var data = calendar.GetData(model.Month, model.Year);
 
-    var startDate = new DateOnly(model.year, (int)model.Month, 1);
+    var startDate = new DateOnly(model.Year, (int)model.Month, 1);
     var endDate = startDate.AddMonths(1);
 
     for (var addDate = startDate; addDate < endDate; addDate = addDate.AddDays(1))
@@ -47,6 +42,7 @@ static class MapCalendarData
     {
       for (var date = dayOff.StartDate; date < dayOff.EndDate && date < endDate; date = date.AddDays(1))
       {
+        if (dayOff.StopActive >= date) continue;
         result[date].DaysOff.Add(new ModelResultCalendar.DayOff()
         {
           Off = dayOff.Off,
@@ -57,8 +53,10 @@ static class MapCalendarData
 
     foreach (var dayOff in data.dayOffExpressions)
     {
-      foreach (var date in dayOff.convertToDate(model.year, model.Month).Where(a => a < endDate))
+      foreach (var date in dayOff.convertToDate(model.Year, model.Month).Where(a => a < endDate))
       {
+        if (dayOff.StopActive >= date) continue;
+
         result[date].DaysOff.Add(new ModelResultCalendar.DayOff()
         {
           Off = dayOff.Off,

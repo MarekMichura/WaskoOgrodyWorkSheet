@@ -33,7 +33,7 @@ class DatabaseContext : IdentityDbContext<ModelUser, ModelRole, string>
 
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
   {
-    optionsBuilder.AddInterceptors(new UpdateLastActualization());
+    // optionsBuilder.AddInterceptors(new UpdateLastActualization());
     base.OnConfiguring(optionsBuilder);
   }
 
