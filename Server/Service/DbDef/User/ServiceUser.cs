@@ -1,16 +1,9 @@
 
 namespace Wasko;
 
-partial class ServiceUser : IServiceUser
+partial class ServiceUser(IHttpContextAccessor httpContext, SignInManager<ModelUser> sim, DatabaseContext db) : IServiceUser
 {
-  private readonly IHttpContextAccessor _httpContext;
-  private readonly SignInManager<ModelUser> _sim;
-  private readonly DatabaseContext _db;
-
-  public ServiceUser(IHttpContextAccessor httpContext, SignInManager<ModelUser> sim, DatabaseContext db)
-  {
-    _httpContext = httpContext;
-    _db = db;
-    _sim = sim;
-  }
+  private readonly IHttpContextAccessor _httpContext = httpContext;
+  private readonly SignInManager<ModelUser> _sim = sim;
+  private readonly DatabaseContext _db = db;
 }

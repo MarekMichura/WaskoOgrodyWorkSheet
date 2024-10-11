@@ -4,15 +4,13 @@ namespace Wasko;
 
 class StorageDayOffDateTargetRole
 {
-  static public IEnumerable<ModelDayOffDateTargetRole> DaysOffTargets = _DaysOffTargets().ToArray();
-  static private IEnumerable<ModelDayOffDateTargetRole> _DaysOffTargets()
+  static private readonly ModelDayOffDateTargetRole DayOffTarget1 = new()
   {
-    yield return new()
-    {
-      TargetID = StorageRole.employerID,
-      DayOffID = StorageDayOffDate.dayOffAuthor
-    };
-  }
+    TargetID = StorageRole.employerID!,
+    DayOffID = StorageDayOffDate.dayOffAuthor
+  };
+
+  static public IEnumerable<ModelDayOffDateTargetRole> DaysOffTargets = [DayOffTarget1];
 }
 
 #endif

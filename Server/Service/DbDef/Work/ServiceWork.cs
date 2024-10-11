@@ -1,16 +1,10 @@
 
 namespace Wasko;
 
-partial class ServiceWork : IServiceWork
+partial class ServiceWork(DatabaseContext context, IServiceUser user) : IServiceWork
 {
-  DatabaseContext _context;
-  IServiceUser _user;
-
-  public ServiceWork(DatabaseContext context, IServiceUser user)
-  {
-    _context = context;
-    _user = user;
-  }
+  DatabaseContext _context = context;
+  IServiceUser _user = user;
 
   public IEnumerable<ModelWorkHour>? AddOrChangeWorkHours(DateOnly date, IEnumerable<ModelInputWorkHours.WorkHours> hours)
   {
@@ -49,7 +43,7 @@ partial class ServiceWork : IServiceWork
     var result = _context.WorkLocations
       .Where(a => a.Active)
       .Include(a => a.Targets)
-      .Where(a => a.Targets.Any(a => current.Roles.Select(a => a.Id).Contains(a.Id)) || !a.Targets.Any())
+      .Where(a => a.Targets.Any(a => current.Roles.Select(a => a.Id).Contains(a.Id)) || a.Targets.Count == 0)
       .ToList();
 
     return result;

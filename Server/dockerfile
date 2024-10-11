@@ -1,5 +1,5 @@
 # install tools for server
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS server-with-debugger
+FROM mcr.microsoft.com/dotnet/sdk:latest AS server-with-debugger
 RUN apt-get update && apt-get install -y --no-install-recommends curl && apt-get clean
 RUN curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /remote_debugger
 RUN dotnet tool install --global dotnet-ef
@@ -32,7 +32,7 @@ FROM server-sdk AS server-publish
 WORKDIR /Server/
 RUN dotnet publish "./Server.csproj" -c release -o /Server/publish /p:UseAppHost=false
 
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS server-release
+FROM mcr.microsoft.com/dotnet/aspnet:latest AS server-release
 USER app
 WORKDIR /Server
 COPY --from=server-publish /Server/publish/ .

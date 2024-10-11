@@ -1,1 +1,5 @@
 FROM mcr.microsoft.com/mssql/server:2022-latest AS db-base
+EXPOSE 1433
+
+USER 10001:10001
+CMD ["/opt/mssql/bin/sqlservr"]

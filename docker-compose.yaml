@@ -3,6 +3,58 @@ networks:
     driver: bridge
 
 services:
+  server-release:
+    build:
+      context: ./Server
+      dockerfile: dockerfile
+      target: server-release
+      args:
+        - BUILD_CONFIGURATION=release
+        - ASPNETCORE_ENVIRONMENT=Production
+    container_name: server-release
+    image: server-release
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - DB_PASSWORD="${DB_PASSWORD:-zaq1@WSX}"
+    depends_on:
+      - db
+      - html-release
+    ports:
+      - "80:8080"
+      - "443:8081"
+    networks:
+      - app-network
+    volumes:
+      - ./DB/images:/Server/wwwroot/images/
+
+  html-release:
+    build:
+      context: ./HTML
+      dockerfile: dockerfile
+      target: html-release
+    container_name: html-release
+    image: html-release
+
+  initialize-db-release:
+    build:
+      context: ./Server
+      dockerfile: dockerfile
+      target: server-update-db
+      args:
+        - BUILD_CONFIGURATION=release
+        - ASPNETCORE_ENVIRONMENT=Production
+    container_name: initialize-db-release
+    image: initialize-db-release
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - DB_PASSWORD="${DB_PASSWORD:-zaq1@WSX}"
+    depends_on:
+      - db
+    networks:
+      - app-network
+    volumes:
+      - ./DB/Migrations/:/Server/Migrations/       
+
   server-development:
     build:
       context: ./Server
@@ -40,30 +92,8 @@ services:
       - ./Server/wwwroot/:/Server/wwwroot
       - ./Server/Service/:/Server/Service
       - ./Server/EndPoint/:/Server/EndPoint
-
-  server-release:
-    build:
-      context: ./Server
-      dockerfile: dockerfile
-      target: server-release
-      args:
-        - BUILD_CONFIGURATION=release
-        - ASPNETCORE_ENVIRONMENT=Production
-    container_name: server-release
-    image: server-release
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Production
-      - DB_PASSWORD="${DB_PASSWORD:-zaq1@WSX}"
-    depends_on:
-      - db
-      - html-release
-    ports:
-      - "80:8080"
-      - "443:8081"
-    networks:
-      - app-network
-    volumes:
-      - ./DB/images:/Server/wwwroot/images/
+    cpus: '0.25'
+    mem_limit: '1g'
 
   html-development:
     build:
@@ -78,36 +108,8 @@ services:
       - app-network
     volumes:
       - ./HTML/:/html/
-
-  html-release:
-    build:
-      context: ./HTML
-      dockerfile: dockerfile
-      target: html-release
-    container_name: html-release
-    image: html-release
-
-  db:
-    build:
-      context: ./DB
-      dockerfile: dockerfile
-      target: db-base
-    container_name: db
-    image: db
-    environment:
-      ACCEPT_EULA: "Y"
-      MYSQL_USER: "10001:10001"
-      MYSQL_PASS: "${DB_PASSWORD:-zaq1@WSX}"
-      SA_PASSWORD: "${DB_PASSWORD:-zaq1@WSX}"
-    user: "10001:10001"
-    ports:
-      - "1433:1433"
-    networks:
-      - app-network
-    volumes:
-      - ./DB/log/:/var/opt/mssql/log
-      - ./DB/data/:/var/opt/mssql/data
-      - ./DB/secrets/:/var/opt/mssql/secrets
+    cpus: '0.25'
+    mem_limit: '1g'
 
   initialize-db-development:
     build:
@@ -129,22 +131,32 @@ services:
     volumes:
       - ./DB/Migrations/:/Server/Migrations/
 
-  initialize-db-release:
+  db:
     build:
-      context: ./Server
+      context: ./DB
       dockerfile: dockerfile
-      target: server-update-db
-      args:
-        - BUILD_CONFIGURATION=release
-        - ASPNETCORE_ENVIRONMENT=Production
-    container_name: initialize-db-release
-    image: initialize-db-release
+      target: db-base
+    container_name: db
+    image: db
     environment:
-      - ASPNETCORE_ENVIRONMENT=Production
-      - DB_PASSWORD="${DB_PASSWORD:-zaq1@WSX}"
-    depends_on:
-      - db
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "${DB_PASSWORD:-zaq1@WSX}"
+      MSSQL_PID: "Express"
+      MSSQL_MEMORY_LIMIT_MB: "4096"
+      MSSQL_MIN_MEMORY_MB: "2048"
+      MSSQL_MAXDOP: "4"
+      MSSQL_WORKER_THREADS: "64"
+      MSSQL_TCP_PORT: "1433"
+      MSSQL_BACKUP_DIR: "/var/opt/mssql/backup"
+      MSSQL_AUTO_UPDATE_STATISTICS_ASYNC: "ON"
+      MSSQL_QUERY_OPTIMIZER_HOTFIXES: "ON"
+      MSSQL_TRACEFLAGS: "4199"
+    user: "10001:10001"
+    ports:
+      - "1433:1433"
     networks:
       - app-network
     volumes:
-      - ./DB/Migrations/:/Server/Migrations/        
+      - ./DB/log/:/var/opt/mssql/log
+      - ./DB/data/:/var/opt/mssql/data
+      - ./DB/secrets/:/var/opt/mssql/secrets 

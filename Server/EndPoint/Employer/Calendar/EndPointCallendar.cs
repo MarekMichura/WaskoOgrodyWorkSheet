@@ -1,4 +1,3 @@
-
 namespace Wasko;
 
 class Calendar : IEndPoint

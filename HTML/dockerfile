@@ -1,7 +1,6 @@
 FROM node:latest AS html
 RUN apt-get update && apt-get install -y --no-install-recommends build-essential autoconf libtool pkg-config && apt-get clean
 
-# Etap 1: Base
 FROM html AS html-release
 WORKDIR /html
 RUN mkdir build
@@ -12,7 +11,6 @@ COPY webpack.config.js ./
 COPY . .
 RUN yarn run build
 
-# Etap 2: Development
 FROM html AS html-development
 WORKDIR /html
 EXPOSE 3000

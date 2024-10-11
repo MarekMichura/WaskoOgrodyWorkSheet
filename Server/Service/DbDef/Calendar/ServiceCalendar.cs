@@ -1,39 +1,30 @@
 namespace Wasko;
 
-partial class ServiceCalendar : IServiceCalendar
+partial class ServiceCalendar(DatabaseContext context, IServiceUser user) : IServiceCalendar
 {
-  DatabaseContext _context;
-  IServiceUser _user;
+  readonly DatabaseContext _context = context;
+  readonly IServiceUser _user = user;
 
-  public ServiceCalendar(DatabaseContext context, IServiceUser user)
-  {
-    _context = context;
-    _user = user;
-  }
-
-  public CalendarResponse GetData(EnumMonth month, int year)
+  public CalendarResponse GetData(DateOnly start, DateOnly? end)
   {
     var current = _user.GetCurrentUser() ?? throw new NullReferenceException();
-    var firstDay = new DateOnly(year, (int)month, 1);
-    var lastDay = firstDay.AddMonths(1);
+    var firstDay = start;
+    var lastDay = end ?? start;
 
     var DayOffDates = _context.DayOffDates
       .Where(a => a.StartDate <= lastDay && firstDay <= a.EndDate && a.StopActive > firstDay)
       .Include(a => a.TargetsRole)
-      .Where(a => a.TargetsRole.Any(b => current.Roles.Contains(b)) || !a.TargetsRole.Any())
+      .Where(a => a.TargetsRole.Any(b => current.Roles.Contains(b)) || a.TargetsRole.Count == 0)
       .Include(a => a.TargetsUser)
-      .Where(a => a.TargetsUser.Any(b => b.UserName == current.UserName) || !a.TargetsUser.Any())
+      .Where(a => a.TargetsUser.Any(b => b.UserName == current.UserName) || a.TargetsUser.Count == 0)
       .ToList();
 
     var DayOffExpression = _context.DayOffExpression
-      .Where(a =>
-        (a.Year == null || a.Year == year) &&
-        (a.Month == null || a.Month == month) &&
-         a.StopActive > firstDay)
+      .Where(a => a.StopActive > firstDay)
       .Include(a => a.TargetsRole)
-      .Where(a => a.TargetsRole.Any(b => current.Roles.Contains(b)) || !a.TargetsRole.Any())
+      .Where(a => a.TargetsRole.Any(b => current.Roles.Contains(b)) || a.TargetsRole.Count == 0)
       .Include(a => a.TargetsUser)
-      .Where(a => a.TargetsUser.Any(b => b.UserName == current.UserName) || !a.TargetsUser.Any())
+      .Where(a => a.TargetsUser.Any(b => b.UserName == current.UserName) || a.TargetsUser.Count == 0)
       .ToList();
 
     var WorkHours = _context.WorkHours
@@ -41,7 +32,6 @@ partial class ServiceCalendar : IServiceCalendar
       .Include(a => a.WorkLocation)
       .Include(a => a.Chords)
       .ToList();
-
 
     return new CalendarResponse()
     {

@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class DatabaseContext : IdentityDbContext<ModelUser, ModelRole, string>
+class DatabaseContext(DbContextOptions<DatabaseContext> options) : IdentityDbContext<ModelUser, ModelRole, string>(options)
 {
   // =============================================================
   public DbSet<ModelBonus> Bonus { get; set; }
@@ -28,8 +28,6 @@ class DatabaseContext : IdentityDbContext<ModelUser, ModelRole, string>
 
   // =============================================================
   public DbSet<ModelLastActualization> LastActualizations { get; set; }
-
-  public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) { }
 
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
   {

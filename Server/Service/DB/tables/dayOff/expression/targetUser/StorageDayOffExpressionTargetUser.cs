@@ -3,14 +3,12 @@ namespace Wasko;
 
 class StorageDayOffExpressionTargetUser
 {
-  static public IEnumerable<ModelDayOffExpressionTargetUser> DaysOffTargets = _DaysOffTargets().ToArray();
-  static private IEnumerable<ModelDayOffExpressionTargetUser> _DaysOffTargets()
+  static private readonly ModelDayOffExpressionTargetUser DayOffTargetUser1 = new()
   {
-    yield return new()
-    {
-      TargetID = StorageUser.Dima,
-      DayOffID = StorageDayOffExpression.wolne,
-    };
-  }
+    TargetID = StorageUser.Dima!,
+    DayOffID = StorageDayOffExpression.free_day
+  };
+
+  static public IEnumerable<ModelDayOffExpressionTargetUser> DaysOffTargets = [DayOffTargetUser1];
 }
 #endif
