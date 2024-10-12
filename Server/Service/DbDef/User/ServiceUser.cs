@@ -1,4 +1,3 @@
-
 namespace Wasko;
 
 partial class ServiceUser(IHttpContextAccessor httpContext, SignInManager<ModelUser> sim, DatabaseContext db) : IServiceUser

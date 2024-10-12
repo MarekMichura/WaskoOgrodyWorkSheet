@@ -5,7 +5,10 @@ partial class ServiceUser
   public ModelResultUserProfil GetProfil()
   {
     var user = GetCurrentUser();
-    if (user is null || user.Profil is null) throw new NullReferenceException();
+    if (user is null || user.Profil is null)
+    {
+      throw new NullReferenceException();
+    }
 
     return new()
     {

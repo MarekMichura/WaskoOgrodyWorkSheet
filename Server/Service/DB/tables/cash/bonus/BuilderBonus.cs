@@ -9,7 +9,6 @@ class BuilderBonus : IBuilder
       entity.Property(a => a.ID).HasDefaultValueSql("NewId()");
       entity.Property(a => a.Bonus).HasColumnType("money");
 
-
       entity.HasOne(a => a.Target).WithMany(a => a.UsersBonuses)
         .HasForeignKey(a => a.TargetID)
         .OnDelete(DeleteBehavior.Restrict);

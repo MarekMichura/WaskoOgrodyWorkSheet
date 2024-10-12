@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Authentication;
-
 namespace Wasko;
 
 class IdentityService : IService
@@ -27,7 +25,12 @@ class IdentityService : IService
     builder.Services.AddAuthorization(a =>
     {
       foreach (var b in StorageRole.Roles)
-        if (b.Name is not null) a.AddPolicy(b.Name, c => c.RequireRole(b.Name));
+      {
+        if (b.Name is not null)
+        {
+          a.AddPolicy(b.Name, c => c.RequireRole(b.Name));
+        }
+      }
     });
   }
 }

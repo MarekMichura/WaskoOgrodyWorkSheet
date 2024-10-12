@@ -2,9 +2,9 @@ namespace Wasko;
 
 struct CalendarResponse
 {
-  public IEnumerable<ModelDayOffDate> dayOffDates { get; set; }
-  public IEnumerable<ModelDayOffExpression> dayOffExpressions { get; set; }
-  public IEnumerable<ModelWorkHour> workHours { get; set; }
+  public IEnumerable<ModelDayOffDate> DayOffDates { get; set; }
+  public IEnumerable<ModelDayOffExpression> DayOffExpressions { get; set; }
+  public IEnumerable<ModelWorkHour> WorkHours { get; set; }
 }
 
 interface IServiceCalendar

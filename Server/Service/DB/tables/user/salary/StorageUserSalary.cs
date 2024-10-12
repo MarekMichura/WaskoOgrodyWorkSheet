@@ -3,7 +3,7 @@ namespace Wasko;
 
 class StorageUserSalary
 {
-  static private readonly ModelUserSalary SalaryDima = new()
+  private static readonly ModelUserSalary SalaryDima = new()
   {
     ID = StorageUser.Dima!,
     ApproverID = StorageUser.admin!,
@@ -11,7 +11,7 @@ class StorageUserSalary
     HourlySalary = 30
   };
 
-  static private readonly ModelUserSalary SalaryLoszka = new()
+  private static readonly ModelUserSalary SalaryLoszka = new()
   {
     ID = StorageUser.Loszka!,
     ApproverID = StorageUser.admin!,
@@ -19,7 +19,7 @@ class StorageUserSalary
     HourlySalary = 30
   };
 
-  static private readonly ModelUserSalary SalaryEryk = new()
+  private static readonly ModelUserSalary SalaryEryk = new()
   {
     ID = StorageUser.Eryk!,
     ApproverID = StorageUser.admin!,
@@ -27,6 +27,6 @@ class StorageUserSalary
     HourlySalary = 26
   };
 
-  static public IEnumerable<ModelUserSalary> Salaries = [SalaryDima, SalaryLoszka, SalaryEryk];
+  public static IEnumerable<ModelUserSalary> Salaries = [SalaryDima, SalaryLoszka, SalaryEryk];
 }
 #endif

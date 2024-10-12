@@ -2,19 +2,19 @@ namespace Wasko;
 
 class Program
 {
-  private static WebApplicationBuilder? _builder;
-  private static WebApplication? _app;
-  public static WebApplicationBuilder builder => _builder ?? throw new NullReferenceException();
-  public static WebApplication app => _app ?? throw new NullReferenceException();
+    private static WebApplicationBuilder? _builder;
+    private static WebApplication? _app;
+    public static WebApplicationBuilder Builder => _builder ?? throw new NullReferenceException();
+    public static WebApplication App => _app ?? throw new NullReferenceException();
 
-  static void Main(string[] args)
-  {
-    _builder = WebApplication.CreateBuilder();
-    builder.DefineServices();
+    static void Main()
+    {
+        _builder = WebApplication.CreateBuilder();
+        Builder.DefineServices();
 
-    _app = builder.Build();
-    app.DefineEndPoints();
+        _app = Builder.Build();
+        App.DefineEndPoints();
 
-    app.Run();
-  }
+        App.Run();
+    }
 }

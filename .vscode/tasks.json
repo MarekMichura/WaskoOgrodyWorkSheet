@@ -40,7 +40,7 @@
       "type": "shell"
     },
     {
-      "command": "docker-compose up --build -d server-${input:dockerName}",
+      "command": "docker-compose run --rm --service-ports --build server-${input:dockerName}",
       "group": "build",
       "label": "Docker Compose Up",
       "problemMatcher": [],

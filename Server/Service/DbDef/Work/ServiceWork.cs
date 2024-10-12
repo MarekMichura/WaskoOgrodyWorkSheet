@@ -1,10 +1,9 @@
-
 namespace Wasko;
 
 partial class ServiceWork(DatabaseContext context, IServiceUser user) : IServiceWork
 {
-  DatabaseContext _context = context;
-  IServiceUser _user = user;
+  readonly DatabaseContext _context = context;
+  readonly IServiceUser _user = user;
 
   public IEnumerable<ModelWorkHour>? AddOrChangeWorkHours(DateOnly date, IEnumerable<ModelInputWorkHours.WorkHours> hours)
   {

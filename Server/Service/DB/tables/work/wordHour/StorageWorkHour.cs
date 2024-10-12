@@ -1,6 +1,4 @@
 #if DEBUG
-using Wasko;
-
 namespace Wasko;
 
 class StorageWorkHour
@@ -66,7 +64,7 @@ class StorageWorkHour
   static readonly ModelWorkHour WorkHourEryk18 = new() { ID = "89cf0ab5-b392-4461-a144-cc1538a29db0", Date = new DateOnly(2024, 06, 27), WorkStart = new TimeOnly(7, 0), WorkEnd = new TimeOnly(16, 0), UserID = StorageUser.Eryk, AuthorID = StorageUser.Eryk, WorkLocationID = StorageWorkLocations.Piaskowa };
   static readonly ModelWorkHour WorkHourEryk19 = new() { ID = "1f38a532-3ed4-42c5-9195-9b5ec4c5e1fe", Date = new DateOnly(2024, 06, 28), WorkStart = new TimeOnly(5, 30), WorkEnd = new TimeOnly(19, 0), UserID = StorageUser.Eryk, AuthorID = StorageUser.Eryk, WorkLocationID = StorageWorkLocations.Quattro };
 
-  static public IEnumerable<ModelWorkHour> WorkHours =
+  public static IEnumerable<ModelWorkHour> WorkHours =
     [WorkHourDima01, WorkHourDima02, WorkHourDima03, WorkHourDima04, WorkHourDima05, WorkHourDima06, WorkHourDima07, WorkHourDima08, WorkHourDima09, WorkHourDima10, WorkHourDima11, WorkHourDima12, WorkHourDima13, WorkHourDima14, WorkHourDima15, WorkHourDima16, WorkHourDima17, WorkHourDima18, WorkHourDima19, WorkHourDima20, WorkHourLoszka01, WorkHourLoszka02, WorkHourLoszka03, WorkHourLoszka04, WorkHourLoszka05, WorkHourLoszka06, WorkHourLoszka07, WorkHourLoszka08, WorkHourLoszka09, WorkHourLoszka10, WorkHourLoszka11, WorkHourLoszka12, WorkHourLoszka13, WorkHourLoszka14, WorkHourLoszka15, WorkHourLoszka16, WorkHourLoszka17, WorkHourLoszka18, WorkHourLoszka19, WorkHourLoszka20, WorkHourLoszka21, WorkHourEryk01, WorkHourEryk02, WorkHourEryk03, WorkHourEryk04, WorkHourEryk05, WorkHourEryk06, WorkHourEryk07, WorkHourEryk08, WorkHourEryk09, WorkHourEryk10, WorkHourEryk11, WorkHourEryk12, WorkHourEryk13, WorkHourEryk14, WorkHourEryk15, WorkHourEryk16, WorkHourEryk17, WorkHourEryk18, WorkHourEryk19,];
 }
 #endif

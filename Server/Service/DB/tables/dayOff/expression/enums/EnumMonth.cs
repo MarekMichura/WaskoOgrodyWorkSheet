@@ -1,3 +1,5 @@
+namespace Wasko;
+
 public enum EnumMonth
 {
   January = 1,

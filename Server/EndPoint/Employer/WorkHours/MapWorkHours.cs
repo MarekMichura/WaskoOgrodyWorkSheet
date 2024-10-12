@@ -1,6 +1,6 @@
 namespace Wasko;
 
-struct ModelInputWorkHours
+readonly struct ModelInputWorkHours
 {
   public class WorkHours
   {
@@ -30,7 +30,10 @@ class MapWorkHours
   {
     var before = work.AddOrChangeWorkHours(model.Date, model.Hours);
 
-    if (before!.Count() == 0) return Results.Ok("nie ma zmian");
+    if (!before!.Any())
+    {
+      return Results.Ok();
+    }
 
     var chordsThatWasForgetting = before?.SelectMany(a => a.Chords)
       .Select(a => new ModelResultWorkHours.Chord()

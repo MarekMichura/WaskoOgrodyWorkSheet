@@ -64,6 +64,8 @@ services:
         - BUILD_CONFIGURATION=debug
         - ASPNETCORE_ENVIRONMENT=Development
     container_name: server-development
+    stdin_open: true
+    tty: true
     image: server-development
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -92,7 +94,7 @@ services:
       - ./Server/wwwroot/:/Server/wwwroot
       - ./Server/Service/:/Server/Service
       - ./Server/EndPoint/:/Server/EndPoint
-    cpus: '0.25'
+    cpus: '1'
     mem_limit: '1g'
 
   html-development:

@@ -33,9 +33,9 @@ partial class ServiceCalendar(DatabaseContext context, IServiceUser user) : ISer
 
     return new CalendarResponse()
     {
-      dayOffDates = DayOffDates,
-      dayOffExpressions = DayOffExpression,
-      workHours = WorkHours
+      DayOffDates = DayOffDates,
+      DayOffExpressions = DayOffExpression,
+      WorkHours = WorkHours
     };
   }
 }

@@ -1,5 +1,3 @@
-using System.Runtime.Serialization;
-
 namespace Wasko;
 
 class ModelDayOffDate
@@ -14,6 +12,8 @@ class ModelDayOffDate
   [Required]
   public required bool Off { get; set; }
   public DateOnly? StopActive { get; set; }
+  [Required]
+  public byte Order { get; set; } = 128;
 
   [Required]
   [DataType(DataType.Date)]

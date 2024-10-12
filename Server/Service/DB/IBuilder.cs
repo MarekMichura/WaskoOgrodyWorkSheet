@@ -7,7 +7,7 @@ interface IBuilder
 
 static class Builder
 {
-  static public void CreateModels(this ModelBuilder model)
+  public static void CreateModels(this ModelBuilder model)
   {
     Assembly.GetExecutingAssembly().DefinedTypes
       .Where(x => typeof(IBuilder).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract)

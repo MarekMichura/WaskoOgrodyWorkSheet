@@ -13,14 +13,17 @@ interface IEndPoint
 
 static class EndPointDefinition
 {
-  static public IEnumerable<T> ForEach<T>(this IEnumerable<T> objs, Action<T> fun)
+  public static IEnumerable<T> ForEach<T>(this IEnumerable<T> objs, Action<T> fun)
   {
     foreach (var obj in objs)
+    {
       fun(obj);
+    }
+
     return objs;
   }
 
-  static public void DefineServices(this WebApplicationBuilder builder)
+  public static void DefineServices(this WebApplicationBuilder builder)
   {
     Assembly.GetExecutingAssembly().DefinedTypes
       .Where(x => typeof(IService).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract)
@@ -29,7 +32,7 @@ static class EndPointDefinition
         .ForEach(x => x.DefineService(builder));
   }
 
-  static public void DefineEndPoints(this WebApplication app)
+  public static void DefineEndPoints(this WebApplication app)
   {
     Assembly.GetExecutingAssembly().DefinedTypes
       .Where(x => typeof(IEndPoint).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract)

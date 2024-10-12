@@ -1,7 +1,6 @@
 namespace Wasko;
 
 class ModelWorkLocationTargetRole
-
 {
   [Required]
   [StringLength(36)]

@@ -3,7 +3,7 @@ namespace Wasko;
 
 class StorageBonus
 {
-  static private readonly ModelBonus Bonus1 = new()
+  private static readonly ModelBonus Bonus1 = new()
   {
     ID = "5a744293-575a-44b5-83bd-91818e8924a4",
     Bonus = 100,
@@ -12,7 +12,7 @@ class StorageBonus
     TargetID = StorageUser.Dima,
   };
 
-  static private readonly ModelBonus Bonus2 = new()
+  private static readonly ModelBonus Bonus2 = new()
   {
     ID = "b055128e-a98a-421d-98d5-0ca059552457",
     Bonus = 50,
@@ -21,7 +21,7 @@ class StorageBonus
     TargetID = StorageUser.Loszka,
   };
 
-  static private readonly ModelBonus Bonus3 = new()
+  private static readonly ModelBonus Bonus3 = new()
   {
     ID = "66b3fdf2-ebcc-4bc7-8626-ae8c8941cf0b",
     Bonus = 10,
@@ -30,6 +30,6 @@ class StorageBonus
     TargetID = StorageUser.Eryk,
   };
 
-  static public IEnumerable<ModelBonus> Bonuses = [Bonus1, Bonus2, Bonus3];
+  public static IEnumerable<ModelBonus> Bonuses = [Bonus1, Bonus2, Bonus3];
 }
 #endif

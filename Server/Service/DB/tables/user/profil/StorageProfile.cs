@@ -2,7 +2,7 @@ namespace Wasko;
 
 class StorageProfil
 {
-  static private readonly ModelProfil ProfileAdmin = new()
+  private static readonly ModelProfil ProfileAdmin = new()
   {
     ID = StorageUser.admin!,
     FirstName = "Marek",
@@ -11,7 +11,7 @@ class StorageProfil
   };
 
 #if DEBUG
-  static private readonly ModelProfil ProfileUser = new()
+  private static readonly ModelProfil ProfileUser = new()
   {
     ID = StorageUser.user!,
     FirstName = "User",
@@ -19,7 +19,7 @@ class StorageProfil
     WorkStartDate = new DateOnly(2024, 8, 1)
   };
 
-  static private readonly ModelProfil ProfileEryk = new()
+  private static readonly ModelProfil ProfileEryk = new()
   {
     ID = StorageUser.Eryk!,
     FirstName = "Eryk",
@@ -27,7 +27,7 @@ class StorageProfil
     WorkStartDate = new DateOnly(2024, 8, 1)
   };
 
-  static private readonly ModelProfil ProfileLoszka = new()
+  private static readonly ModelProfil ProfileLoszka = new()
   {
     ID = StorageUser.Loszka!,
     FirstName = "Loszka",
@@ -35,7 +35,7 @@ class StorageProfil
     WorkStartDate = new DateOnly(2024, 8, 1)
   };
 
-  static private readonly ModelProfil ProfileDima = new()
+  private static readonly ModelProfil ProfileDima = new()
   {
     ID = StorageUser.Dima!,
     FirstName = "Dima",
@@ -45,7 +45,7 @@ class StorageProfil
 #endif
 
 #if DEBUG
-  static public IEnumerable<ModelProfil> Profiles = [ProfileUser, ProfileEryk, ProfileLoszka, ProfileDima, ProfileAdmin];
+  public static IEnumerable<ModelProfil> Profiles = [ProfileUser, ProfileEryk, ProfileLoszka, ProfileDima, ProfileAdmin];
 #else
   static public IEnumerable<ModelProfil> Profiles = [ProfileAdmin];
 #endif

@@ -10,19 +10,19 @@ class EndPointSPA : IService, IEndPoint
     app.UseStaticFiles();
 
     if (app.Environment.IsDevelopment())
+    {
       SpaDevelopment(app);
-    else SpaRelease(app);
+    }
+    else
+    {
+      SpaRelease(app);
+    }
   }
 
-  private void SpaDevelopment(WebApplication app)
-  {
-    app.UseSpa(spa =>
-      spa.UseProxyToSpaDevelopmentServer("http://html-development:3000"));
-  }
+  private static void SpaDevelopment(WebApplication app) => app.UseSpa(spa =>
+    spa.UseProxyToSpaDevelopmentServer("http://html-development:3000"));
 
-  private void SpaRelease(WebApplication app)
-  {
-    app.UseSpa(spa =>
+  private static void SpaRelease(WebApplication app) => app.UseSpa(spa =>
     {
       spa.Options.SourcePath = AppPath;
       spa.ApplicationBuilder.UseStaticFiles(new StaticFileOptions
@@ -30,11 +30,12 @@ class EndPointSPA : IService, IEndPoint
         FileProvider = new PhysicalFileProvider(Path.Combine(app.Environment.ContentRootPath, AppPath))
       });
     });
-  }
 
   public void DefineService(WebApplicationBuilder builder)
   {
     if (!builder.Environment.IsDevelopment())
+    {
       builder.Services.AddSpaStaticFiles(con => con.RootPath = AppPath);
+    }
   }
 }
