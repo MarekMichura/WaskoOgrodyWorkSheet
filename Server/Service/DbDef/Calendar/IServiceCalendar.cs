@@ -9,5 +9,5 @@ struct CalendarResponse
 
 interface IServiceCalendar
 {
-  CalendarResponse GetData(DateOnly start, DateOnly? end);
+  CalendarResponse GetData(DateOnly start, DateOnly end);
 }

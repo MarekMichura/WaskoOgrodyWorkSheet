@@ -1,5 +1,3 @@
-using System.Text.Json.Serialization;
-
 namespace Wasko;
 
 class ModelDayOffExpression
@@ -35,28 +33,4 @@ class ModelDayOffExpression
 
   public virtual ICollection<ModelUser> TargetsUser { get; set; } = [];
   public virtual ICollection<ModelRole> TargetsRole { get; set; } = [];
-
-  public List<DateOnly> convertToDate(int year, EnumMonth month, bool rangeMonth = true)
-  {
-    var result = new List<DateOnly>();
-    var start = new DateOnly(year, (int)month, 1);
-    var end = rangeMonth ? start.AddMonths(1) : start;
-
-    DateOnly? eastern = DaysAfterEaster is null ? null :
-      Easter.DateAfterEastern((int)DaysAfterEaster, year);
-
-    for (var date = start; date < end; date = date.AddDays(1))
-    {
-      if ((Day is not null && date.Day != Day) ||
-          (DayOfWeek is not null && (int)date.DayOfWeek != (int)DayOfWeek) ||
-          (Month is not null && date.Month != (int)Month) ||
-          (Year is not null && date.Year != Year) ||
-          (eastern is not null && eastern != date))
-        continue;
-
-      result.Add(date);
-    }
-
-    return result;
-  }
 }

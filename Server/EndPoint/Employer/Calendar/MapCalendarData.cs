@@ -2,8 +2,8 @@ namespace Wasko;
 
 class ModelInputCalendar
 {
-  public required EnumMonth Month { get; init; }
-  public required int Year { get; init; }
+  public required DateOnly Start { get; init; }
+  public required DateOnly End { get; init; }
 }
 
 class ModelResultCalendar
@@ -12,14 +12,32 @@ class ModelResultCalendar
   {
     public required string Reason { get; set; }
     public required bool Off { get; set; }
+
+    public static implicit operator DayOff(ModelDayOffDate model) => new()
+    {
+      Reason = model.Reason,
+      Off = model.Off
+    };
+
+    public static implicit operator DayOff(ModelDayOffExpression model) => new()
+    {
+      Reason = model.Reason,
+      Off = model.Off
+    };
   }
   public struct WorkHours
   {
     public required TimeOnly Start { get; set; }
     public required TimeOnly End { get; set; }
     public required string Where { get; set; }
-  }
 
+    public static implicit operator WorkHours(ModelWorkHour model) => new()
+    {
+      Start = model.WorkStart,
+      End = model.WorkEnd,
+      Where = model.WorkLocation!.Name
+    };
+  }
 
   public List<DayOff> DaysOff { get; set; } = [];
   public List<WorkHours> WorkingHours { get; set; } = [];
@@ -30,50 +48,27 @@ static class MapCalendarData
   public static IResult CalendarData([FromBody] ModelInputCalendar model, [FromServices] IServiceCalendar calendar)
   {
     var result = new Dictionary<DateOnly, ModelResultCalendar>();
-    var data = calendar.GetData(model.Month, model.Year);
+    var data = calendar.GetData(model.Start, model.End);
 
-    var startDate = new DateOnly(model.Year, (int)model.Month, 1);
-    var endDate = startDate.AddMonths(1);
-
-    for (var addDate = startDate; addDate < endDate; addDate = addDate.AddDays(1))
+    for (var addDate = model.Start; addDate <= model.End; addDate = addDate.AddDays(1))
       result.Add(addDate, new ModelResultCalendar());
 
-    foreach (var dayOff in data.dayOffDates)
+    data.dayOffDates.ForEach(a =>
     {
-      for (var date = dayOff.StartDate; date < dayOff.EndDate && date < endDate; date = date.AddDays(1))
+      var endDate = a.EndDate ?? a.StartDate;
+      for (var date = a.StartDate; date <= endDate && date < model.End; date = date.AddDays(1))
       {
-        if (dayOff.StopActive >= date) continue;
-        result[date].DaysOff.Add(new ModelResultCalendar.DayOff()
-        {
-          Off = dayOff.Off,
-          Reason = dayOff.Reason
-        });
+        if (a.StopActive >= date) continue;
+        result[date].DaysOff.Add(a);
       }
-    }
+    });
 
-    foreach (var dayOff in data.dayOffExpressions)
-    {
-      foreach (var date in dayOff.convertToDate(model.Year, model.Month).Where(a => a < endDate))
-      {
-        if (dayOff.StopActive >= date) continue;
+    data.dayOffExpressions
+      .SelectMany(a => ConvertDayOffExpression.ConvertToDates(a, model.Start, model.End).Select(b => new { data = a, date = b }))
+      .ForEach(a => result[a.date].DaysOff.Add(a.data));
 
-        result[date].DaysOff.Add(new ModelResultCalendar.DayOff()
-        {
-          Off = dayOff.Off,
-          Reason = dayOff.Reason
-        });
-      }
-    }
+    data.workHours.ForEach(a => result[a.Date].WorkingHours.Add(a));
 
-    foreach (var workingHours in data.workHours)
-    {
-      result[workingHours.Date].WorkingHours.Add(new ModelResultCalendar.WorkHours()
-      {
-        Start = workingHours.WorkStart,
-        End = workingHours.WorkEnd,
-        Where = workingHours.WorkLocation!.Name
-      });
-    }
     return Results.Ok(result);
   }
 }
