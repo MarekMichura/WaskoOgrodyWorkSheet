@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class ModelResultCalendar
+public class ModelResultCalendar
 {
   public struct DayOff
   {

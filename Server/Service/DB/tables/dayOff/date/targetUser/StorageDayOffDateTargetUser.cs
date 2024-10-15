@@ -1,7 +1,7 @@
 #if DEBUG
 namespace Wasko;
 
-class StorageDayOffDateTargetUser
+public class StorageDayOffDateTargetUser
 {
   private static readonly ModelDayOffDateTargetUser DayOffTargetUser1 = new()
   {

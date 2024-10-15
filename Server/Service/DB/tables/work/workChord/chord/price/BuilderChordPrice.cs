@@ -1,20 +1,20 @@
 namespace Wasko;
 
-class BuilderChordPrice : IBuilder
+public class BuilderChordPrice : IBuilder
 {
   public void CreateModel(ModelBuilder builder)
   {
-    builder.Entity<ModelChordPrice>(entity =>
+    builder.Entity<ModelChordPrice>(static entity =>
     {
-      entity.Property(a => a.ID).HasDefaultValueSql("NewId()");
-      entity.Property(a => a.Price).HasColumnType("money");
+      entity.Property(static a => a.ID).HasDefaultValueSql("NewId()");
+      entity.Property(static a => a.Price).HasColumnType("money");
 
-      entity.HasOne(a => a.Chord).WithMany(a => a.Prices)
-        .HasForeignKey(a => a.ChordID)
+      entity.HasOne(static a => a.Chord).WithMany(static a => a.Prices)
+        .HasForeignKey(static a => a.ChordID)
         .OnDelete(DeleteBehavior.Restrict);
 
-      entity.HasOne(a => a.Creator).WithMany(a => a.ChangedChordsPrices)
-        .HasForeignKey(a => a.CreatorID)
+      entity.HasOne(static a => a.Creator).WithMany(static a => a.ChangedChordsPrices)
+        .HasForeignKey(static a => a.CreatorID)
         .OnDelete(DeleteBehavior.Restrict);
 
       entity.HasData(StorageChordPrice.ChordPrices);

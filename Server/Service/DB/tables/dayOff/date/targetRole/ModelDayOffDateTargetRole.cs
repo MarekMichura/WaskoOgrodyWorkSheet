@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class ModelDayOffDateTargetRole
+public class ModelDayOffDateTargetRole
 {
   [Required]
   [StringLength(36)]

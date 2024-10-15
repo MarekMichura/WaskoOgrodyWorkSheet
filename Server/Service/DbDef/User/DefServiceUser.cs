@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class DefServiceUser : IService
+public class DefServiceUser : IService
 {
   public void DefineService(WebApplicationBuilder builder)
   {

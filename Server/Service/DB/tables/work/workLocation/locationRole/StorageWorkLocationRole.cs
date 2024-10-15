@@ -1,11 +1,11 @@
 namespace Wasko;
 
-class StorageWorkLocationRole
+public class StorageWorkLocationRole
 {
   public static readonly ModelWorkLocationRole RoleChord = new()
   {
     ID = "1638d369-1b20-48fb-a8f7-586040ecbf51",
-    AuthorID = StorageUser.Users.First(a => a.UserName == "admin").Id,
+    AuthorID = StorageUser.Users.First(static a => a.UserName == "admin").Id,
     Name = "Chord"
   };
 

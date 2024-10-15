@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class EndPointAuthentication : IEndPoint
+public class EndPointAuthentication : IEndPoint
 {
   public void DefineEndPoint(WebApplication app)
   {

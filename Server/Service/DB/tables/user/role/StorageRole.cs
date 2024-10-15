@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class StorageRole(string id, string name, ushort strength = 0)
+public class StorageRole(string id, string name, ushort strength = 0)
 {
   public string ID { get; set; } = id;
   public string Name { get; set; } = name;
@@ -13,7 +13,7 @@ class StorageRole(string id, string name, ushort strength = 0)
     TitleStrength = role.TitleStrength,
     NormalizedName = role.Name.ToUpper(),
     ConcurrencyStamp = Guid.NewGuid().ToString(),
-    AuthorID = StorageUser.Users.First(a => a.UserName == "admin").Id
+    AuthorID = StorageUser.Users.First(static a => a.UserName == "admin").Id
   };
 
   private static readonly StorageRole RoleBlockEmployerDayOff = new("264462d7-74f0-45c3-bcf2-7ad0741e7676", nameof(BuildInRoles.Block_employer_day_off));

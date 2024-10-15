@@ -95,7 +95,7 @@ services:
       - ./Server/Service/:/Server/Service
       - ./Server/EndPoint/:/Server/EndPoint
     cpus: '1'
-    mem_limit: '1g'
+    mem_limit: '2g'
 
   html-development:
     build:
@@ -111,7 +111,7 @@ services:
     volumes:
       - ./HTML/:/html/
     cpus: '0.25'
-    mem_limit: '1g'
+    mem_limit: '2g'
 
   initialize-db-development:
     build:

@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class DatabaseService : IService
+public class DatabaseService : IService
 {
   public void DefineService(WebApplicationBuilder builder)
   {

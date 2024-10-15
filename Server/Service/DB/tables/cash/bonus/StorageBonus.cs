@@ -1,7 +1,7 @@
 #if DEBUG
 namespace Wasko;
 
-class StorageBonus
+public class StorageBonus
 {
   private static readonly ModelBonus Bonus1 = new()
   {

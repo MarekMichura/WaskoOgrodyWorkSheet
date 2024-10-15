@@ -1,7 +1,7 @@
 #if DEBUG
 namespace Wasko;
 
-class StorageFound
+public class StorageFound
 {
   private static readonly ModelFound Found1 = new()
   {

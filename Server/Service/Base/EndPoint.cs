@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Wasko;
 
-class EndPoint : IEndPoint, IService
+public class EndPoint : IEndPoint, IService
 {
     public short Priority => short.MinValue + 2;
 
@@ -23,13 +23,13 @@ class EndPoint : IEndPoint, IService
         app.UseAuthentication();
         app.UseAuthorization();
 
-        app.UseEndpoints(endpoint => { });
+        app.UseEndpoints(static endpoint => { });
     }
 
     public void DefineService(WebApplicationBuilder builder)
     {
         builder.Services.AddControllersWithViews()
-          .AddJsonOptions(options =>
+          .AddJsonOptions(static options =>
           {
               options.JsonSerializerOptions.Converters.Add(new TimeOnlyJsonConverter());
               options.JsonSerializerOptions.Converters.Add(new DateOnlyJsonConverter());
@@ -38,7 +38,7 @@ class EndPoint : IEndPoint, IService
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSession();
 
-        builder.Services.AddResponseCompression(options =>
+        builder.Services.AddResponseCompression(static options =>
         {
             options.EnableForHttps = true;
         });

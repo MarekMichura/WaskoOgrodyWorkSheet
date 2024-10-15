@@ -1,22 +1,22 @@
 namespace Wasko;
 
-class BuilderWorkLocationRole : IBuilder
+public class BuilderWorkLocationRole : IBuilder
 {
   public void CreateModel(ModelBuilder builder)
   {
-    builder.Entity<ModelWorkLocationRole>(entity =>
+    builder.Entity<ModelWorkLocationRole>(static entity =>
     {
-      entity.Property(a => a.ID).HasDefaultValueSql("NewId()");
+      entity.Property(static a => a.ID).HasDefaultValueSql("NewId()");
 
-      entity.HasMany(a => a.Locations).WithMany(a => a.Roles)
+      entity.HasMany(static a => a.Locations).WithMany(static a => a.Roles)
         .UsingEntity<ModelWorkLocationRoleWorkLocation>(
-          a => a.HasOne(b => b.Location)
+          static a => a.HasOne(static b => b.Location)
             .WithMany()
-            .HasForeignKey(a => a.LocationID)
+            .HasForeignKey(static a => a.LocationID)
             .OnDelete(DeleteBehavior.Restrict),
-          a => a.HasOne(b => b.Role)
+          static a => a.HasOne(static b => b.Role)
             .WithMany()
-            .HasForeignKey(a => a.RoleID)
+            .HasForeignKey(static a => a.RoleID)
             .OnDelete(DeleteBehavior.Restrict));
 
       entity.HasData(StorageWorkLocationRole.WorkLocationRoles);

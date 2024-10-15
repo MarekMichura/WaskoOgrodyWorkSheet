@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class ModelWorkLocationRole
+public class ModelWorkLocationRole
 {
   [Key]
   [Required]

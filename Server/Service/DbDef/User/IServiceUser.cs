@@ -1,6 +1,6 @@
 namespace Wasko;
 
-interface IServiceUser
+public interface IServiceUser
 {
   ModelUser? GetCurrentUser();
   public ModelResultUserProfil GetProfil();

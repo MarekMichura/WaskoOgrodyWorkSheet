@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class ModelDayOffExpression
+public class ModelDayOffExpression
 {
   [Key]
   [Required]

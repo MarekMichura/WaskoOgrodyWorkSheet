@@ -22,7 +22,7 @@ FROM server-sdk AS server-development
 EXPOSE 8080
 EXPOSE 8081
 WORKDIR /Server/
-ENTRYPOINT [ "dotnet", "watch" ]
+ENTRYPOINT [ "dotnet", "watch", "run" ]
 
 FROM server-sdk AS server-update-db
 WORKDIR /Server/

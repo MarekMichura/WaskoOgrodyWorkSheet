@@ -1,7 +1,7 @@
 #if DEBUG
 namespace Wasko;
 
-class StorageWorkHour
+public class StorageWorkHour
 {
   static readonly ModelWorkHour WorkHourDima01 = new() { ID = "1d7cc0a4-9bf2-459d-b015-10ca6e3be617", Date = new DateOnly(2024, 06, 3), WorkStart = new TimeOnly(7, 0), WorkEnd = new TimeOnly(17, 0), UserID = StorageUser.Dima, AuthorID = StorageUser.Dima, WorkLocationID = StorageWorkLocations.Pychowicka };
   static readonly ModelWorkHour WorkHourDima02 = new() { ID = "65d8a463-ca86-428f-b1b0-160c6f1dd080", Date = new DateOnly(2024, 06, 4), WorkStart = new TimeOnly(7, 0), WorkEnd = new TimeOnly(12, 0), UserID = StorageUser.Dima, AuthorID = StorageUser.Dima, WorkLocationID = StorageWorkLocations.Mogilska };

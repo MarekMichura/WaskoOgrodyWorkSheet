@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class ModelNotification
+public class ModelNotification
 {
   [Key]
   [Required]

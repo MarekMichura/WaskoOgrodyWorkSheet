@@ -1,49 +1,49 @@
 namespace Wasko;
 
-class BuilderDayOffExpression : IBuilder
+public class BuilderDayOffExpression : IBuilder
 {
   public void CreateModel(ModelBuilder builder)
   {
-    builder.Entity<ModelDayOffExpression>(entity =>
+    builder.Entity<ModelDayOffExpression>(static entity =>
     {
-      entity.HasIndex(a => a.Order);
+      entity.HasIndex(static a => a.Order);
 
-      entity.Property(a => a.Month)
+      entity.Property(static a => a.Month)
         .HasConversion<int>().HasColumnType("tinyint");
 
-      entity.Property(a => a.DayOfWeek)
+      entity.Property(static a => a.DayOfWeek)
         .HasConversion<int>().HasColumnType("tinyint");
 
-      entity.Property(a => a.ID).HasDefaultValueSql("NewId()");
+      entity.Property(static a => a.ID).HasDefaultValueSql("NewId()");
 
-      entity.HasMany(a => a.TargetsUser).WithMany(a => a.DaysOffExpression)
+      entity.HasMany(static a => a.TargetsUser).WithMany(static a => a.DaysOffExpression)
         .UsingEntity<ModelDayOffExpressionTargetUser>(
-          a => a.HasOne(b => b.Target)
+          static a => a.HasOne(static b => b.Target)
             .WithMany()
-            .HasForeignKey(a => a.TargetID)
+            .HasForeignKey(static a => a.TargetID)
             .OnDelete(DeleteBehavior.Restrict),
-          a => a.HasOne(b => b.DayOff)
+          static a => a.HasOne(static b => b.DayOff)
             .WithMany()
-            .HasForeignKey(a => a.DayOffID)
+            .HasForeignKey(static a => a.DayOffID)
             .OnDelete(DeleteBehavior.Restrict));
 
-      entity.HasMany(a => a.TargetsRole).WithMany(a => a.DaysOffExpressions)
+      entity.HasMany(static a => a.TargetsRole).WithMany(static a => a.DaysOffExpressions)
         .UsingEntity<ModelDayOffExpressionTargetRole>(
-          a => a.HasOne(b => b.Target)
+          static a => a.HasOne(static b => b.Target)
             .WithMany()
-            .HasForeignKey(a => a.TargetID)
+            .HasForeignKey(static a => a.TargetID)
             .OnDelete(DeleteBehavior.Restrict),
-          a => a.HasOne(b => b.DayOff)
+          static a => a.HasOne(static b => b.DayOff)
             .WithMany()
-            .HasForeignKey(a => a.DayOffID)
+            .HasForeignKey(static a => a.DayOffID)
             .OnDelete(DeleteBehavior.Restrict));
 
-      entity.HasOne(a => a.Author).WithMany(a => a.DaysOffExpressionAuthor)
-        .HasForeignKey(a => a.AuthorID)
+      entity.HasOne(static a => a.Author).WithMany(static a => a.DaysOffExpressionAuthor)
+        .HasForeignKey(static a => a.AuthorID)
         .OnDelete(DeleteBehavior.Restrict);
 
-      entity.HasOne(a => a.Approver).WithMany(a => a.DaysOffExpressionApprover)
-        .HasForeignKey(a => a.ApproverID)
+      entity.HasOne(static a => a.Approver).WithMany(static a => a.DaysOffExpressionApprover)
+        .HasForeignKey(static a => a.ApproverID)
         .OnDelete(DeleteBehavior.Restrict);
 
       entity.HasData(StorageDayOffExpression.DaysOff);

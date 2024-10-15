@@ -3,7 +3,7 @@ namespace Wasko;
 using Range = List<Tuple<DateOnly, DateOnly?>>;
 using Model = ModelDayOffExpression;
 
-class ConvertDayOffExpression
+public class ConvertDayOffExpression
 {
   private static Range HandleYear(Model model, Range range)
   {
@@ -11,12 +11,19 @@ class ConvertDayOffExpression
     {
       return range;
     }
-
     var (start, end) = range.First();
+    var modelStart = new DateOnly((int)model.Year, 1, 1);
+    var modelEnd = new DateOnly((int)model.Year, 12, 31);
 
-    range[0] = new(
-      (model.Year < start.Year) ? new DateOnly((int)model.Year, 1, 1) : start,
-      (model.Year > end?.Year) ? new DateOnly((int)model.Year, 12, 31) : end);
+    var rangeStart = start > modelStart ? start : modelStart;
+    var rangeEnd = end < modelEnd ? end : modelEnd;
+
+    if (rangeStart > rangeEnd)
+    {
+      return [];
+    }
+
+    range[0] = new(rangeStart, rangeEnd);
     return range;
   }
 
@@ -188,8 +195,8 @@ class ConvertDayOffExpression
     range = HandleEaster(model, range);
     // ShowRange(range, "koniec");
 
-    return range.Select(a => new { start = a.Item1, count = (a.Item2 ?? a.Item1).DayNumber - a.Item1.DayNumber + 1 })
-      .SelectMany(a => Enumerable.Range(0, a.count).Select(a.start.AddDays))
+    return range.Select(static a => new { start = a.Item1, count = (a.Item2 ?? a.Item1).DayNumber - a.Item1.DayNumber + 1 })
+      .SelectMany(static a => Enumerable.Range(0, a.count).Select(a.start.AddDays))
       .ToList();
   }
 

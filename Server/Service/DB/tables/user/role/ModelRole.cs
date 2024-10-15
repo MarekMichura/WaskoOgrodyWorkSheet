@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class ModelRole : IdentityRole
+public class ModelRole : IdentityRole
 {
   [Required]
   [StringLength(36)]

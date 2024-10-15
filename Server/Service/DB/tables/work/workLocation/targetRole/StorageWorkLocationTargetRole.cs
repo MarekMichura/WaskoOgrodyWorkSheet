@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class StorageWorkLocationTargetRole
+public class StorageWorkLocationTargetRole
 {
   public static readonly ModelWorkLocationTargetRole Role1 = new() { RoleID = StorageRole.employerID, WorkLocationID = StorageWorkLocations.NotSet };
   public static readonly ModelWorkLocationTargetRole Role2 = new() { RoleID = StorageRole.employerID, WorkLocationID = StorageWorkLocations.Drive };

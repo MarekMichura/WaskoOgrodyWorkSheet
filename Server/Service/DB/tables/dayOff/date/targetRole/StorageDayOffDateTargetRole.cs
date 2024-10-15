@@ -2,7 +2,7 @@
 
 namespace Wasko;
 
-class StorageDayOffDateTargetRole
+public class StorageDayOffDateTargetRole
 {
   private static readonly ModelDayOffDateTargetRole DayOffTarget1 = new()
   {

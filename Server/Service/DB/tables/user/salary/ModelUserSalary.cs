@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class ModelUserSalary
+public class ModelUserSalary
 {
   [Required]
   [DataType(DataType.Date)]

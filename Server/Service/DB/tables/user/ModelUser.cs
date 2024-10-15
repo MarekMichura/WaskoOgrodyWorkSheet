@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class ModelUser : IdentityUser
+public class ModelUser : IdentityUser
 {
   [Required]
   public bool Active { get; set; } = true;

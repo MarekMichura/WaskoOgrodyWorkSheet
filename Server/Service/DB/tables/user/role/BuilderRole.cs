@@ -1,27 +1,27 @@
 namespace Wasko;
 
-class BuilderRole : IBuilder
+public class BuilderRole : IBuilder
 {
   public void CreateModel(ModelBuilder builder)
   {
-    builder.Entity<ModelRole>(entity =>
+    builder.Entity<ModelRole>(static entity =>
     {
-      entity.Property(a => a.Id)
+      entity.Property(static a => a.Id)
         .HasMaxLength(36)
         .IsRequired();
 
-      entity.Property(a => a.ConcurrencyStamp)
+      entity.Property(static a => a.ConcurrencyStamp)
         .IsRequired();
 
-      entity.HasIndex(a => a.Name).IsUnique();
-      entity.Property(a => a.Name)
+      entity.HasIndex(static a => a.Name).IsUnique();
+      entity.Property(static a => a.Name)
         .IsRequired();
 
-      entity.HasOne(a => a.Author).WithMany(a => a.CreatedRoles)
-        .HasForeignKey(a => a.AuthorID)
+      entity.HasOne(static a => a.Author).WithMany(static a => a.CreatedRoles)
+        .HasForeignKey(static a => a.AuthorID)
         .OnDelete(DeleteBehavior.Restrict);
 
-      entity.HasMany(a => a.Users).WithMany(a => a.Roles)
+      entity.HasMany(static a => a.Users).WithMany(static a => a.Roles)
         .UsingEntity<IdentityUserRole<string>>();
 
       entity.HasData(StorageRole.Roles);

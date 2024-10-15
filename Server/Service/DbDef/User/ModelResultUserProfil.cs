@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class ModelResultUserProfil
+public class ModelResultUserProfil
 {
   public required string FirstName { get; set; }
   public required string LastName { get; set; }

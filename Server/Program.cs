@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class Program
+public class Program
 {
     private static WebApplicationBuilder? _builder;
     private static WebApplication? _app;

@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class ModelProfil
+public class ModelProfil
 {
   [Required]
   [StringLength(36)]

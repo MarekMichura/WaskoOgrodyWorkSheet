@@ -1,6 +1,6 @@
 namespace Wasko;
 
-readonly struct ModelInputWorkHours
+public readonly struct ModelInputWorkHours
 {
   public class WorkHours
   {
@@ -13,7 +13,7 @@ readonly struct ModelInputWorkHours
   public List<WorkHours> Hours { get; init; }
 }
 
-struct ModelResultWorkHours
+public struct ModelResultWorkHours
 {
   public struct Chord
   {
@@ -24,7 +24,7 @@ struct ModelResultWorkHours
   public IEnumerable<Chord> PrevChords { get; set; }
 }
 
-class MapWorkHours
+public class MapWorkHours
 {
   public static IResult WorkHours(ModelInputWorkHours model, IServiceWork work)
   {
@@ -35,8 +35,8 @@ class MapWorkHours
       return Results.Ok();
     }
 
-    var chordsThatWasForgetting = before?.SelectMany(a => a.Chords)
-      .Select(a => new ModelResultWorkHours.Chord()
+    var chordsThatWasForgetting = before?.SelectMany(static a => a.Chords)
+      .Select(static a => new ModelResultWorkHours.Chord()
       {
         ChordID = a.ID,
         ChordCount = 10,

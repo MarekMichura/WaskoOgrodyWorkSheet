@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class EndPointSwagger : IEndPoint, IService
+public class EndPointSwagger : IEndPoint, IService
 {
   public void DefineEndPoint(WebApplication app)
   {
@@ -16,7 +16,7 @@ class EndPointSwagger : IEndPoint, IService
     if (builder.Environment.IsDevelopment())
     {
       builder.Services.AddEndpointsApiExplorer();
-      builder.Services.AddSwaggerGen(a => { });
+      builder.Services.AddSwaggerGen(static a => { });
     }
   }
 }

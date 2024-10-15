@@ -1,23 +1,23 @@
 namespace Wasko;
 
-class BuilderWorkHour : IBuilder
+public class BuilderWorkHour : IBuilder
 {
   public void CreateModel(ModelBuilder builder)
   {
-    builder.Entity<ModelWorkHour>(entity =>
+    builder.Entity<ModelWorkHour>(static entity =>
     {
-      entity.Property(a => a.ID).HasDefaultValueSql("NewId()");
+      entity.Property(static a => a.ID).HasDefaultValueSql("NewId()");
 
-      entity.HasOne(a => a.User).WithMany(a => a.WorkHours)
-        .HasForeignKey(a => a.UserID)
+      entity.HasOne(static a => a.User).WithMany(static a => a.WorkHours)
+        .HasForeignKey(static a => a.UserID)
         .OnDelete(DeleteBehavior.Restrict);
 
-      entity.HasOne(a => a.Author).WithMany(a => a.CreatedWorkHours)
-        .HasForeignKey(a => a.AuthorID)
+      entity.HasOne(static a => a.Author).WithMany(static a => a.CreatedWorkHours)
+        .HasForeignKey(static a => a.AuthorID)
         .OnDelete(DeleteBehavior.Restrict);
 
-      entity.HasOne(a => a.WorkLocation).WithMany(a => a.WorkHours)
-        .HasForeignKey(a => a.WorkLocationID)
+      entity.HasOne(static a => a.WorkLocation).WithMany(static a => a.WorkHours)
+        .HasForeignKey(static a => a.WorkLocationID)
         .OnDelete(DeleteBehavior.Restrict);
 
 #if DEBUG

@@ -1,11 +1,11 @@
 #if DEBUG
 namespace Wasko;
 
-class BuilderDayOffExpressionTargetUser : IBuilder
+public class BuilderDayOffExpressionTargetUser : IBuilder
 {
   public void CreateModel(ModelBuilder builder)
   {
-    builder.Entity<ModelDayOffExpressionTargetUser>(entity =>
+    builder.Entity<ModelDayOffExpressionTargetUser>(static entity =>
     {
       entity.HasData(StorageDayOffExpressionTargetUser.DaysOffTargets);
     });

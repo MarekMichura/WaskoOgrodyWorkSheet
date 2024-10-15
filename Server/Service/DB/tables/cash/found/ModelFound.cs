@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class ModelFound
+public class ModelFound
 {
   [Key]
   [Required]

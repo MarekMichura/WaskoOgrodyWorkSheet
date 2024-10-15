@@ -1,23 +1,23 @@
 #if DEBUG
 namespace Wasko;
 
-class StorageUsersRole
+public class StorageUsersRole
 {
   private static readonly IdentityUserRole<string> UserRoleUserEmployer = new()
   {
-    UserId = StorageUser.user!,
+    UserId = StorageUser.User!,
     RoleId = StorageRole.employerID
   };
 
   private static readonly IdentityUserRole<string> UserRoleUserGardener = new()
   {
-    UserId = StorageUser.user!,
+    UserId = StorageUser.User!,
     RoleId = StorageRole.gardenerID
   };
 
   private static readonly IdentityUserRole<string> UserRoleUserPolishHolidays = new()
   {
-    UserId = StorageUser.user!,
+    UserId = StorageUser.User!,
     RoleId = StorageRole.polishHolidaysID
   };
 

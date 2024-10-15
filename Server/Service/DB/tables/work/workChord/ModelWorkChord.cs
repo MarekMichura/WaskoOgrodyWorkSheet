@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class ModelWorkChord
+public class ModelWorkChord
 {
   [Key]
   [Required]

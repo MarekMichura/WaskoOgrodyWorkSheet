@@ -13,11 +13,13 @@
     "optipng",
     "Pychowicka",
     "rozhodnik",
+    "Samesite",
     "tseslint",
     "voda",
     "Wasko",
     "webp",
-    "wwwroot"
+    "wwwroot",
+    "Xunit"
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
@@ -43,7 +45,8 @@
     "Server/.dockerignore": true,
     "Server/.gitignore": true,
     "Server/taskCreateDb.sh": true,
-    "Server/wait-for-it.sh": true
+    "Server/wait-for-it.sh": true,
+    "ServerTests/wwwroot": true
   },
   "hide-files.files": [
     "HTML/.babelrc",
@@ -56,6 +59,7 @@
     "Server/.dockerignore",
     "Server/.gitignore",
     "Server/taskCreateDb.sh",
-    "Server/wait-for-it.sh"
+    "Server/wait-for-it.sh",
+    "ServerTests/wwwroot"
   ]
 }

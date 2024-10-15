@@ -1,7 +1,7 @@
 #if DEBUG
 namespace Wasko;
 
-class StorageDayOffDate
+public class StorageDayOffDate
 {
   private static readonly ModelDayOffDate DayOff1 = new()
   {
@@ -44,7 +44,7 @@ class StorageDayOffDate
     ID = "c2b5dea3-85fc-469e-a265-088a7feb2172",
     Off = true,
     Reason = "Wolne z powodu widzi mi się autora",
-    AuthorID = StorageUser.admin!,
+    AuthorID = StorageUser.Admin!,
     StartDate = new DateOnly(2024, 07, 1),
     EndDate = new DateOnly(2024, 07, 10),
   };

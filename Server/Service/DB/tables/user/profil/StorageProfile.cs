@@ -1,10 +1,10 @@
 namespace Wasko;
 
-class StorageProfil
+public class StorageProfil
 {
   private static readonly ModelProfil ProfileAdmin = new()
   {
-    ID = StorageUser.admin!,
+    ID = StorageUser.Admin!,
     FirstName = "Marek",
     LastName = "Michura",
     WorkStartDate = new DateOnly(2000, 1, 1)
@@ -13,7 +13,7 @@ class StorageProfil
 #if DEBUG
   private static readonly ModelProfil ProfileUser = new()
   {
-    ID = StorageUser.user!,
+    ID = StorageUser.User!,
     FirstName = "User",
     LastName = "test",
     WorkStartDate = new DateOnly(2024, 8, 1)

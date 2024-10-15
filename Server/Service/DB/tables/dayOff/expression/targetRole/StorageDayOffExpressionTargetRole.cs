@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class StorageDayOffExpressionTargetRole
+public class StorageDayOffExpressionTargetRole
 {
   private static readonly ModelDayOffExpressionTargetRole DayOffTarget1 = new()
   {
@@ -40,7 +40,7 @@ class StorageDayOffExpressionTargetRole
 
   private static readonly ModelDayOffExpressionTargetRole DayOffTarget7 = new()
   {
-    DayOffID = StorageDayOffExpression.assumption_of_the_blessed_virgin_mary,
+    DayOffID = StorageDayOffExpression.assumption,
     TargetID = StorageRole.polishHolidaysID!
   };
 

@@ -1,22 +1,21 @@
-{
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "name": "Docker: attach server",
-      "pipeTransport": {
-        "debuggerPath": "/remote_debugger/vsdbg",
-        "pipeArgs": ["-i", "exec", "server-development"],
-        "pipeCwd": "${workspaceRoot}/",
-        "pipeProgram": "docker",
-        "quoteArgs": false
-      },
-      "preLaunchTask": "Docker Compose Up",
-      "processName": "dotnet",
-      "request": "attach",
-      "sourceFileMap": {
-        "/Server/": "${workspaceRoot}/Server/"
-      },
-      "type": "coreclr"
-    }
-  ]
-}
+// {
+//   "version": "0.2.0",
+//   "configurations": [
+//     {
+//       "name": "Docker: attach server",
+//       "type": "coreclr",
+//       "request": "attach",
+//       "processName": "Server",
+//       "pipeTransport": {
+//         "debuggerPath": "/remote_debugger/vsdbg",
+//         "pipeArgs": ["exec", "-i", "server-development"],
+//         "pipeCwd": "${workspaceRoot}/",
+//         "pipeProgram": "docker",
+//         "quoteArgs": false
+//       },
+//       "sourceFileMap": {
+//         "/Server/": "${workspaceRoot}/Server/"
+//       }
+//     }
+//   ]
+// }

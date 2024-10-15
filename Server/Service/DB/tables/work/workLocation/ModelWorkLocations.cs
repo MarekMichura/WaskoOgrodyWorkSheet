@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class ModelWorkLocation
+public class ModelWorkLocation
 {
   [Key]
   [Required]

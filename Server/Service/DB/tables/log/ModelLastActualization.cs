@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class ModelLastActualization
+public class ModelLastActualization
 {
   [Key]
   [Required]

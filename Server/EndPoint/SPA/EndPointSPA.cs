@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class EndPointSPA : IService, IEndPoint
+public class EndPointSPA : IService, IEndPoint
 {
   private const string AppPath = "./wwwroot";
   public short Priority => short.MinValue;
@@ -19,7 +19,7 @@ class EndPointSPA : IService, IEndPoint
     }
   }
 
-  private static void SpaDevelopment(WebApplication app) => app.UseSpa(spa =>
+  private static void SpaDevelopment(WebApplication app) => app.UseSpa(static spa =>
     spa.UseProxyToSpaDevelopmentServer("http://html-development:3000"));
 
   private static void SpaRelease(WebApplication app) => app.UseSpa(spa =>
@@ -35,7 +35,7 @@ class EndPointSPA : IService, IEndPoint
   {
     if (!builder.Environment.IsDevelopment())
     {
-      builder.Services.AddSpaStaticFiles(con => con.RootPath = AppPath);
+      builder.Services.AddSpaStaticFiles(static con => con.RootPath = AppPath);
     }
   }
 }

@@ -6,11 +6,11 @@ struct ModelResultWorkLocation
   public string LocationID { get; set; }
 }
 
-class MapWorkLocations
+public class MapWorkLocations
 {
   public static IResult WorkLocation(IServiceWork work)
   {
-    return Results.Ok(work.GetWorkLocations().Select(a => new ModelResultWorkLocation
+    return Results.Ok(work.GetWorkLocations().Select(static a => new ModelResultWorkLocation
     {
       LocationID = a.ID,
       LocationName = a.Name

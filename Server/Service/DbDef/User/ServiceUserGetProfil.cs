@@ -16,7 +16,7 @@ partial class ServiceUser
       WorkStartDate = user.Profil.WorkStartDate,
       FirstName = user.Profil.FirstName,
       LastName = user.Profil.LastName,
-      Roles = user.Roles.Select(a => a.Name ?? throw new NullReferenceException())
+      Roles = user.Roles.Select(static a => a.Name ?? throw new NullReferenceException())
     };
   }
 }

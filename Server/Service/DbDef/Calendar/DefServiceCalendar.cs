@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class DefServiceCalendar : IService
+public class DefServiceCalendar : IService
 {
   public void DefineService(WebApplicationBuilder builder)
   {

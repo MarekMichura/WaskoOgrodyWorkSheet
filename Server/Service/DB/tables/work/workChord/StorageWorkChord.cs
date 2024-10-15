@@ -2,7 +2,7 @@
 
 namespace Wasko;
 
-class StorageWorkChord
+public class StorageWorkChord
 {
   public static readonly ModelWorkChord WorkChord1 = new()
   {
@@ -10,7 +10,7 @@ class StorageWorkChord
     Quantity = 40,
     ChordID = StorageChord.Goły,
     AuthorID = StorageUser.Dima,
-    WorkHourID = StorageWorkHour.WorkHours.First(a => a.Date == new DateOnly(2024, 06, 3) && a.UserID == StorageUser.Dima).ID
+    WorkHourID = StorageWorkHour.WorkHours.First(static a => a.Date == new DateOnly(2024, 06, 3) && a.UserID == StorageUser.Dima).ID
   };
 
   public static readonly ModelWorkChord WorkChord2 = new()
@@ -19,7 +19,7 @@ class StorageWorkChord
     Quantity = 55,
     ChordID = StorageChord.p9,
     AuthorID = StorageUser.Dima,
-    WorkHourID = StorageWorkHour.WorkHours.First(a => a.Date == new DateOnly(2024, 06, 3) && a.UserID == StorageUser.Dima).ID
+    WorkHourID = StorageWorkHour.WorkHours.First(static a => a.Date == new DateOnly(2024, 06, 3) && a.UserID == StorageUser.Dima).ID
   };
 
   public static readonly ModelWorkChord WorkChord3 = new()
@@ -28,7 +28,7 @@ class StorageWorkChord
     Quantity = 143,
     ChordID = StorageChord.C2,
     AuthorID = StorageUser.Loszka,
-    WorkHourID = StorageWorkHour.WorkHours.First(a => a.Date == new DateOnly(2024, 06, 6) && a.UserID == StorageUser.Loszka).ID
+    WorkHourID = StorageWorkHour.WorkHours.First(static a => a.Date == new DateOnly(2024, 06, 6) && a.UserID == StorageUser.Loszka).ID
   };
 
   public static readonly ModelWorkChord WorkChord4 = new()
@@ -37,7 +37,7 @@ class StorageWorkChord
     Quantity = 84,
     ChordID = StorageChord.C2,
     AuthorID = StorageUser.Loszka,
-    WorkHourID = StorageWorkHour.WorkHours.First(a => a.Date == new DateOnly(2024, 06, 14) && a.UserID == StorageUser.Loszka).ID
+    WorkHourID = StorageWorkHour.WorkHours.First(static a => a.Date == new DateOnly(2024, 06, 14) && a.UserID == StorageUser.Loszka).ID
   };
 
   public static readonly ModelWorkChord WorkChord5 = new()
@@ -46,7 +46,7 @@ class StorageWorkChord
     Quantity = 52,
     ChordID = StorageChord.p9,
     AuthorID = StorageUser.Loszka,
-    WorkHourID = StorageWorkHour.WorkHours.First(a => a.Date == new DateOnly(2024, 06, 14) && a.UserID == StorageUser.Loszka).ID
+    WorkHourID = StorageWorkHour.WorkHours.First(static a => a.Date == new DateOnly(2024, 06, 14) && a.UserID == StorageUser.Loszka).ID
   };
 
   public static readonly ModelWorkChord WorkChord6 = new()
@@ -55,7 +55,7 @@ class StorageWorkChord
     Quantity = 41,
     ChordID = StorageChord.C5,
     AuthorID = StorageUser.Loszka,
-    WorkHourID = StorageWorkHour.WorkHours.First(a => a.Date == new DateOnly(2024, 06, 14) && a.UserID == StorageUser.Loszka).ID
+    WorkHourID = StorageWorkHour.WorkHours.First(static a => a.Date == new DateOnly(2024, 06, 14) && a.UserID == StorageUser.Loszka).ID
   };
 
   public static readonly ModelWorkChord WorkChord7 = new()
@@ -64,7 +64,7 @@ class StorageWorkChord
     Quantity = 39,
     ChordID = StorageChord.C2,
     AuthorID = StorageUser.Loszka,
-    WorkHourID = StorageWorkHour.WorkHours.First(a => a.Date == new DateOnly(2024, 06, 1) && a.UserID == StorageUser.Loszka).ID
+    WorkHourID = StorageWorkHour.WorkHours.First(static a => a.Date == new DateOnly(2024, 06, 1) && a.UserID == StorageUser.Loszka).ID
   };
 
   public static readonly IEnumerable<ModelWorkChord> WorkChords =

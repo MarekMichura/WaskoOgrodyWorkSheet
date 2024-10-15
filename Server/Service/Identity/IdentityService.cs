@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class IdentityService : IService
+public class IdentityService : IService
 {
   public void DefineService(WebApplicationBuilder builder)
   {

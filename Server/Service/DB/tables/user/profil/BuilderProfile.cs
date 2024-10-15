@@ -1,18 +1,18 @@
 namespace Wasko;
 
-class BuilderProfile : IBuilder
+public class BuilderProfile : IBuilder
 {
   public void CreateModel(ModelBuilder builder)
   {
-    builder.Entity<ModelProfil>(entity =>
+    builder.Entity<ModelProfil>(static entity =>
     {
-      entity.Property(a => a.WorkStartDate)
+      entity.Property(static a => a.WorkStartDate)
         .HasColumnType("Date")
         .HasDefaultValueSql("getdate()")
         .IsRequired();
 
-      entity.HasOne(a => a.User).WithOne(a => a.Profil)
-        .HasForeignKey<ModelProfil>(a => a.ID)
+      entity.HasOne(static a => a.User).WithOne(static a => a.Profil)
+        .HasForeignKey<ModelProfil>(static a => a.ID)
         .OnDelete(DeleteBehavior.Restrict)
         .IsRequired();
 

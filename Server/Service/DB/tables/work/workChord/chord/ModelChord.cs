@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class ModelChord
+public class ModelChord
 {
   [Key]
   [Required]
@@ -19,6 +19,6 @@ class ModelChord
   public virtual ICollection<ModelWorkChord> WorkChords { get; set; } = [];
   public virtual ICollection<ModelChordPrice> Prices { get; set; } = [];
   public virtual ModelChordPrice? CurrentPrice => Prices
-    .Where(a => a.Date < DateOnly.FromDateTime(DateTime.Now))
-    .MaxBy(a => a.Date);
+    .Where(static a => a.Date < DateOnly.FromDateTime(DateTime.Now))
+    .MaxBy(static a => a.Date);
 }
