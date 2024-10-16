@@ -1,41 +1,49 @@
 namespace Wasko;
 
-public class ModelResultCalendar
+public struct ModelResultCalendarDayOff
 {
-  public struct DayOff
+  public required string Reason { get; set; }
+  public required byte Order { get; set; }
+  public required bool Off { get; set; }
+
+  public static implicit operator ModelResultCalendarDayOff(ModelDayOffDate model) => new()
   {
-    public required string Reason { get; set; }
-    public required byte Order { get; set; }
-    public required bool Off { get; set; }
+    Reason = model.Reason,
+    Order = model.Order,
+    Off = model.Off
+  };
 
-    public static implicit operator DayOff(ModelDayOffDate model) => new()
-    {
-      Reason = model.Reason,
-      Order = model.Order,
-      Off = model.Off
-    };
-
-    public static implicit operator DayOff(ModelDayOffExpression model) => new()
-    {
-      Reason = model.Reason,
-      Order = model.Order,
-      Off = model.Off
-    };
-  }
-  public struct WorkHours
+  public static implicit operator ModelResultCalendarDayOff(ModelDayOffExpression model) => new()
   {
-    public required TimeOnly Start { get; set; }
-    public required TimeOnly End { get; set; }
-    public required string Where { get; set; }
+    Reason = model.Reason,
+    Order = model.Order,
+    Off = model.Off
+  };
+}
 
-    public static implicit operator WorkHours(ModelWorkHour model) => new()
-    {
-      Start = model.WorkStart,
-      End = model.WorkEnd,
-      Where = model.WorkLocation!.Name
-    };
+public struct ModelResultCalendarWorkHours
+{
+  public required TimeOnly Start { get; set; }
+  public required TimeOnly End { get; set; }
+  public required string Where { get; set; }
+
+  public static implicit operator ModelResultCalendarWorkHours(ModelWorkHour model) => new()
+  {
+    Start = model.WorkStart,
+    End = model.WorkEnd,
+    Where = model.WorkLocation!.Name
+  };
+}
+
+
+public readonly struct ModelResultCalendar
+{
+  public ConcurrentBag<ModelResultCalendarDayOff> DaysOff { get; init; }
+  public ConcurrentBag<ModelResultCalendarWorkHours> WorkingHours { get; init; }
+
+  public ModelResultCalendar()
+  {
+    DaysOff = new ConcurrentBag<ModelResultCalendarDayOff>();
+    WorkingHours = new ConcurrentBag<ModelResultCalendarWorkHours>();
   }
-
-  public List<DayOff> DaysOff { get; set; } = [];
-  public List<WorkHours> WorkingHours { get; set; } = [];
 }

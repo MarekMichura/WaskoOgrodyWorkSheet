@@ -7,3 +7,4 @@ global using System.ComponentModel.DataAnnotations;
 global using Microsoft.AspNetCore.Mvc;
 global using System.Security.Claims;
 global using System.ComponentModel.DataAnnotations.Schema;
+global using System.Collections.Concurrent;

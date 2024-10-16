@@ -182,31 +182,28 @@ public class ConvertDayOffExpression
     return newRange;
   }
 
-  public static List<DateOnly> ConvertToDates(Model model, DateOnly start, DateOnly end)
+  public static List<DateOnly> ConvertToDates(Model model, DateOnly limitBegin, DateOnly limitEnd)
   {
-    var range = HandleYear(model, [new(start, end)]);
-    // ShowRange(range, "rok");
-    range = HandleMonth(model, range);
-    // ShowRange(range, "miesiac");
-    range = HandleDay(model, range);
-    // ShowRange(range, "dzien");
-    range = HandleDayOfWeek(model, range);
-    // ShowRange(range, "tydzien");
-    range = HandleEaster(model, range);
-    // ShowRange(range, "koniec");
+    var ranges = HandleYear(model, [new(limitBegin, limitEnd)]);
+    ranges = HandleMonth(model, ranges);
+    ranges = HandleDay(model, ranges);
+    ranges = HandleDayOfWeek(model, ranges);
+    ranges = HandleEaster(model, ranges);
 
-    return range.Select(static a => new { start = a.Item1, count = (a.Item2 ?? a.Item1).DayNumber - a.Item1.DayNumber + 1 })
-      .SelectMany(static a => Enumerable.Range(0, a.count).Select(a.start.AddDays))
-      .ToList();
+    var result = new List<DateOnly>();
+    foreach (var range in ranges)
+    {
+      var (start, end) = range;
+
+      var dayStart = start.DayNumber;
+      var dayEnd = end?.DayNumber ?? dayStart;
+      int daysDifference = dayEnd - dayStart + 1;
+
+      for (int i = 0; i < daysDifference; i++)
+      {
+        result.Add(start.AddDays(i));
+      }
+    }
+    return result;
   }
-
-  // private static void ShowRange(Range range, string dec)
-  // {
-  //   System.Console.WriteLine("=============================================");
-  //   System.Console.WriteLine(dec);
-  //   foreach (var date in range)
-  //   {
-  //     System.Console.WriteLine($"{date.Item1} {date.Item2}");
-  //   }
-  // }
 }
