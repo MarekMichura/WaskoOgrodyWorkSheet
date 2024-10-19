@@ -99,6 +99,10 @@ export const DateYearArrow = styled.svg`
   &[data-rotate='true'] {
     transform: rotate(180deg);
   }
+
+  &[data-active='false'] {
+    fill: ${(p) => p.theme.background[300].default};
+  }
 `
 
 export const DateMonths = styled.div`

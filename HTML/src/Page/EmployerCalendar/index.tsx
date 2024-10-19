@@ -45,6 +45,11 @@ function EmployerCalendar() {
     startTransition(() => navigation(links[route.Show_calendar] + `/${Month[month]}/${year}`))
   }
 
+  function ChangeYear(up: boolean) {
+    if (up) startTransition(() => navigation(links[route.Show_calendar] + `/${Month[0]}/${Number(year) + 1}`))
+    else startTransition(() => navigation(links[route.Show_calendar] + `/${Month[11]}/${Number(year) - 1}`))
+  }
+
   if (Object.keys(data).length === 0) return <></>
   return (
     <CSS.Container>
@@ -66,9 +71,18 @@ function EmployerCalendar() {
         </CSS.DateInformation>
         <CSS.DateContent>
           <CSS.DateYearContainer>
-            <ArrowIcon cssSVG={CSS.DateYearArrow} data-rotate={true} />
+            <ArrowIcon
+              cssSVG={CSS.DateYearArrow}
+              onClick={() => ChangeYear(false)}
+              data-active={state.profil!.workStartDate.getFullYear() < Number(year)}
+              data-rotate={true}
+            />
             {year}
-            <ArrowIcon cssSVG={CSS.DateYearArrow} />
+            <ArrowIcon
+              cssSVG={CSS.DateYearArrow}
+              onClick={() => ChangeYear(true)}
+              data-active={now.getFullYear() > Number(year)}
+            />
           </CSS.DateYearContainer>
           <CSS.DateMonths>
             <CSS.DateMonth data-active={MonthActive(0)} onClick={() => ChangeMonth(0)}>

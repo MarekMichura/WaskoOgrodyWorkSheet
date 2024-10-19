@@ -36,15 +36,14 @@ function getProfile({dispatch}: IActionInit) {
     })
     .then(
       (a: INotificationResponse) =>
-        (a.type &&
-          dispatch({
-            action: MainAction.NOTIFICATION_ADD,
-            life: NOTIFICATION_INIT_LIFE,
-            text: a.text,
-            type: a.type,
-            dispatch,
-          })) ||
-        console.log(a.text)
+        a.type &&
+        dispatch({
+          action: MainAction.NOTIFICATION_ADD,
+          life: NOTIFICATION_INIT_LIFE,
+          text: a.text,
+          type: a.type,
+          dispatch,
+        })
     )
     .catch(() => {})
     .finally(() => {

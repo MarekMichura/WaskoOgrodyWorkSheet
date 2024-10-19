@@ -36,7 +36,6 @@ export function GenerateDateRange(
     return
   }
   date.setDate(1)
-  console.log(date)
   date.setDate(date.getDate() - Days[date.getDay() as DayRange])
   const dates: Date[] = Array(42)
   for (let i = 0; i < 42; i++) {
