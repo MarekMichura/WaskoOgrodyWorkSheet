@@ -14,3 +14,5 @@ export const Month: Record<MonthRange, string> = [
   'listopad',
   'grudzień',
 ]
+
+export const months = Month as unknown as string[]

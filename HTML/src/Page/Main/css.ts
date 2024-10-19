@@ -20,7 +20,6 @@ export const Container = styled.div`
 
 export const Content = styled.div`
   border-top-left-radius: 30px;
-  padding: 30px;
   max-height: 100%;
 
   grid-row: 2/3;
