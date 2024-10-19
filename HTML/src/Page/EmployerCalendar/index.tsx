@@ -141,9 +141,9 @@ function EmployerCalendar() {
                 const range = parse > now || parse < state.profil!.workStartDate
                 const date = range || parse.getMonth() != months.indexOf(month ?? '')
                 let status = 'notSet'
-                if (b.daysOff.find((a) => a.off == true)) status = 'off'
-                else if (b.workingHours.length > 0) status = 'ok'
-                else if (range) status = ''
+                if (b.workingHours.length > 0) status = 'ok'
+                else if (b.daysOff.find((a) => a.off == true)) status = 'off'
+                else if (range) status = 'not'
 
                 return (
                   <CSS.Date key={c} data-date={date} data-status={status} onClick={() => setSelected(parse)}>

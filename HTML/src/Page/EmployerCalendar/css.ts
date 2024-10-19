@@ -130,33 +130,40 @@ export const Calendar = styled.div`
   font-size: 15pt;
   min-height: calc(100% - 70px);
   grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
   text-align: center;
 `
 
 export const Date = styled.div`
   position: relative;
+  display: flex;
+  width: fit-content;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1/1;
   color: ${(p) => p.theme.background[300].default};
+
+  &[data-status='off']:after {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 100%;
+    width: 7px;
+    height: 7px;
+    border-radius: 100%;
+    background-color: ${(p) => p.theme.secondary[200].default};
+  }
+  &[data-date='true'][data-status='notSet'] {
+    color: rgba(255, 0, 0, 0.35);
+  }
   &[data-date='false'] {
     color: ${(p) => p.theme.background[900].default};
   }
-
-  &:after {
-    position: absolute;
-    content: '';
-    right: 0;
-    width: 5px;
-    height: 5px;
-    border-radius: 100%;
+  &[data-date='false'][data-status='notSet'] {
+    color: red;
   }
-
-  &[data-status='off']:after {
-    background-color: green;
-  }
-
-  &[data-status='notSet']:after {
-    background-color: red;
-  }
-
-  &[data-status='notSet'] {
+  &[data-date='false'][data-status='off']:after {
+    background-color: ${(p) => p.theme.secondary[500].default};
   }
 `
