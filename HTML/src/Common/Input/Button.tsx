@@ -1,19 +1,18 @@
-import React, {useRef, useState} from 'react'
+import {useRef, useState} from 'react'
 
 import {IButton} from './IProps'
 
 import * as CSS from './css'
 
-function Button({onClick, ...p}: IButton) {
+export const Button = ({onClick, ...p}: IButton) => {
   const effect = useRef<HTMLElement>(null)
   const [ripple, setRipple] = useState<NodeJS.Timeout | undefined>()
 
-  function click(e: React.MouseEvent<HTMLInputElement>) {
+  const click = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (onClick) onClick(e)
     const current = effect.current
 
     if (p.disabled == true || current == undefined) return
-    // if (current.style.animationPlayState == 'paused') return
     current.style.animationName = `a2`
     clearTimeout(ripple)
 
@@ -36,5 +35,3 @@ function Button({onClick, ...p}: IButton) {
     </CSS.ContextButton>
   )
 }
-
-export default Button

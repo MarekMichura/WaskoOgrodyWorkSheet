@@ -1,70 +1,66 @@
 import {useFormik} from 'formik'
-import {useContext, useEffect} from 'react'
+import {Suspense} from 'react'
+import {useTheme} from 'styled-components'
 
-import {MainAction} from '/global/MAIN_ACTION'
-import KeyIcon from '/Icon/KeyIcon'
-import LogoIcon from '/Icon/LogoIcon'
-import UserIcon from '/Icon/UserIcon'
-import Button from '/Input/Button'
-import Input from '/Input/Input'
-import Context from '/MContext'
+import {Button} from '/Button'
+import {KeyIcon} from '/Icon/KeyIcon'
+import {LogoIcon} from '/Icon/LogoIcon'
+import {UserIcon} from '/Icon/UserIcon'
+import {Input} from '/Input'
+import {Loading} from '/Loading/index'
+import {useProfil} from '/QueryFn/profil/useProfil'
 
 import {defaultLoginValues as initialValues} from './ITypes'
-import validate from './validation'
+import {validationLogin as validate} from './validation'
 
 import * as CSS from './css'
 
-function LoginPage() {
-  const {dispatch} = useContext(Context)
-  function changeTheme() {
-    dispatch({action: MainAction.CHANGE_THEME, dispatch})
-  }
-
-  useEffect(() => {
-    dispatch({action: MainAction.CHANGE_TITLE, title: 'Logowanie'})
-  }, [])
+export const Login = () => {
+  const {changeTheme} = useTheme()
+  const {mutationLogin} = useProfil()
 
   const {submitForm, handleChange, errors} = useFormik({
     initialValues,
-    onSubmit: ({userName, password}) => {
-      if (!userName || !password) return
-      dispatch({action: MainAction.LOGIN, userName, password, dispatch})
-    },
     validate,
+    validateOnChange: false,
+    onSubmit: ({userName, password}) => mutationLogin.mutate({Login: userName, Password: password}),
   })
 
   return (
-    <CSS.Center>
-      <CSS.Content>
-        <CSS.Top>
-          <LogoIcon cssSVG={CSS.SVG} onClick={changeTheme} />
-          <div>
-            <CSS.Title>Waśko ogrody</CSS.Title>
-            <CSS.SubTitle>Zaloguj się</CSS.SubTitle>
-          </div>
-        </CSS.Top>
-        <Input
-          icon={UserIcon}
-          placeholder="Login"
-          type="text"
-          required
-          name="userName"
-          onChange={handleChange}
-          error={errors.userName}
-        />
-        <Input
-          icon={KeyIcon}
-          placeholder="Hasło"
-          type="password"
-          required
-          name="password"
-          onChange={handleChange}
-          error={errors.password}
-        />
-        <Button type="button" value="Zaloguj się" onClick={submitForm} />
-      </CSS.Content>
-    </CSS.Center>
+    <Suspense fallback={<Loading open={true} text="ładowanie strony" />}>
+      <CSS.Center>
+        <CSS.Content>
+          <CSS.Top>
+            <LogoIcon cssSVG={CSS.SVG} onClick={changeTheme} />
+            <div>
+              <CSS.Title>Waśko ogrody</CSS.Title>
+              <CSS.SubTitle>Zaloguj się</CSS.SubTitle>
+            </div>
+          </CSS.Top>
+          <Input
+            icon={UserIcon}
+            placeholder="Login"
+            type="text"
+            required
+            name="userName"
+            onChange={handleChange}
+            error={errors.userName}
+          />
+          <Input
+            icon={KeyIcon}
+            placeholder="Hasło"
+            type="password"
+            required
+            name="password"
+            onChange={handleChange}
+            error={errors.password}
+          />
+          <Button type="button" onClick={submitForm}>
+            Zaloguj się
+          </Button>
+          <Loading open={mutationLogin.isPending} text="Logowanie" />
+        </CSS.Content>
+      </CSS.Center>
+    </Suspense>
   )
 }
-
-export default LoginPage

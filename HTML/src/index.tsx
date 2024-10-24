@@ -1,12 +1,17 @@
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query'
+import {ReactQueryDevtools} from '@tanstack/react-query-devtools'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
-import Context from './Common/MainContext/index'
+import {App} from './app'
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
+const client = new QueryClient()
 
-root.render(
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <Context />
+    <QueryClientProvider client={client}>
+      <App />
+      <ReactQueryDevtools />
+    </QueryClientProvider>
   </React.StrictMode>
 )

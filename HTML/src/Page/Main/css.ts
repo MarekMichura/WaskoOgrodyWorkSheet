@@ -19,8 +19,10 @@ export const Container = styled.div`
 `
 
 export const Content = styled.div`
+  position: relative;
   border-top-left-radius: 30px;
   max-height: 100%;
+  padding: 15px;
 
   grid-row: 2/3;
   grid-column: 2/3;

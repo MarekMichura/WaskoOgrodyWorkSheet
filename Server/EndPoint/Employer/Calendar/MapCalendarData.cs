@@ -8,26 +8,12 @@ static class MapCalendarData
   {
     var data = calendar.GetData(model.Start, model.End);
 
-    var result = CreateRange(model.Start, model.End);
+    var result = new Dic();
     WorkHours(result, data.WorkHours);
     DayOffDates(result, data.DayOffDates, model.End);
     DayOffExpression(result, data.DayOffExpressions, model.Start, model.End);
 
     return Results.Ok(result);
-  }
-
-  private static Dic CreateRange(DateOnly start, DateOnly end)
-  {
-    var dayStart = start.DayNumber;
-    int daysDifference = end.DayNumber - dayStart + 1;
-    var result = new Dic();
-
-    for (int i = 0; i < daysDifference; i++)
-    {
-      result[DateOnly.FromDayNumber(dayStart + i)] = new ModelResultCalendar { DaysOff = [], WorkingHours = [] };
-    }
-
-    return result;
   }
 
   private static void DayOffDates(Dic dates, IEnumerable<ModelDayOffDate> daysOff, DateOnly rangeEnd)
@@ -46,7 +32,10 @@ static class MapCalendarData
 
       for (int i = 0; i < daysDifference; i++)
       {
-        dates[DateOnly.FromDayNumber(dayStart + i)].DaysOff.Add(dayOff);
+        var date = DateOnly.FromDayNumber(dayStart + i);
+        if (!dates.ContainsKey(date))
+          dates.TryAdd(date, new ModelResultCalendar());
+        dates[date].DaysOff.Add(dayOff);
       }
     });
   }
@@ -57,6 +46,8 @@ static class MapCalendarData
     {
       foreach (var date in ConvertDayOffExpression.ConvertToDates(dayOff, rangeStart, rangeEnd))
       {
+        if (!dates.ContainsKey(date))
+          dates.TryAdd(date, new ModelResultCalendar());
         dates[date].DaysOff.Add(dayOff);
       }
     });
@@ -66,6 +57,8 @@ static class MapCalendarData
   {
     Parallel.ForEach(workHours, workHour =>
     {
+      if (!dates.ContainsKey(workHour.Date))
+        dates.TryAdd(workHour.Date, new ModelResultCalendar());
       dates[workHour.Date].WorkingHours.Add(workHour);
     });
   }

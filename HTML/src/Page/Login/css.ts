@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import {IThemes} from '/global/THEME'
+import {ITheme} from '/QueryFn/Theme/types/ITheme'
 
 export const Center = styled.div`
   min-height: 100dvh;
@@ -25,7 +25,7 @@ export const Content = styled.div`
   overflow: hidden;
   background-color: ${(a) => a.theme.background[50].default};
   box-shadow: ${(a) =>
-    a.theme.name == IThemes.THEME_LIGHT
+    a.theme.name == ITheme.THEME_LIGHT
       ? `0 0 3px 0 ${a.theme.background[900].default}`
       : `inset 0 0 5px 0 ${a.theme.background[300].default}`};
 
@@ -62,6 +62,7 @@ export const Title = styled.h1`
   text-align: center;
   font-family: 'Archivo Black';
 
+  user-select: none;
   color: ${(a) => a.theme.primary.default};
 `
 
@@ -71,5 +72,6 @@ export const SubTitle = styled.h3`
   text-align: center;
   font-family: 'Archivo Black';
 
+  user-select: none;
   color: ${(a) => a.theme.primary.default};
 `

@@ -1,6 +1,6 @@
-import {useEffect, useRef} from 'react'
+import {useRef, useEffect} from 'react'
 
-import Icon, {defAnimate, IChangeMenu} from '.'
+import {IChangeMenu, Icon, defAnimate} from '.'
 
 const pathOpen = `
   M74-194L74-328L627-328L627-194L74-194Z
@@ -15,7 +15,7 @@ const pathClose = `
   M74-632L74-766L886-766L886-632L74-632Z
 `
 
-function MenuIcon({status, ...p}: IChangeMenu) {
+export const MenuIcon = ({status, ...p}: IChangeMenu) => {
   const animationOpen = useRef<SVGAnimateElement>(null)
   const animationClose = useRef<SVGAnimateElement>(null)
 
@@ -41,5 +41,3 @@ function MenuIcon({status, ...p}: IChangeMenu) {
     </Icon>
   )
 }
-
-export default MenuIcon

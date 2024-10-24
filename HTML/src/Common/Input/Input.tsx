@@ -4,10 +4,10 @@ import {IInput} from './IProps'
 
 import * as CSS from './css'
 
-function Input({icon: Icon, error, ...p}: IInput) {
+export const Input = ({icon: Icon, error, ...p}: IInput) => {
   const ref = useRef<HTMLInputElement>(null)
 
-  function click() {
+  const click = () => {
     ref.current?.focus()
   }
 
@@ -20,5 +20,3 @@ function Input({icon: Icon, error, ...p}: IInput) {
     </CSS.ContextInput>
   )
 }
-
-export default Input

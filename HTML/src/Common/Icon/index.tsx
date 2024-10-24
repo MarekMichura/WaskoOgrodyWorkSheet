@@ -18,12 +18,10 @@ export interface IChangeMenu extends IIcon {
   status?: boolean
 }
 
-function Icon({cssSVG: CssSVG, children: path, ...svgProps}: IIcon) {
+export const Icon = ({cssSVG: CssSVG, children: path, ...svgProps}: IIcon) => {
   const viewBox = svgProps.viewBox ?? '0 -960 960 960'
   const props = {...svgProps, viewBox, xmlns}
 
   if (CssSVG === undefined) return createElement('svg', props, path)
   return <CssSVG {...props}>{path}</CssSVG>
 }
-
-export default Icon

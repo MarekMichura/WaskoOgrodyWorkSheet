@@ -1,37 +1,25 @@
-import {useContext, useState} from 'react'
+import {useState} from 'react'
 import {Outlet} from 'react-router-dom'
 
-import {MainAction} from '/global/MAIN_ACTION'
-import Context from '/MContext'
+import {SuspendWrapper} from '/Suspend'
 
-import SideBar from './SideBar'
+import {SideBar} from './SideBar'
 import TopBar from './TopBar'
 
 import * as CSS from './css'
 
-function MainPage() {
-  const {state, dispatch} = useContext(Context)
-  const [menu, setMenu] = useState<boolean>(false)
-  const {profil} = state
-
-  if (profil === undefined) {
-    dispatch({action: MainAction.LOG_OUT, dispatch})
-    return
-  }
-
-  function changeOpenMenu() {
-    setMenu((a) => !a)
-  }
+export const MainPage = () => {
+  const [menu, setMenu] = useState(false)
 
   return (
     <CSS.Container>
       <CSS.Content>
-        <Outlet />
+        <SuspendWrapper text="ładowanie strony" open={false}>
+          <Outlet />
+        </SuspendWrapper>
       </CSS.Content>
       <SideBar open={menu} />
-      <TopBar openMenu={menu} changeOpenMenu={changeOpenMenu} />
+      <TopBar openMenu={menu} changeOpenMenu={() => setMenu((a) => !a)} />
     </CSS.Container>
   )
 }
-
-export default MainPage

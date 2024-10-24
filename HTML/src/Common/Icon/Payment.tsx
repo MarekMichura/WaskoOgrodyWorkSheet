@@ -1,6 +1,6 @@
-import Icon, {IChangeMenu} from '.'
+import {IChangeMenu, Icon} from '.'
 
-function PaymentIcon(props: IChangeMenu) {
+export const PaymentIcon = (props: IChangeMenu) => {
   const p = {...props, style: {...props.style, Transform: 'rotateX(180%)'}}
   return (
     <Icon {...p}>
@@ -8,5 +8,3 @@ function PaymentIcon(props: IChangeMenu) {
     </Icon>
   )
 }
-
-export default PaymentIcon

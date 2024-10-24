@@ -13,8 +13,9 @@ public class BuilderUserRole : IBuilder
       entity.HasOne<ModelRole>().WithMany()
         .HasForeignKey(static a => a.RoleId)
         .OnDelete(DeleteBehavior.Restrict);
-
+#if DEBUG
       entity.HasData(StorageUsersRole.UsersRoles);
+#endif
     });
   }
 }

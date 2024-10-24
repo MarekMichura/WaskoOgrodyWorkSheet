@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+
 namespace Wasko;
 
 public class EndPointSPA : IService, IEndPoint
@@ -10,24 +12,20 @@ public class EndPointSPA : IService, IEndPoint
     app.UseStaticFiles();
 
     if (app.Environment.IsDevelopment())
-    {
       SpaDevelopment(app);
-    }
     else
-    {
-      SpaRelease(app);
-    }
+      SpaRelease(app, app.Environment.ContentRootPath);
   }
 
-  private static void SpaDevelopment(WebApplication app) => app.UseSpa(static spa =>
+  private static void SpaDevelopment(IApplicationBuilder app) => app.UseSpa(static spa =>
     spa.UseProxyToSpaDevelopmentServer("http://html-development:3000"));
 
-  private static void SpaRelease(WebApplication app) => app.UseSpa(spa =>
+  private static void SpaRelease(IApplicationBuilder app, string contentRootPath) => app.UseSpa(spa =>
     {
       spa.Options.SourcePath = AppPath;
       spa.ApplicationBuilder.UseStaticFiles(new StaticFileOptions
       {
-        FileProvider = new PhysicalFileProvider(Path.Combine(app.Environment.ContentRootPath, AppPath))
+        FileProvider = new PhysicalFileProvider(Path.Combine(contentRootPath, AppPath))
       });
     });
 

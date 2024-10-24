@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom'
 import styled, {keyframes} from 'styled-components'
 
-import {IThemes} from '/global/THEME'
+import {ITheme} from '/QueryFn/Theme/types/ITheme'
 
 export const Container = styled.nav`
   position: relative;
@@ -111,7 +111,7 @@ const keyframe = keyframes`
   100%{background-position:10% 0%}
 `
 
-export const MenuOption = styled.div`
+export const MenuOption = styled(Link)`
   position: relative;
   min-width: 40px;
   display: grid;
@@ -122,7 +122,7 @@ export const MenuOption = styled.div`
   cursor: pointer;
 
   box-shadow: 0 0 5px 0
-    ${(p) => (p.theme.name == IThemes.THEME_DARK ? p.theme.background[50].default : p.theme.background[500].default)};
+    ${(p) => (p.theme.name == ITheme.THEME_DARK ? p.theme.background[50].default : p.theme.background[500].default)};
   background: linear-gradient(
     to right,
     ${(a) => a.theme.background[100].default} 0%,

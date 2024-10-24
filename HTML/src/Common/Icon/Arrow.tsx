@@ -1,6 +1,6 @@
-import Icon, {IChangeMenu} from '.'
+import {IChangeMenu, Icon} from '.'
 
-function ArrowIcon(props: IChangeMenu) {
+export const ArrowIcon = (props: IChangeMenu) => {
   const p = {...props, style: {...props.style, Transform: 'rotateX(180%)'}}
   return (
     <Icon {...p}>
@@ -8,5 +8,3 @@ function ArrowIcon(props: IChangeMenu) {
     </Icon>
   )
 }
-
-export default ArrowIcon

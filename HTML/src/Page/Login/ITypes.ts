@@ -1,6 +1,6 @@
 export interface ILoginValues {
-  userName?: string
-  password?: string
+  userName: string
+  password: string
 }
 
 export const defaultLoginValues: ILoginValues = {

@@ -1,6 +1,6 @@
 import styled, {keyframes} from 'styled-components'
 
-import {IThemes} from '/global/THEME'
+import {ITheme} from '/QueryFn/Theme/types/ITheme'
 
 const Context = styled.div`
   position: relative;
@@ -115,7 +115,29 @@ export const SVG = styled.svg`
   fill: ${(a) => a.theme.primary.default};
 `
 
-const InputBase = styled.input`
+export const Button = styled.button`
+  width: fit-content;
+  align-self: flex-end;
+  padding: 15px;
+  height: 100%;
+
+  font-family: 'Roboto', sans-serif;
+  font-size: 15pt;
+  border: none;
+  outline: none;
+
+  cursor: pointer;
+
+  color: ${(a) => a.theme.text[950].default};
+  background-color: ${(a) =>
+    a.theme.name == ITheme.THEME_LIGHT ? a.theme.primary[500].default : a.theme.primary[200].default};
+
+  &:disabled {
+    cursor: not-allowed !important;
+  }
+`
+
+export const Input = styled.input`
   font-family: 'Roboto', sans-serif;
   font-size: 15pt;
   border: none;
@@ -126,24 +148,11 @@ const InputBase = styled.input`
 
   background-color: transparent;
   color: ${(a) => a.theme.text[900].default};
+
   &:disabled {
     cursor: not-allowed !important;
   }
-`
 
-export const Button = styled(InputBase)`
-  width: fit-content;
-  padding: 15px;
-  height: 100%;
-
-  cursor: pointer;
-
-  color: ${(a) => a.theme.text[950].default};
-  background-color: ${(a) =>
-    a.theme.name == IThemes.THEME_LIGHT ? a.theme.primary[500].default : a.theme.primary[200].default};
-`
-
-export const Input = styled(InputBase)`
   &::placeholder {
     visibility: hidden;
   }

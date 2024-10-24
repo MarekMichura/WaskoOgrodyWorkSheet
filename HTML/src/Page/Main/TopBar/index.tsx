@@ -1,12 +1,12 @@
-import {useContext, useState} from 'react'
+import {useState} from 'react'
 
-import {MainAction} from '/global/MAIN_ACTION'
-import {IThemes} from '/global/THEME'
-import BellIcon from '/Icon/BellIcon'
-import FaceIcon from '/Icon/FaceIcon'
-import MenuIcon from '/Icon/MenuIcon'
-import ThemeModeIcon from '/Icon/ThemeModeIcon'
-import Context from '/MContext'
+import {BellIcon} from '/Icon/BellIcon'
+import {FaceIcon} from '/Icon/FaceIcon'
+import {MenuIcon} from '/Icon/MenuIcon'
+import {ThemeModeIcon} from '/Icon/ThemeModeIcon'
+import {useProfil} from '/QueryFn/profil/useProfil'
+import {ITheme} from '/QueryFn/Theme/types/ITheme'
+import {useTheme} from '/QueryFn/Theme/useTheme'
 
 import * as CSS from './css'
 
@@ -22,46 +22,26 @@ interface IProps {
 }
 
 function TopBar({openMenu, changeOpenMenu}: IProps) {
-  const {state, dispatch} = useContext(Context)
   const [menu, setMenu] = useState<IMenu>(IMenu.none)
-  const {title, theme, profil} = state
-  const {firstName, lastName, userName, roles} = profil ?? {}
-  const themeStatus = theme == IThemes.THEME_DARK
-
-  function changeTheme() {
-    dispatch({action: MainAction.CHANGE_THEME, dispatch})
-  }
-
-  function logOut() {
-    dispatch({action: MainAction.LOG_OUT, dispatch})
-  }
-  function menuProfil() {
-    setMenu(IMenu.profil)
-  }
-
-  function menuNotification() {
-    setMenu(IMenu.notification)
-  }
-
-  function menuClose() {
-    setMenu(IMenu.none)
-  }
+  const profil = useProfil()
+  const theme = useTheme()
+  const {firstName, lastName, userName, roles} = profil.data!
 
   return (
     <CSS.Container>
       <CSS.Left>
         <MenuIcon cssSVG={CSS.Icon} status={openMenu} onClick={changeOpenMenu} />
-        <CSS.Title>{title}</CSS.Title>
+        <CSS.Title>{document.title}</CSS.Title>
       </CSS.Left>
       <CSS.Right>
-        <CSS.IconCon onClick={menuNotification}>
+        <CSS.IconCon onClick={() => setMenu(IMenu.notification)}>
           <BellIcon cssSVG={CSS.Icon} />
           {/* <CSS.BelNum>2</CSS.BelNum> */}
         </CSS.IconCon>
         <CSS.IconCon>
-          <ThemeModeIcon cssSVG={CSS.Icon} status={themeStatus} onClick={changeTheme} />
+          <ThemeModeIcon cssSVG={CSS.Icon} status={theme.data == ITheme.THEME_DARK} onClick={theme.changeTheme} />
         </CSS.IconCon>
-        <CSS.MenuCon onClick={menuProfil}>
+        <CSS.MenuCon onClick={() => setMenu(IMenu.profil)}>
           {userName}
           <FaceIcon cssSVG={CSS.Icon} />
         </CSS.MenuCon>
@@ -80,7 +60,7 @@ function TopBar({openMenu, changeOpenMenu}: IProps) {
             </CSS.UserRightFlex>
           </CSS.UserFlex>
           <hr />
-          <CSS.MenuOption onClick={logOut}>Wyloguj się</CSS.MenuOption>
+          <CSS.MenuOption onClick={() => profil.mutationLogOut.mutate()}>Wyloguj się</CSS.MenuOption>
         </CSS.MenuItem>
       </CSS.Menu>
       <CSS.Menu data-open={menu == IMenu.notification}>
@@ -88,7 +68,7 @@ function TopBar({openMenu, changeOpenMenu}: IProps) {
           <CSS.MenuOption>Nie masz żadnych nowych powiadomień</CSS.MenuOption>
         </CSS.MenuItem>
       </CSS.Menu>
-      <CSS.MenuBehind onClick={menuClose} data-open={menu != IMenu.none} />
+      <CSS.MenuBehind onClick={() => setMenu(IMenu.none)} data-open={menu != IMenu.none} />
     </CSS.Container>
   )
 }

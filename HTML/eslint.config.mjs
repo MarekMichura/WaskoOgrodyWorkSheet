@@ -1,4 +1,5 @@
 import pluginJs from '@eslint/js'
+import pluginQuery from '@tanstack/eslint-plugin-query'
 import importPlugin from 'eslint-plugin-import'
 import pluginReact from 'eslint-plugin-react'
 import globals from 'globals'
@@ -9,6 +10,7 @@ const res = [
   ...tseslint.configs.recommended,
   {
     ...pluginReact.configs.flat.recommended,
+    ...pluginQuery.recommended,
     languageOptions: {globals: globals.browser},
     settings: {
       react: {

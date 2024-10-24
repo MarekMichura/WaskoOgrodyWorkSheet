@@ -1,13 +1,14 @@
-import {IIcon} from '/Icon/index'
+import {IIcon} from '../Icon'
 
-type IProps = React.HTMLProps<HTMLInputElement>
+type IPropsInput = React.HTMLProps<HTMLInputElement>
+type IPropsButton = React.HTMLProps<HTMLButtonElement>
 
-export interface IInput extends IProps {
+export interface IInput extends IPropsInput {
   icon: (p: IIcon) => JSX.Element
   type: 'text' | 'password'
   error?: string
 }
 
-export interface IButton extends IProps {
-  type: 'submit' | 'button'
+export interface IButton extends IPropsButton {
+  type?: 'button' | 'submit' | 'reset'
 }

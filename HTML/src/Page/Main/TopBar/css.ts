@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import {IThemes} from '/global/THEME'
+import {ITheme} from '/QueryFn/Theme/types/ITheme'
 
 export const Container = styled.header`
   position: relative;
@@ -63,10 +63,10 @@ export const IconCon = styled.div`
   padding: 5px;
 
   box-shadow: 0 0 5px 0
-    ${(p) => (p.theme.name == IThemes.THEME_DARK ? p.theme.background[50].default : p.theme.background[500].default)};
+    ${(p) => (p.theme.name == ITheme.THEME_DARK ? p.theme.background[50].default : p.theme.background[500].default)};
 
   background-color: ${(p) =>
-    p.theme.name == IThemes.THEME_DARK ? p.theme.background[100].default : p.theme.background[50].default};
+    p.theme.name == ITheme.THEME_DARK ? p.theme.background[100].default : p.theme.background[50].default};
 `
 
 export const BelNum = styled.span`
@@ -91,10 +91,10 @@ export const MenuCon = styled.div`
   cursor: pointer;
   border-radius: 15px;
   box-shadow: 0 0 5px 0
-    ${(p) => (p.theme.name == IThemes.THEME_DARK ? p.theme.background[50].default : p.theme.background[500].default)};
+    ${(p) => (p.theme.name == ITheme.THEME_DARK ? p.theme.background[50].default : p.theme.background[500].default)};
 
   background-color: ${(p) =>
-    p.theme.name == IThemes.THEME_DARK ? p.theme.background[100].default : p.theme.background[50].default};
+    p.theme.name == ITheme.THEME_DARK ? p.theme.background[100].default : p.theme.background[50].default};
 `
 
 export const IconSmall = styled.svg`
@@ -126,9 +126,9 @@ export const Menu = styled.div`
   grid-template-rows: 0fr;
 
   box-shadow: 0 0 5px 0
-    ${(p) => (p.theme.name == IThemes.THEME_DARK ? p.theme.background[50].default : p.theme.background[500].default)};
+    ${(p) => (p.theme.name == ITheme.THEME_DARK ? p.theme.background[50].default : p.theme.background[500].default)};
   background-color: ${(p) =>
-    p.theme.name == IThemes.THEME_DARK ? p.theme.background[100].default : p.theme.background[50].default};
+    p.theme.name == ITheme.THEME_DARK ? p.theme.background[100].default : p.theme.background[50].default};
 
   transition:
     grid-template-rows 300ms ease-in-out,
