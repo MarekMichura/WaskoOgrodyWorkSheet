@@ -36,14 +36,21 @@ public struct ModelResultCalendarWorkHours
 }
 
 
-public readonly struct ModelResultCalendar
+public readonly struct ModelResultCalendarData
 {
   public ConcurrentBag<ModelResultCalendarDayOff> DaysOff { get; init; }
   public ConcurrentBag<ModelResultCalendarWorkHours> WorkingHours { get; init; }
 
-  public ModelResultCalendar()
+  public ModelResultCalendarData()
   {
-    DaysOff = new ConcurrentBag<ModelResultCalendarDayOff>();
-    WorkingHours = new ConcurrentBag<ModelResultCalendarWorkHours>();
+    DaysOff = [];
+    WorkingHours = [];
   }
+}
+
+public readonly struct ModelResultCalendar
+{
+  public ConcurrentDictionary<DateOnly, ModelResultCalendarData> Data { get; init; }
+  public DateTime Time { get; init; }
+
 }

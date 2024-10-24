@@ -16,5 +16,6 @@ export interface IResponseCalendarData {
 }
 
 export interface IResponseCalendar {
-  [date: string]: IResponseCalendarData
+  data: {[date: string]: IResponseCalendarData}
+  time: string
 }

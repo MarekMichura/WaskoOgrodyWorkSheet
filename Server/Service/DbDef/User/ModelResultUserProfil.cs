@@ -1,6 +1,6 @@
 namespace Wasko;
 
-public class ModelResultUserProfil
+public struct ModelResultUserProfil
 {
   public required string FirstName { get; set; }
   public required string LastName { get; set; }
@@ -8,4 +8,5 @@ public class ModelResultUserProfil
   public required DateOnly WorkStartDate { get; set; }
   public byte[]? ProfileImage { get; set; }
   public required IEnumerable<string> Roles { get; set; }
+  public DateTime Time { get; set; }
 }

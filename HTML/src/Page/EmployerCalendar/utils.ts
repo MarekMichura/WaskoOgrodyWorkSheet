@@ -12,7 +12,7 @@ import {ISelected} from './types/ISelected'
 export const getDataFromFetch = (date: Date, data?: IResponseCalendar | null) => {
   if (!data) return null
   const dateStr = ChangeToApiDateString(date)
-  return data[dateStr]
+  return data.data[dateStr]
 }
 
 export const CheckMonthYear = (now: Date, start: Date, month?: string, year?: string): ICheckMonthYearResult => {
@@ -56,7 +56,7 @@ export const getSelectedData = (selected: ISelected, client: QueryClient) => {
     })
     .reduce<IResponseCalendarData[]>((acc, [, value]) => {
       if (value == undefined) return acc
-      if (value[data]) acc.push(value[data])
+      if (value.data[data]) acc.push(value.data[data])
       return acc
     }, [])
 

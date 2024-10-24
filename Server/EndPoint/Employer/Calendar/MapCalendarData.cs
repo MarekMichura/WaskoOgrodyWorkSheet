@@ -1,11 +1,37 @@
 namespace Wasko;
 
-using Dic = ConcurrentDictionary<DateOnly, ModelResultCalendar>;
+using Dic = ConcurrentDictionary<DateOnly, ModelResultCalendarData>;
 
 static class MapCalendarData
 {
-  public static IResult CalendarData([FromBody] ModelInputCalendar model, [FromServices] IServiceCalendar calendar)
+  private static string GenCacheKey(DateOnly start, DateOnly end, string? userID) =>
+    string.Format("{0}-{1}-{2}-{3}", "CalendarData", userID, start, end);
+
+  private static readonly MemoryCacheEntryOptions cacheOptions = new MemoryCacheEntryOptions()
+    .SetSlidingExpiration(TimeSpan.FromSeconds(60))
+    .SetPriority(CacheItemPriority.Low);
+
+  public static IResult CalendarData([FromBody] ModelInputCalendar model,
+                                     [FromServices] IServiceCalendar calendar,
+                                     [FromServices] IServiceUser user,
+                                     [FromServices] IMemoryCache cache,
+                                     HttpContext httpContext)
   {
+    var now = DateTime.Now;
+    var cacheKey = GenCacheKey(model.Start, model.End, user.GetCurrentUserID() ?? throw new NullReferenceException());
+    if (cache.TryGetValue(cacheKey, out var outPut) && outPut is ModelResultCalendar hit)
+    {
+      if (httpContext.Request.Headers.TryGetValue("If-Modified-Since", out var since)
+        && DateTime.TryParse(since, out var sinceTime)
+        && sinceTime >= hit.Time)
+      {
+        // Console.WriteLine("Modification hit");
+        return Results.StatusCode(304);
+      }
+      httpContext.Response.Headers["cache-hit"] = "true";
+      return Results.Ok(new ModelResultCalendar() { Data = hit.Data, Time = now });
+    }
+
     var data = calendar.GetData(model.Start, model.End);
 
     var result = new Dic();
@@ -13,7 +39,11 @@ static class MapCalendarData
     DayOffDates(result, data.DayOffDates, model.End);
     DayOffExpression(result, data.DayOffExpressions, model.Start, model.End);
 
-    return Results.Ok(result);
+    outPut = new ModelResultCalendar() { Data = result, Time = now };
+    cache.Set(cacheKey, outPut, cacheOptions);
+
+    Console.WriteLine("Cache fail");
+    return Results.Ok(outPut);
   }
 
   private static void DayOffDates(Dic dates, IEnumerable<ModelDayOffDate> daysOff, DateOnly rangeEnd)
@@ -34,7 +64,7 @@ static class MapCalendarData
       {
         var date = DateOnly.FromDayNumber(dayStart + i);
         if (!dates.ContainsKey(date))
-          dates.TryAdd(date, new ModelResultCalendar());
+          dates.TryAdd(date, new ModelResultCalendarData());
         dates[date].DaysOff.Add(dayOff);
       }
     });
@@ -47,7 +77,7 @@ static class MapCalendarData
       foreach (var date in ConvertDayOffExpression.ConvertToDates(dayOff, rangeStart, rangeEnd))
       {
         if (!dates.ContainsKey(date))
-          dates.TryAdd(date, new ModelResultCalendar());
+          dates.TryAdd(date, new ModelResultCalendarData());
         dates[date].DaysOff.Add(dayOff);
       }
     });
@@ -58,7 +88,7 @@ static class MapCalendarData
     Parallel.ForEach(workHours, workHour =>
     {
       if (!dates.ContainsKey(workHour.Date))
-        dates.TryAdd(workHour.Date, new ModelResultCalendar());
+        dates.TryAdd(workHour.Date, new ModelResultCalendarData());
       dates[workHour.Date].WorkingHours.Add(workHour);
     });
   }

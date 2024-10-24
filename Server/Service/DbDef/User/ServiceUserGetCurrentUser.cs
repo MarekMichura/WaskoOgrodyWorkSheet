@@ -2,6 +2,9 @@ namespace Wasko;
 
 partial class ServiceUser
 {
+  public string? GetCurrentUserID() =>
+     _httpContext.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+
   public ModelUser? GetCurrentUser()
   {
     var userId = _httpContext.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier);

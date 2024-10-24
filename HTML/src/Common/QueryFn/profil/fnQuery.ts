@@ -4,19 +4,29 @@ import factory from 'wretch/index'
 import {INotification, INotificationType} from '../Notification/types/INotification'
 
 import {IFnQuery} from './types/IFnQuery'
-import {IProfilResult} from './types/IProfil'
+import {IProfil, IProfilResult} from './types/IProfil'
 
 type notificationAdd = UseMutationResult<INotification[], Error, INotification, unknown>
 
-export const fnQuery = (notification: notificationAdd, status: QueryStatus | undefined): (() => Promise<IFnQuery>) => {
+export const fnQuery = (
+  prevData: IProfil | undefined,
+  notification: notificationAdd,
+  status: QueryStatus | undefined
+): (() => Promise<IFnQuery>) => {
   return () => {
+    const headers: Record<string, string> = prevData ? {'If-Modified-Since': prevData.time} : {}
+
     const promise = new Promise<IFnQuery>((resolve, reject) => {
       factory('/Api/v1/GetProfil')
+        .headers(headers)
         .get()
         .badRequest(() => reject({type: INotificationType.error, text: 'Wystąpił problem z żądaniem'}))
         .notFound(() => reject({type: INotificationType.error, text: 'Nie znaleziono żądanego zasobu'}))
         .internalError(() => reject({type: INotificationType.error, text: 'Wystąpił problem po stronie serwera'}))
         .timeout(() => reject({type: INotificationType.error, text: 'Przekroczony czas żądania'}))
+        .error(304, () => {
+          resolve(prevData!)
+        })
         .unauthorized(() => {
           if (status == 'success') notification.mutate({type: INotificationType.info, text: 'Nie jesteś zalogowany'})
           resolve(null)

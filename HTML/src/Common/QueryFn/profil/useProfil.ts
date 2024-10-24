@@ -7,15 +7,17 @@ import {fnMutationLogin} from './fnMutationLogin'
 import {fnMutationLogOut} from './fnMutationLogOut'
 import {fnQuery} from './fnQuery'
 import {IFnQuery} from './types/IFnQuery'
+import {IProfil} from './types/IProfil'
 
 export const useProfil = () => {
   const {mutationNotificationAdd} = useNotification()
   const client = useQueryClient()
+  const prevData = client.getQueryData<IProfil>(['profil'])
   const status = client.getQueryState(['profil'])
 
   const profil = useQuery<IFnQuery, INotification>({
     queryKey: ['profil'],
-    queryFn: fnQuery(mutationNotificationAdd, status?.status),
+    queryFn: fnQuery(prevData, mutationNotificationAdd, status?.status),
     notifyOnChangeProps: 'all',
     refetchOnMount: false,
     refetchIntervalInBackground: false,

@@ -7,6 +7,7 @@ export interface IProfilResult {
   workStartDate: string
   roles: IUserRole[]
   image?: string
+  time: string
 }
 
 export interface IProfil {
@@ -16,4 +17,5 @@ export interface IProfil {
   workStartDate: Date
   roles: IUserRole[]
   image?: string
+  time: string
 }
