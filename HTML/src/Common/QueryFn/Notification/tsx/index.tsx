@@ -20,23 +20,29 @@ export const Notifications = () => {
   )
 }
 
+const DEFAULT_LIFE = 10000
+
 const Notification = ({id, text, type, life}: INotificationProps) => {
   const {mutationNotificationRemove} = useNotification()
 
   useEffect(() => {
-    const time = setTimeout(() => mutationNotificationRemove.mutate(id), (life ?? 2000) + 1000)
+    const time = setTimeout(() => mutationNotificationRemove.mutate(id), (life ?? DEFAULT_LIFE) + 1000)
     return () => clearTimeout(time)
   }, [])
 
   const Icon = NotificationIcon[type]
   const title = NotificationTitle[type]
   return (
-    <CSS.Notification style={{animationDelay: `${life ?? 2000}ms`}}>
+    <CSS.Notification style={{animationDelay: `${life ?? DEFAULT_LIFE}ms`}}>
       <CSS.Content data-type={type}>
         <Icon cssSVG={CSS.SVG} />
         <CSS.Label>
           <CSS.Title>{title}</CSS.Title>
-          <span>{text}</span>
+          <span>
+            {text.split('\n').map((line, i) => (
+              <div key={i}>{line}</div>
+            ))}
+          </span>
         </CSS.Label>
         <CloseIcon onClick={() => mutationNotificationRemove.mutate(id)} cssSVG={CSS.CloseSVG} />
       </CSS.Content>

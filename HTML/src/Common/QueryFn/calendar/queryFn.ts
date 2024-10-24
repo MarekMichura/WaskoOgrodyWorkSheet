@@ -32,9 +32,9 @@ export const queryFn = (
           resolve(prevData!)
         })
         .text((text) => {
-          if (text != JSON.stringify(prevData)) {
+          if (text.slice(8, text.lastIndexOf('},') + 1) != JSON.stringify(prevData?.data)) {
             notification.mutate({
-              text: `Pobrane dane kalendarza dla zakresu od: ${ChangeToApiDateString(start)} do: ${ChangeToApiDateString(end)}`,
+              text: `Pobrane dane kalendarza dla zakresu:\nod: ${ChangeToApiDateString(start)}\ndo: ${ChangeToApiDateString(end)}`,
               type: INotificationType.success,
             })
             return JSON.parse(text)
@@ -44,7 +44,13 @@ export const queryFn = (
         .then((response: IResponseCalendar) => {
           resolve(response)
         })
-        .catch((a) => console.log(a))
+        .catch((error) => {
+          reject({
+            type: INotificationType.error,
+            text: 'Podczas pobierania danych kalendarza wystąpił nieznany problem',
+          })
+          console.log(error)
+        })
     })
 
     promise.catch((a: INotification) => {

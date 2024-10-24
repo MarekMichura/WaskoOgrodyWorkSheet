@@ -24,6 +24,7 @@ export const useProfil = () => {
     refetchOnWindowFocus: true,
     refetchOnReconnect: true,
     refetchInterval: (query) => (query.state.data ? 10000 : false),
+    retryDelay: 2000,
   })
 
   const mutationLogin = useMutation({

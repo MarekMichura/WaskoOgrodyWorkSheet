@@ -35,6 +35,13 @@ export const fnQuery = (
           if (status == 'pending') notification.mutate({type: INotificationType.success, text: 'Jesteś zalogowany'})
           resolve({...profil, workStartDate: new Date(Date.parse(profil.workStartDate))})
         })
+        .catch((error) => {
+          console.log(error)
+          reject({
+            type: INotificationType.error,
+            text: 'Podczas podtrzymywania uwierzytelniania wystąpił nieznany problem',
+          })
+        })
     })
 
     promise.catch((data: INotification) => notification.mutate(data))

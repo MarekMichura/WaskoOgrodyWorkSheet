@@ -16,6 +16,7 @@ export const useEmployerCalendar = (year?: number, month?: number, start?: Date,
     queryFn: queryFn(prevData, mutationNotificationAdd, start, end),
     enabled: enable,
     refetchInterval: 10000,
+    retryDelay: 2000,
   })
 
   return {...calendar}

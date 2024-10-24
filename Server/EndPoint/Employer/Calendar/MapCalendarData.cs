@@ -1,6 +1,6 @@
 namespace Wasko;
 
-using Dic = ConcurrentDictionary<DateOnly, ModelResultCalendarData>;
+using Dic = Dictionary<DateOnly, ModelResultCalendarData>;
 
 static class MapCalendarData
 {
@@ -48,7 +48,7 @@ static class MapCalendarData
 
   private static void DayOffDates(Dic dates, IEnumerable<ModelDayOffDate> daysOff, DateOnly rangeEnd)
   {
-    Parallel.ForEach(daysOff, dayOff =>
+    foreach (var dayOff in daysOff)
     {
       var start = dayOff.StartDate;
       var end = dayOff.EndDate ?? dayOff.StartDate;
@@ -67,12 +67,12 @@ static class MapCalendarData
           dates.TryAdd(date, new ModelResultCalendarData());
         dates[date].DaysOff.Add(dayOff);
       }
-    });
+    }
   }
 
   private static void DayOffExpression(Dic dates, IEnumerable<ModelDayOffExpression> daysOff, DateOnly rangeStart, DateOnly rangeEnd)
   {
-    Parallel.ForEach(daysOff, dayOff =>
+    foreach (var dayOff in daysOff)
     {
       foreach (var date in ConvertDayOffExpression.ConvertToDates(dayOff, rangeStart, rangeEnd))
       {
@@ -80,16 +80,16 @@ static class MapCalendarData
           dates.TryAdd(date, new ModelResultCalendarData());
         dates[date].DaysOff.Add(dayOff);
       }
-    });
+    }
   }
 
   private static void WorkHours(Dic dates, IEnumerable<ModelWorkHour> workHours)
   {
-    Parallel.ForEach(workHours, workHour =>
+    foreach (var workHour in workHours)
     {
       if (!dates.ContainsKey(workHour.Date))
         dates.TryAdd(workHour.Date, new ModelResultCalendarData());
       dates[workHour.Date].WorkingHours.Add(workHour);
-    });
+    }
   }
 }
