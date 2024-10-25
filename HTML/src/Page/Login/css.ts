@@ -10,7 +10,7 @@ export const Center = styled.div`
   justify-content: center;
 `
 
-export const Content = styled.div`
+export const Content = styled.form`
   max-height: max(Calc(100dvh - 100px), 280px);
   width: min(350px, Calc(100%), 100vw);
   border-radius: 20px;

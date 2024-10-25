@@ -35,7 +35,19 @@
     "**/Thumbs.db": true,
     "**.sln": true,
     "**/bin": true,
-    "**/obj": true
+    "**/obj": true,
+    "HTML/.babelrc": true,
+    "HTML/.dockerignore": true,
+    "HTML/.gitignore": true,
+    "HTML/.prettierrc": true,
+    "HTML/build": true,
+    "HTML/node_modules": true,
+    "HTML/yarn.lock": true,
+    "Server/.dockerignore": true,
+    "Server/.gitignore": true,
+    "Server/taskCreateDb.sh": true,
+    "Server/wait-for-it.sh": true,
+    "ServerTests/wwwroot": true
   },
   "hide-files.files": [
     "HTML/.babelrc",

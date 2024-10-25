@@ -1,4 +1,4 @@
-import {useQuery, useMutation} from '@tanstack/react-query'
+import {useQuery, useMutation, useQueryClient} from '@tanstack/react-query'
 
 import {fnMutation} from './fnMutation'
 import {fnQuery} from './fnQuery'
@@ -7,6 +7,8 @@ import {ITheme} from './types/ITheme'
 export const LS_THEME_NAME = 'theme'
 
 export const useTheme = () => {
+  const client = useQueryClient()
+
   const theme = useQuery<ITheme>({
     queryKey: ['Theme'],
     queryFn: fnQuery,
@@ -18,8 +20,8 @@ export const useTheme = () => {
 
   const mutation = useMutation<ITheme, Error, ITheme>({
     mutationFn: fnMutation,
-    onSuccess: () => {
-      theme.refetch()
+    onSuccess: (data) => {
+      client.setQueryData(['Theme'], data)
     },
   })
 
