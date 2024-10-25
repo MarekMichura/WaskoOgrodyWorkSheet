@@ -6,15 +6,20 @@ public class BuilderChordPrice : IBuilder
   {
     builder.Entity<ModelChordPrice>(static entity =>
     {
-      entity.Property(static a => a.ID).HasDefaultValueSql("NewId()");
-      entity.Property(static a => a.Price).HasColumnType("money");
+      entity.Property(static chordPrice => chordPrice.ID)
+        .HasDefaultValueSql("NewId()");
 
-      entity.HasOne(static a => a.Chord).WithMany(static a => a.Prices)
-        .HasForeignKey(static a => a.ChordID)
+      entity.Property(static chordPrice => chordPrice.Price)
+        .HasColumnType("money");
+
+      entity.HasOne(static chordPrice => chordPrice.Chord)
+        .WithMany(static chord => chord.Prices)
+        .HasForeignKey(static chordPrice => chordPrice.ChordID)
         .OnDelete(DeleteBehavior.Restrict);
 
-      entity.HasOne(static a => a.Creator).WithMany(static a => a.ChangedChordsPrices)
-        .HasForeignKey(static a => a.CreatorID)
+      entity.HasOne(static chordPrice => chordPrice.Creator)
+        .WithMany(static user => user.ChangedChordsPrices)
+        .HasForeignKey(static chordPrice => chordPrice.CreatorID)
         .OnDelete(DeleteBehavior.Restrict);
 
       entity.HasData(StorageChordPrice.ChordPrices);

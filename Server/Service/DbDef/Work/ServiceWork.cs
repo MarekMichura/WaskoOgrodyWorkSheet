@@ -5,20 +5,20 @@ partial class ServiceWork(DatabaseContext context, IServiceUser user) : IService
   readonly DatabaseContext _context = context;
   readonly IServiceUser _user = user;
 
-  public IEnumerable<ModelWorkHour>? AddOrChangeWorkHours(DateOnly date, IEnumerable<ModelInputWorkHours.WorkHours> hours)
+  public IEnumerable<ModelWorkHours>? AddOrChangeWorkHours(DateOnly date, IEnumerable<ModelInputWorkHours.WorkHours> hours)
   {
     var current = _user.GetCurrentUser() ?? throw new NullReferenceException();
 
     var workHoursBefore = _context.WorkHours
-      .Where(a => a.Date == date && a.UserID == current.Id && a.Active && a.Chords.Count() != 0)
-      .Include(a => a.Chords)
+      .Where(workHours => workHours.Date == date && workHours.UserID == current.Id && workHours.Active && workHours.Chords.Count() != 0)
+      .Include(workHours => workHours.Chords)
       .ToList();
 
-    workHoursBefore.ForEach(a => a.Active = false);
-    var newHours = new List<ModelWorkHour>();
+    workHoursBefore.ForEach(workHours => workHours.Active = false);
+    var newHours = new List<ModelWorkHours>();
     foreach (var hour in hours)
     {
-      newHours.Add(new ModelWorkHour()
+      newHours.Add(new ModelWorkHours()
       {
         ID = Guid.NewGuid().ToString(),
         AuthorID = current.Id,
@@ -40,9 +40,11 @@ partial class ServiceWork(DatabaseContext context, IServiceUser user) : IService
     var current = _user.GetCurrentUser() ?? throw new NullReferenceException();
 
     var result = _context.WorkLocations
-      .Where(a => a.Active)
-      .Include(a => a.Targets)
-      .Where(a => a.Targets.Any(a => current.Roles.Select(a => a.Id).Contains(a.Id)) || a.Targets.Count == 0)
+      .Where(workLocation => workLocation.Active)
+      .Include(workLocation => workLocation.Targets)
+      .Where(workLocation => workLocation.Targets
+        .Any(role => current.Roles.Select(role => role.Id).Contains(role.Id))
+        || workLocation.Targets.Count == 0)
       .ToList();
 
     return result;

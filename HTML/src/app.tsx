@@ -5,6 +5,7 @@ import {useNotification} from '/QueryFn/Notification/useNotification'
 import {useProfil} from '/QueryFn/profil/useProfil'
 import {IThemeSwitch} from '/QueryFn/Theme/types/IThemeSwitch'
 import {useTheme} from '/QueryFn/Theme/useTheme'
+import {endPoints, IAdditionalRoute} from '/Router/IRoute'
 import {SuspendWrapper} from '/Suspend'
 
 import {MyRoute} from './Common/Router'
@@ -15,12 +16,16 @@ export const App = () => {
   const profil = useProfil()
   const theme = useTheme()
 
-  if (!theme.isSuccess || !profil.isSuccess) return <></>
+  if (notification.isPending || profil.isPending || theme.isPending) return <></>
+  if (!theme.isSuccess || !notification.isSuccess) {
+    const Error = endPoints[IAdditionalRoute.Error]
+    return <Error />
+  }
 
   return (
     <ThemeProvider theme={IThemeSwitch[theme.data]}>
       <GlobalStyle />
-      <SuspendWrapper open={profil.isPending || notification.isPending || theme.isPending} text="Wczytywanie danych">
+      <SuspendWrapper open={false} text="Wczytywanie danych">
         <MyRoute />
       </SuspendWrapper>
       <Notifications />

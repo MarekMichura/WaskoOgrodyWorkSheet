@@ -12,7 +12,7 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     font-family: "Lato", sans-serif;
 
-    color: ${(a) => a.theme.text[950].default};
-    background-color: ${(a) => a.theme.background[100].default};
+    color: ${(p) => p.theme.text[950].default};
+    background-color: ${(p) => p.theme.background[100].default};
   }
 `

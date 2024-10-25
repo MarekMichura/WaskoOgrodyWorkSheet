@@ -6,17 +6,21 @@ public class BuilderWorkLocations : IBuilder
   {
     builder.Entity<ModelWorkLocation>(static entity =>
     {
-      entity.Property(static a => a.ID).HasDefaultValueSql("NewId()");
+      entity.Property(static workLocation => workLocation.ID)
+        .HasDefaultValueSql("NewId()");
 
-      entity.HasMany(static a => a.Targets).WithMany(static a => a.WorkLocations)
+      entity.HasMany(static workLocation => workLocation.Targets)
+        .WithMany(static role => role.WorkLocations)
         .UsingEntity<ModelWorkLocationTargetRole>(
-          static a => a.HasOne(static b => b.Role)
+          static targetRole => targetRole
+            .HasOne(static targetRole => targetRole.Role)
             .WithMany()
-            .HasForeignKey(static a => a.RoleID)
+            .HasForeignKey(static targetRole => targetRole.RoleID)
             .OnDelete(DeleteBehavior.Restrict),
-          static a => a.HasOne(static b => b.WorkLocation)
+          static targetRole => targetRole
+            .HasOne(static targetRole => targetRole.WorkLocation)
             .WithMany()
-            .HasForeignKey(static a => a.WorkLocationID)
+            .HasForeignKey(static targetRole => targetRole.WorkLocationID)
             .OnDelete(DeleteBehavior.Restrict));
 
       entity.HasData(StorageWorkLocations.WorkLocations);

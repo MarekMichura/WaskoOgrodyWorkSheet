@@ -27,7 +27,7 @@ public struct ModelResultCalendarWorkHours
   public required TimeOnly End { get; set; }
   public required string Where { get; set; }
 
-  public static implicit operator ModelResultCalendarWorkHours(ModelWorkHour model) => new()
+  public static implicit operator ModelResultCalendarWorkHours(ModelWorkHours model) => new()
   {
     Start = model.WorkStart,
     End = model.WorkEnd,

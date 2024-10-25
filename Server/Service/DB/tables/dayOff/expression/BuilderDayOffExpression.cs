@@ -6,44 +6,55 @@ public class BuilderDayOffExpression : IBuilder
   {
     builder.Entity<ModelDayOffExpression>(static entity =>
     {
-      entity.HasIndex(static a => a.Order);
+      entity.HasIndex(static dayOff => dayOff.Order);
 
-      entity.Property(static a => a.Month)
-        .HasConversion<int>().HasColumnType("tinyint");
+      entity.Property(static dayOff => dayOff.Month)
+        .HasConversion<int>()
+        .HasColumnType("tinyint");
 
-      entity.Property(static a => a.DayOfWeek)
-        .HasConversion<int>().HasColumnType("tinyint");
+      entity.Property(static dayOff => dayOff.DayOfWeek)
+        .HasConversion<int>()
+        .HasColumnType("tinyint");
 
-      entity.Property(static a => a.ID).HasDefaultValueSql("NewId()");
+      entity.Property(static dayOff => dayOff.ID)
+        .HasDefaultValueSql("NewId()");
 
-      entity.HasMany(static a => a.TargetsUser).WithMany(static a => a.DaysOffExpression)
+      entity.HasMany(static dayOff => dayOff.TargetsUser)
+        .WithMany(static user => user.DaysOffExpression)
         .UsingEntity<ModelDayOffExpressionTargetUser>(
-          static a => a.HasOne(static b => b.Target)
+          static targetUser => targetUser
+            .HasOne(static dayOff => dayOff.Target)
             .WithMany()
-            .HasForeignKey(static a => a.TargetID)
+            .HasForeignKey(static targetUser => targetUser.TargetID)
             .OnDelete(DeleteBehavior.Restrict),
-          static a => a.HasOne(static b => b.DayOff)
+          static targetUser => targetUser
+            .HasOne(static targetUser => targetUser.DayOff)
             .WithMany()
-            .HasForeignKey(static a => a.DayOffID)
+            .HasForeignKey(static targetUser => targetUser.DayOffID)
             .OnDelete(DeleteBehavior.Restrict));
 
-      entity.HasMany(static a => a.TargetsRole).WithMany(static a => a.DaysOffExpressions)
+      entity.HasMany(static dayOff => dayOff.TargetsRole)
+        .WithMany(static role => role.DaysOffExpressions)
         .UsingEntity<ModelDayOffExpressionTargetRole>(
-          static a => a.HasOne(static b => b.Target)
+          static targetRole => targetRole
+            .HasOne(static targetRole => targetRole.Target)
             .WithMany()
-            .HasForeignKey(static a => a.TargetID)
+            .HasForeignKey(static targetRole => targetRole.TargetID)
             .OnDelete(DeleteBehavior.Restrict),
-          static a => a.HasOne(static b => b.DayOff)
+          static targetRole => targetRole
+            .HasOne(static targetRole => targetRole.DayOff)
             .WithMany()
-            .HasForeignKey(static a => a.DayOffID)
+            .HasForeignKey(static targetRole => targetRole.DayOffID)
             .OnDelete(DeleteBehavior.Restrict));
 
-      entity.HasOne(static a => a.Author).WithMany(static a => a.DaysOffExpressionAuthor)
-        .HasForeignKey(static a => a.AuthorID)
+      entity.HasOne(static dayOff => dayOff.Author)
+        .WithMany(static user => user.DaysOffExpressionAuthor)
+        .HasForeignKey(static dayOff => dayOff.AuthorID)
         .OnDelete(DeleteBehavior.Restrict);
 
-      entity.HasOne(static a => a.Approver).WithMany(static a => a.DaysOffExpressionApprover)
-        .HasForeignKey(static a => a.ApproverID)
+      entity.HasOne(static dayOff => dayOff.Approver)
+        .WithMany(static user => user.DaysOffExpressionApprover)
+        .HasForeignKey(static dayOff => dayOff.ApproverID)
         .OnDelete(DeleteBehavior.Restrict);
 
       entity.HasData(StorageDayOffExpression.DaysOff);

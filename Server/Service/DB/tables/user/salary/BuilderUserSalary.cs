@@ -6,20 +6,22 @@ public class BuilderUserSalary : IBuilder
   {
     builder.Entity<ModelUserSalary>(static entity =>
     {
-      entity.HasKey(static a => new { a.ID, a.Date });
+      entity.HasKey(static salary => new { salary.ID, salary.Date });
 
-      entity.Property(static a => a.ID).HasDefaultValueSql("NewId()");
-      entity.Property(static a => a.HourlySalary).HasColumnType("money");
+      entity.Property(static salary => salary.ID).HasDefaultValueSql("NewId()");
+      entity.Property(static salary => salary.HourlySalary).HasColumnType("money");
 
-      entity.HasOne(static a => a.User).WithMany(static a => a.ApprovedSalary)
-        .HasForeignKey(static a => a.ID)
+      entity.HasOne(static salary => salary.User)
+        .WithMany(static user => user.ApprovedSalary)
+        .HasForeignKey(static salary => salary.ID)
         .OnDelete(DeleteBehavior.Restrict);
 
-      entity.HasOne(static a => a.Approver).WithMany(static a => a.Salary)
-        .HasForeignKey(static a => a.ApproverID)
+      entity.HasOne(static salary => salary.Approver)
+        .WithMany(static user => user.Salary)
+        .HasForeignKey(static salary => salary.ApproverID)
         .OnDelete(DeleteBehavior.Restrict);
 
-      entity.Property(static a => a.Date)
+      entity.Property(static salary => salary.Date)
         .HasDefaultValueSql("GETDATE()");
 #if DEBUG
       entity.HasData(StorageUserSalary.Salaries);

@@ -6,22 +6,28 @@ public class BuilderBonus : IBuilder
   {
     builder.Entity<ModelBonus>(static entity =>
     {
-      entity.Property(static a => a.ID).HasDefaultValueSql("NewId()");
-      entity.Property(static a => a.Bonus).HasColumnType("money");
+      entity.Property(static bonus => bonus.ID)
+        .HasDefaultValueSql("NewId()");
 
-      entity.HasOne(static a => a.Target).WithMany(static a => a.UsersBonuses)
-        .HasForeignKey(static a => a.TargetID)
+      entity.Property(static bonus => bonus.Bonus)
+        .HasColumnType("money");
+
+      entity.HasOne(static bonus => bonus.Target)
+        .WithMany(static user => user.UsersBonuses)
+        .HasForeignKey(static bonus => bonus.TargetID)
         .OnDelete(DeleteBehavior.Restrict);
 
-      entity.HasOne(static a => a.Creator).WithMany(static a => a.CreatedBonuses)
-        .HasForeignKey(static a => a.CreatorID)
+      entity.HasOne(static bonus => bonus.Creator)
+        .WithMany(static user => user.CreatedBonuses)
+        .HasForeignKey(static bonus => bonus.CreatorID)
         .OnDelete(DeleteBehavior.Restrict);
 
-      entity.HasOne(static a => a.Approver).WithMany(static a => a.ApprovedBonuses)
-        .HasForeignKey(static a => a.ApproverID)
+      entity.HasOne(static bonus => bonus.Approver)
+        .WithMany(static user => user.ApprovedBonuses)
+        .HasForeignKey(static bonus => bonus.ApproverID)
         .OnDelete(DeleteBehavior.Restrict);
 
-      entity.Property(static a => a.Date)
+      entity.Property(static bonus => bonus.Date)
         .HasDefaultValueSql("GETDATE()");
 #if DEBUG
       entity.HasData(StorageBonus.Bonuses);

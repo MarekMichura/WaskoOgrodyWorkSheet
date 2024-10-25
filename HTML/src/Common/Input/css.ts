@@ -26,7 +26,7 @@ export const ContextButton = styled(Context)`
 export const ContextInput = styled(Context)`
   padding: 5px 5px;
   gap: 5px;
-  background-color: ${(a) => a.theme.background[100].default};
+  background-color: ${(p) => p.theme.background[100].default};
 
   &::after {
     left: 0;
@@ -43,7 +43,7 @@ export const ContextInput = styled(Context)`
     height: 1px;
 
     transition: 300ms width ease-in-out;
-    background-color: ${(a) => a.theme.primary.default};
+    background-color: ${(p) => p.theme.primary.default};
     bottom: 0;
   }
 
@@ -53,7 +53,7 @@ export const ContextInput = styled(Context)`
   }
 
   &:focus-within {
-    background-color: ${(a) => a.theme.secondary[100].default};
+    background-color: ${(p) => p.theme.secondary[100].default};
   }
 `
 
@@ -75,7 +75,7 @@ export const Effect = styled.span`
   min-height: 100%;
   border-radius: 100%;
   aspect-ratio: 1;
-  background-color: ${(a) => a.theme.text[50].default};
+  background-color: ${(p) => p.theme.text[50].default};
   pointer-events: none;
   transform: scale(0);
   opacity: 1;
@@ -112,7 +112,7 @@ export const Error = styled.label`
 export const SVG = styled.svg`
   width: 40px;
 
-  fill: ${(a) => a.theme.primary.default};
+  fill: ${(p) => p.theme.primary.default};
 `
 
 export const Button = styled.button`
@@ -128,9 +128,9 @@ export const Button = styled.button`
 
   cursor: pointer;
 
-  color: ${(a) => a.theme.text[950].default};
-  background-color: ${(a) =>
-    a.theme.name == ITheme.THEME_LIGHT ? a.theme.primary[500].default : a.theme.primary[200].default};
+  color: ${(p) => p.theme.text[950].default};
+  background-color: ${(p) =>
+    p.theme.name == ITheme.THEME_LIGHT ? p.theme.primary[500].default : p.theme.primary[200].default};
 
   &:disabled {
     cursor: not-allowed !important;
@@ -147,7 +147,7 @@ export const Input = styled.input`
   align-self: flex-end;
 
   background-color: transparent;
-  color: ${(a) => a.theme.text[900].default};
+  color: ${(p) => p.theme.text[900].default};
 
   &:disabled {
     cursor: not-allowed !important;
@@ -169,13 +169,13 @@ export const Input = styled.input`
   &:-webkit-autofill:focus,
   &:-webkit-autofill:active {
     -webkit-background-clip: text;
-    -webkit-text-fill-color: ${(a) => a.theme.text[900].default};
-    box-shadow: inset 0 0 20px 20px ${(a) => a.theme.background[100].default};
+    -webkit-text-fill-color: ${(p) => p.theme.text[900].default};
+    box-shadow: inset 0 0 20px 20px ${(p) => p.theme.background[100].default};
   }
 
   &:-webkit-autofill:focus {
     -webkit-background-clip: text;
-    -webkit-text-fill-color: ${(a) => a.theme.text[900].default};
-    box-shadow: inset 0 0 20px 20px ${(a) => a.theme.secondary[100].default};
+    -webkit-text-fill-color: ${(p) => p.theme.text[900].default};
+    box-shadow: inset 0 0 20px 20px ${(p) => p.theme.secondary[100].default};
   }
 `

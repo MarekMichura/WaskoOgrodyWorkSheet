@@ -3,7 +3,7 @@ namespace Test;
 class Cookies(string cookie)
 {
   public readonly string[][] cookie =
-    cookie.Split(';').Select(static a => a.Split('=')).ToArray();
+    cookie.Split(';').Select(static cookies => cookies.Split('=')).ToArray();
 
   public string Name => cookie[0][0];
   public string Value => cookie[0][1];

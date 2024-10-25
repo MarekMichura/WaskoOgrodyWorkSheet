@@ -25,7 +25,6 @@ static class MapCalendarData
         && DateTime.TryParse(since, out var sinceTime)
         && sinceTime >= hit.Time)
       {
-        // Console.WriteLine("Modification hit");
         return Results.StatusCode(304);
       }
       httpContext.Response.Headers["cache-hit"] = "true";
@@ -42,7 +41,6 @@ static class MapCalendarData
     outPut = new ModelResultCalendar() { Data = result, Time = now };
     cache.Set(cacheKey, outPut, cacheOptions);
 
-    Console.WriteLine("Cache fail");
     return Results.Ok(outPut);
   }
 
@@ -83,7 +81,7 @@ static class MapCalendarData
     }
   }
 
-  private static void WorkHours(Dic dates, IEnumerable<ModelWorkHour> workHours)
+  private static void WorkHours(Dic dates, IEnumerable<ModelWorkHours> workHours)
   {
     foreach (var workHour in workHours)
     {

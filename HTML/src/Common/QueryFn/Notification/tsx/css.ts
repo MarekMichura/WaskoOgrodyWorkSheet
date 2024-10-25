@@ -1,7 +1,7 @@
 import styled, {keyframes} from 'styled-components'
 
 export const Container = styled.div`
-  position: absolute;
+  position: fixed;
   bottom: 15px;
   right: 15px;
   top: 15px;

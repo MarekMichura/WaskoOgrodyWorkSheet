@@ -38,7 +38,7 @@ export const DateInformation = styled.div`
   @media screen and (max-width: 730px) {
     grid-template-rows: max-content max-content 1fr;
     grid-template-columns: 1fr 2fr;
-    min-height: 250px;
+    min-height: 190px;
     grid-column-gap: 30px;
 
     grid-row: 2/3;
@@ -113,7 +113,6 @@ export const DateYearArrow = styled.svg`
 
 export const DateMonths = styled.div`
   display: flex;
-  gap: 5px;
   justify-content: space-between;
   border-bottom: 1px solid black;
   margin: 15px 0;

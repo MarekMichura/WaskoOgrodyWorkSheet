@@ -13,8 +13,16 @@ export const Notifications = () => {
 
   return (
     <CSS.Container>
-      {data!.map((a) => {
-        return <Notification key={a.id} id={a.id} text={a.text} type={a.type} life={a.life} />
+      {data!.map((notification) => {
+        return (
+          <Notification
+            key={notification.id}
+            id={notification.id}
+            text={notification.text}
+            type={notification.type}
+            life={notification.life}
+          />
+        )
       })}
     </CSS.Container>
   )

@@ -13,6 +13,6 @@ public class ModelWorkLocation
   public bool Active { get; set; } = true;
 
   public virtual ICollection<ModelRole> Targets { get; set; } = [];
-  public virtual ICollection<ModelWorkHour> WorkHours { get; set; } = [];
+  public virtual ICollection<ModelWorkHours> WorkHours { get; set; } = [];
   public virtual ICollection<ModelWorkLocationRole> Roles { get; set; } = [];
 }

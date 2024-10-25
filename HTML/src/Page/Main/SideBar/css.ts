@@ -125,10 +125,10 @@ export const MenuOption = styled(Link)`
     ${(p) => (p.theme.name == ITheme.THEME_DARK ? p.theme.background[50].default : p.theme.background[500].default)};
   background: linear-gradient(
     to right,
-    ${(a) => a.theme.background[100].default} 0%,
-    ${(a) => a.theme.background[100].default} 25%,
-    ${(a) => a.theme.background[200].default} 75%,
-    ${(a) => a.theme.background[200].default} 100%
+    ${(p) => p.theme.background[100].default} 0%,
+    ${(p) => p.theme.background[100].default} 25%,
+    ${(p) => p.theme.background[200].default} 75%,
+    ${(p) => p.theme.background[200].default} 100%
   );
 
   background-size: 400% 400%;
@@ -184,7 +184,7 @@ export const MenuIcon = styled.svg`
   height: 30px;
   width: 30px;
 
-  fill: ${(a) => a.theme.background[800].default};
+  fill: ${(p) => p.theme.background[800].default};
 `
 
 export const MenuText = styled.div`

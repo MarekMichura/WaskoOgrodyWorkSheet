@@ -42,6 +42,10 @@ export const EmployerCalendar = () => {
     }
   }, [data])
 
+  useEffect(() => {
+    document.title = 'Przegląd kalendarza'
+  }, [])
+
   return (
     <SuspendWrapper open={false} text="Kalendarz problemy">
       <CSS.Container>
@@ -57,6 +61,7 @@ export const EmployerCalendar = () => {
           <CSS.DateContent>
             <CSS.DateYearContainer>
               {calendar.fetchStatus == 'fetching' && 'Aktualizowanie danych...'}
+              {calendar.fetchStatus == 'paused' && 'Brak dostępu do internetu...'}
               <ArrowIcon
                 cssSVG={CSS.DateYearArrow}
                 onClick={() => data && setYear(navigation, data.yearNumber - 1, true)}
@@ -96,7 +101,14 @@ export const EmployerCalendar = () => {
               })}
             </CSS.Calendar>
           </CSS.DateContent>
-          <Loading open={calendar?.isPending ?? true} text={`Pobieranie danych dla ${params.month} ${params.year}`} />
+          <Loading
+            open={calendar?.isPending ?? true}
+            text={
+              calendar.fetchStatus == 'paused'
+                ? 'Brak połączenia z internetem'
+                : `Pobieranie danych dla ${params.month} ${params.year}`
+            }
+          />
         </CSS.Content>
       </CSS.Container>
     </SuspendWrapper>

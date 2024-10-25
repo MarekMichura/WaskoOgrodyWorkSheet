@@ -22,13 +22,13 @@ public class IdentityService : IService
       };
     });
 
-    builder.Services.AddAuthorization(a =>
+    builder.Services.AddAuthorization(authorization =>
     {
-      foreach (var b in StorageRole.Roles)
+      foreach (var roles in StorageRole.Roles)
       {
-        if (b.Name is not null)
+        if (roles.Name is not null)
         {
-          a.AddPolicy(b.Name, c => c.RequireRole(b.Name));
+          authorization.AddPolicy(roles.Name, policy => policy.RequireRole(roles.Name));
         }
       }
     });

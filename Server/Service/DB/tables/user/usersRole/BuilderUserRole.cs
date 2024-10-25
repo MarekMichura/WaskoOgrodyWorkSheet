@@ -6,12 +6,14 @@ public class BuilderUserRole : IBuilder
   {
     builder.Entity<IdentityUserRole<string>>(static entity =>
     {
-      entity.HasOne<ModelUser>().WithMany()
-        .HasForeignKey(static a => a.UserId)
+      entity.HasOne<ModelUser>()
+        .WithMany()
+        .HasForeignKey(static role => role.UserId)
         .OnDelete(DeleteBehavior.Restrict);
 
-      entity.HasOne<ModelRole>().WithMany()
-        .HasForeignKey(static a => a.RoleId)
+      entity.HasOne<ModelRole>()
+        .WithMany()
+        .HasForeignKey(static role => role.RoleId)
         .OnDelete(DeleteBehavior.Restrict);
 #if DEBUG
       entity.HasData(StorageUsersRole.UsersRoles);

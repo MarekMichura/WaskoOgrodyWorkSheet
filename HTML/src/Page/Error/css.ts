@@ -10,7 +10,7 @@ export const Content = styled.div`
 `
 
 export const Title = styled.h1`
-  color: ${(a) => a.theme.primary.default};
+  color: ${(p) => p.theme.primary.default};
 
   text-transform: uppercase;
   font-family: 'Archivo Black';

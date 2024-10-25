@@ -17,7 +17,7 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : Identi
   public DbSet<ModelDayOffExpressionTargetUser> DayOffExpressionTargetRole { get; set; }
 
   // =============================================================
-  public DbSet<ModelWorkHour> WorkHours { get; set; }
+  public DbSet<ModelWorkHours> WorkHours { get; set; }
   public DbSet<ModelWorkLocation> WorkLocations { get; set; }
   public DbSet<ModelWorkLocationRole> WorkLocationRoles { get; set; }
   public DbSet<ModelWorkLocationTargetRole> WorkLocationTargetRoles { get; set; }

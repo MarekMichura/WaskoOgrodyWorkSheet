@@ -29,8 +29,8 @@ public class ModelUser : IdentityUser
   public virtual ICollection<ModelFound> ApprovedFounds { get; set; } = [];
 
   // ============================= Work hours ===============
-  public virtual ICollection<ModelWorkHour> WorkHours { get; set; } = [];
-  public virtual ICollection<ModelWorkHour> CreatedWorkHours { get; set; } = [];
+  public virtual ICollection<ModelWorkHours> WorkHours { get; set; } = [];
+  public virtual ICollection<ModelWorkHours> CreatedWorkHours { get; set; } = [];
 
   // ============================= Chords ===================
   public virtual ICollection<ModelChordPrice> ChangedChordsPrices { get; set; } = [];

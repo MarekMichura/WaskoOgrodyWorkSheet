@@ -6,23 +6,29 @@ public class BuilderFound : IBuilder
   {
     builder.Entity<ModelFound>(static entity =>
     {
-      entity.Property(static a => a.ID).HasDefaultValueSql("NewId()");
-      entity.Property(static a => a.Founded).HasColumnType("money");
+      entity.Property(static found => found.ID)
+        .HasDefaultValueSql("NewId()");
 
-      entity.HasOne(static a => a.Target).WithMany(static a => a.UsersFounded)
-        .HasForeignKey(static a => a.TargetID)
+      entity.Property(static found => found.Founded)
+        .HasColumnType("money");
+
+      entity.HasOne(static found => found.Target)
+        .WithMany(static user => user.UsersFounded)
+        .HasForeignKey(static found => found.TargetID)
         .OnDelete(DeleteBehavior.Restrict);
 
-      entity.HasOne(static a => a.Creator).WithMany(static a => a.CreatedFounds)
-        .HasForeignKey(static a => a.CreatorID)
+      entity.HasOne(static found => found.Creator)
+        .WithMany(static user => user.CreatedFounds)
+        .HasForeignKey(static found => found.CreatorID)
         .OnDelete(DeleteBehavior.Restrict);
 
-      entity.HasOne(static a => a.Approver).WithMany(static a => a.ApprovedFounds)
-        .HasForeignKey(static a => a.ApproverID)
+      entity.HasOne(static found => found.Approver)
+        .WithMany(static user => user.ApprovedFounds)
+        .HasForeignKey(static found => found.ApproverID)
         .OnDelete(DeleteBehavior.Restrict);
 
 
-      entity.Property(static a => a.Date)
+      entity.Property(static found => found.Date)
         .HasDefaultValueSql("GETDATE()");
 
 #if DEBUG

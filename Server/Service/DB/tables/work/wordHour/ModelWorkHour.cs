@@ -1,6 +1,6 @@
 namespace Wasko;
 
-public class ModelWorkHour
+public class ModelWorkHours
 {
   [Key]
   [Required]

@@ -74,7 +74,6 @@ public class GetCalendar(WebApp app)
     await Client.PostAsync("/Authenticate", loginContent);
     var response = await Client.PostAsync("/CalendarData", calendarContent);
     var data = await response.Content.ReadFromJsonAsync<Dictionary<DateOnly, ModelResultCalendar>>();
-    // var content = string.Join("\n", data!.Select(a => $"{a.Key}" + (a.Value.DaysOff.Any() ? "\n\t" : "") + string.Join("\n\t", a.Value.DaysOff.Select(a => a.Reason)) + (a.Value.DaysOff.Any() ? "\n\t" : "") + string.Join("\n\t", a.Value.WorkingHours.Select(a => a.Where))));
 
     Assert.Equal(days, data!.Count);
   }
@@ -97,11 +96,9 @@ public class GetCalendar(WebApp app)
     await Client.PostAsync("/Authenticate", loginContent);
     var response = await Client.PostAsync("/CalendarData", calendarContent);
     var data = await response.Content.ReadFromJsonAsync<Dictionary<DateOnly, ModelResultCalendar>>();
-    var daysOff = data!.SelectMany(static a => a.Value.DaysOff);
-    var workingHours = data!.SelectMany(static a => a.Value.WorkingHours);
-    // var content = string.Join("", data!.Select(a => $"{a.Key}" + (a.Value.DaysOff.Any() ? "\n\t" : "") + string.Join("\n\t", a.Value.DaysOff.Select(a => a.Reason)) + (a.Value.DaysOff.Any() ? "\n\t" : "") + string.Join("\n\t", a.Value.WorkingHours.Select(a => a.Where))));
+    var daysOff = data!.SelectMany(static calendar => calendar.Value.DaysOff);
+    var workingHours = data!.SelectMany(static calendar => calendar.Value.WorkingHours);
 
-    // Assert.Fail(content);
     Assert.True(daysOff.Any());
     Assert.True(workingHours.Any());
   }

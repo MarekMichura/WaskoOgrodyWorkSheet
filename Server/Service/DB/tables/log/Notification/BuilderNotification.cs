@@ -7,9 +7,11 @@ public class BuilderNotification : IBuilder
   {
     builder.Entity<ModelNotification>(static entity =>
     {
-      entity.Property(static a => a.ID).HasDefaultValueSql("NewId()");
+      entity.Property(static notification => notification.ID)
+        .HasDefaultValueSql("NewId()");
 
-      entity.HasOne(static a => a.Target).WithMany(static a => a.Notifications);
+      entity.HasOne(static notification => notification.Target)
+        .WithMany(static user => user.Notifications);
     });
   }
 }

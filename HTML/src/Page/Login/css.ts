@@ -23,11 +23,11 @@ export const Content = styled.div`
   gap: 20px;
 
   overflow: hidden;
-  background-color: ${(a) => a.theme.background[50].default};
-  box-shadow: ${(a) =>
-    a.theme.name == ITheme.THEME_LIGHT
-      ? `0 0 3px 0 ${a.theme.background[900].default}`
-      : `inset 0 0 5px 0 ${a.theme.background[300].default}`};
+  background-color: ${(p) => p.theme.background[50].default};
+  box-shadow: ${(p) =>
+    p.theme.name == ITheme.THEME_LIGHT
+      ? `0 0 3px 0 ${p.theme.background[900].default}`
+      : `inset 0 0 5px 0 ${p.theme.background[300].default}`};
 
   @media screen and (max-width: 370px) {
     padding-left: Calc(100vw - 350px);
@@ -63,7 +63,7 @@ export const Title = styled.h1`
   font-family: 'Archivo Black';
 
   user-select: none;
-  color: ${(a) => a.theme.primary.default};
+  color: ${(p) => p.theme.primary.default};
 `
 
 export const SubTitle = styled.h3`
@@ -73,5 +73,5 @@ export const SubTitle = styled.h3`
   font-family: 'Archivo Black';
 
   user-select: none;
-  color: ${(a) => a.theme.primary.default};
+  color: ${(p) => p.theme.primary.default};
 `

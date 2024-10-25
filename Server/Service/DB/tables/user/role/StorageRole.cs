@@ -13,7 +13,8 @@ public class StorageRole(string id, string name, ushort strength = 0)
     TitleStrength = role.TitleStrength,
     NormalizedName = role.Name.ToUpper(),
     ConcurrencyStamp = Guid.NewGuid().ToString(),
-    AuthorID = StorageUser.Users.First(static a => a.UserName == "admin").Id
+    AuthorID = StorageUser.Users
+      .First(static user => user.UserName == "admin").Id
   };
 
   private static readonly StorageRole RoleBlockEmployerDayOff = new("264462d7-74f0-45c3-bcf2-7ad0741e7676", nameof(BuildInRoles.Block_employer_day_off));
@@ -25,12 +26,12 @@ public class StorageRole(string id, string name, ushort strength = 0)
 
   private static readonly StorageRole RolePolishHolidays = new("1d923116-d460-4809-b8d8-47d1c4216b2c", nameof(BuildInRoles.Polish_holidays));
 
-  public static IEnumerable<ModelRole> Roles = [RoleBlockEmployerDayOff, RoleBlockEmployerBonus, RoleBlockEmployerFound, RoleEmployer, RoleGardener, RolePolishHolidays];
+  public readonly static IEnumerable<ModelRole> Roles = [RoleBlockEmployerDayOff, RoleBlockEmployerBonus, RoleBlockEmployerFound, RoleEmployer, RoleGardener, RolePolishHolidays];
 
-  public static string employerID = RoleEmployer.ID;
-  public static string gardenerID = RoleGardener.ID;
-  public static string blockEmployerDayOffID = RoleBlockEmployerDayOff.ID;
-  public static string blockEmployerBonusID = RoleBlockEmployerBonus.ID;
-  public static string blockEmployerFoundID = RoleBlockEmployerFound.ID;
-  public static string polishHolidaysID = RolePolishHolidays.ID;
+  public readonly static string employerID = RoleEmployer.ID;
+  public readonly static string gardenerID = RoleGardener.ID;
+  public readonly static string blockEmployerDayOffID = RoleBlockEmployerDayOff.ID;
+  public readonly static string blockEmployerBonusID = RoleBlockEmployerBonus.ID;
+  public readonly static string blockEmployerFoundID = RoleBlockEmployerFound.ID;
+  public readonly static string polishHolidaysID = RolePolishHolidays.ID;
 }

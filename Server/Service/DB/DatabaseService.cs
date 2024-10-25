@@ -8,6 +8,13 @@ public class DatabaseService : IService
     var password = Environment.GetEnvironmentVariable("DB_PASSWORD");
     connectionStr = connectionStr.Replace("${PASSWORD}", password);
 
-    builder.Services.AddDbContext<DatabaseContext>(a => { a.UseSqlServer(connectionStr, a => { a.EnableRetryOnFailure(); }); });
+    builder.Services.AddDbContext<DatabaseContext>(option =>
+    {
+      option.UseSqlServer(connectionStr, sqlOption =>
+      {
+        sqlOption.EnableRetryOnFailure();
+        sqlOption.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+      });
+    });
   }
 }

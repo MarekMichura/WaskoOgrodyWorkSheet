@@ -9,10 +9,9 @@ import {routePermission, IRoute, routes, endPoints, IAdditionalRoute} from './IR
 
 export const MyRoute = () => {
   const [pending] = useTransition()
-  const {data, isSuccess} = useProfil()
+  const {data, isError} = useProfil()
 
-  if (!isSuccess) return <></>
-  if (!data) {
+  if (isError || !data) {
     const Login = endPoints[IAdditionalRoute.login]
     return <Login />
   }

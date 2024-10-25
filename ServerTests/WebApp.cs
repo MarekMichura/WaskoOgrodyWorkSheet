@@ -10,17 +10,18 @@ public class WebApp : IDisposable
     {
       builder.ConfigureServices(static services =>
         {
-          // remove connection to DB and use in memory DB
-          var db = services.SingleOrDefault(static a => a.ServiceType == typeof(DbContextOptions<DatabaseContext>))
+          var db = services
+            .SingleOrDefault(static service => service.ServiceType == typeof(DbContextOptions<DatabaseContext>))
             ?? throw new NullReferenceException();
-          services.Remove(db);
-          services.AddDbContext<DatabaseContext>(static a => a.UseInMemoryDatabase("Test"));
 
-          // use default data in db
+          services.Remove(db);
+          services.AddDbContext<DatabaseContext>(static options => options.UseInMemoryDatabase("Test"));
+
           var provider = services.BuildServiceProvider();
           using var scope = provider.CreateScope();
 
-          var dataBase = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+          var dataBase = scope.ServiceProvider
+            .GetRequiredService<DatabaseContext>();
           dataBase.Database.EnsureCreated();
         });
     });

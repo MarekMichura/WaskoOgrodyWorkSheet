@@ -1,5 +1,5 @@
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.HttpsPolicy;
 
 namespace Wasko;
 
@@ -42,6 +42,14 @@ public class EndPoint : IEndPoint, IService
         {
             options.EnableForHttps = true;
         });
+
+        // builder.Services.AddHttpsRedirection(static options =>
+        // {
+        //     options.HttpsPort = 8081;
+        // });
+
+        // builder.Services.AddDataProtection()
+        //     .ProtectKeysWithCertificate("thumbprint");
     }
 }
 

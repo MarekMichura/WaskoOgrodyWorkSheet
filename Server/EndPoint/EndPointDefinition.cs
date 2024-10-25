@@ -26,10 +26,10 @@ static class EndPointDefinition
   public static void DefineServices(this WebApplicationBuilder builder)
   {
     Assembly.GetExecutingAssembly().DefinedTypes
-      .Where(x => typeof(IService).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract)
+      .Where(type => typeof(IService).IsAssignableFrom(type) && !type.IsInterface && !type.IsAbstract)
         .Select(Activator.CreateInstance)
         .Cast<IService>()
-        .ForEach(x => x.DefineService(builder));
+        .ForEach(service => service.DefineService(builder));
   }
 
   public static void DefineEndPoints(this WebApplication app)
@@ -38,7 +38,7 @@ static class EndPointDefinition
       .Where(x => typeof(IEndPoint).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract)
         .Select(Activator.CreateInstance)
         .Cast<IEndPoint>()
-        .OrderByDescending(x => x.Priority)
-        .ForEach(x => x.DefineEndPoint(app));
+        .OrderByDescending(endPoint => endPoint.Priority)
+        .ForEach(endPoint => endPoint.DefineEndPoint(app));
   }
 }

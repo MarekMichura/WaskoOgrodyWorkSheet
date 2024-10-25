@@ -21,7 +21,7 @@ public class ModelWorkChord
   [Required]
   [StringLength(36)]
   public required string WorkHourID { get; set; }
-  public ModelWorkHour? WorkHour { get; set; }
+  public ModelWorkHours? WorkHour { get; set; }
 
   [Required]
   [StringLength(36)]

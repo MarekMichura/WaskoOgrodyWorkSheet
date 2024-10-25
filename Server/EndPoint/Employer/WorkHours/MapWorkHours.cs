@@ -35,12 +35,13 @@ public class MapWorkHours
       return Results.Ok();
     }
 
-    var chordsThatWasForgetting = before?.SelectMany(static a => a.Chords)
-      .Select(static a => new ModelResultWorkHours.Chord()
+    var chordsThatWasForgetting = before?
+      .SelectMany(static workHour => workHour.Chords)
+      .Select(static chord => new ModelResultWorkHours.Chord()
       {
-        ChordID = a.ID,
+        ChordID = chord.ID,
         ChordCount = 10,
-        LocationID = a.WorkHour!.WorkLocationID
+        LocationID = chord.WorkHour!.WorkLocationID
       });
 
     return Results.Ok(chordsThatWasForgetting);

@@ -6,13 +6,14 @@ public class BuilderProfile : IBuilder
   {
     builder.Entity<ModelProfil>(static entity =>
     {
-      entity.Property(static a => a.WorkStartDate)
+      entity.Property(static profil => profil.WorkStartDate)
         .HasColumnType("Date")
         .HasDefaultValueSql("getdate()")
         .IsRequired();
 
-      entity.HasOne(static a => a.User).WithOne(static a => a.Profil)
-        .HasForeignKey<ModelProfil>(static a => a.ID)
+      entity.HasOne(static profil => profil.User)
+        .WithOne(static user => user.Profil)
+        .HasForeignKey<ModelProfil>(static profil => profil.ID)
         .OnDelete(DeleteBehavior.Restrict)
         .IsRequired();
 

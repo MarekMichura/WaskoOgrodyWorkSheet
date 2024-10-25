@@ -25,10 +25,10 @@ public class LoginTest(WebApp app)
 
     Assert.True(response.IsSuccessStatusCode);
     Assert.True(data.Authenticated);
-    Assert.Equal(data.Profil!.UserName, user.UserName);
+    Assert.Equal(data.Profil?.UserName, user.UserName);
 
-    Assert.NotEmpty(cookies1.Last(static a => a.Name == ".AspNetCore.Identity.Application").Value);
-    Assert.Empty(cookies2.Last(static a => a.Name == ".AspNetCore.Identity.Application").Value);
+    Assert.NotEmpty(cookies1.Last(static cookie => cookie.Name == ".AspNetCore.Identity.Application").Value);
+    Assert.Empty(cookies2.Last(static cookie => cookie.Name == ".AspNetCore.Identity.Application").Value);
   }
 
   [Theory]
@@ -48,8 +48,6 @@ public class LoginTest(WebApp app)
     Assert.True(response.IsSuccessStatusCode);
     Assert.False(data.Authenticated);
     Assert.Null(data.Profil);
-    Assert.Empty(cookies.Last(static a => a.Name == ".AspNetCore.Identity.Application").Value);
+    Assert.Empty(cookies.Last(static cookie => cookie.Name == ".AspNetCore.Identity.Application").Value);
   }
-
-
 }

@@ -10,25 +10,25 @@ partial class ServiceCalendar(DatabaseContext context, IServiceUser user) : ISer
     var current = _user.GetCurrentUser() ?? throw new NullReferenceException();
 
     var DayOffDates = _context.DayOffDates
-      .Where(a => a.StartDate <= end && start <= a.EndDate && (a.StopActive == null || a.StopActive > start))
-      .Include(a => a.TargetsRole)
-      .Where(a => a.TargetsRole.Any(b => current.Roles.Contains(b)) || a.TargetsRole.Count == 0)
-      .Include(a => a.TargetsUser)
-      .Where(a => a.TargetsUser.Any(b => b.UserName == current.UserName) || a.TargetsUser.Count == 0)
+      .Where(dayOff => dayOff.StartDate <= end && start <= dayOff.EndDate && (dayOff.StopActive == null || dayOff.StopActive > start))
+      .Include(dayOff => dayOff.TargetsRole)
+      .Where(dayOff => dayOff.TargetsRole.Any(role => current.Roles.Contains(role)) || dayOff.TargetsRole.Count == 0)
+      .Include(dayOff => dayOff.TargetsUser)
+      .Where(dayOff => dayOff.TargetsUser.Any(user => user.UserName == current.UserName) || dayOff.TargetsUser.Count == 0)
       .ToList();
 
     var DayOffExpression = _context.DayOffExpression
-      .Where(a => a.StopActive == null || a.StopActive > start)
-      .Include(a => a.TargetsRole)
-      .Where(a => a.TargetsRole.Any(b => current.Roles.Contains(b)) || a.TargetsRole.Count == 0)
-      .Include(a => a.TargetsUser)
-      .Where(a => a.TargetsUser.Any(b => b.UserName == current.UserName) || a.TargetsUser.Count == 0)
+      .Where(dayOff => dayOff.StopActive == null || dayOff.StopActive > start)
+      .Include(dayOff => dayOff.TargetsRole)
+      .Where(dayOff => dayOff.TargetsRole.Any(role => current.Roles.Contains(role)) || dayOff.TargetsRole.Count == 0)
+      .Include(dayOff => dayOff.TargetsUser)
+      .Where(dayOff => dayOff.TargetsUser.Any(user => user.UserName == current.UserName) || dayOff.TargetsUser.Count == 0)
       .ToList();
 
     var WorkHours = _context.WorkHours
-      .Where(a => a.UserID == current.Id && a.Date <= end && start <= a.Date && a.Active)
-      .Include(a => a.WorkLocation)
-      .Include(a => a.Chords)
+      .Where(workHours => workHours.UserID == current.Id && workHours.Date <= end && start <= workHours.Date && workHours.Active)
+      .Include(workHours => workHours.WorkLocation)
+      .Include(workHours => workHours.Chords)
       .ToList();
 
     return new CalendarResponse()

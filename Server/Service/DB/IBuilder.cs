@@ -13,6 +13,6 @@ static class Builder
       .Where(x => typeof(IBuilder).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract)
         .Select(Activator.CreateInstance)
         .Cast<IBuilder>()
-        .ForEach(x => x.CreateModel(model));
+        .ForEach(builder => builder.CreateModel(model));
   }
 }

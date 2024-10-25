@@ -62,12 +62,12 @@ const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 export const endPoints: Record<IAdditionalRoute | IRoute, React.LazyExoticComponent<() => JSX.Element>> = {
   [IRoute.setWorkingHours]: lazy(() => delay(10000).then(() => ({default: () => <>setWorkingHours</>}))),
   [IRoute.addComment]: lazy(() => delay(10000).then(() => ({default: () => <>addComment</>}))),
-  [IRoute.showCalendar]: lazy(() => import('/Calendar').then((a) => ({default: a.EmployerCalendar}))),
+  [IRoute.showCalendar]: lazy(() => import('/Calendar').then((module) => ({default: module.EmployerCalendar}))),
   [IRoute.askDayOff]: lazy(() => delay(10000).then(() => ({default: () => <>askDayOff</>}))),
   [IRoute.setChord]: lazy(() => delay(10000).then(() => ({default: () => <>setChord</>}))),
   [IRoute.addRefund]: lazy(() => delay(10000).then(() => ({default: () => <>addRefund</>}))),
   [IRoute.askBonus]: lazy(() => delay(10000).then(() => ({default: () => <>askBonus</>}))),
-  [IAdditionalRoute.login]: lazy(() => import('/Login').then((a) => ({default: a.Login}))),
-  [IAdditionalRoute.mainPage]: lazy(() => import('/Main').then((a) => ({default: a.MainPage}))),
-  [IAdditionalRoute.Error]: lazy(() => import('/Error/index').then((a) => ({default: a.Error404}))),
+  [IAdditionalRoute.login]: lazy(() => import('/Login').then((module) => ({default: module.Login}))),
+  [IAdditionalRoute.mainPage]: lazy(() => import('/Main').then((module) => ({default: module.MainPage}))),
+  [IAdditionalRoute.Error]: lazy(() => import('/Error/index').then((module) => ({default: module.Error404}))),
 }

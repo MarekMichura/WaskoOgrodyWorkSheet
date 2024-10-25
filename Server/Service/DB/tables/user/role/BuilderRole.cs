@@ -6,22 +6,26 @@ public class BuilderRole : IBuilder
   {
     builder.Entity<ModelRole>(static entity =>
     {
-      entity.Property(static a => a.Id)
+      entity.Property(static role => role.Id)
         .HasMaxLength(36)
         .IsRequired();
 
-      entity.Property(static a => a.ConcurrencyStamp)
+      entity.Property(static role => role.ConcurrencyStamp)
         .IsRequired();
 
-      entity.HasIndex(static a => a.Name).IsUnique();
-      entity.Property(static a => a.Name)
+      entity.HasIndex(static role => role.Name)
+        .IsUnique();
+
+      entity.Property(static role => role.Name)
         .IsRequired();
 
-      entity.HasOne(static a => a.Author).WithMany(static a => a.CreatedRoles)
-        .HasForeignKey(static a => a.AuthorID)
+      entity.HasOne(static role => role.Author)
+        .WithMany(static user => user.CreatedRoles)
+        .HasForeignKey(static role => role.AuthorID)
         .OnDelete(DeleteBehavior.Restrict);
 
-      entity.HasMany(static a => a.Users).WithMany(static a => a.Roles)
+      entity.HasMany(static role => role.Users)
+        .WithMany(static user => user.Roles)
         .UsingEntity<IdentityUserRole<string>>();
 
       entity.HasData(StorageRole.Roles);

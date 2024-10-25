@@ -9,3 +9,6 @@ global using System.Security.Claims;
 global using System.ComponentModel.DataAnnotations.Schema;
 global using System.Collections.Concurrent;
 global using Microsoft.Extensions.Caching.Memory;
+global using System.Text.Json;
+global using System.Text.Json.Serialization;
+global using Microsoft.AspNetCore.DataProtection;

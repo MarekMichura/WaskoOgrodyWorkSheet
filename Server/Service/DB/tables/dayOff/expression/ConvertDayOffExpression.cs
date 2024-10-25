@@ -5,13 +5,13 @@ using Model = ModelDayOffExpression;
 
 public class ConvertDayOffExpression
 {
-  private static Range HandleYear(Model model, Range range)
+  private static Range HandleYear(Model model, Range ranges)
   {
     if (model.Year is null)
     {
-      return range;
+      return ranges;
     }
-    var (start, end) = range.First();
+    var (start, end) = ranges.First();
     var modelStart = new DateOnly((int)model.Year, 1, 1);
     var modelEnd = new DateOnly((int)model.Year, 12, 31);
 
@@ -23,24 +23,24 @@ public class ConvertDayOffExpression
       return [];
     }
 
-    range[0] = new(rangeStart, rangeEnd);
-    return range;
+    ranges[0] = new(rangeStart, rangeEnd);
+    return ranges;
   }
 
-  private static Range HandleMonth(Model model, Range range)
+  private static Range HandleMonth(Model model, Range ranges)
   {
     if (model.Month is null)
     {
-      return range;
+      return ranges;
     }
 
     var newRange = new Range();
     var month = (int)model.Month;
 
-    foreach (var a in range)
+    foreach (var range in ranges)
     {
-      var start = a.Item1;
-      var end = a.Item2 ?? start;
+      var start = range.Item1;
+      var end = range.Item2 ?? start;
 
       // if only one possible result
       if (start.Year == end.Year)
@@ -88,20 +88,20 @@ public class ConvertDayOffExpression
     return newRange;
   }
 
-  private static Range HandleDay(Model model, Range range)
+  private static Range HandleDay(Model model, Range ranges)
   {
     if (model.Day is null)
     {
-      return range;
+      return ranges;
     }
 
     var newRange = new Range();
     var day = (int)model.Day;
 
-    foreach (var a in range)
+    foreach (var range in ranges)
     {
-      var start = a.Item1;
-      var end = a.Item2 ?? start;
+      var start = range.Item1;
+      var end = range.Item2 ?? start;
 
       // if only one possible result
       if (start.Year == end.Year && start.Month == end.Month)
@@ -125,20 +125,20 @@ public class ConvertDayOffExpression
     return newRange;
   }
 
-  private static Range HandleDayOfWeek(Model model, Range range)
+  private static Range HandleDayOfWeek(Model model, Range ranges)
   {
     if (model.DayOfWeek is null)
     {
-      return range;
+      return ranges;
     }
 
     var newRange = new Range();
     var day = (int)model.DayOfWeek;
 
-    foreach (var a in range)
+    foreach (var range in ranges)
     {
-      var start = a.Item1;
-      var end = a.Item2 ?? start;
+      var start = range.Item1;
+      var end = range.Item2 ?? start;
 
       for (var date = start.AddDays((day - (int)start.DayOfWeek + 7) % 7); date <= end; date = date.AddDays(7))
       {
@@ -149,21 +149,21 @@ public class ConvertDayOffExpression
     return newRange;
   }
 
-  private static Range HandleEaster(Model model, Range range)
+  private static Range HandleEaster(Model model, Range ranges)
   {
     if (model.DaysAfterEaster is null)
     {
-      return range;
+      return ranges;
     }
 
     var newRange = new Range();
     var day = (int)model.DaysAfterEaster;
     var easter = new Dictionary<int, DateOnly>();
 
-    foreach (var a in range)
+    foreach (var range in ranges)
     {
-      var start = a.Item1;
-      var end = a.Item2 ?? start;
+      var start = range.Item1;
+      var end = range.Item2 ?? start;
 
       for (var year = start.Year; year <= end.Year; year++)
       {

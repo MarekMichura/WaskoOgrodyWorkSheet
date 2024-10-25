@@ -19,6 +19,6 @@ public class ModelChord
   public virtual ICollection<ModelWorkChord> WorkChords { get; set; } = [];
   public virtual ICollection<ModelChordPrice> Prices { get; set; } = [];
   public virtual ModelChordPrice? CurrentPrice => Prices
-    .Where(static a => a.Date < DateOnly.FromDateTime(DateTime.Now))
-    .MaxBy(static a => a.Date);
+    .Where(static chordPrice => chordPrice.Date < DateOnly.FromDateTime(DateTime.Now))
+    .MaxBy(static chordPrice => chordPrice.Date);
 }

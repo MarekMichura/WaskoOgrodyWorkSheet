@@ -53,7 +53,7 @@ export const Icon = styled.svg`
   display: block;
 
   cursor: pointer;
-  fill: ${(a) => a.theme.background[800].default};
+  fill: ${(p) => p.theme.background[800].default};
 `
 
 export const IconCon = styled.div`
@@ -105,7 +105,7 @@ export const IconSmall = styled.svg`
   aspect-ratio: 1;
 
   display: block;
-  fill: ${(a) => a.theme.background[800].default};
+  fill: ${(p) => p.theme.background[800].default};
 `
 
 export const MenuItem = styled.div`
@@ -180,7 +180,7 @@ export const BigIcon = styled.svg`
 
   display: block;
 
-  fill: ${(a) => a.theme.background[800].default};
+  fill: ${(p) => p.theme.background[800].default};
 `
 
 export const MenuOption = styled.div`

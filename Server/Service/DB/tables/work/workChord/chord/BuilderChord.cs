@@ -6,10 +6,12 @@ public class BuilderChord : IBuilder
   {
     builder.Entity<ModelChord>(static entity =>
     {
-      entity.Property(static a => a.ID).HasDefaultValueSql("NewId()");
+      entity.Property(static chord => chord.ID)
+        .HasDefaultValueSql("NewId()");
 
-      entity.HasOne(static a => a.Creator).WithMany(static a => a.CreatedChords)
-        .HasForeignKey(static a => a.CreatorID)
+      entity.HasOne(static chord => chord.Creator)
+        .WithMany(static user => user.CreatedChords)
+        .HasForeignKey(static chord => chord.CreatorID)
         .OnDelete(DeleteBehavior.Restrict);
 
       entity.HasData(StorageChord.Chords);

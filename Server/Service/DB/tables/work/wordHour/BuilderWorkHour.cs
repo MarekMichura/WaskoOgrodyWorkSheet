@@ -4,20 +4,24 @@ public class BuilderWorkHour : IBuilder
 {
   public void CreateModel(ModelBuilder builder)
   {
-    builder.Entity<ModelWorkHour>(static entity =>
+    builder.Entity<ModelWorkHours>(static entity =>
     {
-      entity.Property(static a => a.ID).HasDefaultValueSql("NewId()");
+      entity.Property(static workHours => workHours.ID)
+        .HasDefaultValueSql("NewId()");
 
-      entity.HasOne(static a => a.User).WithMany(static a => a.WorkHours)
-        .HasForeignKey(static a => a.UserID)
+      entity.HasOne(static workHours => workHours.User)
+        .WithMany(static user => user.WorkHours)
+        .HasForeignKey(static workHours => workHours.UserID)
         .OnDelete(DeleteBehavior.Restrict);
 
-      entity.HasOne(static a => a.Author).WithMany(static a => a.CreatedWorkHours)
-        .HasForeignKey(static a => a.AuthorID)
+      entity.HasOne(static workHours => workHours.Author)
+        .WithMany(static user => user.CreatedWorkHours)
+        .HasForeignKey(static workHours => workHours.AuthorID)
         .OnDelete(DeleteBehavior.Restrict);
 
-      entity.HasOne(static a => a.WorkLocation).WithMany(static a => a.WorkHours)
-        .HasForeignKey(static a => a.WorkLocationID)
+      entity.HasOne(static workHours => workHours.WorkLocation)
+        .WithMany(static workLocation => workLocation.WorkHours)
+        .HasForeignKey(static workHours => workHours.WorkLocationID)
         .OnDelete(DeleteBehavior.Restrict);
 
 #if DEBUG
