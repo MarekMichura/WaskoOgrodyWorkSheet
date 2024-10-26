@@ -27,7 +27,7 @@ export const MyRoute = () => {
               <Route path={routes[v]} Component={endPoints[v]} key={k} />
             ))}
           <Route path="*" Component={endPoints[IAdditionalRoute.Error]} />
-          <Route index Component={() => <>/</>} />
+          {/* <Route index Component={() => <>/</>} /> */}
         </Route>
       </Routes>
       <Loading open={pending} text="Ładowanie strony głównej" />

@@ -51,7 +51,7 @@ export const links: Record<IRoute, string> = {
 export const routes: Record<IRoute, string> = {
   [IRoute.setWorkingHours]: links[IRoute.setWorkingHours].slice(1),
   [IRoute.addComment]: links[IRoute.addComment].slice(1),
-  [IRoute.showCalendar]: `${links[IRoute.showCalendar]}/:month?/:year?`.slice(1),
+  [IRoute.showCalendar]: `${links[IRoute.showCalendar].slice(1)}/*`,
   [IRoute.askDayOff]: links[IRoute.askDayOff].slice(1),
   [IRoute.setChord]: links[IRoute.setChord].slice(1),
   [IRoute.addRefund]: links[IRoute.addRefund].slice(1),
@@ -59,10 +59,12 @@ export const routes: Record<IRoute, string> = {
 }
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
-export const endPoints: Record<IAdditionalRoute | IRoute, React.LazyExoticComponent<() => JSX.Element>> = {
+export const endPoints = {
   [IRoute.setWorkingHours]: lazy(() => delay(10000).then(() => ({default: () => <>setWorkingHours</>}))),
   [IRoute.addComment]: lazy(() => delay(10000).then(() => ({default: () => <>addComment</>}))),
-  [IRoute.showCalendar]: lazy(() => import('/Calendar').then((module) => ({default: module.EmployerCalendar}))),
+  [IRoute.showCalendar]: lazy(() =>
+    import('/Calendar/EmployerCalendar').then((module) => ({default: module.EmployerCalendar}))
+  ),
   [IRoute.askDayOff]: lazy(() => delay(10000).then(() => ({default: () => <>askDayOff</>}))),
   [IRoute.setChord]: lazy(() => delay(10000).then(() => ({default: () => <>setChord</>}))),
   [IRoute.addRefund]: lazy(() => delay(10000).then(() => ({default: () => <>addRefund</>}))),

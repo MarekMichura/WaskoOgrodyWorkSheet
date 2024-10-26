@@ -35,6 +35,7 @@ export default tseslint.config(
       'react/react-in-jsx-scope': 'off',
       'react-refresh/only-export-components': ['warn', {allowConstantExport: true}],
       'import/no-unresolved': 'off',
+      'import/named': 'off',
       'import/order': [
         'error',
         {

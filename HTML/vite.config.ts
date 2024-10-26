@@ -1,10 +1,9 @@
 import path from 'path'
 
 import react from '@vitejs/plugin-react'
-import {defineConfig} from 'vite'
-
-import viteCompression from 'vite-plugin-compression'
 import {visualizer} from 'rollup-plugin-visualizer'
+import {defineConfig} from 'vite'
+import viteCompression from 'vite-plugin-compression'
 
 declare const __dirname: string
 export default defineConfig({
@@ -71,6 +70,7 @@ export default defineConfig({
       '/Function': path.resolve(__dirname, 'src/Common/Function'),
       '/Calendar': path.resolve(__dirname, 'src/Page/EmployerCalendar'),
       '/EmployerCalendar': path.resolve(__dirname, 'src/Page/EmployerCalendar'),
+      '/ErrorBoundary': path.resolve(__dirname, 'src/Common/ErrorBoundary'),
       '/Error': path.resolve(__dirname, 'src/Page/Error'),
       '/Icon': path.resolve(__dirname, 'src/Common/Icon'),
       '/Input': path.resolve(__dirname, 'src/Common/Input/Input.tsx'),

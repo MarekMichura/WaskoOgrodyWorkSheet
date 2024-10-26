@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import {styled} from 'styled-components'
 
 import {ITheme} from '/QueryFn/Theme/types/ITheme'
 

@@ -36,7 +36,7 @@ const Notification = ({id, text, type, life}: INotificationProps) => {
   useEffect(() => {
     const time = setTimeout(() => mutationNotificationRemove.mutate(id), (life ?? DEFAULT_LIFE) + 1000)
     return () => clearTimeout(time)
-  }, [])
+  }, [id, life, mutationNotificationRemove])
 
   const Icon = NotificationIcon[type]
   const title = NotificationTitle[type]

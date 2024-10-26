@@ -8,6 +8,6 @@ export const SuspendWrapperController = ({set}: ISuspendWrapperController) => {
     return () => {
       set(false)
     }
-  }, [])
+  }, [set])
   return <></>
 }

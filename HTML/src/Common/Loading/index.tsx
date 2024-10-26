@@ -10,7 +10,7 @@ export const Loading = ({openDefault, open, text}: ILoadingProps) => {
     if (open == state) return
     const time = setTimeout(() => setState(open ?? false), open ? 100 : 2000)
     return () => clearTimeout(time)
-  }, [open])
+  }, [open, state])
 
   if (!state) return <></>
   return (

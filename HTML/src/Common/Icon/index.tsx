@@ -7,13 +7,6 @@ export interface IIcon extends React.SVGProps<SVGSVGElement> {
   cssSVG?: IStyledComponentBase<'web', FastOmit<React.SVGProps<SVGSVGElement>, never>>
 }
 
-export const defAnimate = {
-  begin: 'indefinite',
-  fill: 'freeze',
-  attributeName: 'd',
-  dur: '500ms',
-}
-
 export interface IChangeMenu extends IIcon {
   status?: boolean
 }

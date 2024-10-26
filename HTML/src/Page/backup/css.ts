@@ -122,14 +122,13 @@ export const DateMonth = styled.div`
   position: relative;
   color: ${(p) => p.theme.background[300].default};
   pointer-events: none;
-  &[data-active='true'] {
+  &[data-active='ok'] {
     cursor: pointer;
     pointer-events: all;
     color: ${(p) => p.theme.background[900].default};
     cursor: pointer;
   }
-  &[data-current='true'] {
-    cursor: default;
+  &[data-active='current'] {
     color: ${(p) => p.theme.primary[700].default};
   }
 `

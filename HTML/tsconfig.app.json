@@ -24,6 +24,7 @@
 
     "paths": {
       "/Button": ["Common/Input/Button.tsx"],
+      "/ErrorBoundary": ["Common/ErrorBoundary/index.tsx"],
       "/Calendar": ["Page/EmployerCalendar/index.tsx"],
       "/Calendar/*": ["Page/EmployerCalendar/*"],
       "/EmployerCalendar": ["Page/EmployerCalendar/index.tsx"],

@@ -1,6 +1,8 @@
 import {useRef, useEffect} from 'react'
 
-import {IChangeMenu, Icon, defAnimate} from '.'
+import {defAnimate} from './defAnimate'
+
+import {IChangeMenu, Icon} from '.'
 
 const pathOpen = `
   M74-194L74-328L627-328L627-194L74-194Z

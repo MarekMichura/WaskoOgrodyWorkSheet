@@ -1,5 +1,5 @@
 import {Formik} from 'formik'
-import {Suspense} from 'react'
+import {Suspense, useEffect} from 'react'
 import {useTheme} from 'styled-components'
 
 import {Button} from '/Button'
@@ -22,6 +22,10 @@ export const Login = () => {
   const Login = ({login, password}: ILoginValues) => {
     mutationLogin.mutate({Login: login, Password: password})
   }
+
+  useEffect(() => {
+    document.title = 'Przegląd kalendarza'
+  }, [])
 
   return (
     <Suspense fallback={<Loading open={true} text="ładowanie strony" />}>

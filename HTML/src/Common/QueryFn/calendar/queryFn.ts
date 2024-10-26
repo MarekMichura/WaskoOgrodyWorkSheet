@@ -10,14 +10,11 @@ type notificationAdd = UseMutationResult<INotification[], Error, INotification, 
 export const queryFn = (
   prevData: IResponseCalendar | undefined,
   notification: notificationAdd,
-  start?: Date,
-  end?: Date
+  start: Date,
+  end: Date
 ): (() => Promise<IResponseCalendar>) => {
   return (): Promise<IResponseCalendar> => {
     const promise = new Promise<IResponseCalendar>((resolve, reject) => {
-      if (start == undefined || end == undefined)
-        return () => Promise.reject({type: INotificationType.error, text: 'Nie poprawne dane dla kalendarza'})
-
       const headers: Record<string, string> = prevData ? {'If-Modified-Since': prevData.time} : {}
       const post = {start: ChangeToApiDateString(start), end: ChangeToApiDateString(end)}
 
@@ -29,7 +26,7 @@ export const queryFn = (
         .internalError(() => reject({type: INotificationType.error, text: 'Wystąpił problem po stronie serwera'}))
         .timeout(() => reject({type: INotificationType.error, text: 'Przekroczono limit czasu żądania'}))
         .error(304, () => {
-          resolve(prevData!)
+          reject()
         })
         .text((text) => {
           if (text.slice(8, text.lastIndexOf('},') + 1) != JSON.stringify(prevData?.data)) {
@@ -54,8 +51,7 @@ export const queryFn = (
     })
 
     promise.catch((a: INotification) => {
-      console.log(a)
-      notification.mutate(a)
+      if (a != undefined) notification.mutate(a)
     })
     return promise
   }

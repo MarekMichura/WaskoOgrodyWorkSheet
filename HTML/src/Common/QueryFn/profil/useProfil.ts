@@ -18,13 +18,8 @@ export const useProfil = () => {
   const profil = useQuery<IFnQuery, INotification>({
     queryKey: ['profil'],
     queryFn: fnQuery(prevData, mutationNotificationAdd, status?.status),
-    notifyOnChangeProps: 'all',
-    refetchOnMount: false,
-    refetchIntervalInBackground: false,
-    refetchOnWindowFocus: true,
-    refetchOnReconnect: true,
-    refetchInterval: (query) => (query.state.data ? 10000 : false),
-    retryDelay: 10000,
+    refetchInterval: (query) => (query.state.data ? 10 : false),
+    retryDelay: 10,
   })
 
   const mutationLogin = useMutation({
