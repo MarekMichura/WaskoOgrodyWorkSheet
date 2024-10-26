@@ -11,8 +11,8 @@ export interface IResponseCalendarDayOff {
 }
 
 export interface IResponseCalendarData {
-  daysOff?: IResponseCalendarDayOff[]
-  workingHours?: IResponseCalendarWorkHours[]
+  daysOff: IResponseCalendarDayOff[]
+  workingHours: IResponseCalendarWorkHours[]
 }
 
 export interface IResponseCalendar {

@@ -1,1 +1,1 @@
-type ICssDateStatus = 'notSet' | 'ok' | 'off' | 'not'
+export type ICssDateStatus = 'notSet' | 'ok' | 'off' | 'not'

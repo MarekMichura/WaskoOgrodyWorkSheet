@@ -1,6 +1,6 @@
 namespace Wasko;
 
-public class EndPointSwagger : IEndPoint, IService
+public class EndPointSwagger : IMiddleware, IService
 {
   public void DefineEndPoint(WebApplication app)
   {

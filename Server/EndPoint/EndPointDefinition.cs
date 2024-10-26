@@ -5,13 +5,13 @@ interface IService
   public void DefineService(WebApplicationBuilder builder);
 }
 
-interface IEndPoint
+interface IMiddleware
 {
   public short Priority => 0;
   public void DefineEndPoint(WebApplication app);
 }
 
-static class EndPointDefinition
+static class MiddlewareDefinition
 {
   public static IEnumerable<T> ForEach<T>(this IEnumerable<T> objs, Action<T> fun)
   {
@@ -32,12 +32,12 @@ static class EndPointDefinition
         .ForEach(service => service.DefineService(builder));
   }
 
-  public static void DefineEndPoints(this WebApplication app)
+  public static void DefineMiddleware(this WebApplication app)
   {
     Assembly.GetExecutingAssembly().DefinedTypes
-      .Where(x => typeof(IEndPoint).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract)
+      .Where(x => typeof(IMiddleware).IsAssignableFrom(x) && !x.IsInterface && !x.IsAbstract)
         .Select(Activator.CreateInstance)
-        .Cast<IEndPoint>()
+        .Cast<IMiddleware>()
         .OrderByDescending(endPoint => endPoint.Priority)
         .ForEach(endPoint => endPoint.DefineEndPoint(app));
   }

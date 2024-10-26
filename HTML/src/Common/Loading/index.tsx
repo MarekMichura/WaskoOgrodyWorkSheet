@@ -8,7 +8,7 @@ export const Loading = ({openDefault, open, text}: ILoadingProps) => {
   const [state, setState] = useState(openDefault ?? false)
   useEffect(() => {
     if (open == state) return
-    const time = setTimeout(() => setState(open), open ? 150 : 2000)
+    const time = setTimeout(() => setState(open ?? false), open ? 100 : 2000)
     return () => clearTimeout(time)
   }, [open])
 

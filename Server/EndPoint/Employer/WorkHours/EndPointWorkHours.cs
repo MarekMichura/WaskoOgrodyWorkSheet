@@ -1,6 +1,6 @@
 namespace Wasko;
 
-public class EndPointWorkHours : IEndPoint
+public class EndPointWorkHours : IMiddleware
 {
   public void DefineEndPoint(WebApplication app)
   {

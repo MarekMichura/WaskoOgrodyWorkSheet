@@ -22,7 +22,7 @@ export const LoadingContainer = styled.div`
   }
   &[data-start='true'] {
     background-color: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(2px);
     pointer-events: all;
   }
 `

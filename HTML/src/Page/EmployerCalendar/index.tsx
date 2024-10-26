@@ -1,10 +1,9 @@
 import {useQueryClient} from '@tanstack/react-query'
-import {useEffect, useState} from 'react'
+import {useEffect, useMemo, useState} from 'react'
 import {useNavigate, useParams} from 'react-router-dom'
 
 import {Button} from '/Button'
 import {ArrowIcon} from '/Icon/Arrow'
-import {Loading} from '/Loading'
 import {useEmployerCalendar} from '/QueryFn/calendar/useCalendar'
 import {useProfil} from '/QueryFn/profil/useProfil'
 import {IRoute, links} from '/Router/IRoute'
@@ -27,12 +26,12 @@ export const EmployerCalendar = () => {
   const {workStartDate} = profil.data!
   const params = useParams<IParams<ICalendarParams>>()
   const [selected, setSelected] = useState<ISelected | null>(null)
-  const selectedData = getSelectedData(selected, client)
   const now = new Date()
 
   const data = CheckMonthYear(now, profil.data!.workStartDate, params.month, params.year)
   const range = data && CalcRange(data.yearNumber, data.monthNumber)
   const calendar = useEmployerCalendar(data?.yearNumber, data?.monthNumber, range?.dates[0], range?.dates[41])
+  const selectedData = useMemo(() => getSelectedData(selected, client), [selected, calendar.fetchStatus])
 
   useEffect(() => {
     if (data == null) {
@@ -60,8 +59,9 @@ export const EmployerCalendar = () => {
           </CSS.DateInformation>
           <CSS.DateContent>
             <CSS.DateYearContainer>
-              {calendar.fetchStatus == 'fetching' && 'Aktualizowanie danych...'}
-              {calendar.fetchStatus == 'paused' && 'Brak dostępu do internetu...'}
+              {calendar.isPending && 'Ładowanie danych...'}
+              {calendar.isRefetching && 'Aktualizowanie danych...'}
+              {calendar.isPaused && 'Brak dostępu do internetu...'}
               <ArrowIcon
                 cssSVG={CSS.DateYearArrow}
                 onClick={() => data && setYear(navigation, data.yearNumber - 1, true)}
@@ -91,7 +91,8 @@ export const EmployerCalendar = () => {
               ))}
               {range?.dates.map((date, i) => {
                 const statusCheck = getDataFromFetch(date, calendar.data)
-                const {isInMonth, status} = handleDate(date, range.start, range.end, statusCheck)
+                const haveData = calendar.data == undefined
+                const {isInMonth, status} = handleDate(date, range.start, range.end, haveData, statusCheck)
 
                 return (
                   <CSS.Date key={i} data-date={isInMonth} data-status={status} onClick={() => setSelected(date)}>
@@ -101,14 +102,6 @@ export const EmployerCalendar = () => {
               })}
             </CSS.Calendar>
           </CSS.DateContent>
-          <Loading
-            open={calendar?.isPending ?? true}
-            text={
-              calendar.fetchStatus == 'paused'
-                ? 'Brak połączenia z internetem'
-                : `Pobieranie danych dla ${params.month} ${params.year}`
-            }
-          />
         </CSS.Content>
       </CSS.Container>
     </SuspendWrapper>

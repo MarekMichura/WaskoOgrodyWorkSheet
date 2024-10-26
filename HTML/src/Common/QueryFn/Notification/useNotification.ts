@@ -7,6 +7,7 @@ export const useNotification = () => {
 
   const notification = useQuery({
     queryKey: ['Notification'],
+    initialData: [],
     queryFn: fnQuery,
     staleTime: Infinity,
     refetchOnWindowFocus: false,

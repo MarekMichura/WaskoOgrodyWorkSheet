@@ -16,6 +16,7 @@ export const useTheme = () => {
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     refetchOnMount: false,
+    initialData: ITheme.THEME_DARK,
   })
 
   const mutation = useMutation<ITheme, Error, ITheme>({

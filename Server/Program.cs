@@ -13,7 +13,7 @@ public class Program
     Builder.DefineServices();
 
     _app = Builder.Build();
-    App.DefineEndPoints();
+    App.DefineMiddleware();
 
     App.Run();
   }

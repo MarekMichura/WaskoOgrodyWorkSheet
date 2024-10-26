@@ -1,5 +1,5 @@
 export interface ILoadingProps {
-  open: boolean
-  openDefault?: true
+  open?: boolean
+  openDefault?: boolean
   text?: string
 }

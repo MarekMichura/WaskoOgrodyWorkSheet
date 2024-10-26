@@ -16,8 +16,8 @@ export const App = () => {
   const profil = useProfil()
   const theme = useTheme()
 
-  if (notification.isPending || profil.isPending || theme.isPending) return <></>
-  if (!theme.isSuccess || !notification.isSuccess) {
+  const loading = notification.isPending || profil.isPending || theme.isPending
+  if (theme.isError || notification.isError) {
     const Error = endPoints[IAdditionalRoute.Error]
     return <Error />
   }
@@ -25,7 +25,11 @@ export const App = () => {
   return (
     <ThemeProvider theme={IThemeSwitch[theme.data]}>
       <GlobalStyle />
-      <SuspendWrapper open={false} text="Wczytywanie danych">
+      <SuspendWrapper
+        forceOpen={loading}
+        waitLoad={loading}
+        openDefault={true}
+        text={loading ? 'Próba przywrócenia sesji' : 'Ładowanie strony'}>
         <MyRoute />
       </SuspendWrapper>
       <Notifications />

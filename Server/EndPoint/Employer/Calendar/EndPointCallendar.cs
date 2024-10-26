@@ -1,6 +1,6 @@
 namespace Wasko;
 
-public class Calendar : IEndPoint
+public class Calendar : IMiddleware
 {
   public void DefineEndPoint(WebApplication app)
   {

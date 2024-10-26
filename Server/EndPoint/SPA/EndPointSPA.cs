@@ -1,8 +1,6 @@
-using System.Text.RegularExpressions;
-
 namespace Wasko;
 
-public class EndPointSPA : IService, IEndPoint
+public class EndPointSPA : IService, IMiddleware
 {
   private const string AppPath = "./wwwroot";
   public short Priority => short.MinValue;

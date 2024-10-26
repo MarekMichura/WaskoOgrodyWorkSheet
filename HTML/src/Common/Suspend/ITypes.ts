@@ -1,8 +1,9 @@
 import {ILoadingProps} from '/Loading/ILoadingProps'
 
 export interface ISuspenseDelayed extends ILoadingProps {
-  open: boolean
+  forceOpen?: boolean
   children: React.ReactNode
+  waitLoad?: boolean
 }
 
 export interface ISuspendWrapperController {
