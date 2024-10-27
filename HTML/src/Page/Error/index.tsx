@@ -4,7 +4,7 @@ import {IErrorProps} from './IErrorProps'
 
 import * as CSS from './css'
 
-export function Error404({error, code}: IErrorProps) {
+function Error404({error, code}: IErrorProps) {
   return (
     <CSS.Content>
       <SadFaceIcon cssSVG={CSS.SVG} />
@@ -14,3 +14,5 @@ export function Error404({error, code}: IErrorProps) {
     </CSS.Content>
   )
 }
+
+export default Error404

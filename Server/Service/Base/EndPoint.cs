@@ -21,7 +21,7 @@ public class EndPoint : IMiddleware, IService
     app.UseAuthentication();
     app.UseAuthorization();
 
-    app.UseResponseCompression();
+    // app.UseResponseCompression();
     app.UseEndpoints(static endpoint => { });
   }
 

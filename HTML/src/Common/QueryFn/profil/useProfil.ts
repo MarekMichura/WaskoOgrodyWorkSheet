@@ -1,5 +1,7 @@
 import {useQueryClient, useQuery, useMutation} from '@tanstack/react-query'
 
+import {endPoints, IRoute, links} from '/Router/IRoute'
+
 import {INotification} from '../Notification/types/INotification'
 import {useNotification} from '../Notification/useNotification'
 
@@ -18,8 +20,8 @@ export const useProfil = () => {
   const profil = useQuery<IFnQuery, INotification>({
     queryKey: ['profil'],
     queryFn: fnQuery(prevData, mutationNotificationAdd, status?.status),
-    refetchInterval: (query) => (query.state.data ? 10 : false),
-    retryDelay: 10,
+    refetchInterval: (query) => (query.state.data ? 10000 : false),
+    retryDelay: 10000,
   })
 
   const mutationLogin = useMutation({
@@ -31,6 +33,14 @@ export const useProfil = () => {
     onError: ({type, text}: INotification) => {
       client.setQueryData(['profil'], false)
       mutationNotificationAdd.mutate({type, text})
+    },
+    onMutate() {
+      const loc = window.location.pathname
+      const len = loc.indexOf('/', 1)
+      const route = len == -1 ? loc : loc.substring(0, len)
+
+      const routeID = Object.entries(links).find(([, value]) => value == route)?.[0]
+      if (routeID != undefined) endPoints[routeID as unknown as IRoute].preload()
     },
   })
 

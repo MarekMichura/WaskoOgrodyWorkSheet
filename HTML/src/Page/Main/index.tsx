@@ -8,7 +8,7 @@ import TopBar from './TopBar'
 
 import * as CSS from './css'
 
-export const MainPage = () => {
+const MainPage = () => {
   const [menu, setMenu] = useState(false)
 
   return (
@@ -23,3 +23,5 @@ export const MainPage = () => {
     </CSS.Container>
   )
 }
+
+export default MainPage

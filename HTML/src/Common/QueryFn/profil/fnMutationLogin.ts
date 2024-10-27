@@ -17,5 +17,6 @@ export const fnMutationLogin = (data: ILoginRequestData): Promise<IFnMutationRes
           resolve({profil: response.profil, text: 'Zalogowano', type: INotificationType.success})
         else reject({type: INotificationType.error, text: 'Niepoprawny login lub hasło'})
       })
+      .catch(() => reject({type: INotificationType.error, text: 'Nieznany problem'}))
   })
 }
