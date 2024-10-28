@@ -74,132 +74,6 @@ export const DateSelectedMod = styled.div`
   }
 `
 
-export const TopBar = styled.div`
-  display: flex;
-  justify-content: space-between;
-`
-
-export const DateYearContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: right;
-`
-
-export const FetchStatus = styled.div`
-  display: flex;
-  flex-direction: column;
-  font-size: 8pt;
-`
-
-export const DateContent = styled.div`
-  padding: 15px;
-  border-radius: 0 15px 15px 0;
-  background-color: ${(p) => p.theme.background[100].default};
-
-  @media screen and (max-width: 730px) {
-    border-radius: 15px 15px 0 0;
-  }
-  * {
-    user-select: none;
-  }
-`
-
-export const DateYearArrow = styled.svg`
-  width: 30px;
-  height: 30px;
-  fill: ${(p) => p.theme.background[950].default};
-
-  &[data-rotate='true'] {
-    transform: rotate(180deg);
-  }
-
-  &[data-active='true'] {
-    cursor: pointer;
-  }
-  &[data-active='false'] {
-    pointer-events: none;
-    fill: ${(p) => p.theme.background[300].default};
-  }
-`
-
-export const DateMonths = styled.div`
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid black;
-  margin: 15px 0;
-`
-
-export const DateMonth = styled.div`
-  position: relative;
-  color: ${(p) => p.theme.background[300].default};
-  pointer-events: none;
-  &[data-active='true'] {
-    cursor: pointer;
-    pointer-events: all;
-    color: ${(p) => p.theme.background[900].default};
-    cursor: pointer;
-  }
-  &[data-current='true'] {
-    cursor: default;
-    color: ${(p) => p.theme.primary[700].default};
-  }
-`
-
-export const Calendar = styled.div`
-  display: grid;
-  font-size: 15pt;
-  min-height: calc(100% - 70px);
-  grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
-  text-align: center;
-`
-
-export const Date = styled.div`
-  position: relative;
-  display: flex;
-  width: fit-content;
-  margin: 0 auto;
-  justify-content: center;
-  align-items: center;
-  aspect-ratio: 1/1;
-  cursor: pointer;
-  color: ${(p) => p.theme.background[300].default};
-  transition: color 300ms ease-in-out;
-
-  &:after {
-    position: absolute;
-    content: '';
-    top: 0;
-    left: 100%;
-    width: 7px;
-    height: 7px;
-    border-radius: 100%;
-    transition: background-color 300ms ease-in-out;
-  }
-
-  &[data-status='off']:after {
-    background-color: ${(p) => p.theme.primary[200].default};
-  }
-  &[data-status='okOff']:after {
-    background-color: ${(p) => p.theme.secondary[200].default};
-  }
-  &[data-date='true'][data-status='notSet'] {
-    color: rgba(255, 0, 0, 0.35);
-  }
-  &[data-date='false'] {
-    color: ${(p) => p.theme.background[900].default};
-  }
-  &[data-date='false'][data-status='notSet'] {
-    color: red;
-  }
-  &[data-date='false'][data-status='off']:after {
-    background-color: ${(p) => p.theme.primary[500].default};
-  }
-  &[data-date='false'][data-status='okOff']:after {
-    background-color: ${(p) => p.theme.secondary[500].default};
-  }
-`
-
 export const SelectedInfo = styled.div`
   display: flex;
   flex-direction: column;
@@ -213,5 +87,89 @@ export const SelectedInfo = styled.div`
 
   h3 {
     margin: 0;
+  }
+`
+
+export const Date = styled.div`
+  position: relative;
+  display: flex;
+  width: fit-content;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1/1;
+  cursor: pointer;
+  transition: color 300ms ease-in-out;
+  color: ${(p) => p.theme.background[800].default};
+
+  &:after {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 100%;
+    width: 7px;
+    height: 7px;
+    border-radius: 100%;
+    transition: background-color 300ms ease-in-out;
+  }
+
+  &[data-status='false-false-false'] {
+    opacity: 0.3; // poza zakresem
+    // nie wolne
+    color: red; // nie pracował
+  }
+
+  &[data-status='false-false-true'] {
+    opacity: 0.3; // poza zakresem
+    // nie wolne
+    // pracował
+  }
+
+  &[data-status='false-true-false'] {
+    opacity: 0.3; // poza zakresem
+    // wolne
+    &:after {
+      background-color: ${(p) => p.theme.primary.default};
+    }
+    // nie pracował
+  }
+
+  &[data-status='false-true-true'] {
+    opacity: 0.3; // poza zakresem
+    // wolne
+    // pracował
+    &:after {
+      background-color: ${(p) => p.theme.secondary[500].default};
+    }
+  }
+
+  &[data-status='true-false-false'] {
+    // miesiac
+    // nie wolne
+    color: red; // nie pracował
+  }
+
+  &[data-status='true-false-true'] {
+    // miesiac
+    // nie wolne
+    // pracował
+  }
+
+  &[data-status='true-true-false'] {
+    // miesiac
+    // wolne
+    &:after {
+      background-color: ${(p) => p.theme.primary.default};
+    }
+    // nie pracował
+  }
+
+  &[data-status='true-true-true'] {
+    // miesiac
+    // wolne
+    &:after {
+      background-color: ${(p) => p.theme.secondary[500].default};
+    }
+    // pracował
   }
 `

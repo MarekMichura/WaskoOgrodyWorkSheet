@@ -115,7 +115,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '/Button': path.resolve(__dirname, 'src/Common/Input/Button.tsx'),
-      '/Calendar': path.resolve(__dirname, 'src/Page/EmployerCalendar'),
+      '/Calendar': path.resolve(__dirname, 'src/Common/Calendar'),
       '/EmployerCalendar': path.resolve(__dirname, 'src/Page/EmployerCalendar'),
       '/Error': path.resolve(__dirname, 'src/Page/Error'),
       '/ErrorBoundary': path.resolve(__dirname, 'src/Common/ErrorBoundary'),

@@ -1,7 +1,8 @@
 import {Params} from 'react-router-dom'
 
+import {IMonth} from '/Calendar/IMonth'
+
 import {ICalendarParam} from '../types/ICalendarParams'
-import {IMonth} from '../types/IMonth'
 
 export const checkParam = (param: Params): ICalendarParam => {
   if (param.year == undefined && param.month == undefined) {
