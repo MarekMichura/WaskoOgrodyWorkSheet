@@ -33,7 +33,7 @@ export const fnQuery = (
         })
         .json((profil: IProfilResult) => {
           if (status == 'pending') notification.mutate({type: INotificationType.success, text: 'Jesteś zalogowany'})
-          resolve({...profil, workStartDate: new Date(Date.parse(profil.workStartDate))})
+          resolve({...profil, workStartDate: new Date(Date.parse(profil.workStartDate)), wait: false})
         })
         .catch(() => {
           reject({

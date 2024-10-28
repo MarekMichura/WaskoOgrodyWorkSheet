@@ -8,7 +8,7 @@ import {UserIcon} from '/Icon/UserIcon'
 import {Input} from '/Input'
 import {Button} from '/InputButton'
 import {Loading} from '/Loading/index'
-import {useProfil} from '/QueryFn/profil/useProfil'
+import {useLogin} from '/QueryFn/profil/useLogin'
 import {endPoints, IAdditionalRoute} from '/Router/IRoute'
 
 import {ILoginValues, defaultLoginValues as initialValues} from './ITypes'
@@ -18,7 +18,7 @@ import * as CSS from './css'
 
 const Login = () => {
   const {changeTheme} = useTheme()
-  const {mutationLogin} = useProfil()
+  const mutationLogin = useLogin()
 
   const Login = ({login, password}: ILoginValues) => {
     mutationLogin.mutate({Login: login, Password: password})

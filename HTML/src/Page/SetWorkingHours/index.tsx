@@ -1,5 +1,7 @@
+import * as CSS from './css'
+
 const SetWorkingHours = () => {
-  return <></>
+  return <CSS.Container></CSS.Container>
 }
 
 export default SetWorkingHours

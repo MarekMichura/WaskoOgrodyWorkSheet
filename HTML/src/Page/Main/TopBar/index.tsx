@@ -4,6 +4,7 @@ import {BellIcon} from '/Icon/BellIcon'
 import {FaceIcon} from '/Icon/FaceIcon'
 import {MenuIcon} from '/Icon/MenuIcon'
 import {ThemeModeIcon} from '/Icon/ThemeModeIcon'
+import {useLogOut} from '/QueryFn/profil/useLogOut'
 import {useProfil} from '/QueryFn/profil/useProfil'
 import {ITheme} from '/QueryFn/Theme/types/ITheme'
 import {useTheme} from '/QueryFn/Theme/useTheme'
@@ -23,6 +24,7 @@ interface IProps {
 
 function TopBar({openMenu, changeOpenMenu}: IProps) {
   const [menu, setMenu] = useState<IMenu>(IMenu.none)
+  const logOut = useLogOut()
   const profil = useProfil()
   const theme = useTheme()
   const {firstName, lastName, userName, roles} = profil.data!
@@ -36,7 +38,7 @@ function TopBar({openMenu, changeOpenMenu}: IProps) {
       <CSS.Right>
         <CSS.IconCon onClick={() => setMenu(IMenu.notification)}>
           <BellIcon cssSVG={CSS.Icon} />
-          {/* <CSS.BelNum>2</CSS.BelNum> */}
+          <CSS.BelNum data-value={10}>+</CSS.BelNum>
         </CSS.IconCon>
         <CSS.IconCon>
           <ThemeModeIcon cssSVG={CSS.Icon} status={theme.data == ITheme.THEME_DARK} onClick={theme.changeTheme} />
@@ -60,7 +62,7 @@ function TopBar({openMenu, changeOpenMenu}: IProps) {
             </CSS.UserRightFlex>
           </CSS.UserFlex>
           <hr />
-          <CSS.MenuOption onClick={() => profil.mutationLogOut.mutate()}>Wyloguj się</CSS.MenuOption>
+          <CSS.MenuOption onClick={() => logOut.mutate()}>Wyloguj się</CSS.MenuOption>
         </CSS.MenuItem>
       </CSS.Menu>
       <CSS.Menu data-open={menu == IMenu.notification}>

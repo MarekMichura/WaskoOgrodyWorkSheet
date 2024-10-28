@@ -5,7 +5,8 @@ import {ChangeToApiDateString} from '/Function/ChangeToApiDateString'
 import {Button} from '/InputButton'
 import {IMonth} from '/InputCalendar/IMonth'
 import {Calendar} from '/InputCalendar/index'
-import {useEmployerCalendar, useEmployerCalendarDayData} from '/QueryFn/calendar/useCalendar'
+import {useEmployerCalendar} from '/QueryFn/calendar/useCalendar'
+import {useEmployerCalendarDayData} from '/QueryFn/calendar/useEmployerCalendarDayData'
 import {links, IRoute} from '/Router/IRoute'
 
 import {checkMonths} from './fun/checkMonths'
@@ -19,9 +20,9 @@ import * as CSS from './css'
 export const EmployerCalendar = () => {
   const nav = useNavigate()
   const {year, month} = checkParam(useParams())
-  const range = useCalendarRange()
   const [selected, select] = useState<Date | null>(null)
-  const {data} = useEmployerCalendar(year, month)
+  const range = useCalendarRange()
+  const calendar = useEmployerCalendar(year, month)
 
   const checkedMonths = checkMonths(range, year, month)
   const checkedYears = checkYear(range, year)
@@ -33,12 +34,20 @@ export const EmployerCalendar = () => {
   const setMonth = (i: number) => move(i, year)
 
   const status = (date: Date) => {
+    if (calendar.data == undefined) return 'false-false-true'
     const inRange = date.getMonth() == month && (date > range.start || date < range.end)
-    const off = (data?.data[ChangeToApiDateString(date)]?.daysOff.length ?? 0) > 0
-    const work = (data?.data[ChangeToApiDateString(date)]?.workingHours.length ?? 0) > 0
+    const off = (calendar.data?.data[ChangeToApiDateString(date)]?.daysOff.length ?? 0) > 0
+    const work = (calendar.data?.data[ChangeToApiDateString(date)]?.workingHours.length ?? 0) > 0
 
     return `${inRange}-${off}-${work}`
   }
+
+  const title = () => {
+    if (calendar.isPaused) return 'Brak dostępu do internetu'
+    if (calendar.status == 'pending') return 'Pobieranie danych...'
+    return ''
+  }
+
   return (
     <CSS.Container>
       <CSS.Content>
@@ -63,7 +72,7 @@ export const EmployerCalendar = () => {
           prevYear={minusYear}
           status={status}
           select={(a) => select(a)}
-          title=""
+          title={title()}
         />
       </CSS.Content>
     </CSS.Container>

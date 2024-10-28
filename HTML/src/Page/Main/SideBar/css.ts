@@ -63,7 +63,6 @@ export const MenuContainer = styled.div`
       height: calc(100% - 20px);
     }
   }
-  /* min-height: calc(100% - 20px); */
 `
 
 export const MenuScroll = styled.div`

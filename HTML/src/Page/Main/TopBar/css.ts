@@ -73,14 +73,21 @@ export const BelNum = styled.span`
   position: absolute;
   top: 0;
   right: 0;
-  width: 15px;
-  height: 15px;
+  min-width: 15px;
+  min-height: 15px;
   border-radius: 100%;
   font-size: 10pt;
   text-align: center;
 
   overflow: hidden;
   background-color: ${(p) => p.theme.primary.default};
+  &[data-value='0'] {
+    opacity: 0;
+  }
+  span:has(> :where(*):contains('0')) {
+    opacity: 0;
+    color: red;
+  }
 `
 
 export const MenuCon = styled.div`
