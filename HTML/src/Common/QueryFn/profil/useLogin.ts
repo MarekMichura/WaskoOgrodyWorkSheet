@@ -18,7 +18,7 @@ export const useLogin = () => {
       mutationNotificationAdd.mutate({type, text})
     },
     onError: ({type, text}: INotification) => {
-      client.setQueryData(['profil'], false)
+      client.setQueryData(['profil'], null)
       mutationNotificationAdd.mutate({type, text})
     },
     onMutate() {

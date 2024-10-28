@@ -36,6 +36,7 @@
       "/PageLogin/*": ["Page/Login/*"],
       "/PageMain/*": ["Page/Main/*"],
       "/PageSetWorkingHours/*": ["Page/SetWorkingHours/*"],
+      "/PwaCatch/*": ["Common/PwaEventCatch/*"],
       "/QueryFn/*": ["Common/QueryFn/*"],
       "/Router/*": ["Common/Router/*"],
       "/Suspend/*": ["Common/Suspend/*"]

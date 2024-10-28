@@ -6,14 +6,7 @@ public class UseMiddleware : IMiddleware, IService
 
   public void DefineEndPoint(WebApplication app)
   {
-    if (!app.Environment.IsDevelopment())
-    {
-      app.UseHsts();
-    }
-
-
     app.UseStaticCompressedFiles();
-    app.UseHttpsRedirection();
     app.MapControllers();
 
     app.UseRouting();

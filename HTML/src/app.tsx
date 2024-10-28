@@ -18,6 +18,7 @@ export const App = () => {
   const theme = useTheme()
 
   const loading = notification.isPending || profil.isPending || theme.isPending
+
   if (theme.isError || notification.isError) {
     const Error = endPoints[IAdditionalRoute.Error].lazy
     return <Error />

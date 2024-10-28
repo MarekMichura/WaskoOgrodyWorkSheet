@@ -1,9 +1,12 @@
+import {useQuery} from '@tanstack/react-query'
 import {useState} from 'react'
 
 import {BellIcon} from '/Icon/BellIcon'
+import {DownloadIcon} from '/Icon/Download'
 import {FaceIcon} from '/Icon/FaceIcon'
 import {MenuIcon} from '/Icon/MenuIcon'
 import {ThemeModeIcon} from '/Icon/ThemeModeIcon'
+import {BeforeInstallPromptEvent} from '/PwaCatch/IType'
 import {useLogOut} from '/QueryFn/profil/useLogOut'
 import {useProfil} from '/QueryFn/profil/useProfil'
 import {ITheme} from '/QueryFn/Theme/types/ITheme'
@@ -23,11 +26,18 @@ interface IProps {
 }
 
 function TopBar({openMenu, changeOpenMenu}: IProps) {
+  const {data} = useQuery<BeforeInstallPromptEvent | null>({queryKey: ['PWA']})
   const [menu, setMenu] = useState<IMenu>(IMenu.none)
   const logOut = useLogOut()
   const profil = useProfil()
   const theme = useTheme()
   const {firstName, lastName, userName, roles} = profil.data!
+
+  const install = () => {
+    console.log('installing')
+    if (data == null) return
+    data.prompt()
+  }
 
   return (
     <CSS.Container>
@@ -36,6 +46,11 @@ function TopBar({openMenu, changeOpenMenu}: IProps) {
         <CSS.Title>{document.title}</CSS.Title>
       </CSS.Left>
       <CSS.Right>
+        {data != null && (
+          <CSS.IconCon onClick={install}>
+            <DownloadIcon cssSVG={CSS.Icon} />
+          </CSS.IconCon>
+        )}
         <CSS.IconCon onClick={() => setMenu(IMenu.notification)}>
           <BellIcon cssSVG={CSS.Icon} />
           <CSS.BelNum data-value={10}>+</CSS.BelNum>

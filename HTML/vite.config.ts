@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react'
 import {defineConfig} from 'vite'
 import {compression} from 'vite-plugin-compression2'
 import viteImagemin from 'vite-plugin-imagemin'
+import {VitePWA} from 'vite-plugin-pwa'
 
 declare const __dirname: string
 export default defineConfig({
@@ -15,6 +16,63 @@ export default defineConfig({
         plugins: [
           ['babel-plugin-react-compiler', {}],
           ['babel-plugin-styled-components', {minify: true}],
+        ],
+      },
+    }),
+    VitePWA({
+      registerType: 'autoUpdate',
+      manifest: {
+        name: 'Wasko ogrody',
+        short_name: 'Wasko',
+        start_url: '/',
+        icons: [
+          {
+            src: 'icons/manifest-icon-192.maskable.png',
+            sizes: '192x192',
+            type: 'image/png',
+            purpose: 'any',
+          },
+          {
+            src: 'icons/manifest-icon-192.maskable.png',
+            sizes: '192x192',
+            type: 'image/png',
+            purpose: 'maskable',
+          },
+          {
+            src: 'icons/manifest-icon-512.maskable.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any',
+          },
+          {
+            src: 'icons/manifest-icon-512.maskable.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'maskable',
+          },
+        ],
+        theme_color: '#00000000',
+        background_color: '#00000000',
+        display: 'fullscreen',
+        orientation: 'portrait',
+      },
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,png,svg}'],
+        runtimeCaching: [
+          {
+            urlPattern: ({request}) =>
+              request.destination === 'script' || //
+              request.destination === 'style' ||
+              request.destination === 'image',
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'wasko-cache',
+              expiration: {
+                maxEntries: 1000,
+                maxAgeSeconds: 3000000,
+              },
+            },
+          },
         ],
       },
     }),
@@ -127,6 +185,7 @@ export default defineConfig({
       '/PageLogin': path.resolve(__dirname, 'src/Page/Login'),
       '/PageMain': path.resolve(__dirname, 'src/Page/Main'),
       '/PageSetWorkingHours': path.resolve(__dirname, 'src/Page/SetWorkingHours'),
+      '/PwaCatch': path.resolve(__dirname, 'src/Common/PwaEventCatch'),
       '/QueryFn': path.resolve(__dirname, 'src/Common/QueryFn'),
       '/Router': path.resolve(__dirname, 'src/Common/Router'),
       '/Suspend': path.resolve(__dirname, 'src/Common/Suspend'),

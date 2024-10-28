@@ -2,6 +2,7 @@
   "cSpell.words": [
     "Archivo",
     "ASPNETCORE",
+    "beforeinstallprompt",
     "brotli",
     "Dima",
     "Eurovia",
@@ -52,7 +53,6 @@
     "Server/.dockerignore": true,
     "Server/.gitignore": true,
     "Server/taskCreateDb.sh": true,
-    "Server/wait-for-it.sh": true,
     "ServerTests/wwwroot": true
   }
 }

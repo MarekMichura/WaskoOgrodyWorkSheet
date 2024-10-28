@@ -1,0 +1,13 @@
+FROM nginx:latest AS nginx-base
+WORKDIR /etc/nginx/
+
+RUN mkdir ssl
+RUN chmod +rwx ssl
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./ssl/example.key -out ./ssl/example.crt -subj "/C=PL/ST=Małopolskie/L=Kraków/O=Wasko/OU=IT/CN=example.com"
+
+COPY ./wait-for-it.sh ./wait-for-it.sh
+RUN chmod +x ./wait-for-it.sh
+
+COPY ./default.conf ./conf.d/default.conf
+
+ENTRYPOINT ["/etc/nginx/wait-for-it.sh", "server-release:8080", "--", "nginx", "-g", "daemon off;"]
