@@ -1,17 +1,17 @@
-import {useState, Suspense} from 'react'
+import {useState, Suspense, Fragment} from 'react'
 
 import {Loading} from '/Loading'
 
 import {ISuspenseDelayed} from './ITypes'
 import {SuspendWrapperController} from './SuspendWrapperController'
 
-export const SuspendWrapper = ({forceOpen, waitLoad, children, ...props}: ISuspenseDelayed) => {
-  const [state, setState] = useState(false)
+export const SuspendWrapper = ({forceOpen, children, ...props}: ISuspenseDelayed) => {
+  const [loading, setLoading] = useState(false)
 
   return (
-    <>
-      {!waitLoad && <Suspense fallback={<SuspendWrapperController set={setState} />}>{children}</Suspense>}
-      <Loading {...props} open={forceOpen || state} />
-    </>
+    <Fragment>
+      <Suspense fallback={<SuspendWrapperController set={setLoading} />}>{children}</Suspense>
+      <Loading {...props} open={forceOpen || loading} />
+    </Fragment>
   )
 }

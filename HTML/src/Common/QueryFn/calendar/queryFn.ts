@@ -25,28 +25,13 @@ export const queryFn = (
         .notFound(() => reject({type: INotificationType.error, text: 'Błąd połączenia z serwerem'}))
         .internalError(() => reject({type: INotificationType.error, text: 'Wystąpił problem po stronie serwera'}))
         .timeout(() => reject({type: INotificationType.error, text: 'Przekroczono limit czasu żądania'}))
-        .error(304, () => {
-          reject()
-        })
-        .text((text) => {
-          if (text.slice(8, text.lastIndexOf('},') + 1) != JSON.stringify(prevData?.data)) {
-            notification.mutate({
-              text: `Pobrane dane kalendarza dla zakresu:\nod: ${ChangeToApiDateString(start)}\ndo: ${ChangeToApiDateString(end)}`,
-              type: INotificationType.success,
-            })
-            return JSON.parse(text)
-          }
-          return prevData
-        })
-        .then((response: IResponseCalendar) => {
-          resolve(response)
-        })
-        .catch((error) => {
+        .error(304, () => resolve(prevData!))
+        .json((response: IResponseCalendar) => resolve(response))
+        .catch(() => {
           reject({
             type: INotificationType.error,
             text: 'Podczas pobierania danych kalendarza wystąpił nieznany problem',
           })
-          console.log(error)
         })
     })
 

@@ -1,6 +1,6 @@
 import {IUserRole} from '/QueryFn/profil/types/IUserRole'
 
-import {lazy} from './myLazy'
+import {myLazy} from './myLazy'
 
 export enum IRoute {
   showCalendar,
@@ -51,7 +51,7 @@ export const links: Record<IRoute, string> = {
 export const routes: Record<IRoute, string> = {
   [IRoute.setWorkingHours]: links[IRoute.setWorkingHours].slice(1),
   [IRoute.addComment]: links[IRoute.addComment].slice(1),
-  [IRoute.showCalendar]: `${links[IRoute.showCalendar].slice(1)}/*`,
+  [IRoute.showCalendar]: `${links[IRoute.showCalendar].slice(1)}/:year?/:month?`,
   [IRoute.askDayOff]: links[IRoute.askDayOff].slice(1),
   [IRoute.setChord]: links[IRoute.setChord].slice(1),
   [IRoute.addRefund]: links[IRoute.addRefund].slice(1),
@@ -59,14 +59,14 @@ export const routes: Record<IRoute, string> = {
 }
 
 export const endPoints = {
-  [IRoute.setWorkingHours]: lazy(() => import('../../Page/SerWorkingHours')),
-  [IRoute.addComment]: lazy(() => import('../../Page/SerWorkingHours')),
-  [IRoute.showCalendar]: lazy(() => import('/EmployerCalendar')),
-  [IRoute.askDayOff]: lazy(() => import('../../Page/SerWorkingHours')),
-  [IRoute.setChord]: lazy(() => import('../../Page/SerWorkingHours')),
-  [IRoute.addRefund]: lazy(() => import('../../Page/SerWorkingHours')),
-  [IRoute.askBonus]: lazy(() => import('../../Page/SerWorkingHours')),
-  [IAdditionalRoute.login]: lazy(() => import('/Login')),
-  [IAdditionalRoute.mainPage]: lazy(() => import('/Main')),
-  [IAdditionalRoute.Error]: lazy(() => import('/Error/index')),
+  [IRoute.setWorkingHours]: myLazy(() => import('/SetWorkingHours')),
+  [IRoute.addComment]: myLazy(() => import('/SetWorkingHours')),
+  [IRoute.showCalendar]: myLazy(() => import('/Calendar')),
+  [IRoute.askDayOff]: myLazy(() => import('/SetWorkingHours')),
+  [IRoute.setChord]: myLazy(() => import('/SetWorkingHours')),
+  [IRoute.addRefund]: myLazy(() => import('/SetWorkingHours')),
+  [IRoute.askBonus]: myLazy(() => import('/SetWorkingHours')),
+  [IAdditionalRoute.login]: myLazy(() => import('/Login')),
+  [IAdditionalRoute.mainPage]: myLazy(() => import('/Main')),
+  [IAdditionalRoute.Error]: myLazy(() => import('/Error')),
 }

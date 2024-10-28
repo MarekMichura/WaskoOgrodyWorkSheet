@@ -58,9 +58,7 @@ public class StaticCompressedFiles(RequestDelegate next, IWebHostEnvironment env
   private static async Task<bool> ReturnCompressedFile(string method, string filePath, HttpContext context)
   {
     var path = filePath + "." + method;
-    Console.WriteLine("I am trying to get compress file:\n\t" + path);
     if (!File.Exists(path)) return false;
-    Console.WriteLine("\tFile exist and i will return them" + path);
     var response = context.Response;
     var headers = response.Headers;
 
@@ -96,7 +94,6 @@ public class StaticCompressedFiles(RequestDelegate next, IWebHostEnvironment env
     if (acceptedCompression.Contains("gzip") && await ReturnCompressedFile("gzip", serwerPath, context)) return;
     if (acceptedCompression.Contains("deflate") && await ReturnCompressedFile("deflate", serwerPath, context)) return;
 
-    Console.WriteLine("\tCompressed file are not for me");
     await _next(context);
   }
 }

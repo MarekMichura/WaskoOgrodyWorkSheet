@@ -1,3 +1,5 @@
+import {Fragment} from 'react/jsx-runtime'
+
 import {endPoints, links} from '/Router/IRoute'
 
 import {ISideBarOption} from './ISideBarOption'
@@ -9,7 +11,7 @@ export const SideBarOption = ({icon: Icon, route, show, text}: ISideBarOption) =
     endPoints[route].preload()
   }
 
-  if (!show[route]) return <></>
+  if (!show[route]) return <Fragment />
   return (
     <CSS.MenuOption to={links[route]} data-selected={false} onMouseEnter={preFetch}>
       <CSS.MenuIconContainer>

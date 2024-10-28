@@ -49,6 +49,8 @@ export const Logo = styled.div`
   }
 `
 
+export const LogoSVG = styled.svg``
+
 export const MenuContainer = styled.div`
   position: relative;
   padding: 10px;

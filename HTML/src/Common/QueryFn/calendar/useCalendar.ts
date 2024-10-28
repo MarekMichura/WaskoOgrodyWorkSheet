@@ -25,8 +25,9 @@ export const useEmployerCalendar = (year: number, month: number) => {
   const calendar = useQuery({
     queryKey: ['employer_calendar', year, month],
     queryFn: queryFn(prevData, mutationNotificationAdd, start, end),
-    refetchInterval: 2000,
+    refetchInterval: 500,
     retryDelay: 2000,
+    notifyOnChangeProps: ['data', 'isError'],
   })
 
   return {...calendar, start, end}
@@ -63,7 +64,7 @@ export const useEmployerCalendarDayData = (date: Date | null) => {
       return check
     })
     return {time: max[1]!.time, ...max[1]!.data[str]}
-  }, [date])
+  }, [date, client])
 
   return data
 }

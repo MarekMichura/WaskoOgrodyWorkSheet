@@ -1,3 +1,4 @@
+import {ErrorBoundary} from 'react-error-boundary'
 import {ThemeProvider} from 'styled-components'
 
 import {Notifications} from '/QueryFn/Notification/tsx'
@@ -18,21 +19,22 @@ export const App = () => {
 
   const loading = notification.isPending || profil.isPending || theme.isPending
   if (theme.isError || notification.isError) {
-    const Error = endPoints[IAdditionalRoute.Error]
+    const Error = endPoints[IAdditionalRoute.Error].lazy
     return <Error />
   }
 
   return (
-    <ThemeProvider theme={IThemeSwitch[theme.data]}>
-      <GlobalStyle />
-      <SuspendWrapper
-        forceOpen={loading}
-        waitLoad={loading}
-        openDefault={true}
-        text={loading ? 'Próba przywrócenia sesji' : 'Ładowanie strony'}>
-        <MyRoute />
-      </SuspendWrapper>
-      <Notifications />
-    </ThemeProvider>
+    <ErrorBoundary FallbackComponent={endPoints[IAdditionalRoute.Error].lazy}>
+      <ThemeProvider theme={IThemeSwitch[theme.data]}>
+        <GlobalStyle />
+        <SuspendWrapper
+          forceOpen={loading}
+          openDefault={true}
+          text={loading ? 'Próba przywrócenia sesji' : 'Ładowanie strony'}>
+          <MyRoute />
+        </SuspendWrapper>
+        <Notifications />
+      </ThemeProvider>
+    </ErrorBoundary>
   )
 }

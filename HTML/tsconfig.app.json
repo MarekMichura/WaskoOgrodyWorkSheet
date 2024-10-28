@@ -24,12 +24,13 @@
 
     "paths": {
       "/Button": ["Common/Input/Button.tsx"],
-      "/ErrorBoundary": ["Common/ErrorBoundary/index.tsx"],
       "/Calendar": ["Page/EmployerCalendar/index.tsx"],
       "/Calendar/*": ["Page/EmployerCalendar/*"],
       "/EmployerCalendar": ["Page/EmployerCalendar/index.tsx"],
       "/EmployerCalendar/*": ["Page/EmployerCalendar/*"],
+      "/Error": ["Page/Error/index.tsx"],
       "/Error/*": ["Page/Error/*"],
+      "/ErrorBoundary": ["Common/ErrorBoundary/index.tsx"],
       "/Function/*": ["Common/Function/*"],
       "/Icon/*": ["Common/Icon/*"],
       "/Input": ["Common/Input/Input.tsx"],
@@ -43,6 +44,8 @@
       "/QueryFn/*": ["Common/QueryFn/*"],
       "/Router": ["Common/Router/index.tsx"],
       "/Router/*": ["Common/Router/*"],
+      "/SetWorkingHours": ["Page/SetWorkingHours/index.tsx"],
+      "/SetWorkingHours/*": ["Page/SetWorkingHours/*"],
       "/Suspend": ["Common/Suspend/index.tsx"]
     }
   },

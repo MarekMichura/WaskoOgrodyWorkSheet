@@ -4,17 +4,14 @@ import zlib from 'zlib'
 import react from '@vitejs/plugin-react'
 import {defineConfig} from 'vite'
 import {compression} from 'vite-plugin-compression2'
-// import viteImagemin from 'vite-plugin-imagemin'
+import viteImagemin from 'vite-plugin-imagemin'
 
 declare const __dirname: string
 export default defineConfig({
   plugins: [
     react({
       babel: {
-        presets: [
-          ['@babel/preset-react', {runtime: 'automatic'}],
-          '@babel/preset-typescript', //
-        ],
+        presets: [['@babel/preset-react', {runtime: 'automatic'}], '@babel/preset-typescript'],
         plugins: [
           ['babel-plugin-react-compiler', {}],
           ['babel-plugin-styled-components', {minify: true}],
@@ -47,32 +44,32 @@ export default defineConfig({
         level: 9,
       },
     }),
-    // viteImagemin({
-    //   gifsicle: {
-    //     optimizationLevel: 7,
-    //   },
-    //   optipng: {
-    //     optimizationLevel: 7,
-    //   },
-    //   mozjpeg: {
-    //     quality: 80,
-    //   },
-    //   pngquant: {
-    //     quality: [0.7, 0.9],
-    //     speed: 4,
-    //   },
-    //   svgo: {
-    //     plugins: [
-    //       {
-    //         name: 'removeViewBox',
-    //       },
-    //       {
-    //         name: 'removeEmptyAttrs',
-    //         active: false,
-    //       },
-    //     ],
-    //   },
-    // }),
+    viteImagemin({
+      gifsicle: {
+        optimizationLevel: 7,
+      },
+      optipng: {
+        optimizationLevel: 7,
+      },
+      mozjpeg: {
+        quality: 80,
+      },
+      pngquant: {
+        quality: [0.7, 0.9],
+        speed: 4,
+      },
+      svgo: {
+        plugins: [
+          {
+            name: 'removeViewBox',
+          },
+          {
+            name: 'removeEmptyAttrs',
+            active: false,
+          },
+        ],
+      },
+    }),
   ],
   server: {
     open: false,
@@ -85,6 +82,13 @@ export default defineConfig({
     outDir: 'build',
     minify: 'terser',
     cssCodeSplit: true,
+    rollupOptions: {
+      output: {
+        entryFileNames: 'assets/[hash][hash].js',
+        chunkFileNames: 'assets/[hash][hash].js',
+        assetFileNames: 'assets/[hash][hash].js',
+      },
+    },
     terserOptions: {
       compress: {
         ecma: 5,
@@ -95,10 +99,12 @@ export default defineConfig({
         toplevel: true,
         unused: true,
         module: true,
+        collapse_vars: true,
+        reduce_vars: true,
+        pure_funcs: ['console'],
       },
       mangle: {
         toplevel: true,
-        // properties: true,
       },
       output: {
         comments: false,
@@ -109,11 +115,11 @@ export default defineConfig({
   resolve: {
     alias: {
       '/Button': path.resolve(__dirname, 'src/Common/Input/Button.tsx'),
-      '/Function': path.resolve(__dirname, 'src/Common/Function'),
       '/Calendar': path.resolve(__dirname, 'src/Page/EmployerCalendar'),
       '/EmployerCalendar': path.resolve(__dirname, 'src/Page/EmployerCalendar'),
-      '/ErrorBoundary': path.resolve(__dirname, 'src/Common/ErrorBoundary'),
       '/Error': path.resolve(__dirname, 'src/Page/Error'),
+      '/ErrorBoundary': path.resolve(__dirname, 'src/Common/ErrorBoundary'),
+      '/Function': path.resolve(__dirname, 'src/Common/Function'),
       '/Icon': path.resolve(__dirname, 'src/Common/Icon'),
       '/Input': path.resolve(__dirname, 'src/Common/Input/Input.tsx'),
       '/Loading': path.resolve(__dirname, 'src/Common/Loading'),
@@ -122,6 +128,7 @@ export default defineConfig({
       '/Notification': path.resolve(__dirname, 'src/Common/Notification'),
       '/QueryFn': path.resolve(__dirname, 'src/Common/QueryFn'),
       '/Router': path.resolve(__dirname, 'src/Common/Router'),
+      '/SetWorkingHours': path.resolve(__dirname, 'src/Page/SetWorkingHours'),
       '/Suspend': path.resolve(__dirname, 'src/Common/Suspend'),
     },
   },

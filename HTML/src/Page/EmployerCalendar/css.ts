@@ -74,10 +74,21 @@ export const DateSelectedMod = styled.div`
   }
 `
 
+export const TopBar = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
 export const DateYearContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: right;
+`
+
+export const FetchStatus = styled.div`
+  display: flex;
+  flex-direction: column;
+  font-size: 8pt;
 `
 
 export const DateContent = styled.div`
@@ -153,8 +164,9 @@ export const Date = styled.div`
   aspect-ratio: 1/1;
   cursor: pointer;
   color: ${(p) => p.theme.background[300].default};
+  transition: color 300ms ease-in-out;
 
-  &[data-status='off']:after {
+  &:after {
     position: absolute;
     content: '';
     top: 0;
@@ -162,6 +174,13 @@ export const Date = styled.div`
     width: 7px;
     height: 7px;
     border-radius: 100%;
+    transition: background-color 300ms ease-in-out;
+  }
+
+  &[data-status='off']:after {
+    background-color: ${(p) => p.theme.primary[200].default};
+  }
+  &[data-status='okOff']:after {
     background-color: ${(p) => p.theme.secondary[200].default};
   }
   &[data-date='true'][data-status='notSet'] {
@@ -174,6 +193,9 @@ export const Date = styled.div`
     color: red;
   }
   &[data-date='false'][data-status='off']:after {
+    background-color: ${(p) => p.theme.primary[500].default};
+  }
+  &[data-date='false'][data-status='okOff']:after {
     background-color: ${(p) => p.theme.secondary[500].default};
   }
 `

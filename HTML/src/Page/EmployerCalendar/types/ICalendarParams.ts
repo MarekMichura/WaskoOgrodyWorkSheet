@@ -1,4 +1,6 @@
-export interface ICalendarParams {
-  month: string
-  year: string
+import {IMonth} from './IMonth'
+
+export interface ICalendarParam {
+  month: IMonth
+  year: number
 }

@@ -21,7 +21,7 @@ export const SideBar = ({open}: {open: boolean}) => {
   return (
     <CSS.Container data-open={open}>
       <CSS.Logo>
-        <LogoIcon />
+        <LogoIcon cssSVG={CSS.LogoSVG} />
       </CSS.Logo>
       <CSS.MenuContainer>
         <CSS.MenuScroll>

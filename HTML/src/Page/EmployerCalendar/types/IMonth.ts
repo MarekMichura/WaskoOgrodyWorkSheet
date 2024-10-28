@@ -12,3 +12,7 @@ export enum IMonth {
   'listopad',
   'grudzień',
 }
+
+export const months = Object.values(IMonth)
+  .filter((a) => typeof a == 'string')
+  .map((a) => a.toString())

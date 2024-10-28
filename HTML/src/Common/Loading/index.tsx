@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, Fragment} from 'react'
 
 import {ILoadingProps} from './ILoadingProps'
 
@@ -12,7 +12,7 @@ export const Loading = ({openDefault, open, text}: ILoadingProps) => {
     return () => clearTimeout(time)
   }, [open, state])
 
-  if (!state) return <></>
+  if (!state) return <Fragment />
   return (
     <CSS.LoadingContainer data-start={open ?? true}>
       <CSS.LoadingContent>
