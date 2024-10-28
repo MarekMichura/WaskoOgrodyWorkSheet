@@ -7,7 +7,7 @@ import {useProfil} from '/QueryFn/profil/useProfil'
 import {IThemeSwitch} from '/QueryFn/Theme/types/IThemeSwitch'
 import {useTheme} from '/QueryFn/Theme/useTheme'
 import {endPoints, IAdditionalRoute} from '/Router/IRoute'
-import {SuspendWrapper} from '/Suspend'
+import {SuspendWrapper} from '/Suspend/index'
 
 import {MyRoute} from './Common/Router'
 import {GlobalStyle} from './GlobalStyle'

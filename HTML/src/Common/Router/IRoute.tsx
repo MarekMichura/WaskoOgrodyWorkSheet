@@ -59,14 +59,14 @@ export const routes: Record<IRoute, string> = {
 }
 
 export const endPoints = {
-  [IRoute.setWorkingHours]: myLazy(() => import('/SetWorkingHours')),
-  [IRoute.addComment]: myLazy(() => import('/SetWorkingHours')),
-  [IRoute.showCalendar]: myLazy(() => import('/EmployerCalendar')),
-  [IRoute.askDayOff]: myLazy(() => import('/SetWorkingHours')),
-  [IRoute.setChord]: myLazy(() => import('/SetWorkingHours')),
-  [IRoute.addRefund]: myLazy(() => import('/SetWorkingHours')),
-  [IRoute.askBonus]: myLazy(() => import('/SetWorkingHours')),
-  [IAdditionalRoute.login]: myLazy(() => import('/Login')),
-  [IAdditionalRoute.mainPage]: myLazy(() => import('/Main')),
-  [IAdditionalRoute.Error]: myLazy(() => import('/Error')),
+  [IRoute.setWorkingHours]: myLazy(() => import('/PageSetWorkingHours/index')),
+  [IRoute.addComment]: myLazy(() => import('/PageSetWorkingHours/index')),
+  [IRoute.showCalendar]: myLazy(() => import('/PageCalendar/index')),
+  [IRoute.askDayOff]: myLazy(() => import('/PageSetWorkingHours/index')),
+  [IRoute.setChord]: myLazy(() => import('/PageSetWorkingHours/index')),
+  [IRoute.addRefund]: myLazy(() => import('/PageSetWorkingHours/index')),
+  [IRoute.askBonus]: myLazy(() => import('/PageSetWorkingHours/index')),
+  [IAdditionalRoute.login]: myLazy(() => import('/PageLogin/index')),
+  [IAdditionalRoute.mainPage]: myLazy(() => import('/PageMain/index')),
+  [IAdditionalRoute.Error]: myLazy(() => import('/PageError/index')),
 }

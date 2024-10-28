@@ -23,30 +23,22 @@
     "noUncheckedSideEffectImports": true,
 
     "paths": {
-      "/Button": ["Common/Input/Button.tsx"],
-      "/Calendar": ["Common/Calendar/index.tsx"],
-      "/Calendar/*": ["Common/Calendar/*"],
-      "/EmployerCalendar": ["Page/EmployerCalendar/index.tsx"],
-      "/EmployerCalendar/*": ["Page/EmployerCalendar/*"],
-      "/Error": ["Page/Error/index.tsx"],
-      "/Error/*": ["Page/Error/*"],
       "/ErrorBoundary": ["Common/ErrorBoundary/index.tsx"],
       "/Function/*": ["Common/Function/*"],
       "/Icon/*": ["Common/Icon/*"],
       "/Input": ["Common/Input/Input.tsx"],
-      "/Loading": ["Common/Loading/index.tsx"],
+      "/InputButton": ["Common/Input/Button.tsx"],
+      "/InputCalendar/*": ["Common/Calendar/*"],
       "/Loading/*": ["Common/Loading/*"],
-      "/Login": ["Page/Login/index.tsx"],
-      "/Login/*": ["Page/Login/*"],
-      "/Main": ["Page/Main/index.tsx"],
-      "/Main/*": ["Page/Main/*"],
       "/Notification/*": ["Common/Notification/*"],
+      "/PageCalendar/*": ["Page/EmployerCalendar/*"],
+      "/PageError/*": ["Page/Error/*"],
+      "/PageLogin/*": ["Page/Login/*"],
+      "/PageMain/*": ["Page/Main/*"],
+      "/PageSetWorkingHours/*": ["Page/SetWorkingHours/*"],
       "/QueryFn/*": ["Common/QueryFn/*"],
-      "/Router": ["Common/Router/index.tsx"],
       "/Router/*": ["Common/Router/*"],
-      "/SetWorkingHours": ["Page/SetWorkingHours/index.tsx"],
-      "/SetWorkingHours/*": ["Page/SetWorkingHours/*"],
-      "/Suspend": ["Common/Suspend/index.tsx"]
+      "/Suspend/*": ["Common/Suspend/*"]
     }
   },
   "include": ["src"]

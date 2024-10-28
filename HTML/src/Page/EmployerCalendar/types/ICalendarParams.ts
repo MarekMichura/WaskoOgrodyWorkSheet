@@ -1,4 +1,4 @@
-import {IMonth} from '../../../Common/Calendar/IMonth'
+import {IMonth} from '/InputCalendar/IMonth'
 
 export interface ICalendarParam {
   month: IMonth

@@ -1,6 +1,6 @@
 import {Params} from 'react-router-dom'
 
-import {IMonth} from '/Calendar/IMonth'
+import {IMonth} from '/InputCalendar/IMonth'
 
 import {ICalendarParam} from '../types/ICalendarParams'
 

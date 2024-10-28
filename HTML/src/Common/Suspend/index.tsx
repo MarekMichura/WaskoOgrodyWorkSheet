@@ -1,6 +1,6 @@
 import {useState, Suspense, Fragment} from 'react'
 
-import {Loading} from '/Loading'
+import {Loading} from '/Loading/index'
 
 import {ISuspenseDelayed} from './ITypes'
 import {SuspendWrapperController} from './SuspendWrapperController'

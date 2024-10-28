@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react'
 import {ErrorBoundary} from 'react-error-boundary'
 import {useNavigate} from 'react-router-dom'
 
-import {IMonth} from '/Calendar/IMonth'
+import {IMonth} from '/InputCalendar/IMonth'
 import {links, IRoute} from '/Router/IRoute'
 
 import {EmployerCalendar} from './calendar'

@@ -3,7 +3,7 @@ import {ErrorBoundary} from 'react-error-boundary'
 import {Outlet} from 'react-router-dom'
 
 import {endPoints, IAdditionalRoute} from '/Router/IRoute'
-import {SuspendWrapper} from '/Suspend'
+import {SuspendWrapper} from '/Suspend/index'
 
 import {SideBar} from './SideBar'
 import TopBar from './TopBar'

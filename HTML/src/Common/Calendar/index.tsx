@@ -81,23 +81,14 @@ export const Calendar = ({
         {Array.from({length: 42}).map((_, i) => {
           const day = new Date(start.getFullYear(), start.getMonth(), start.getDate() + i)
           const stat = status(day)
-          // const dateData = data?.data[strTime]
-          // const status = () => {
-          //   if (data === undefined) return 'undefined'
-          //   if (day > range.end || day < range.start) return 'ok'
-          //   if (dateData === undefined) return 'notSet'
-          //   if (dateData.daysOff.length > 0 && dateData.workingHours.length) return 'okOff'
-          //   if (dateData.daysOff.length > 0) return 'off'
-          //   if (dateData.workingHours.length === 0) return 'notSet'
-          //   return 'ok'
-          // }
+
           const click = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
             select(day)
             if (props.onClick) props.onClick(event)
           }
 
           return (
-            <Element key={i} data-status={stat} onClick={click} {...props}>
+            <Element key={i} data-status={stat} {...props} onClick={click}>
               {day.getDate()}
             </Element>
           )
