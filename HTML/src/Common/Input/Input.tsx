@@ -4,7 +4,7 @@ import {IInput} from './IProps'
 
 import * as CSS from './css'
 
-export const Input = ({icon: Icon, error, ...p}: IInput) => {
+export function Input({icon: Icon, error, ...p}: IInput) {
   const ref = useRef<HTMLInputElement>(null)
 
   const click = () => {

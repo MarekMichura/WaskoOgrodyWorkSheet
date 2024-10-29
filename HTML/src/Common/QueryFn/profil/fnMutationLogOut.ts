@@ -2,7 +2,7 @@ import factory from 'wretch/index'
 
 import {INotification, INotificationType} from '../Notification/types/INotification'
 
-export const fnMutationLogOut = (): Promise<INotification> => {
+export function fnMutationLogOut(): Promise<INotification> {
   return new Promise((resolve, reject) => {
     return factory('/Api/v1/LogOut')
       .post()

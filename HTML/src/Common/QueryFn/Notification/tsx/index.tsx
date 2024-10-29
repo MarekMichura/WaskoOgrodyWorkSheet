@@ -8,7 +8,7 @@ import {useNotification} from '../useNotification'
 
 import * as CSS from './css'
 
-export const Notifications = () => {
+export function Notifications() {
   const {data} = useNotification()
 
   return (

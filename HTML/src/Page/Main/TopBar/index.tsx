@@ -1,4 +1,4 @@
-import {useQuery} from '@tanstack/react-query'
+import {useQuery, useQueryClient} from '@tanstack/react-query'
 import {useState} from 'react'
 
 import {BellIcon} from '/Icon/BellIcon'
@@ -6,7 +6,7 @@ import {DownloadIcon} from '/Icon/Download'
 import {FaceIcon} from '/Icon/FaceIcon'
 import {MenuIcon} from '/Icon/MenuIcon'
 import {ThemeModeIcon} from '/Icon/ThemeModeIcon'
-import {BeforeInstallPromptEvent} from '/PwaCatch/IType'
+import {IPwaQuery} from '/PwaCatch/index'
 import {useLogOut} from '/QueryFn/profil/useLogOut'
 import {useProfil} from '/QueryFn/profil/useProfil'
 import {ITheme} from '/QueryFn/Theme/types/ITheme'
@@ -26,7 +26,8 @@ interface IProps {
 }
 
 function TopBar({openMenu, changeOpenMenu}: IProps) {
-  const {data} = useQuery<BeforeInstallPromptEvent | null>({queryKey: ['PWA']})
+  const client = useQueryClient()
+  const {data} = useQuery<IPwaQuery>({queryKey: ['PWA']})
   const [menu, setMenu] = useState<IMenu>(IMenu.none)
   const logOut = useLogOut()
   const profil = useProfil()
@@ -34,9 +35,7 @@ function TopBar({openMenu, changeOpenMenu}: IProps) {
   const {firstName, lastName, userName, roles} = profil.data!
 
   const install = () => {
-    console.log('installing')
-    if (data == null) return
-    data.prompt()
+    client.setQueryData(['PWA'], {...data, click: true})
   }
 
   return (
@@ -46,7 +45,7 @@ function TopBar({openMenu, changeOpenMenu}: IProps) {
         <CSS.Title>{document.title}</CSS.Title>
       </CSS.Left>
       <CSS.Right>
-        {data != null && (
+        {data!.state && (
           <CSS.IconCon onClick={install}>
             <DownloadIcon cssSVG={CSS.Icon} />
           </CSS.IconCon>

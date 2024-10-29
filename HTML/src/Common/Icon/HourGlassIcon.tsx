@@ -1,6 +1,6 @@
 import {IChangeMenu, Icon} from '.'
 
-export const HourGlassIcon = (props: IChangeMenu) => {
+export function HourGlassIcon(props: IChangeMenu) {
   const p = {...props, style: {...props.style, Transform: 'rotateX(180%)'}}
   return (
     <Icon {...p}>

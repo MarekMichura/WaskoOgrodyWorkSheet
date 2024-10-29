@@ -1,4 +1,4 @@
-export const generateUID = () => {
+export function generateUID() {
   const firstPart = (Math.random() * 46656) | 0
   const secondPart = (Math.random() * 46656) | 0
 

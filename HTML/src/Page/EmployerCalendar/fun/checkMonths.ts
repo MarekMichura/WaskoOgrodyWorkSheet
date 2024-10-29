@@ -1,7 +1,7 @@
 import {ICheckMonthsResult} from '../types/ICheckMonthsResult'
 import {IRange} from '../types/IRange'
 
-export const checkMonths = (range: IRange, year: number, month: number): ICheckMonthsResult => {
+export function checkMonths(range: IRange, year: number, month: number): ICheckMonthsResult {
   const result: ICheckMonthsResult = [
     false,
     false,

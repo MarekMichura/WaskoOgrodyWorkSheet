@@ -1,6 +1,6 @@
 import {IChangeMenu, Icon} from '.'
 
-export const CommentIcon = (props: IChangeMenu) => {
+export function CommentIcon(props: IChangeMenu) {
   const p = {...props, style: {...props.style, Transform: 'rotateX(180%)'}}
   return (
     <Icon {...p}>

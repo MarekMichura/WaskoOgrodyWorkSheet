@@ -8,11 +8,11 @@ import {IProfil, IProfilResult} from './types/IProfil'
 
 type notificationAdd = UseMutationResult<INotification[], Error, INotification, unknown>
 
-export const fnQuery = (
+export function fnQuery(
   prevData: IProfil | undefined,
   notification: notificationAdd,
   status: QueryStatus | undefined
-): (() => Promise<IFnQuery>) => {
+): () => Promise<IFnQuery> {
   return () => {
     const headers: Record<string, string> = prevData ? {'If-Modified-Since': prevData.time} : {}
 

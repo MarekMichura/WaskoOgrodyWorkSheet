@@ -1,4 +1,4 @@
-import {useTransition} from 'react'
+import {Fragment} from 'react/jsx-runtime'
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 
 import {useProfil} from '/QueryFn/profil/useProfil'
@@ -7,10 +7,10 @@ import {Loading} from '../Loading'
 
 import {endPoints, IAdditionalRoute, IRoute, routePermission, routes} from './IRoute'
 
-export const MyRoute = () => {
-  const [pending] = useTransition()
-  const {data} = useProfil()
+export function MyRoute() {
+  const {data, isFetched} = useProfil()
 
+  if (isFetched) <Fragment />
   if (data == null || data.wait) {
     const Login = endPoints[IAdditionalRoute.login].lazy
     return <Login />
@@ -29,7 +29,7 @@ export const MyRoute = () => {
           <Route path="*" Component={endPoints[IAdditionalRoute.Error].lazy} />
         </Route>
       </Routes>
-      <Loading open={pending} text="Ładowanie strony głównej" />
+      <Loading text="Ładowanie strony głównej" />
     </BrowserRouter>
   )
 }

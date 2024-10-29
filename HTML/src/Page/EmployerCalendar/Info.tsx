@@ -12,7 +12,7 @@ export interface IEmployerCalendarInfo {
   } | null
 }
 
-const WorkHours = ({data}: {data: IResponseCalendarWorkHours[]}) => {
+function WorkHours({data}: {data: IResponseCalendarWorkHours[]}) {
   if (data.length == 0) return <Fragment />
   console.log(data)
   return (
@@ -27,7 +27,7 @@ const WorkHours = ({data}: {data: IResponseCalendarWorkHours[]}) => {
   )
 }
 
-const DayOff = ({data}: {data: IResponseCalendarDayOff[]}) => {
+function DayOff({data}: {data: IResponseCalendarDayOff[]}) {
   if (data.length == 0) return <Fragment />
 
   return (
@@ -42,7 +42,7 @@ const DayOff = ({data}: {data: IResponseCalendarDayOff[]}) => {
   )
 }
 
-export const EmployerCalendarInfo = (props: IEmployerCalendarInfo) => {
+export function EmployerCalendarInfo(props: IEmployerCalendarInfo) {
   if (props == undefined || props.data == undefined) return <Fragment />
 
   return (

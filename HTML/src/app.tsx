@@ -1,41 +1,29 @@
+import {lazy} from 'react'
 import {ErrorBoundary} from 'react-error-boundary'
 import {ThemeProvider} from 'styled-components'
 
 import {Notifications} from '/QueryFn/Notification/tsx'
-import {useNotification} from '/QueryFn/Notification/useNotification'
-import {useProfil} from '/QueryFn/profil/useProfil'
+import {ITheme} from '/QueryFn/Theme/types/ITheme'
 import {IThemeSwitch} from '/QueryFn/Theme/types/IThemeSwitch'
 import {useTheme} from '/QueryFn/Theme/useTheme'
 import {endPoints, IAdditionalRoute} from '/Router/IRoute'
-import {SuspendWrapper} from '/Suspend/index'
 
-import {MyRoute} from './Common/Router'
+import {SuspendWrapper} from './Common/Suspend'
 import {GlobalStyle} from './GlobalStyle'
 
-export const App = () => {
-  const notification = useNotification()
-  const profil = useProfil()
+const MyRoute = lazy(() => import('/Router/index').then((a) => ({default: a.MyRoute})))
+export function App() {
   const theme = useTheme()
 
-  const loading = notification.isPending || profil.isPending || theme.isPending
-
-  if (theme.isError || notification.isError) {
-    const Error = endPoints[IAdditionalRoute.Error].lazy
-    return <Error />
-  }
-
   return (
-    <ErrorBoundary FallbackComponent={endPoints[IAdditionalRoute.Error].lazy}>
-      <ThemeProvider theme={IThemeSwitch[theme.data]}>
+    <ThemeProvider theme={IThemeSwitch[theme.data ?? ITheme.THEME_LIGHT]}>
+      <ErrorBoundary FallbackComponent={endPoints[IAdditionalRoute.Error].lazy}>
         <GlobalStyle />
-        <SuspendWrapper
-          forceOpen={loading}
-          openDefault={true}
-          text={loading ? 'Próba przywrócenia sesji' : 'Ładowanie strony'}>
+        <SuspendWrapper text={'Ładowanie strony'}>
           <MyRoute />
         </SuspendWrapper>
         <Notifications />
-      </ThemeProvider>
-    </ErrorBoundary>
+      </ErrorBoundary>
+    </ThemeProvider>
   )
 }

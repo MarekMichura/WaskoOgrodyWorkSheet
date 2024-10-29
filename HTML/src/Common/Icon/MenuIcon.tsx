@@ -17,7 +17,7 @@ const pathClose = `
   M74-632L74-766L886-766L886-632L74-632Z
 `
 
-export const MenuIcon = ({status, ...p}: IChangeMenu) => {
+export function MenuIcon({status, ...p}: IChangeMenu) {
   const animationOpen = useRef<SVGAnimateElement>(null)
   const animationClose = useRef<SVGAnimateElement>(null)
 

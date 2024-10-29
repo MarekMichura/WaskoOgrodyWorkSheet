@@ -4,11 +4,11 @@ import {ILoadingProps} from './ILoadingProps'
 
 import * as CSS from './css'
 
-export const Loading = ({openDefault, open, text}: ILoadingProps) => {
+export function Loading({openDefault, open, text}: ILoadingProps) {
   const [state, setState] = useState(openDefault ?? false)
   useEffect(() => {
     if (open == state) return
-    const time = setTimeout(() => setState(open ?? false), open ? 100 : 2000)
+    const time = setTimeout(() => setState(open ?? false), open ? 300 : 2000)
     return () => clearTimeout(time)
   }, [open, state])
 

@@ -13,7 +13,7 @@ import {SideBarOption} from './Option'
 
 import * as CSS from './css'
 
-export const SideBar = ({open}: {open: boolean}) => {
+export function SideBar({open}: {open: boolean}) {
   const {data} = useProfil()
 
   const permission = routePermission(data!.roles)

@@ -30,3 +30,4 @@ yarn-error.log*
 lerna-debug.log*
 
 *.tsbuildinfo
+vite.config.ts.timestamp**

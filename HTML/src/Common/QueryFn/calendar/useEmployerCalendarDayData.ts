@@ -3,7 +3,7 @@ import {useMemo} from 'react'
 
 import {IResponseCalendar} from './ICalendarResponse'
 
-export const useEmployerCalendarDayData = (date: Date | null) => {
+export function useEmployerCalendarDayData(date: Date | null) {
   const client = useQueryClient()
 
   const data = useMemo(() => {

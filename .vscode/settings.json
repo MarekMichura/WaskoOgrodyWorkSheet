@@ -11,6 +11,7 @@
     "Henniger",
     "Hsts",
     "jpegtran",
+    "keyval",
     "klimanowa",
     "Narama",
     "optipng",
@@ -53,6 +54,7 @@
     "Server/.dockerignore": true,
     "Server/.gitignore": true,
     "Server/taskCreateDb.sh": true,
+    "Server/wait-for-it.sh": true,
     "ServerTests/wwwroot": true
   }
 }

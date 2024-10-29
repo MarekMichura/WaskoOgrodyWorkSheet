@@ -6,7 +6,7 @@ import {ITheme} from './types/ITheme'
 
 export const LS_THEME_NAME = 'theme'
 
-export const useTheme = () => {
+export function useTheme() {
   const client = useQueryClient()
 
   const theme = useQuery<ITheme>({

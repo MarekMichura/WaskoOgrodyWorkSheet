@@ -6,7 +6,7 @@ import {ISideBarOption} from './ISideBarOption'
 
 import * as CSS from './css'
 
-export const SideBarOption = ({icon: Icon, route, show, text}: ISideBarOption) => {
+export function SideBarOption({icon: Icon, route, show, text}: ISideBarOption) {
   const preFetch = () => {
     endPoints[route].preload()
   }

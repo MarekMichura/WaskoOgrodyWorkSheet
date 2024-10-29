@@ -1,4 +1,4 @@
-export const calcRange = (year: number, month: number) => {
+export function calcRange(year: number, month: number) {
   const start = new Date(year, month, 1)
   const day = start.getDay() - 1
   start.setDate(start.getDate() - (day == -1 ? 6 : day))

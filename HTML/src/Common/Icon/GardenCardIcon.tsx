@@ -1,6 +1,6 @@
 import {IChangeMenu, Icon} from '.'
 
-export const GardenCardIcon = (props: IChangeMenu) => {
+export function GardenCardIcon(props: IChangeMenu) {
   const p = {...props, style: {...props.style, Transform: 'rotateX(180%)'}}
   return (
     <Icon {...p}>

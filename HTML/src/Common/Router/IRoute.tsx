@@ -19,7 +19,7 @@ export enum IAdditionalRoute {
   Error = max + 2,
 }
 
-export const routePermission = (roles?: IUserRole[]): Record<IRoute, boolean> => {
+export function routePermission(roles?: IUserRole[]): Record<IRoute, boolean> {
   const login = roles !== undefined
   const employer = login && roles.includes(IUserRole.Employer)
   const gardener = login && roles.includes(IUserRole.Gardener)

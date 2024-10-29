@@ -16,7 +16,7 @@ import {validationLogin as validate} from './validation'
 
 import * as CSS from './css'
 
-const Login = () => {
+function Login() {
   const {changeTheme} = useTheme()
   const mutationLogin = useLogin()
 

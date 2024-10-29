@@ -37,7 +37,7 @@ interface ICalendar extends React.HTMLProps<HTMLDivElement> {
   >
 }
 
-export const Calendar = ({
+export function Calendar({
   month,
   year,
   title,
@@ -50,7 +50,7 @@ export const Calendar = ({
   status,
   select,
   ...props
-}: ICalendar) => {
+}: ICalendar) {
   const start = new Date(year, month, 1)
   start.setDate(start.getDate() - (start.getDay() - 1 == -1 ? 6 : start.getDay() - 1))
 

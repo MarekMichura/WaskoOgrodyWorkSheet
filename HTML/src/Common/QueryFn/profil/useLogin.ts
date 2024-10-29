@@ -7,7 +7,7 @@ import {useNotification} from '../Notification/useNotification'
 
 import {fnMutationLogin} from './fnMutationLogin'
 
-export const useLogin = () => {
+export function useLogin() {
   const {mutationNotificationAdd} = useNotification()
   const client = useQueryClient()
 

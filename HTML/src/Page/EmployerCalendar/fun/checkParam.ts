@@ -4,7 +4,7 @@ import {IMonth} from '/InputCalendar/IMonth'
 
 import {ICalendarParam} from '../types/ICalendarParams'
 
-export const checkParam = (param: Params): ICalendarParam => {
+export function checkParam(param: Params): ICalendarParam {
   if (param.year == undefined && param.month == undefined) {
     const now = new Date()
     return {month: now.getMonth(), year: now.getFullYear()}

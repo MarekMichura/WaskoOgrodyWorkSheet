@@ -2,7 +2,7 @@ import {useQueryClient, useQuery, useMutation} from '@tanstack/react-query'
 
 import {fnQuery, fnAddMutation, fnRemoveMutation} from './fnQuery'
 
-export const useNotification = () => {
+export function useNotification() {
   const client = useQueryClient()
 
   const notification = useQuery({

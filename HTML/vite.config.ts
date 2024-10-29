@@ -25,6 +25,7 @@ export default defineConfig({
         name: 'Wasko ogrody',
         short_name: 'Wasko',
         start_url: '/',
+        lang: 'pl',
         icons: [
           {
             src: 'icons/manifest-icon-192.maskable.png',
@@ -51,10 +52,10 @@ export default defineConfig({
             purpose: 'maskable',
           },
         ],
-        theme_color: '#00000000',
-        background_color: '#00000000',
+        theme_color: '#000000',
+        background_color: '#000000',
         display: 'fullscreen',
-        orientation: 'portrait',
+        orientation: 'any',
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,png,svg}'],
@@ -103,29 +104,37 @@ export default defineConfig({
       },
     }),
     viteImagemin({
+      //gif
       gifsicle: {
-        optimizationLevel: 7,
+        optimizationLevel: 3,
+        interlaced: true,
+        colors: 200,
       },
-      optipng: {
-        optimizationLevel: 7,
-      },
-      mozjpeg: {
-        quality: 80,
-      },
+      //png
       pngquant: {
-        quality: [0.7, 0.9],
-        speed: 4,
+        speed: 1,
+        strip: true,
+        quality: [0.6, 0.8],
+        dithering: 0.8,
       },
-      svgo: {
-        plugins: [
-          {
-            name: 'removeViewBox',
-          },
-          {
-            name: 'removeEmptyAttrs',
-            active: false,
-          },
-        ],
+      //jpg
+      mozjpeg: {
+        quality: 75,
+        progressive: true,
+        targa: false,
+        revert: false,
+        fastCrush: false,
+        dcScanOpt: 1,
+        trellis: true,
+        trellisDC: true,
+        tune: 'hvs-psnr',
+        overshoot: true,
+        arithmetic: false,
+        dct: 'float',
+        quantBaseline: false,
+        quantTable: 4,
+        smooth: 10,
+        sample: ['2x2'],
       },
     }),
   ],
@@ -142,9 +151,9 @@ export default defineConfig({
     cssCodeSplit: true,
     rollupOptions: {
       output: {
-        entryFileNames: 'assets/[hash][hash].js',
-        chunkFileNames: 'assets/[hash][hash].js',
-        assetFileNames: 'assets/[hash][hash].js',
+        entryFileNames: 'assets/[name][hash][hash].js',
+        chunkFileNames: 'assets/[name][hash][hash].js',
+        assetFileNames: 'assets/[name][hash][hash].js',
       },
     },
     terserOptions: {
@@ -159,7 +168,6 @@ export default defineConfig({
         module: true,
         collapse_vars: true,
         reduce_vars: true,
-        pure_funcs: ['console'],
       },
       mangle: {
         toplevel: true,

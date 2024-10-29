@@ -9,7 +9,10 @@ interface IMyLazy<T extends ComponentType<any>> {
 const RetryCatch = <T extends ComponentType<T>>(name: string, nr: number = 0) => {
   return new Promise<{default: T}>((resolve) => {
     const path = `${name}?q=${nr}`
-    import(path).then(resolve).catch(() => setTimeout(() => RetryCatch<T>(name, nr + 1).then(resolve), 10000))
+
+    import(/* @vite-ignore */ path)
+      .then(resolve)
+      .catch(() => setTimeout(() => RetryCatch<T>(name, nr + 1).then(resolve), 10000))
   })
 }
 

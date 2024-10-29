@@ -7,6 +7,7 @@ public class UseMiddleware : IMiddleware, IService
   public void DefineEndPoint(WebApplication app)
   {
     app.UseStaticCompressedFiles();
+    app.UseStaticFiles();
     app.MapControllers();
 
     app.UseRouting();

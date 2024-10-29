@@ -1,6 +1,6 @@
 import {IIcon, Icon} from '.'
 
-export const LogoIcon = (props: IIcon) => {
+export function LogoIcon(props: IIcon) {
   const p = {...props, viewBox: '0 0 278 217', stroke: '#004f00', fill: '#004f00'}
   return (
     <Icon {...p}>

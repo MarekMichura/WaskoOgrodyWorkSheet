@@ -4,7 +4,7 @@ import {useProfil} from '/QueryFn/profil/useProfil'
 
 import {IRange} from '../types/IRange'
 
-export const useCalendarRange = (): IRange => {
+export function useCalendarRange(): IRange {
   const profil = useProfil()
   const [day, setDay] = useState(new Date())
   const [range, setRange] = useState<IRange>({start: profil.data!.workStartDate, end: day})

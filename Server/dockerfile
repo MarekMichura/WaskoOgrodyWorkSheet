@@ -24,7 +24,7 @@ ENTRYPOINT [ "dotnet", "watch", "run" ]
 FROM server-sdk AS server-update-db
 WORKDIR /Server/
 COPY ["./taskCreateDb.sh", "./taskCreateDb.sh"]
-COPY ["../nginx/wait-for-it.sh", "./wait-for-it.sh"]
+COPY ["./wait-for-it.sh", "./wait-for-it.sh"]
 RUN chmod +x taskCreateDb.sh && chmod +x wait-for-it.sh
 
 ENTRYPOINT [ "./taskCreateDb.sh" ]

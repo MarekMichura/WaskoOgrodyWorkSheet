@@ -4,7 +4,7 @@ import {IButton} from './IProps'
 
 import * as CSS from './css'
 
-export const Button = ({onClick, ...p}: IButton) => {
+export function Button({onClick, ...p}: IButton) {
   const effect = useRef<HTMLElement>(null)
   const [ripple, setRipple] = useState<NodeJS.Timeout | undefined>()
 

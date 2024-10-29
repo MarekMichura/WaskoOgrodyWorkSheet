@@ -5,7 +5,7 @@ import {Loading} from '/Loading/index'
 import {ISuspenseDelayed} from './ITypes'
 import {SuspendWrapperController} from './SuspendWrapperController'
 
-export const SuspendWrapper = ({forceOpen, children, ...props}: ISuspenseDelayed) => {
+export function SuspendWrapper({forceOpen, children, ...props}: ISuspenseDelayed) {
   const [loading, setLoading] = useState(false)
 
   return (

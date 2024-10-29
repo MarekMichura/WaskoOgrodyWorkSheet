@@ -4,13 +4,13 @@ import {INotificationProps, INotification} from './types/INotification'
 
 export let notifications: INotificationProps[] = []
 
-export const fnQuery = (): Promise<INotificationProps[]> => {
+export function fnQuery(): Promise<INotificationProps[]> {
   return new Promise((resolve) => {
     resolve(notifications)
   })
 }
 
-export const fnAddMutation = ({id, text, type, life}: INotification): Promise<INotification[]> => {
+export function fnAddMutation({id, text, type, life}: INotification): Promise<INotification[]> {
   return new Promise((resolve) => {
     const newNotification: INotificationProps = {
       id: id ?? generateUID(),
@@ -23,7 +23,7 @@ export const fnAddMutation = ({id, text, type, life}: INotification): Promise<IN
   })
 }
 
-export const fnRemoveMutation = (id: string): Promise<INotification[]> => {
+export function fnRemoveMutation(id: string): Promise<INotification[]> {
   return new Promise((resolve) => {
     notifications = notifications.filter((notification) => {
       return notification.id !== id

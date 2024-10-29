@@ -2,7 +2,7 @@ import {FormikErrors} from 'formik'
 
 import {ILoginValues} from './ITypes'
 
-export const validationLogin = (values: ILoginValues) => {
+export function validationLogin(values: ILoginValues) {
   const errors: FormikErrors<ILoginValues> = {}
 
   if (values.login == undefined || values.login == '') errors.login = 'Musisz wpisać login'

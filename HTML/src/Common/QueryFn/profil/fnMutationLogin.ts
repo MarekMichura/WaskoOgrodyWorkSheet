@@ -4,7 +4,7 @@ import {INotificationType} from '../Notification/types/INotification'
 
 import {ILoginRequestData, IFnMutationResult, ILoginResponse} from './types/IFnMutationLogin'
 
-export const fnMutationLogin = (data: ILoginRequestData): Promise<IFnMutationResult> => {
+export function fnMutationLogin(data: ILoginRequestData): Promise<IFnMutationResult> {
   return new Promise((resolve, reject) => {
     return factory('/Api/v1/Authenticate')
       .post(data)

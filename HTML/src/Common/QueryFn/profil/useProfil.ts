@@ -7,7 +7,7 @@ import {fnQuery} from './fnQuery'
 import {IFnQuery} from './types/IFnQuery'
 import {IProfil} from './types/IProfil'
 
-export const useProfil = () => {
+export function useProfil() {
   const {mutationNotificationAdd} = useNotification()
   const client = useQueryClient()
   const prevData = client.getQueryData<IProfil>(['profil'])

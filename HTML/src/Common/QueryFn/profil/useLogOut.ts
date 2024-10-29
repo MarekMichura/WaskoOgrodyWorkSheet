@@ -6,7 +6,7 @@ import {useNotification} from '../Notification/useNotification'
 import {fnMutationLogOut} from './fnMutationLogOut'
 import {IProfil} from './types/IProfil'
 
-export const useLogOut = () => {
+export function useLogOut() {
   const {mutationNotificationAdd} = useNotification()
   const client = useQueryClient()
 

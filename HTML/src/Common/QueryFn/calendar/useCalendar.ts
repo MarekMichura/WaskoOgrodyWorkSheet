@@ -7,7 +7,7 @@ import {calcRange} from './calcRange'
 import {IResponseCalendar} from './ICalendarResponse'
 import {queryFn} from './queryFn'
 
-export const useEmployerCalendar = (year: number, month: number) => {
+export function useEmployerCalendar(year: number, month: number) {
   const client = useQueryClient()
   const {mutationNotificationAdd} = useNotification()
 

@@ -17,7 +17,7 @@ import {EmployerCalendarInfo} from './Info'
 
 import * as CSS from './css'
 
-export const EmployerCalendar = () => {
+export function EmployerCalendar() {
   const nav = useNavigate()
   const {year, month} = checkParam(useParams())
   const [selected, select] = useState<Date | null>(null)

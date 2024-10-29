@@ -7,12 +7,12 @@ import {INotification, INotificationType} from '/QueryFn/Notification/types/INot
 import {IResponseCalendar} from './ICalendarResponse'
 
 type notificationAdd = UseMutationResult<INotification[], Error, INotification, unknown>
-export const queryFn = (
+export function queryFn(
   prevData: IResponseCalendar | undefined,
   notification: notificationAdd,
   start: Date,
   end: Date
-): (() => Promise<IResponseCalendar>) => {
+): () => Promise<IResponseCalendar> {
   return (): Promise<IResponseCalendar> => {
     const promise = new Promise<IResponseCalendar>((resolve, reject) => {
       const headers: Record<string, string> = prevData ? {'If-Modified-Since': prevData.time} : {}
