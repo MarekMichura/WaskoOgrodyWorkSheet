@@ -12,7 +12,7 @@ import * as CSS from './css'
 
 const Error = endPoints[IAdditionalRoute.Error].lazy
 
-const MainPage = () => {
+function MainPage() {
   const [menu, setMenu] = useState(false)
 
   return (

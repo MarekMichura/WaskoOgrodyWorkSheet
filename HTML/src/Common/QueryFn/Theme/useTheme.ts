@@ -26,11 +26,11 @@ export function useTheme() {
     },
   })
 
-  const setTheme = (newTheme: ITheme) => {
+  function setTheme(newTheme: ITheme) {
     mutation.mutate(newTheme)
   }
 
-  const changeTheme = () => {
+  function changeTheme() {
     mutation.mutate(theme.data == ITheme.THEME_DARK ? ITheme.THEME_LIGHT : ITheme.THEME_DARK)
   }
 

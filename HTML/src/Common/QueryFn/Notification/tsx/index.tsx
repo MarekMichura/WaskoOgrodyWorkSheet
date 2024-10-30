@@ -30,7 +30,7 @@ export function Notifications() {
 
 const DEFAULT_LIFE = 10000
 
-const Notification = ({id, text, type, life}: INotificationProps) => {
+function Notification({id, text, type, life}: INotificationProps) {
   const {mutationNotificationRemove} = useNotification()
 
   useEffect(() => {

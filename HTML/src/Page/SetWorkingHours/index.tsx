@@ -1,6 +1,6 @@
 import * as CSS from './css'
 
-const SetWorkingHours = () => {
+function SetWorkingHours() {
   return <CSS.Container></CSS.Container>
 }
 

@@ -7,7 +7,7 @@ import * as CSS from './css'
 export function Input({icon: Icon, error, ...p}: IInput) {
   const ref = useRef<HTMLInputElement>(null)
 
-  const click = () => {
+  function click() {
     ref.current?.focus()
   }
 

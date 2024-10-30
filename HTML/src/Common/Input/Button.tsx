@@ -8,7 +8,7 @@ export function Button({onClick, ...p}: IButton) {
   const effect = useRef<HTMLElement>(null)
   const [ripple, setRipple] = useState<NodeJS.Timeout | undefined>()
 
-  const click = (e: React.MouseEvent<HTMLButtonElement>) => {
+  function click(e: React.MouseEvent<HTMLButtonElement>) {
     if (onClick) onClick(e)
     const current = effect.current
 

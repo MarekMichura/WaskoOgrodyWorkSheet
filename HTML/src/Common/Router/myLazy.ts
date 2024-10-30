@@ -6,7 +6,7 @@ interface IMyLazy<T extends ComponentType<any>> {
   lazy: LazyExoticComponent<T>
 }
 
-const RetryCatch = <T extends ComponentType<T>>(name: string, nr: number = 0) => {
+function RetryCatch<T extends ComponentType<T>>(name: string, nr: number = 0) {
   return new Promise<{default: T}>((resolve) => {
     const path = `${name}?q=${nr}`
 
@@ -16,7 +16,7 @@ const RetryCatch = <T extends ComponentType<T>>(name: string, nr: number = 0) =>
   })
 }
 
-const Retry = <T extends ComponentType<T>>(importFn: () => Promise<{default: T}>) => {
+function Retry<T extends ComponentType<T>>(importFn: () => Promise<{default: T}>) {
   return new Promise<{default: T}>((resolve) => {
     importFn()
       .then((a) => resolve(a))
@@ -28,9 +28,9 @@ const Retry = <T extends ComponentType<T>>(importFn: () => Promise<{default: T}>
   })
 }
 
-export const myLazy = <T extends ComponentType<any>>(importFn: () => Promise<{default: T}>): IMyLazy<T> => {
-  const lazy = React.lazy(() => Retry(importFn))
-  const preload = () => Retry(importFn)
-
-  return {lazy, preload}
+export function myLazy<T extends ComponentType<any>>(importFn: () => Promise<{default: T}>): IMyLazy<T> {
+  return {
+    lazy: React.lazy(() => Retry(importFn)),
+    preload: () => Retry(importFn),
+  }
 }

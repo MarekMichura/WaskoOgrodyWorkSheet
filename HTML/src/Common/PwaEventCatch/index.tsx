@@ -24,7 +24,7 @@ export function PwaControl() {
   }
 
   useEffect(() => {
-    const setPwaEvent = (event: BeforeInstallPromptEvent) => {
+    function setPwaEvent(event: BeforeInstallPromptEvent) {
       setState(event)
       client.setQueryData<IPwaQuery>(['PWA'], {state: true, click: false})
     }

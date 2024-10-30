@@ -7,11 +7,11 @@ import {links, IRoute} from '/Router/IRoute'
 
 import {EmployerCalendar} from './calendar'
 
-const EmployerCalendarErrorHandle = () => {
+function EmployerCalendarErrorHandle() {
   const nav = useNavigate()
   const [{error, count}, setError] = useState({count: 0, error: ''})
 
-  const onError = (error: Error) => {
+  function onError(error: Error) {
     setError((a) => ({...a, error: error.message}))
   }
 

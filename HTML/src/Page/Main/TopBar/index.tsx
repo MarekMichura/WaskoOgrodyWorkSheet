@@ -34,7 +34,7 @@ function TopBar({openMenu, changeOpenMenu}: IProps) {
   const theme = useTheme()
   const {firstName, lastName, userName, roles} = profil.data!
 
-  const install = () => {
+  function install() {
     client.setQueryData(['PWA'], {...data, click: true})
   }
 

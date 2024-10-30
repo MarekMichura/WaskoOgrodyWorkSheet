@@ -82,7 +82,7 @@ export function Calendar({
           const day = new Date(start.getFullYear(), start.getMonth(), start.getDate() + i)
           const stat = status(day)
 
-          const click = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+          function click(event: React.MouseEvent<HTMLDivElement, MouseEvent>) {
             select(day)
             if (props.onClick) props.onClick(event)
           }

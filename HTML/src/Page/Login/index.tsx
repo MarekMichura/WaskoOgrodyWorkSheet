@@ -20,7 +20,7 @@ function Login() {
   const {changeTheme} = useTheme()
   const mutationLogin = useLogin()
 
-  const Login = ({login, password}: ILoginValues) => {
+  function Login({login, password}: ILoginValues) {
     mutationLogin.mutate({Login: login, Password: password})
   }
 

@@ -33,7 +33,7 @@ export function EmployerCalendar() {
   const minusYear = () => move(11, year - 1)
   const setMonth = (i: number) => move(i, year)
 
-  const status = (date: Date) => {
+  function status(date: Date) {
     if (calendar.data == undefined) return 'false-false-true'
     const inRange = date.getMonth() == month && (date > range.start || date < range.end)
     const off = (calendar.data?.data[ChangeToApiDateString(date)]?.daysOff.length ?? 0) > 0
@@ -42,7 +42,7 @@ export function EmployerCalendar() {
     return `${inRange}-${off}-${work}`
   }
 
-  const title = () => {
+  function title() {
     if (calendar.isPaused) return 'Brak dostępu do internetu'
     if (calendar.status == 'pending') return 'Pobieranie danych...'
     return ''

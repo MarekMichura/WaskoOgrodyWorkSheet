@@ -7,7 +7,7 @@ import {ISideBarOption} from './ISideBarOption'
 import * as CSS from './css'
 
 export function SideBarOption({icon: Icon, route, show, text}: ISideBarOption) {
-  const preFetch = () => {
+  function preFetch() {
     endPoints[route].preload()
   }
 
