@@ -55,6 +55,7 @@
     "Server/.gitignore": true,
     "Server/taskCreateDb.sh": true,
     "Server/wait-for-it.sh": true,
+    "Server/Properties": true,
     "ServerTests/wwwroot": true
   }
 }

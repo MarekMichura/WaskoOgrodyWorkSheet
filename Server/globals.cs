@@ -11,4 +11,7 @@ global using System.Collections.Concurrent;
 global using Microsoft.Extensions.Caching.Memory;
 global using System.Text.Json;
 global using System.Text.Json.Serialization;
+global using Microsoft.AspNetCore.OutputCaching;
+global using DotNetEnv;
 global using Microsoft.AspNetCore.DataProtection;
+global using Microsoft.Extensions.Primitives;

@@ -1,8 +1,7 @@
 namespace Test;
 
 [Collection("WebApp")]
-public class LoginTest(WebApp app)
-{
+public class LoginTest(WebApp app) {
   public static IEnumerable<object[]> Users =>
     StorageUser.users.Select(static user => new object[] { user });
 
@@ -13,10 +12,10 @@ public class LoginTest(WebApp app)
   public async Task LoginValid(StorageUser user)
   {
     var Client = App.CreateClient();
-    var content = JsonContent.Create(new ModelInputAuthenticate { Login = user.UserName, Password = user.Password });
+    var content = JsonContent.Create(new ModelInputMapAuthenticate { Login = user.UserName, Password = user.Password });
 
     var response = await Client.PostAsync("/Authenticate", content);
-    var data = await response.Content.ReadFromJsonAsync<ModelResultAuthenticate>();
+    var data = await response.Content.ReadFromJsonAsync<ModelOutPutMapAuthenticate>();
     var cookies1 = response.Headers.SingleOrDefault(static header => header.Key == HeaderNames.SetCookie)
       .Value.Select(static a => new Cookies(a));
     response = await Client.PostAsync("/Logout", null);
@@ -38,10 +37,10 @@ public class LoginTest(WebApp app)
   public async Task LoginInValid(string userName, string password)
   {
     var Client = App.CreateClient();
-    var content = JsonContent.Create(new ModelInputAuthenticate { Login = userName, Password = password });
+    var content = JsonContent.Create(new ModelInputMapAuthenticate { Login = userName, Password = password });
 
     var response = await Client.PostAsync("/Authenticate", content);
-    var data = await response.Content.ReadFromJsonAsync<ModelResultAuthenticate>();
+    var data = await response.Content.ReadFromJsonAsync<ModelOutPutMapAuthenticate>();
     var cookies = response.Headers.SingleOrDefault(static header => header.Key == HeaderNames.SetCookie)
       .Value.Select(static a => new Cookies(a));
 

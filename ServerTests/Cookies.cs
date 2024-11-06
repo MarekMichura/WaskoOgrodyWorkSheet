@@ -1,7 +1,6 @@
 namespace Test;
 
-class Cookies(string cookie)
-{
+class Cookies(string cookie) {
   public readonly string[][] cookie =
     cookie.Split(';').Select(static cookies => cookies.Split('=')).ToArray();
 

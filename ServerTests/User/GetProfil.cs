@@ -1,8 +1,7 @@
 namespace Test;
 
 [Collection("WebApp")]
-public class GetProfil(WebApp app)
-{
+public class GetProfil(WebApp app) {
   public static IEnumerable<object[]> Users =>
     StorageUser.users.Select(static user => new object[] { user });
 
@@ -13,7 +12,7 @@ public class GetProfil(WebApp app)
   public async Task GetProfilValid(StorageUser user)
   {
     var Client = App.CreateClient();
-    var content = JsonContent.Create(new ModelInputAuthenticate { Login = user.UserName, Password = user.Password });
+    var content = JsonContent.Create(new ModelInputMapAuthenticate { Login = user.UserName, Password = user.Password });
 
     await Client.PostAsync("/Authenticate", content);
     var response = await Client.GetAsync("/GetProfil");
@@ -31,7 +30,7 @@ public class GetProfil(WebApp app)
   public async Task GetProfilInValid(string userName, string password)
   {
     var Client = App.CreateClient();
-    var content = JsonContent.Create(new ModelInputAuthenticate { Login = userName, Password = password });
+    var content = JsonContent.Create(new ModelInputMapAuthenticate { Login = userName, Password = password });
 
     await Client.PostAsync("/Authenticate", content);
     var response = await Client.GetAsync("/GetProfil");

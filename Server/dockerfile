@@ -3,6 +3,7 @@ FROM mcr.microsoft.com/dotnet/sdk:latest AS server-with-debugger
 RUN apt-get update && apt-get install -y --no-install-recommends curl && apt-get clean
 RUN curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l /remote_debugger
 RUN dotnet tool install --global dotnet-ef
+ENV DB="DB"
 
 FROM server-with-debugger as server-sdk
 WORKDIR /Server/
@@ -14,8 +15,10 @@ COPY ["./globals.cs", "./globals.cs"]
 COPY ["./Program.cs", "./Program.cs"]
 COPY ["./Service/", "./Service/"]
 COPY ["./EndPoint/", "./EndPoint/"]
+COPY ["./Utilities/", "./Utilities/"]
 
-FROM server-sdk AS server-development
+FROM server-with-debugger AS server-development
+ENV client="html-development"
 EXPOSE 8080
 EXPOSE 8081
 WORKDIR /Server/
