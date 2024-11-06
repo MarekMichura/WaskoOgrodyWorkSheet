@@ -1,13 +1,11 @@
 namespace Wasko;
 
-public class StorageRole(string id, string name, ushort strength = 0)
-{
+public class StorageRole(string id, string name, ushort strength = 0) {
   public string ID { get; set; } = id;
   public string Name { get; set; } = name;
   public ushort TitleStrength { get; set; } = strength;
 
-  public static implicit operator ModelRole(StorageRole role) => new()
-  {
+  public static implicit operator ModelRole(StorageRole role) => new() {
     Id = role.ID,
     Name = role.Name,
     TitleStrength = role.TitleStrength,
@@ -26,7 +24,8 @@ public class StorageRole(string id, string name, ushort strength = 0)
 
   private static readonly StorageRole RolePolishHolidays = new("1d923116-d460-4809-b8d8-47d1c4216b2c", nameof(BuildInRoles.Polish_holidays));
 
-  public readonly static IEnumerable<ModelRole> Roles = [RoleBlockEmployerDayOff, RoleBlockEmployerBonus, RoleBlockEmployerFound, RoleEmployer, RoleGardener, RolePolishHolidays];
+  public readonly static ModelRole[] Roles =
+    [RoleBlockEmployerDayOff, RoleBlockEmployerBonus, RoleBlockEmployerFound, RoleEmployer, RoleGardener, RolePolishHolidays];
 
   public readonly static string employerID = RoleEmployer.ID;
   public readonly static string gardenerID = RoleGardener.ID;

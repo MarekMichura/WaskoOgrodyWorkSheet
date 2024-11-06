@@ -1,7 +1,6 @@
 namespace Wasko;
 
-public class ModelChord
-{
+public class ModelChord {
   [Key]
   [Required]
   [StringLength(36)]
@@ -16,9 +15,6 @@ public class ModelChord
   public required string CreatorID { get; set; }
   public virtual ModelUser? Creator { get; set; }
 
-  public virtual ICollection<ModelWorkChord> WorkChords { get; set; } = [];
-  public virtual ICollection<ModelChordPrice> Prices { get; set; } = [];
-  public virtual ModelChordPrice? CurrentPrice => Prices
-    .Where(static chordPrice => chordPrice.Date < DateOnly.FromDateTime(DateTime.Now))
-    .MaxBy(static chordPrice => chordPrice.Date);
+  public virtual ICollection<ModelWorkChord>? WorkChords { get; set; }
+  public virtual ICollection<ModelChordPrice>? Prices { get; set; }
 }

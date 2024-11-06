@@ -1,17 +1,13 @@
-
 namespace Wasko;
 
-class ConvertExpressionYearToRange : IConvertExpressionToRange
-{
+internal class ConvertExpressionYearToRange : IConvertExpressionToRange {
   public IReadOnlyList<DateOnlyRange> Ranges { get; init; }
 
   public ConvertExpressionYearToRange(IConvertExpressionToRange convert, short year)
   {
     var result = new List<DateOnlyRange>();
 
-    foreach (var range in convert.Ranges)
-    {
-      var (start, end) = range;
+    foreach (var (start, end) in convert.Ranges) {
       var min = new DateOnly(year, 1, 1);
       var max = new DateOnly(year, 12, 31);
 

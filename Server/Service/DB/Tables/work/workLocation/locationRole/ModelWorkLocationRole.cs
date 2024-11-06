@@ -1,7 +1,6 @@
 namespace Wasko;
 
-public class ModelWorkLocationRole
-{
+public class ModelWorkLocationRole {
   [Key]
   [Required]
   [StringLength(36)]
@@ -15,5 +14,5 @@ public class ModelWorkLocationRole
   public required string AuthorID { get; set; }
   public virtual ModelUser? Author { get; set; }
 
-  public virtual ICollection<ModelWorkLocation> Locations { get; set; } = [];
+  public virtual ICollection<ModelWorkLocation>? Locations { get; set; }
 }

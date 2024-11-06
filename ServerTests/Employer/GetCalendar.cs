@@ -4,11 +4,6 @@ namespace Test;
 public class GetCalendar(WebApp app) {
   public WebApplicationFactory<Program> App = app.App;
 
-  readonly struct ModelResultCalendar {
-    public readonly List<ModelResultCalendarDayOff> DaysOff { get; init; }
-    public readonly List<ModelResultCalendarWorkHours> WorkingHours { get; init; }
-  }
-
   [Fact]
   public async Task NotEmployerRequestCalendar()
   {
@@ -17,7 +12,7 @@ public class GetCalendar(WebApp app) {
       Login = StorageUser.AdminUser.UserName,
       Password = StorageUser.AdminUser.Password
     });
-    var calendarContent = JsonContent.Create(new ModelInputCalendar {
+    var calendarContent = JsonContent.Create(new ModelInputMapEmployerCalendar {
       Start = DateOnly.Parse("2024-01-01"),
       End = DateOnly.Parse("2024-12-31")
     });
@@ -36,7 +31,7 @@ public class GetCalendar(WebApp app) {
       Login = StorageUser.DimaUser.UserName,
       Password = StorageUser.DimaUser.Password
     });
-    var calendarContent = JsonContent.Create(new ModelInputCalendar {
+    var calendarContent = JsonContent.Create(new ModelInputMapEmployerCalendar {
       Start = DateOnly.Parse("2024-01-01"),
       End = DateOnly.Parse("2024-12-31")
     });
@@ -58,14 +53,14 @@ public class GetCalendar(WebApp app) {
       Login = StorageUser.DimaUser.UserName,
       Password = StorageUser.DimaUser.Password
     });
-    var calendarContent = JsonContent.Create(new ModelInputCalendar {
+    var calendarContent = JsonContent.Create(new ModelInputMapEmployerCalendar {
       Start = DateOnly.Parse(start),
       End = DateOnly.Parse(end)
     });
 
     await Client.PostAsync("/Authenticate", loginContent);
     var response = await Client.PostAsync("/CalendarData", calendarContent);
-    var data = await response.Content.ReadFromJsonAsync<Dictionary<DateOnly, ModelResultCalendar>>();
+    var data = await response.Content.ReadFromJsonAsync<Dictionary<DateOnly, ModelOutputMapEmployerCalendar>>();
 
     Assert.Equal(days, data!.Count);
   }
@@ -78,16 +73,16 @@ public class GetCalendar(WebApp app) {
       Login = StorageUser.DimaUser.UserName,
       Password = StorageUser.DimaUser.Password
     });
-    var calendarContent = JsonContent.Create(new ModelInputCalendar {
+    var calendarContent = JsonContent.Create(new ModelInputMapEmployerCalendar {
       Start = DateOnly.Parse("2024-01-01"),
       End = DateOnly.Parse("2024-12-31")
     });
 
     await Client.PostAsync("/Authenticate", loginContent);
     var response = await Client.PostAsync("/CalendarData", calendarContent);
-    var data = await response.Content.ReadFromJsonAsync<Dictionary<DateOnly, ModelResultCalendar>>();
-    var daysOff = data!.SelectMany(static calendar => calendar.Value.DaysOff);
-    var workingHours = data!.SelectMany(static calendar => calendar.Value.WorkingHours);
+    var data = await response.Content.ReadFromJsonAsync<Dictionary<DateOnly, ModelOutputMapEmployerCalendar>>();
+    var daysOff = data!.SelectMany(static data => data.Value.DayOff);
+    var workingHours = data!.SelectMany(static data => data.Value.WorkHours);
 
     Assert.True(daysOff.Any());
     Assert.True(workingHours.Any());
@@ -101,7 +96,7 @@ public class GetCalendar(WebApp app) {
       Login = StorageUser.DimaUser.UserName,
       Password = StorageUser.DimaUser.Password
     });
-    var calendarContent = JsonContent.Create(new ModelInputCalendar {
+    var calendarContent = JsonContent.Create(new ModelInputMapEmployerCalendar {
       Start = DateOnly.Parse("2023-01-01"),
       End = DateOnly.Parse("2024-12-31")
     });

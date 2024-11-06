@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class ConvertExpressionLimitsToRange : IConvertExpressionToRange {
+internal class ConvertExpressionLimitsToRange : IConvertExpressionToRange {
   public IReadOnlyList<DateOnlyRange> Ranges { get; init; }
 
   public ConvertExpressionLimitsToRange(DateOnly start, DateOnly end, DateOnly? stopActive)

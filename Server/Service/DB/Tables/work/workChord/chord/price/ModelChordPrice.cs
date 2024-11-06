@@ -1,7 +1,6 @@
 namespace Wasko;
 
-public class ModelChordPrice
-{
+public class ModelChordPrice {
   [Key]
   [Required]
   [StringLength(36)]

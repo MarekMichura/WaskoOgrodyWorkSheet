@@ -1,7 +1,6 @@
 namespace Wasko;
 
-public class ModelDayOffExpressionTargetUser
-{
+public class ModelDayOffExpressionTargetUser {
   [Required]
   [StringLength(36)]
   public required string TargetID { get; set; }

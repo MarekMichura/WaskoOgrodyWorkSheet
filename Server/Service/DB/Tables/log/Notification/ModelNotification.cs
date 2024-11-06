@@ -1,7 +1,6 @@
 namespace Wasko;
 
-public class ModelNotification
-{
+public class ModelNotification {
   [Key]
   [Required]
   [StringLength(36)]

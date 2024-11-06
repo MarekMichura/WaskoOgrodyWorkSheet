@@ -1,11 +1,9 @@
 namespace Wasko;
 
-public class BuilderFound : IBuilder
-{
+public class BuilderFound : IBuilder {
   public void CreateModel(ModelBuilder builder)
   {
-    builder.Entity<ModelFound>(static entity =>
-    {
+    builder.Entity<ModelFound>(static entity => {
       entity.Property(static found => found.ID)
         .HasDefaultValueSql("NewId()");
 

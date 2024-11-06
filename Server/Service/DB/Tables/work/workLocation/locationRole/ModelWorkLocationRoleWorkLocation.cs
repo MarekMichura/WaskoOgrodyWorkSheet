@@ -1,7 +1,6 @@
 namespace Wasko;
 
-public class ModelWorkLocationRoleWorkLocation
-{
+public class ModelWorkLocationRoleWorkLocation {
   [Required]
   [StringLength(36)]
   public required string RoleID { get; set; }

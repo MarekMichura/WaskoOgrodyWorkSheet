@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class MiddlewareRouting : IMiddleware {
+internal class MiddlewareRouting : IMiddleware {
   public ushort Priority => 65000;
   public void DefineMiddleware(WebApplication app)
   {

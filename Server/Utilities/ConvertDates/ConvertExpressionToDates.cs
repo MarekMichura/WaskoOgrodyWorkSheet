@@ -1,7 +1,7 @@
 namespace Wasko;
 
 public static partial class Extend {
-  public static List<DateOnly> GetDates(this ModelDayOffExpression model, DateOnly limitBegin, DateOnly limitEnd)
+  public static IEnumerable<DateOnly> GetDates(this ModelDayOffExpression model, DateOnly limitBegin, DateOnly limitEnd)
   {
     IConvertExpressionToRange convert = new ConvertExpressionLimitsToRange(limitBegin, limitEnd, model.StopActive);
     if (model.Year is not null) convert = new ConvertExpressionYearToRange(convert, model.Year.Value);
@@ -10,6 +10,6 @@ public static partial class Extend {
     if (model.DayOfWeek is not null) convert = new ConvertExpressionDayOfWeekToRange(convert, model.DayOfWeek.Value);
     if (model.DaysAfterEaster is not null) convert = new ConvertExpressionEasterToRange(convert, model.DaysAfterEaster.Value);
 
-    return convert.ToList();
+    return convert.GetDates();
   }
 }

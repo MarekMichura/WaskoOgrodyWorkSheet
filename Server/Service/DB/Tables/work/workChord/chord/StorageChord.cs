@@ -1,7 +1,6 @@
 namespace Wasko;
 
-public class StorageChord
-{
+public class StorageChord {
   public static readonly ModelChord Chord1 = new() { ID = "7b989a90-b2a4-4514-9020-756501c7061d", CreatorID = StorageUser.Admin, Name = "Goły korzeń" };
   public static readonly ModelChord Chord2 = new() { ID = "6b5f2ead-4357-482f-9022-e5eb02822313", CreatorID = StorageUser.Admin, Name = "p9" };
   public static readonly ModelChord Chord3 = new() { ID = "7dd19798-98d4-4411-9c21-8fe1e2212e8a", CreatorID = StorageUser.Admin, Name = "p11" };
@@ -14,7 +13,7 @@ public class StorageChord
   public static readonly ModelChord Chord10 = new() { ID = "4a445a6a-07cf-490a-b1d4-37364ad15e4d", CreatorID = StorageUser.Admin, Name = "Drzewa 16-18" };
   public static readonly ModelChord Chord11 = new() { ID = "b7e7da00-6c48-4bb0-8399-fe44f33d94e4", CreatorID = StorageUser.Admin, Name = "Drzewa 18-20" };
 
-  public static readonly IEnumerable<ModelChord> Chords =
+  public static readonly ModelChord[] Chords =
     [Chord1, Chord2, Chord3, Chord4, Chord5, Chord6, Chord7, Chord8, Chord9, Chord10, Chord11];
 
   public static readonly string Goły = Chord1.ID;

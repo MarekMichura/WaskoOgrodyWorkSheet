@@ -1,11 +1,9 @@
 namespace Wasko;
 
-public class BuilderWorkHour : IBuilder
-{
+public class BuilderWorkHour : IBuilder {
   public void CreateModel(ModelBuilder builder)
   {
-    builder.Entity<ModelWorkHours>(static entity =>
-    {
+    builder.Entity<ModelWorkHours>(static entity => {
       entity.Property(static workHours => workHours.ID)
         .HasDefaultValueSql("NewId()");
 

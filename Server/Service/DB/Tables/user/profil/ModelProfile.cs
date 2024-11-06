@@ -1,7 +1,6 @@
 namespace Wasko;
 
-public class ModelProfil
-{
+public class ModelProfil {
   [Required]
   [StringLength(36)]
   [Key, ForeignKey("ModelUser")]
@@ -16,7 +15,7 @@ public class ModelProfil
   [DataType(DataType.Date)]
   public required DateOnly WorkStartDate { get; set; } = DateOnly.FromDateTime(DateTime.Now);
   [DataType(DataType.Upload)]
-  public byte[]? ProfileImage { get; set; } = [];
+  public byte[]? ProfileImage { get; set; }
 
   public virtual ModelUser? User { get; set; }
 }

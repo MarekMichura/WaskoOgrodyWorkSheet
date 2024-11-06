@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class MiddlewareEndPoint : IMiddleware {
+internal class MiddlewareEndPoint : IMiddleware {
   public ushort Priority => 64500;
   public void DefineMiddleware(WebApplication app)
   {

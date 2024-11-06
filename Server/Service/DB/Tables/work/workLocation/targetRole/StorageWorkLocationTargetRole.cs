@@ -1,7 +1,6 @@
 namespace Wasko;
 
-public class StorageWorkLocationTargetRole
-{
+public class StorageWorkLocationTargetRole {
   public static readonly ModelWorkLocationTargetRole Role1 = new() { RoleID = StorageRole.employerID, WorkLocationID = StorageWorkLocations.NotSet };
   public static readonly ModelWorkLocationTargetRole Role2 = new() { RoleID = StorageRole.employerID, WorkLocationID = StorageWorkLocations.Drive };
   public static readonly ModelWorkLocationTargetRole Role3 = new() { RoleID = StorageRole.employerID, WorkLocationID = StorageWorkLocations.Office };
@@ -21,6 +20,6 @@ public class StorageWorkLocationTargetRole
   public static readonly ModelWorkLocationTargetRole Role17 = new() { RoleID = StorageRole.gardenerID, WorkLocationID = StorageWorkLocations.Henniger };
   public static readonly ModelWorkLocationTargetRole Role18 = new() { RoleID = StorageRole.gardenerID, WorkLocationID = StorageWorkLocations.klimanowa };
 
-  public static readonly IEnumerable<ModelWorkLocationTargetRole> WorkLocationRoles =
+  public static readonly ModelWorkLocationTargetRole[] WorkLocationRoles =
     [Role1, Role2, Role3, Role4, Role5, Role6, Role7, Role8, Role9, Role10, Role11, Role12, Role13, Role14, Role15, Role16, Role17, Role18];
 }

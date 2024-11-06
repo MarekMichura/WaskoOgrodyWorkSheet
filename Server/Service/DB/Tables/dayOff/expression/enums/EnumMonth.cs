@@ -1,7 +1,6 @@
 namespace Wasko;
 
-public enum EnumMonth
-{
+public enum EnumMonth {
   January = 1,
   February = 2,
   March = 3,

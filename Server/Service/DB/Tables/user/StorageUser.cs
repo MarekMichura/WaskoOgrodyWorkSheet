@@ -1,7 +1,6 @@
 namespace Wasko;
 
-public class StorageUser(string id, string login, string password, string email, bool active = true)
-{
+public class StorageUser(string id, string login, string password, string email, bool active = true) {
   public string ID { get; set; } = id;
   public string Email { get; set; } = email;
   public string UserName { get; set; } = login;
@@ -10,8 +9,7 @@ public class StorageUser(string id, string login, string password, string email,
 
   public static implicit operator ModelUser(StorageUser user)
   {
-    var result = new ModelUser()
-    {
+    var result = new ModelUser() {
       Id = user.ID,
       UserName = user.UserName,
       NormalizedUserName = user.UserName.ToUpper(),
@@ -24,8 +22,6 @@ public class StorageUser(string id, string login, string password, string email,
     return result;
   }
 
-  public static IEnumerable<ModelUser> Users => users.Select(static a => (ModelUser)a);
-
   public static readonly StorageUser AdminUser = new("cb24a0c2-506f-4810-880b-7f6caa1c21b8", "admin", "zaq1@WSX", "marekti012@gmail.com", false);
 
 #if DEBUG
@@ -36,10 +32,13 @@ public class StorageUser(string id, string login, string password, string email,
 #endif
 
 #if DEBUG
-  public static readonly IEnumerable<StorageUser> users = [AdminUser, UserUser, ErykUser, LoszkaUser, DimaUser];
+  public static readonly StorageUser[] users =
+    [AdminUser, UserUser, ErykUser, LoszkaUser, DimaUser];
 #else
-  public static readonly IEnumerable<StorageUser> users = [AdminUser];
+  public static readonly StorageUser[] users = 
+    [AdminUser];
 #endif
+  public readonly static IEnumerable<ModelUser> Users = users.Select(static a => (ModelUser)a);
 
   public static string Admin => AdminUser.ID;
 #if DEBUG

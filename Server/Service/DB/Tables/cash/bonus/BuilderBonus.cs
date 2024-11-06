@@ -1,11 +1,9 @@
 namespace Wasko;
 
-public class BuilderBonus : IBuilder
-{
+public class BuilderBonus : IBuilder {
   public void CreateModel(ModelBuilder builder)
   {
-    builder.Entity<ModelBonus>(static entity =>
-    {
+    builder.Entity<ModelBonus>(static entity => {
       entity.Property(static bonus => bonus.ID)
         .HasDefaultValueSql("NewId()");
 

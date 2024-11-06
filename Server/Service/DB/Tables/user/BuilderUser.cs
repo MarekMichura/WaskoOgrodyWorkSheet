@@ -1,11 +1,9 @@
 namespace Wasko;
 
-public class BuilderUser : IBuilder
-{
+public class BuilderUser : IBuilder {
   public void CreateModel(ModelBuilder builder)
   {
-    builder.Entity<ModelUser>(static entity =>
-    {
+    builder.Entity<ModelUser>(static entity => {
       entity.Ignore(static user => user.PhoneNumber)
         .Ignore(static user => user.PhoneNumberConfirmed)
         .Ignore(static user => user.AccessFailedCount)

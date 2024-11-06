@@ -7,3 +7,4 @@ indent_style = space
 indent_size = 2
 
 csharp_new_line_before_open_brace = methods
+dotnet_style_prefer_collection_expression = never

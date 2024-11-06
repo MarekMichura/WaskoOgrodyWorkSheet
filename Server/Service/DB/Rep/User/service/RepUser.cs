@@ -35,8 +35,7 @@ public class RepUser(IHttpContextAccessor context, SignInManager<ModelUser> sim,
       var time = DateTime.Now;
       var roles = _db.Roles
         .Include(role => role.Users)
-        .Where(role => role.Users.Any(user => user.Id == id))
-        .ToList();
+        .Where(role => role.Users!.Any(user => user.Id == id));
 
       cache.AddExpirationUserRoles(id);
       cache.AddExpirationRole(roles);
@@ -63,12 +62,12 @@ public class RepUser(IHttpContextAccessor context, SignInManager<ModelUser> sim,
         FirstName = user.Profil!.FirstName,
         LastName = user.Profil.LastName,
         WorkStartDate = user.Profil.WorkStartDate,
-        Roles = user.Roles.Select(a => a.Name!),
+        Roles = user.Roles!.Select(a => a.Name!),
       };
 
       cache.AddExpirationUserRoles(id);
       cache.AddExpirationUserProfil(id);
-      cache.AddExpirationRole(user.Roles);
+      cache.AddExpirationRole(user.Roles!);
       return new { profil, time };
     });
 

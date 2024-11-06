@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class MiddlewareCompression : IMiddleware {
+internal class MiddlewareCompression : IMiddleware {
   public ushort Priority => 64600;
   public void DefineMiddleware(WebApplication app)
   {
@@ -8,7 +8,7 @@ class MiddlewareCompression : IMiddleware {
   }
 }
 
-class MiddlewareStaticCompression : IMiddleware {
+internal class MiddlewareStaticCompression : IMiddleware {
   public ushort Priority => 65100;
   public void DefineMiddleware(WebApplication app)
   {

@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class ServiceConversion : IService {
+internal class ServiceConversion : IService {
   public void DefineService(WebApplicationBuilder builder)
   {
     builder.Services.AddControllers()

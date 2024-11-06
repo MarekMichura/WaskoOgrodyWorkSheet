@@ -1,11 +1,9 @@
 namespace Wasko;
 
-public class BuilderChord : IBuilder
-{
+public class BuilderChord : IBuilder {
   public void CreateModel(ModelBuilder builder)
   {
-    builder.Entity<ModelChord>(static entity =>
-    {
+    builder.Entity<ModelChord>(static entity => {
       entity.Property(static chord => chord.ID)
         .HasDefaultValueSql("NewId()");
 

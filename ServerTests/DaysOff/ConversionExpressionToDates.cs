@@ -1,7 +1,6 @@
 namespace Test;
 
-public class ConversionExpressionToDates
-{
+public class ConversionExpressionToDates {
   public static IEnumerable<object[]> DayData()
   {
     yield return new object[] { 10, "2000-01-01", "2000-01-05", Array.Empty<string>() };
@@ -17,14 +16,14 @@ public class ConversionExpressionToDates
   [MemberData(nameof(DayData))]
   public void Day(byte _day, string _start, string _end, IEnumerable<string> _expect)
   {
-    var model = new ModelDayOffExpression { Day = _day, Reason = "", Off = true, AuthorID = "" };
+    var model = new ModelDayOffExpression { ID = "", Day = _day, Reason = "", Off = true, AuthorID = "" };
     var start = DateOnly.Parse(_start);
     var end = DateOnly.Parse(_end);
     var expect = _expect.Select(DateOnly.Parse);
 
-    var result = ConvertDayOffExpression.ConvertToDates(model, start, end);
+    var result = model.GetDates(start, end);
 
-    Assert.Equal(expect.Count(), result.Count);
+    Assert.Equal(expect.Count(), result.Count());
     Assert.True(expect.All(result.Contains));
   }
 
@@ -64,14 +63,14 @@ public class ConversionExpressionToDates
   [MemberData(nameof(MonthData))]
   public void Month(EnumMonth _month, string _start, string _end, IEnumerable<string> _expect)
   {
-    var model = new ModelDayOffExpression { Month = _month, Reason = "", Off = true, AuthorID = "" };
+    var model = new ModelDayOffExpression { ID = "", Month = _month, Reason = "", Off = true, AuthorID = "" };
     var start = DateOnly.Parse(_start);
     var end = DateOnly.Parse(_end);
     var expect = _expect.Select(DateOnly.Parse);
 
-    var result = ConvertDayOffExpression.ConvertToDates(model, start, end);
+    var result = model.GetDates(start, end);
 
-    Assert.Equal(expect.Count(), result.Count);
+    Assert.Equal(expect.Count(), result.Count());
     Assert.True(expect.All(result.Contains));
   }
 
@@ -136,14 +135,14 @@ public class ConversionExpressionToDates
   [MemberData(nameof(YearData))]
   public void Year(short _year, string _start, string _end, IEnumerable<string> _expect)
   {
-    var model = new ModelDayOffExpression { Year = _year, Reason = "", Off = true, AuthorID = "" };
+    var model = new ModelDayOffExpression { ID = "", Year = _year, Reason = "", Off = true, AuthorID = "" };
     var start = DateOnly.Parse(_start);
     var end = DateOnly.Parse(_end);
     var expect = _expect.Select(DateOnly.Parse);
 
-    var result = ConvertDayOffExpression.ConvertToDates(model, start, end);
+    var result = model.GetDates(start, end);
 
-    Assert.Equal(expect.Count(), result.Count);
+    Assert.Equal(expect.Count(), result.Count());
     Assert.True(expect.All(result.Contains));
   }
 
@@ -176,14 +175,14 @@ public class ConversionExpressionToDates
   [MemberData(nameof(EasterData))]
   public void Easter(byte _day, string _start, string _end, IEnumerable<string> _expect)
   {
-    var model = new ModelDayOffExpression { DaysAfterEaster = _day, Reason = "", Off = true, AuthorID = "" };
+    var model = new ModelDayOffExpression { ID = "", DaysAfterEaster = _day, Reason = "", Off = true, AuthorID = "" };
     var start = DateOnly.Parse(_start);
     var end = DateOnly.Parse(_end);
     var expect = _expect.Select(DateOnly.Parse);
 
-    var result = ConvertDayOffExpression.ConvertToDates(model, start, end);
+    var result = model.GetDates(start, end);
 
-    Assert.Equal(expect.Count(), result.Count);
+    Assert.Equal(expect.Count(), result.Count());
     Assert.True(expect.All(result.Contains));
   }
 
@@ -199,14 +198,14 @@ public class ConversionExpressionToDates
   [MemberData(nameof(MonthAndDayData))]
   public void MonthAndDay(byte _day, EnumMonth _month, string _start, string _end, IEnumerable<string> _expect)
   {
-    var model = new ModelDayOffExpression { Day = _day, Month = _month, Reason = "", Off = true, AuthorID = "" };
+    var model = new ModelDayOffExpression { ID = "", Day = _day, Month = _month, Reason = "", Off = true, AuthorID = "" };
     var start = DateOnly.Parse(_start);
     var end = DateOnly.Parse(_end);
     var expect = _expect.Select(DateOnly.Parse);
 
-    var result = ConvertDayOffExpression.ConvertToDates(model, start, end);
+    var result = model.GetDates(start, end);
 
-    Assert.Equal(expect.Count(), result.Count);
+    Assert.Equal(expect.Count(), result.Count());
     Assert.True(expect.All(result.Contains));
   }
 }

@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class ServiceDatabase : IService {
+internal class ServiceDatabase : IService {
   public void DefineService(WebApplicationBuilder builder)
   {
     var connectionStr = builder.Configuration.GetSection("Database")["Connect"] ?? throw new NullReferenceException();

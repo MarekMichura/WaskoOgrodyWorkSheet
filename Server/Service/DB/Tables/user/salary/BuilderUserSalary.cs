@@ -1,11 +1,9 @@
 namespace Wasko;
 
-public class BuilderUserSalary : IBuilder
-{
+public class BuilderUserSalary : IBuilder {
   public void CreateModel(ModelBuilder builder)
   {
-    builder.Entity<ModelUserSalary>(static entity =>
-    {
+    builder.Entity<ModelUserSalary>(static entity => {
       entity.HasKey(static salary => new { salary.ID, salary.Date });
 
       entity.Property(static salary => salary.ID).HasDefaultValueSql("NewId()");

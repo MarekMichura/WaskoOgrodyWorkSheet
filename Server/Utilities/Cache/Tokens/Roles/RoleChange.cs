@@ -23,9 +23,9 @@ public static class TokenRoleChange {
     }
   }
 
-  public static void AddExpirationRole(this ICacheEntry cache, IEnumerable<ModelRole> models)
+  public static void AddExpirationRole(this ICacheEntry cache, IEnumerable<ModelRole> roles)
   {
-    foreach (var model in models) {
+    foreach (var model in roles) {
       cache.AddExpirationToken(GetToken(model.Id));
     }
   }

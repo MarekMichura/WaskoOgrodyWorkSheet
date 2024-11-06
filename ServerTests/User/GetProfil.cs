@@ -16,7 +16,7 @@ public class GetProfil(WebApp app) {
 
     await Client.PostAsync("/Authenticate", content);
     var response = await Client.GetAsync("/GetProfil");
-    var data = await response.Content.ReadFromJsonAsync<ModelResultUserProfil>();
+    var data = await response.Content.ReadFromJsonAsync<ModelUserProfil>();
     await Client.PostAsync("/Logout", null);
 
     Assert.True(response.IsSuccessStatusCode);

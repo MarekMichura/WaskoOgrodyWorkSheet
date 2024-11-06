@@ -23,10 +23,10 @@ public static class TokenDayOffChange {
     }
   }
 
-  public static void AddExpirationDayOff(this ICacheEntry cache, IEnumerable<ModelDayOff> models)
+  public static void AddExpirationDayOff(this ICacheEntry cache, IEnumerable<ModelDayOff> dayOffs)
   {
-    foreach (var model in models) {
-      cache.AddExpirationToken(GetToken(model.ID));
+    foreach (var dayOff in dayOffs) {
+      cache.AddExpirationToken(GetToken(dayOff.ID));
     }
   }
 }

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.ResponseCompression;
 
 namespace Wasko;
 
-class ServiceCompression : IService {
+internal class ServiceCompression : IService {
   public void DefineService(WebApplicationBuilder builder)
   {
     builder.Services.AddResponseCompression(static options => {

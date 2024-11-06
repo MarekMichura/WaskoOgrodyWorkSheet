@@ -23,10 +23,10 @@ public static class TokenWorkHourChange {
     }
   }
 
-  public static void AddExpirationWorkHour(this ICacheEntry cache, IEnumerable<ModelWorkHours> models)
+  public static void AddExpirationWorkHour(this ICacheEntry cache, IEnumerable<ModelWorkHours> workHours)
   {
-    foreach (var model in models) {
-      cache.AddExpirationToken(GetToken(model.ID));
+    foreach (var workHour in workHours) {
+      cache.AddExpirationToken(GetToken(workHour.ID));
     }
   }
 }

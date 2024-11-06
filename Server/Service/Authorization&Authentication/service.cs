@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class ServiceAuthorizationAuthentication : IService {
+internal class ServiceAuthorizationAuthentication : IService {
   public void DefineService(WebApplicationBuilder builder)
   {
     builder.Services.AddSession();

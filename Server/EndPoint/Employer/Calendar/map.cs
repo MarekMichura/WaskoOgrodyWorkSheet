@@ -22,12 +22,9 @@ public static partial class MapEmployer {
         result[key] = new() { DayOff = value.Select(dayOff => (ModelOutputMapEmployerCalendarDayOff)dayOff) };
       }
       foreach (var (key, value) in workHour) {
-        if (!result.TryGetValue(key, out var obj)) {
-          obj = new() { WorkHours = value.Select(workHours => (ModelOutputMapEmployerCalendarWorkHour)workHours) };
-          result[key] = obj;
-          continue;
-        }
-        obj.WorkHours = value.Select(workHours => (ModelOutputMapEmployerCalendarWorkHour)workHours);
+        var newModel = value.Select(workHours => (ModelOutputMapEmployerCalendarWorkHour)workHours);
+        result.TryAdd(key, new());
+        result[key].WorkHours = newModel;
       }
 
       cache.AddExpirationGetUsersDaysOff(id, start, end);

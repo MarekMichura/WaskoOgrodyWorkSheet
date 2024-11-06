@@ -17,16 +17,12 @@ public class RepWorkHour(DbContext db, IRepUser user, IMemoryCache cache) : IRep
         .AsSplitQuery()
         .Include(workHour => workHour.WorkLocation)
         .Include(workHour => workHour.Chords)
-        .Where(workHour => workHour.UserID == id && workHour.Date >= start && workHour.Date <= end)
-        .ToList();
+        .Where(workHour => workHour.UserID == id && workHour.Date >= start && workHour.Date <= end);
 
       foreach (var workHour in workHours) {
-        if (!result.TryGetValue(workHour.Date, out var list)) {
-          list = [workHour];
-          result[workHour.Date] = list;
-          continue;
+        if (!result.TryAdd(workHour.Date, [workHour])) {
+          result[workHour.Date].Add(workHour);
         }
-        list.Add(workHour);
       }
 
       cache.AddExpirationWorkHour(workHours);

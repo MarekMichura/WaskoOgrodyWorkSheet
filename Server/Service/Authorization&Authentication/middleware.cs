@@ -1,6 +1,6 @@
 namespace Wasko;
 
-class MiddlewareAuthorizationAuthentication : IMiddleware {
+internal class MiddlewareAuthorizationAuthentication : IMiddleware {
   public ushort Priority => 64900;
 
   public void DefineMiddleware(WebApplication app)

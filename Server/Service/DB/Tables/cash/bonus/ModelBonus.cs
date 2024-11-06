@@ -1,7 +1,6 @@
 namespace Wasko;
 
-public class ModelBonus
-{
+public class ModelBonus {
   [Key]
   [Required]
   [StringLength(36)]

@@ -1,11 +1,9 @@
 namespace Wasko;
 
-public class BuilderDayOffExpression : IBuilder
-{
+public class BuilderDayOffExpression : IBuilder {
   public void CreateModel(ModelBuilder builder)
   {
-    builder.Entity<ModelDayOffExpression>(static entity =>
-    {
+    builder.Entity<ModelDayOffExpression>(static entity => {
       entity.HasIndex(static dayOff => dayOff.Order);
 
       entity.Property(static dayOff => dayOff.Month)

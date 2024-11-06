@@ -1,7 +1,6 @@
 namespace Wasko;
 
-public class StorageWorkLocations
-{
+public class StorageWorkLocations {
   public static readonly ModelWorkLocation Location1 = new() { ID = "fd9991df-5d66-4b30-92df-a3c6b64748ca", Name = "Nieustawiona" };
   public static readonly ModelWorkLocation Location2 = new() { ID = "047921e7-1329-4542-acd3-119bcb645077", Name = "Drive" };
   public static readonly ModelWorkLocation Location3 = new() { ID = "b721d3d1-04cd-4244-9fa7-751b085aebfc", Name = "Office" };
@@ -21,7 +20,7 @@ public class StorageWorkLocations
   public static readonly ModelWorkLocation Location17 = new() { ID = "cf9220d9-b583-4831-aff4-c7517ff84888", Name = "Henniger Graby" };
   public static readonly ModelWorkLocation Location18 = new() { ID = "1db06608-e532-45b2-b1a8-3cfeaab85f3d", Name = "klimanowa" };
 
-  public static readonly IEnumerable<ModelWorkLocation> WorkLocations =
+  public static readonly ModelWorkLocation[] WorkLocations =
     [Location1, Location2, Location3, Location4, Location5, Location6, Location7, Location8, Location9, Location10, Location11, Location12, Location13, Location14, Location15, Location16, Location17, Location18];
 
   public static readonly string NotSet = Location1.ID;

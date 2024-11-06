@@ -1,11 +1,9 @@
 namespace Wasko;
 
-public class BuilderDayOffDate : IBuilder
-{
+public class BuilderDayOffDate : IBuilder {
   public void CreateModel(ModelBuilder builder)
   {
-    builder.Entity<ModelDayOffDate>(static entity =>
-    {
+    builder.Entity<ModelDayOffDate>(static entity => {
       entity.Property(static dayOff => dayOff.ID)
         .HasDefaultValueSql("NewId()");
 

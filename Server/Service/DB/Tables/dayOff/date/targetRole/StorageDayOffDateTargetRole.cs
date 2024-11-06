@@ -2,15 +2,14 @@
 
 namespace Wasko;
 
-public class StorageDayOffDateTargetRole
-{
-  private static readonly ModelDayOffDateTargetRole DayOffTarget1 = new()
-  {
+public class StorageDayOffDateTargetRole {
+  private static readonly ModelDayOffDateTargetRole DayOffTarget1 = new() {
     TargetID = StorageRole.employerID!,
     DayOffID = StorageDayOffDate.dayOffAuthor
   };
 
-  public static IEnumerable<ModelDayOffDateTargetRole> DaysOffTargets = [DayOffTarget1];
+  public readonly static ModelDayOffDateTargetRole[] DaysOffTargets =
+    [DayOffTarget1];
 }
 
 #endif

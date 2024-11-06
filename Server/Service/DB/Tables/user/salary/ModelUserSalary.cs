@@ -1,7 +1,6 @@
 namespace Wasko;
 
-public class ModelUserSalary
-{
+public class ModelUserSalary {
   [Required]
   [DataType(DataType.Date)]
   public DateOnly Date { get; set; } = DateOnly.FromDateTime(DateTime.Now);

@@ -1,9 +1,7 @@
 namespace Wasko;
 
-public class StorageWorkLocationRole
-{
-  public static readonly ModelWorkLocationRole RoleChord = new()
-  {
+public class StorageWorkLocationRole {
+  public static readonly ModelWorkLocationRole RoleChord = new() {
     ID = "1638d369-1b20-48fb-a8f7-586040ecbf51",
     Name = "Chord",
     AuthorID = StorageUser.Users
@@ -28,9 +26,9 @@ public class StorageWorkLocationRole
   public static readonly ModelWorkLocationRoleWorkLocation RoleWorkLocation14 = new() { RoleID = chord, LocationID = StorageWorkLocations.Henniger };
   public static readonly ModelWorkLocationRoleWorkLocation RoleWorkLocation15 = new() { RoleID = chord, LocationID = StorageWorkLocations.klimanowa };
 
-  public static readonly IEnumerable<ModelWorkLocationRole> WorkLocationRoles =
+  public static readonly ModelWorkLocationRole[] WorkLocationRoles =
     [RoleChord];
 
-  public static readonly IEnumerable<ModelWorkLocationRoleWorkLocation> WorkLocationRolesWorkLocation =
+  public static readonly ModelWorkLocationRoleWorkLocation[] WorkLocationRolesWorkLocation =
     [RoleWorkLocation1, RoleWorkLocation2, RoleWorkLocation3, RoleWorkLocation4, RoleWorkLocation5, RoleWorkLocation6, RoleWorkLocation7, RoleWorkLocation8, RoleWorkLocation9, RoleWorkLocation10, RoleWorkLocation11, RoleWorkLocation12, RoleWorkLocation13, RoleWorkLocation14, RoleWorkLocation15];
 }

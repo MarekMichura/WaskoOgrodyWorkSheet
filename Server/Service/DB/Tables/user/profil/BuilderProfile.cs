@@ -1,11 +1,9 @@
 namespace Wasko;
 
-public class BuilderProfile : IBuilder
-{
+public class BuilderProfile : IBuilder {
   public void CreateModel(ModelBuilder builder)
   {
-    builder.Entity<ModelProfil>(static entity =>
-    {
+    builder.Entity<ModelProfil>(static entity => {
       entity.Property(static profil => profil.WorkStartDate)
         .HasColumnType("Date")
         .HasDefaultValueSql("getdate()")

@@ -1,7 +1,6 @@
 namespace Wasko;
 
-public enum EnumDayOfWeek
-{
+public enum EnumDayOfWeek {
     Sunday = 0,
     Monday = 1,
     Tuesday = 2,

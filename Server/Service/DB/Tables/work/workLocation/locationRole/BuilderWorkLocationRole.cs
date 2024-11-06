@@ -1,11 +1,9 @@
 namespace Wasko;
 
-public class BuilderWorkLocationRole : IBuilder
-{
+public class BuilderWorkLocationRole : IBuilder {
   public void CreateModel(ModelBuilder builder)
   {
-    builder.Entity<ModelWorkLocationRole>(static entity =>
-    {
+    builder.Entity<ModelWorkLocationRole>(static entity => {
       entity.Property(static workLocationRole => workLocationRole.ID).HasDefaultValueSql("NewId()");
 
       entity.HasMany(static workLocationRole => workLocationRole.Locations)

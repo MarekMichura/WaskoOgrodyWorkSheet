@@ -1,11 +1,9 @@
 namespace Wasko;
 
-public class BuilderWorkChord : IBuilder
-{
+public class BuilderWorkChord : IBuilder {
   public void CreateModel(ModelBuilder builder)
   {
-    builder.Entity<ModelWorkChord>(static entity =>
-    {
+    builder.Entity<ModelWorkChord>(static entity => {
       entity.Property(static workChord => workChord.ID)
         .HasDefaultValueSql("NewId()");
 

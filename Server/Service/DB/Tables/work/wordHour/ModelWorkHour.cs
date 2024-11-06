@@ -1,7 +1,6 @@
 namespace Wasko;
 
-public class ModelWorkHours
-{
+public class ModelWorkHours {
   [Key]
   [Required]
   [StringLength(36)]
@@ -36,5 +35,5 @@ public class ModelWorkHours
   public required string AuthorID { get; set; }
   public virtual ModelUser? Author { get; set; }
 
-  public virtual ICollection<ModelWorkChord> Chords { get; set; } = [];
+  public virtual ICollection<ModelWorkChord>? Chords { get; set; }
 }

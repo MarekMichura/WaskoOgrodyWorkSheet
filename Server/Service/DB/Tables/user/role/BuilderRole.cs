@@ -1,11 +1,9 @@
 namespace Wasko;
 
-public class BuilderRole : IBuilder
-{
+public class BuilderRole : IBuilder {
   public void CreateModel(ModelBuilder builder)
   {
-    builder.Entity<ModelRole>(static entity =>
-    {
+    builder.Entity<ModelRole>(static entity => {
       entity.Property(static role => role.Id)
         .HasMaxLength(36)
         .IsRequired();
