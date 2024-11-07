@@ -108,8 +108,6 @@ services:
       - ./Server/Service/:/Server/Service
       - ./Server/EndPoint/:/Server/EndPoint
       - ./Server/Utilities/:/Server/Utilities
-    cpus: '1'
-    mem_limit: '2g'
 
   html-development:
     build:

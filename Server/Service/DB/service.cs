@@ -14,8 +14,7 @@ internal class ServiceDatabase : IService {
     builder.Services.AddDbContextFactory<DbContext>(options => {
       options.UseSqlServer(connectionStr, sqlOptions => {
         sqlOptions.EnableRetryOnFailure();
-      })
-      .LogTo(Console.WriteLine, LogLevel.Information);
+      });
     });
   }
 }

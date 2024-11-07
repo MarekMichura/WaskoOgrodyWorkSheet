@@ -17,7 +17,7 @@ export function fnQuery(
     const headers: Record<string, string> = prevData ? {'If-Modified-Since': prevData.time} : {}
 
     const promise = new Promise<IFnQuery>((resolve, reject) => {
-      factory('/Api/v1/GetProfil')
+      factory('/Api/v1.0/GetProfil')
         .headers(headers)
         .get()
         .badRequest(() => reject({type: INotificationType.error, text: 'Wystąpił problem z żądaniem'}))

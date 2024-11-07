@@ -4,7 +4,7 @@ import {INotification, INotificationType} from '../Notification/types/INotificat
 
 export function fnMutationLogOut(): Promise<INotification> {
   return new Promise((resolve, reject) => {
-    return factory('/Api/v1/LogOut')
+    return factory('/Api/v1.0/LogOut')
       .post()
       .badRequest(() => reject({type: INotificationType.error, text: 'Nie udało się nawiązać połączenia z serwerem'}))
       .notFound(() => reject({type: INotificationType.error, text: 'Błąd połączenia z serwerem'}))

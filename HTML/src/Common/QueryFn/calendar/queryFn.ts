@@ -16,11 +16,10 @@ export function queryFn(
   return (): Promise<IResponseCalendar> => {
     const promise = new Promise<IResponseCalendar>((resolve, reject) => {
       const headers: Record<string, string> = prevData ? {'If-Modified-Since': prevData.time} : {}
-      const post = {start: ChangeToApiDateString(start), end: ChangeToApiDateString(end)}
-
-      factory('/Api/v1/CalendarData')
+      // const post = {start: ChangeToApiDateString(start), end: ChangeToApiDateString(end)}
+      factory(`/api/v1.0/EmployerCalendar?start=${ChangeToApiDateString(start)}&end=${ChangeToApiDateString(end)}`)
         .headers(headers)
-        .post(post)
+        .get()
         .badRequest(() => reject({type: INotificationType.error, text: 'Nie udało się nawiązać połączenia z serwerem'}))
         .notFound(() => reject({type: INotificationType.error, text: 'Błąd połączenia z serwerem'}))
         .internalError(() => reject({type: INotificationType.error, text: 'Wystąpił problem po stronie serwera'}))
@@ -36,6 +35,7 @@ export function queryFn(
     })
 
     promise.catch((a: INotification) => {
+      console.log(a)
       if (a != undefined) notification.mutate(a)
     })
     return promise

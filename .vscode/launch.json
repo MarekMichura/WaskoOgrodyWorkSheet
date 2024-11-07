@@ -1,21 +1,21 @@
-// {
-//   "version": "0.2.0",
-//   "configurations": [
-//     {
-//       "name": "Docker: attach server",
-//       "type": "coreclr",
-//       "request": "attach",
-//       "processName": "Server",
-//       "pipeTransport": {
-//         "debuggerPath": "/remote_debugger/vsdbg",
-//         "pipeArgs": ["exec", "-i", "server-development"],
-//         "pipeCwd": "${workspaceRoot}/",
-//         "pipeProgram": "docker",
-//         "quoteArgs": false
-//       },
-//       "sourceFileMap": {
-//         "/Server/": "${workspaceRoot}/Server/"
-//       }
-//     }
-//   ]
-// }
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Docker: attach server",
+      "type": "coreclr",
+      "request": "attach",
+      "processName": "Server",
+      "pipeTransport": {
+        "debuggerPath": "/remote_debugger/vsdbg",
+        "pipeArgs": ["exec", "-i", "server-development"],
+        "pipeCwd": "${workspaceRoot}/",
+        "pipeProgram": "docker",
+        "quoteArgs": false
+      },
+      "sourceFileMap": {
+        "/Server/": "${workspaceRoot}/Server/"
+      }
+    }
+  ]
+}

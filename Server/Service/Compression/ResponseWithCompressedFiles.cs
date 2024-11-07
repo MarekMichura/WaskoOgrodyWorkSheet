@@ -1,10 +1,7 @@
 namespace Wasko;
 
-public class ResponseWithCompressedFiles(RequestDelegate next, IWebHostEnvironment env) {
-  private readonly RequestDelegate _next = next;
-  private readonly IWebHostEnvironment _env = env;
-
-  private readonly string[] FetchDest = ["script", "document"];
+public static class ResponseWithCompressedFiles {
+  private static readonly string[] FetchDest = ["script", "document"];
   private static readonly IReadOnlyDictionary<string, string> CompressionType = new Dictionary<string, string>() { { ".html", "text/html" }, { ".htm", "text/html" }, { ".js", "application/javascript" }, };
 
   private static async Task<bool> ReturnCompressedFile(string method, string filePath, HttpContext context)
@@ -14,8 +11,10 @@ public class ResponseWithCompressedFiles(RequestDelegate next, IWebHostEnvironme
     var response = context.Response;
     var headers = response.Headers;
 
+    Console.WriteLine("Return file: " + path);
     headers.CacheControl = "public,max-age=31536000";
     headers.Expires = DateTime.UtcNow.AddMonths(1).ToString("R");
+    headers.Remove("content-length");
     headers.Append("Content-Encoding", method);
     headers.Append("content-type", CompressionType[Path.GetExtension(filePath)]);
     await context.Response.SendFileAsync(path);
@@ -23,15 +22,15 @@ public class ResponseWithCompressedFiles(RequestDelegate next, IWebHostEnvironme
     return true;
   }
 
-  public async Task InvokeAsync(HttpContext context)
+  public static async Task InvokeAsync(HttpContext context)
   {
     var headers = context.Request.Headers;
     var dest = headers["Sec-Fetch-Dest"].ToString();
     if (!FetchDest.Contains(dest)) {
-      await _next(context);
       return;
     }
 
+    var _env = context.RequestServices.GetRequiredService<IWebHostEnvironment>();
     var wwwRoot = _env.WebRootPath ?? _env.ContentRootPath;
     var path = context.Request.Path.ToString().Trim('/');
     var query = path.IndexOf('?', StringComparison.Ordinal);
@@ -39,7 +38,6 @@ public class ResponseWithCompressedFiles(RequestDelegate next, IWebHostEnvironme
     var serwerPath = dest == "document" ? Path.Combine(wwwRoot, "index.html") : Path.Combine(wwwRoot, path);
 
     if (!Path.Exists(serwerPath)) {
-      await _next(context);
       return;
     }
 
@@ -47,7 +45,5 @@ public class ResponseWithCompressedFiles(RequestDelegate next, IWebHostEnvironme
     if (acceptedCompression.Contains("br") && await ReturnCompressedFile("br", serwerPath, context)) return;
     if (acceptedCompression.Contains("gzip") && await ReturnCompressedFile("gzip", serwerPath, context)) return;
     if (acceptedCompression.Contains("deflate") && await ReturnCompressedFile("deflate", serwerPath, context)) return;
-
-    await _next(context);
   }
 }
