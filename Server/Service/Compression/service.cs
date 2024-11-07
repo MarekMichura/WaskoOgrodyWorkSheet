@@ -1,6 +1,3 @@
-using System.IO.Compression;
-using Microsoft.AspNetCore.ResponseCompression;
-
 namespace Wasko;
 
 internal class ServiceCompression : IService {

@@ -1,5 +1,5 @@
 namespace Wasko;
 
 public interface IRepWorkHour {
-  public Dictionary<DateOnly, List<ModelWorkHours>> GetUsersWorkHours(DateOnly start, DateOnly end, out DateTime cacheTime);
+  public Task<CacheResult<DicWorkHours>> GetUsersWorkHoursAsync(string id, DateOnly start, DateOnly end);
 }

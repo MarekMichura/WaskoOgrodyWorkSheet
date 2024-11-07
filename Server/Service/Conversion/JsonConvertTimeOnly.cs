@@ -1,4 +1,3 @@
-
 namespace Wasko;
 
 public class JsonConvertTimeOnly : JsonConverter<TimeOnly> {

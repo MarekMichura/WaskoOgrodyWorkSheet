@@ -9,10 +9,11 @@ internal class ServiceDatabase : IService {
     connectionStr = connectionStr.Replace("${PASSWORD}", password);
     connectionStr = connectionStr.Replace("${SERVER}", host);
 
-    builder.Services.AddDbContext<DbContext>(options => {
+    Console.WriteLine(connectionStr);
+
+    builder.Services.AddDbContextFactory<DbContext>(options => {
       options.UseSqlServer(connectionStr, sqlOptions => {
         sqlOptions.EnableRetryOnFailure();
-        sqlOptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
       })
       .LogTo(Console.WriteLine, LogLevel.Information);
     });

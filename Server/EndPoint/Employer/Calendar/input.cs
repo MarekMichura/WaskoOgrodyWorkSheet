@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Components;
-
 namespace Wasko;
 
 public readonly struct ModelInputMapEmployerCalendar {

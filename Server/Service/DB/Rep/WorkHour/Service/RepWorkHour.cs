@@ -1,24 +1,24 @@
 namespace Wasko;
 
-public class RepWorkHour(DbContext db, IRepUser user, IMemoryCache cache) : IRepWorkHour {
-  private readonly DbContext _db = db;
-  private readonly IRepUser _user = user;
+public class RepWorkHour(IDbContextFactory<DbContext> factory, IMemoryCache cache) : IRepWorkHour {
   private readonly IMemoryCache _cache = cache;
+  private readonly IDbContextFactory<DbContext> _factory = factory;
 
-  public Dictionary<DateOnly, List<ModelWorkHours>> GetUsersWorkHours(DateOnly start, DateOnly end, out DateTime cacheTime)
+  public async Task<CacheResult<DicWorkHours>> GetUsersWorkHoursAsync(string id, DateOnly start, DateOnly end)
   {
-    var id = _user.GetCurrentID() ?? throw new NullReferenceException();
-    var (data, time) = _cache.GetOrCreate($"user_WorkHours:{id} from:{start:yyyy-MM-dd} to:{end:yyyy-MM-dd}", (ICacheEntry cache) => {
+    var key = $"workHours user:{id} from:{start:yyyy-MM-dd} to:{end:yyyy-MM-dd}";
+    return await _cache.GetOrCreateAsync(key, async (ICacheEntry cache) => {
       cache.SetDefaultOptions();
       var time = DateTime.Now;
-      var result = new Dictionary<DateOnly, List<ModelWorkHours>>();
+      var result = new DicWorkHours();
 
-      var workHours = _db.WorkHours
+      using var db = await _factory.CreateDbContextAsync();
+      var workHours = await db.WorkHours
         .AsSplitQuery()
         .Include(workHour => workHour.WorkLocation)
         .Include(workHour => workHour.Chords)
         .Where(workHour => workHour.UserID == id && workHour.Date >= start && workHour.Date <= end)
-        .ToArray();
+        .ToArrayAsync();
 
       foreach (var workHour in workHours) {
         if (!result.TryAdd(workHour.Date, [workHour])) {
@@ -29,10 +29,7 @@ public class RepWorkHour(DbContext db, IRepUser user, IMemoryCache cache) : IRep
       cache.AddExpirationWorkHour(workHours);
       cache.AddExpirationDayOffUser(id);
       TokenGetUsersWorkHour.Cancel(id, start, end);
-      return new Tuple<Dictionary<DateOnly, List<ModelWorkHours>>, DateTime>(result, time);
+      return new CacheResult<DicWorkHours>(result, time);
     })!;
-
-    cacheTime = time;
-    return data;
   }
 }

@@ -1,5 +1,4 @@
 #if DEBUG
-
 namespace Wasko;
 
 public class StorageDayOffDateTargetRole {

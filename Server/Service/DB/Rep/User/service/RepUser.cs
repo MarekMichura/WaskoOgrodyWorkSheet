@@ -1,11 +1,11 @@
-
 namespace Wasko;
 
-public class RepUser(IHttpContextAccessor context, SignInManager<ModelUser> sim, IMemoryCache cache, DbContext db) : IRepUser {
+public class RepUser(IHttpContextAccessor context, SignInManager<ModelUser> sim, IMemoryCache cache, IDbContextFactory<DbContext> factory) : IRepUser {
   private readonly IHttpContextAccessor _context = context;
   private readonly SignInManager<ModelUser> _sim = sim;
   private readonly IMemoryCache _cache = cache;
-  private readonly DbContext _db = db;
+  private readonly IDbContextFactory<DbContext> _factory = factory;
+
 
   public async Task<bool> Login(string login, string password)
   {
@@ -27,36 +27,34 @@ public class RepUser(IHttpContextAccessor context, SignInManager<ModelUser> sim,
     return _context.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier);
   }
 
-  public IEnumerable<ModelRole> GetCurrentRoles(out DateTime cacheTime)
+  public async Task<CacheResult<ModelRole[]>> GetUserRolesAsync(string id)
   {
-    var id = GetCurrentID() ?? throw new NullReferenceException();
-    var (data, time) = _cache.GetOrCreate($"user_role:{id}", (ICacheEntry cache) => {
+    return await _cache.GetOrCreate($"user_role:{id}", async (ICacheEntry cache) => {
       cache.SetDefaultOptions();
       var time = DateTime.Now;
-      var roles = _db.Roles
+
+      using var db = await _factory.CreateDbContextAsync();
+      var roles = await db.Roles
         .Include(role => role.Users)
         .Where(role => role.Users!.Any(user => user.Id == id))
-        .ToArray();
+        .ToArrayAsync();
 
       cache.AddExpirationUserRoles(id);
       cache.AddExpirationRole(roles);
-      return new Tuple<IEnumerable<ModelRole>, DateTime>(roles, time);
+      return new CacheResult<ModelRole[]>(roles, time);
     })!;
-
-    cacheTime = time;
-    return data;
   }
 
-  public ModelUserProfil GetCurrentProfil(out DateTime cacheTime)
+  public async Task<CacheResult<ModelUserProfil>> GetUserProfilAsync(string id)
   {
-    var id = GetCurrentID() ?? throw new NullReferenceException();
-    var (data, time) = _cache.GetOrCreate($"user_profil:{id}", (ICacheEntry cache) => {
+    return (await _cache.GetOrCreateAsync($"user_profil:{id}", async (ICacheEntry cache) => {
       cache.SetDefaultOptions();
       var time = DateTime.Now;
-      var user = _db.Users
+      using var db = await _factory.CreateDbContextAsync();
+      var user = await db.Users
         .Include(user => user.Profil)
         .Include(user => user.Roles)
-        .First(user => user.Id == id);
+        .FirstAsync(user => user.Id == id);
 
       var profil = new ModelUserProfil {
         UserName = user.UserName!,
@@ -69,10 +67,7 @@ public class RepUser(IHttpContextAccessor context, SignInManager<ModelUser> sim,
       cache.AddExpirationUserRoles(id);
       cache.AddExpirationUserProfil(id);
       cache.AddExpirationRole(user.Roles!);
-      return new Tuple<ModelUserProfil, DateTime>(profil, time);
-    })!;
-
-    cacheTime = time;
-    return data;
+      return new CacheResult<ModelUserProfil>(profil, time);
+    }))!;
   }
 }

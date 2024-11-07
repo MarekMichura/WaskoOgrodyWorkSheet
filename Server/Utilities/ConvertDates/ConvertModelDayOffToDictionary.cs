@@ -1,14 +1,9 @@
 namespace Wasko;
 
-using MyDictionary = Dictionary<DateOnly, List<ModelDayOff>>;
-
 public static partial class Extend {
-  public static MyDictionary ConvertToDictionary<T>(
-    this IEnumerable<T> elements,
-    Func<T, IEnumerable<DateOnly>> getDate)
-    where T : ModelDayOff
+  public static DicDaysOff ConvertToDictionary<T>(this IEnumerable<T> elements, Func<T, IEnumerable<DateOnly>> getDate) where T : ModelDayOff
   {
-    var result = new MyDictionary();
+    var result = new DicDaysOff();
     foreach (var element in elements) {
       var dates = getDate(element);
       foreach (var date in dates) {

@@ -16,6 +16,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - DB_PASSWORD="${DB_PASSWORD:-zaq1@WSX}"
+      - db=db
     depends_on:
       - db
       - nginx
@@ -79,6 +80,8 @@ services:
     image: server-development
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - client=http://html-development:3000
+      - db=db
       - DB_PASSWORD="${DB_PASSWORD:-zaq1@WSX}"
     depends_on:
       - db
@@ -104,6 +107,7 @@ services:
       - ./Server/wwwroot/:/Server/wwwroot
       - ./Server/Service/:/Server/Service
       - ./Server/EndPoint/:/Server/EndPoint
+      - ./Server/Utilities/:/Server/Utilities
     cpus: '1'
     mem_limit: '2g'
 

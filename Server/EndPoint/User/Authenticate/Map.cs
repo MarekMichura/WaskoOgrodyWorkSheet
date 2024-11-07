@@ -4,7 +4,9 @@ public static partial class MapUser {
   public static async Task<IResult> MapAuthenticate(ModelInputMapAuthenticate model, IRepUser rep)
   {
     if (await rep.Login(model.Login, model.Password)) {
-      return Results.Ok(new ModelOutPutMapAuthenticate { Authenticated = true, Profil = rep.GetCurrentProfil(out _) });
+      var id = rep.GetCurrentID() ?? throw new NullReferenceException();
+      var (profil, _) = await rep.GetUserProfilAsync(id);
+      return Results.Ok(new ModelOutPutMapAuthenticate { Authenticated = true, Profil = profil });
     }
 
     return Results.Ok(new ModelOutPutMapAuthenticate { Authenticated = false });

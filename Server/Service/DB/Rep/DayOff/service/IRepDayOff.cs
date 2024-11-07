@@ -1,5 +1,5 @@
 namespace Wasko;
 
 public interface IRepDayOff {
-  public Dictionary<DateOnly, List<ModelDayOff>> GetUsersDaysOff(DateOnly start, DateOnly end, out DateTime cacheTime);
+  public Task<CacheResult<DicDaysOff>> GetUsersDaysOffAsync(string id, DateOnly start, DateOnly end);
 }
