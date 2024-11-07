@@ -30,26 +30,27 @@ public class RepUser(IHttpContextAccessor context, SignInManager<ModelUser> sim,
   public IEnumerable<ModelRole> GetCurrentRoles(out DateTime cacheTime)
   {
     var id = GetCurrentID() ?? throw new NullReferenceException();
-    var data = _cache.GetOrCreate($"user_role:{id}", (ICacheEntry cache) => {
+    var (data, time) = _cache.GetOrCreate($"user_role:{id}", (ICacheEntry cache) => {
       cache.SetDefaultOptions();
       var time = DateTime.Now;
       var roles = _db.Roles
         .Include(role => role.Users)
-        .Where(role => role.Users!.Any(user => user.Id == id));
+        .Where(role => role.Users!.Any(user => user.Id == id))
+        .ToArray();
 
       cache.AddExpirationUserRoles(id);
       cache.AddExpirationRole(roles);
-      return new { roles, time };
-    });
+      return new Tuple<IEnumerable<ModelRole>, DateTime>(roles, time);
+    })!;
 
-    cacheTime = data!.time;
-    return data.roles!;
+    cacheTime = time;
+    return data;
   }
 
   public ModelUserProfil GetCurrentProfil(out DateTime cacheTime)
   {
     var id = GetCurrentID() ?? throw new NullReferenceException();
-    var data = _cache.GetOrCreate($"user_profil:{id}", (ICacheEntry cache) => {
+    var (data, time) = _cache.GetOrCreate($"user_profil:{id}", (ICacheEntry cache) => {
       cache.SetDefaultOptions();
       var time = DateTime.Now;
       var user = _db.Users
@@ -68,10 +69,10 @@ public class RepUser(IHttpContextAccessor context, SignInManager<ModelUser> sim,
       cache.AddExpirationUserRoles(id);
       cache.AddExpirationUserProfil(id);
       cache.AddExpirationRole(user.Roles!);
-      return new { profil, time };
-    });
+      return new Tuple<ModelUserProfil, DateTime>(profil, time);
+    })!;
 
-    cacheTime = data!.time;
-    return data!.profil;
+    cacheTime = time;
+    return data;
   }
 }

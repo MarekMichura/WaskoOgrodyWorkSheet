@@ -8,7 +8,7 @@ public class RepWorkHour(DbContext db, IRepUser user, IMemoryCache cache) : IRep
   public Dictionary<DateOnly, List<ModelWorkHours>> GetUsersWorkHours(DateOnly start, DateOnly end, out DateTime cacheTime)
   {
     var id = _user.GetCurrentID() ?? throw new NullReferenceException();
-    var data = _cache.GetOrCreate($"user_WorkHours:{id} from:{start} to:{end}", (ICacheEntry cache) => {
+    var (data, time) = _cache.GetOrCreate($"user_WorkHours:{id} from:{start:yyyy-MM-dd} to:{end:yyyy-MM-dd}", (ICacheEntry cache) => {
       cache.SetDefaultOptions();
       var time = DateTime.Now;
       var result = new Dictionary<DateOnly, List<ModelWorkHours>>();
@@ -17,7 +17,8 @@ public class RepWorkHour(DbContext db, IRepUser user, IMemoryCache cache) : IRep
         .AsSplitQuery()
         .Include(workHour => workHour.WorkLocation)
         .Include(workHour => workHour.Chords)
-        .Where(workHour => workHour.UserID == id && workHour.Date >= start && workHour.Date <= end);
+        .Where(workHour => workHour.UserID == id && workHour.Date >= start && workHour.Date <= end)
+        .ToArray();
 
       foreach (var workHour in workHours) {
         if (!result.TryAdd(workHour.Date, [workHour])) {
@@ -28,10 +29,10 @@ public class RepWorkHour(DbContext db, IRepUser user, IMemoryCache cache) : IRep
       cache.AddExpirationWorkHour(workHours);
       cache.AddExpirationDayOffUser(id);
       TokenGetUsersWorkHour.Cancel(id, start, end);
-      return new { result, time };
-    });
+      return new Tuple<Dictionary<DateOnly, List<ModelWorkHours>>, DateTime>(result, time);
+    })!;
 
-    cacheTime = data!.time;
-    return data.result;
+    cacheTime = time;
+    return data;
   }
 }

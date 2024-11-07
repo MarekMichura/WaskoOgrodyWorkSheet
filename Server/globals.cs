@@ -15,3 +15,7 @@ global using Microsoft.AspNetCore.OutputCaching;
 global using DotNetEnv;
 global using Microsoft.AspNetCore.DataProtection;
 global using Microsoft.Extensions.Primitives;
+global using System.Diagnostics.CodeAnalysis;
+global using FluentValidation;
+global using System.ComponentModel;
+global using FluentValidation.AspNetCore;
