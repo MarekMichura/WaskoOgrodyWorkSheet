@@ -19,7 +19,6 @@
 
   @include useTheme(box-shadow, -3px 3px 10px 0px black, -3px 3px 10px 0px white);
   @include media('max-width: 730px') {
-    min-width: 100%;
     grid-template-columns: 1fr;
   }
 }

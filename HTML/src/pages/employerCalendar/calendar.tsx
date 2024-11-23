@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom'
 
 import Button from '/button/button'
 import {CalendarInput} from '/calendar/calendar'
-import {useEmployerCalendar} from '/query/employerCalendar/useEployerCalendar'
+import {useEmployerCalendar} from '/query/employerCalendar/useEmployerCalendar'
 import {useProfile} from '/query/profile/useProfile'
 import {ERoutes} from '/route/eRoutes'
 import {link} from '/route/link'
@@ -31,12 +31,12 @@ function EmployerCalendar(props: employerCalendarProps) {
   const {data: prevD} = useEmployerCalendar(prev, ['data'])
   const {data: currD} = useEmployerCalendar(props, ['data'])
   const {data: nextD} = useEmployerCalendar(next, ['data'])
-  const {data: seleD} = useEmployerCalendar({year: selected?.year, month: selected?.month}, ['data'], getDate(selected))
+  const {data} = useEmployerCalendar({year: selected?.year, month: selected?.month}, ['data'], getDate(selected))
 
   const {disableMonth, disableYear} = useMemo(() => calcDisable(props, startWork!), [startWork, props])
-  const data = useMemo(
-    () => calcDayData(selected, setSelected, dates, props, prevD, currD, nextD, startWork),
-    [currD, dates, nextD, prevD, props, selected]
+  const days = useMemo(
+    () => calcDayData(selected, setSelected, dates, props, prevD, currD, nextD, startWork!),
+    [currD, dates, nextD, prevD, props, selected, startWork]
   )
 
   function setDate(year: number, month: number) {
@@ -51,21 +51,21 @@ function EmployerCalendar(props: employerCalendarProps) {
             {selected ? `${selected.day}\u00A0${months[selected.month]}` : 'Nie wybrano'}
           </h1>
           <div className={selectedData}>
-            {seleD && seleD.dayOff.length > 0 && (
+            {data && data.dayOff.length > 0 && (
               <div>
                 <h3 className={selectedTitle}>Wolne z powodu</h3>
                 <ul className={selectedElement}>
-                  {seleD.dayOff.map(({reason}, i) => (
+                  {data.dayOff.map(({reason}, i) => (
                     <li key={i}>{reason}</li>
                   ))}
                 </ul>
               </div>
             )}
-            {seleD && seleD.workingHours.length > 0 && (
+            {data && data.workingHours.length > 0 && (
               <div>
                 <h3 className={selectedTitle}>Przepracowano</h3>
                 <ul className={selectedElement}>
-                  {seleD.workingHours.map(({workStart, workEnd, location}, i) => (
+                  {data.workingHours.map(({workStart, workEnd, location}, i) => (
                     <li key={i}>
                       <span>
                         od:{'\u00A0'}
@@ -88,7 +88,7 @@ function EmployerCalendar(props: employerCalendarProps) {
           disablePrevYear={disableYear}
           disableNextYear={false}
           disableMonth={disableMonth}
-          p={data.map((a) => ({...a, className: btn}))}
+          p={days.map((a) => ({...a, className: btn}))}
           setDate={setDate}
         />
       </div>
