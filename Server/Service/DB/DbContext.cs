@@ -1,31 +1,31 @@
 namespace Wasko;
 
 public class DbContext(DbContextOptions<DbContext> options) : IdentityDbContext<ModelUser, ModelRole, string>(options) {
-  public DbSet<ModelBonus> Bonus { get; set; }
-  public DbSet<ModelFound> Founds { get; set; }
+  public required DbSet<ModelBonus> Bonus { get; set; }
+  public required DbSet<ModelFound> Founds { get; set; }
 
   // =============================================================
-  public DbSet<ModelDayOffDate> DayOffDates { get; set; }
-  public DbSet<ModelDayOffDateTargetRole> DayOffDatesTargetUser { get; set; }
-  public DbSet<ModelDayOffDateTargetUser> DayOffDatesTargetRole { get; set; }
+  public required DbSet<ModelDayOffDate> DayOffDates { get; set; }
+  public required DbSet<ModelDayOffDateTargetRole> DayOffDatesTargetUser { get; set; }
+  public required DbSet<ModelDayOffDateTargetUser> DayOffDatesTargetRole { get; set; }
 
   // =============================================================
-  public DbSet<ModelDayOffExpression> DayOffExpression { get; set; }
-  public DbSet<ModelDayOffExpressionTargetRole> DayOffExpressionTargetUser { get; set; }
-  public DbSet<ModelDayOffExpressionTargetUser> DayOffExpressionTargetRole { get; set; }
+  public required DbSet<ModelDayOffExpression> DayOffExpression { get; set; }
+  public required DbSet<ModelDayOffExpressionTargetRole> DayOffExpressionTargetUser { get; set; }
+  public required DbSet<ModelDayOffExpressionTargetUser> DayOffExpressionTargetRole { get; set; }
 
   // =============================================================
-  public DbSet<ModelWorkHours> WorkHours { get; set; }
-  public DbSet<ModelWorkLocation> WorkLocations { get; set; }
-  public DbSet<ModelWorkLocationRole> WorkLocationRoles { get; set; }
-  public DbSet<ModelWorkLocationTargetRole> WorkLocationTargetRoles { get; set; }
+  public required DbSet<ModelWorkHours> WorkHours { get; set; }
+  public required DbSet<ModelWorkLocation> WorkLocations { get; set; }
+  public required DbSet<ModelWorkLocationRole> WorkLocationRoles { get; set; }
+  public required DbSet<ModelWorkLocationTargetRole> WorkLocationTargetRoles { get; set; }
 
   // =============================================================
-  public DbSet<ModelChord> Chords { get; set; }
-  public DbSet<ModelChordPrice> ChordPrices { get; set; }
+  public required DbSet<ModelChord> Chords { get; set; }
+  public required DbSet<ModelChordPrice> ChordPrices { get; set; }
 
   // =============================================================
-  public DbSet<ModelLastActualization> LastActualizations { get; set; }
+  public required DbSet<ModelLastActualization> LastActualizations { get; set; }
 
   protected override void OnModelCreating(ModelBuilder builder)
   {

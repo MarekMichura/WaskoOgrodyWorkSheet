@@ -1,0 +1,145 @@
+.container {
+  position: relative;
+  width: calc(100% - 10px);
+  height: 40px;
+
+  display: flex;
+  transition:
+    200ms background-color ease-in-out,
+    200ms margin ease-in-out;
+  @include useColor('background-color', ac_200);
+
+  &::after,
+  &::before {
+    position: absolute;
+    content: '';
+    height: 3px;
+    width: 0%;
+    top: 100%;
+
+    background-color: $primary;
+    transition:
+      300ms background-color ease-in-out,
+      300ms width ease-in-out;
+  }
+  &::after {
+    right: 0;
+  }
+  &::before {
+    left: 0;
+  }
+  &:has(.error) {
+    &::before,
+    &::after {
+      background-color: red;
+      width: 50%;
+    }
+  }
+
+  &:has(:disabled) {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: grayscale(80%);
+  }
+
+  &:not(:has(.icon)) {
+    .error,
+    .info {
+      left: 5px;
+    }
+    .input {
+      padding-left: 5px;
+    }
+  }
+
+  &:focus-within {
+    @include useColor('background-color', se_200);
+
+    &::after,
+    &::before {
+      width: 50%;
+    }
+  }
+}
+
+.icon {
+  pointer-events: none;
+  padding: 5px;
+  width: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input {
+  all: unset;
+  position: absolute;
+  height: 20px;
+  width: calc(100% - 40px);
+  padding: 15px 0 5px 40px;
+
+  font-size: 16pt;
+  @include useColor('color', 'bg_800');
+  &::placeholder {
+    display: none;
+  }
+  &:not(:focus):placeholder-shown {
+    ~ .info {
+      top: 50%;
+      left: 50%;
+
+      font-size: 15pt;
+      transform: translate(-50%, -50%);
+    }
+    ~ .error {
+      left: 50%;
+
+      transform: translateX(-50%);
+    }
+  }
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    background-clip: text;
+
+    font-size: 16pt;
+    color: inherit;
+    -webkit-text-fill-color: inherit;
+
+    transition:
+      background-color 5000s ease-in-out 0s,
+      color 5000s ease-in-out 0s;
+  }
+}
+
+.info,
+.error {
+  position: absolute;
+  display: block;
+
+  font-size: 10pt;
+
+  user-select: none;
+  pointer-events: none;
+  transition: 200ms all ease-in-out;
+}
+
+.info {
+  left: 45px;
+  top: 0;
+
+  font-family: $font_black;
+}
+
+.error {
+  width: max-content;
+  max-width: 100%;
+
+  top: calc(100% + 2px);
+  left: 45px;
+
+  color: red;
+}

@@ -1,12 +1,13 @@
 {
   "compilerOptions": {
     "baseUrl": "./src",
+    "incremental": true,
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2020",
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
-
     /* Bundler mode */
     "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true,
@@ -14,32 +15,32 @@
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
-
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
-
     "paths": {
-      "/ErrorBoundary": ["Common/ErrorBoundary/index.tsx"],
-      "/Function/*": ["Common/Function/*"],
-      "/Icon/*": ["Common/Icon/*"],
-      "/Input": ["Common/Input/Input.tsx"],
-      "/InputButton": ["Common/Input/Button.tsx"],
-      "/InputCalendar/*": ["Common/Calendar/*"],
-      "/Loading/*": ["Common/Loading/*"],
-      "/Notification/*": ["Common/Notification/*"],
-      "/PageCalendar/*": ["Page/EmployerCalendar/*"],
-      "/PageError/*": ["Page/Error/*"],
-      "/PageLogin/*": ["Page/Login/*"],
-      "/PageMain/*": ["Page/Main/*"],
-      "/PageSetWorkingHours/*": ["Page/SetWorkingHours/*"],
-      "/PwaCatch/*": ["Common/PwaEventCatch/*"],
-      "/QueryFn/*": ["Common/QueryFn/*"],
-      "/Router/*": ["Common/Router/*"],
-      "/Suspend/*": ["Common/Suspend/*"]
+      "/calendar/*": ["components/calendar/*"],
+      "/button/*": ["components/button/*"],
+      "/input/*": ["components/input/*"],
+      "/router/*": ["components/router/*"],
+      "/status/*": ["components/status/*"],
+      "/suspense/*": ["components/suspense/*"],
+      "/svg/*": ["components/icon/svg/*"],
+      /*  */
+      "/lazy/*": ["utils/lazy/*"],
+      "/notification/*": ["utils/notification/*"],
+      "/profile/*": ["utils/profile/*"],
+      "/query/*": ["utils/query/*"],
+      "/route/*": ["utils/route/*"],
+      "/stat/*": ["utils/status/*"],
+      "/style/*": ["utils/style/*"],
+      "/theme/*": ["utils/theme/*"],
+      "/common/*": ["utils/common/*"],
+      /* */
+      "/page/*": ["pages/*"]
     }
   },
   "include": ["src"]

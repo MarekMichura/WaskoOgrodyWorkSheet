@@ -1,0 +1,152 @@
+.container {
+  position: fixed;
+  height: 100dvh;
+  width: 100dvw;
+  left: 0;
+  top: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  backdrop-filter: blur(0);
+  background-color: transparent;
+
+  transition:
+    300ms backdrop-filter linear,
+    300ms background-color linear;
+
+  &[data-open='true'] {
+    backdrop-filter: blur(3px);
+    background-color: rgba(0, 0, 0, 0.3);
+
+    .content,
+    .text {
+      scale: 1;
+    }
+  }
+}
+
+.text {
+  display: block;
+
+  font-family: $font_black;
+  text-transform: uppercase;
+
+  scale: 0;
+  transition: 500ms scale linear;
+}
+
+.content {
+  width: 80px;
+  height: 40px;
+
+  border-radius: 0 0 100px 100px;
+  border: 5px solid #538a2d;
+  border-top: 0;
+  scale: 0;
+
+  background:
+    radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, 0) calc(100% - 5px), #e7ef9d calc(100% - 4px)),
+    radial-gradient(closest-side at 2px 3px, #5c4037 89%, rgba(0, 0, 0, 0)) 0 0/17px 12px,
+    #ff1643;
+
+  mask-image:
+    linear-gradient(#000 0 0),
+    radial-gradient(farthest-side, #000 94%, #0000),
+    radial-gradient(farthest-side, #000 94%, #0000),
+    radial-gradient(farthest-side, #000 94%, #0000),
+    radial-gradient(farthest-side, #000 94%, #0000),
+    radial-gradient(farthest-side, #000 94%, #0000),
+    radial-gradient(farthest-side, #000 94%, #0000),
+    /**/ linear-gradient(#0000 0 0);
+  mask-position:
+    0 0,
+    12px -8px,
+    29px -8px,
+    45px -6px,
+    22px -2px,
+    34px 6px,
+    21px 6px,
+    0 0;
+  mask-composite: exclude, add, add, add, add, add, add;
+  mask-repeat: no-repeat;
+
+  transition: 500ms scale linear;
+  animation: 4s melon infinite;
+}
+
+@keyframes melon {
+  0% {
+    mask-size:
+      auto,
+      0 0,
+      0 0,
+      0 0,
+      0 0,
+      0 0,
+      0 0;
+  }
+  15% {
+    mask-size:
+      auto,
+      25px 25px,
+      0 0,
+      0 0,
+      0 0,
+      0 0,
+      0 0;
+  }
+  30% {
+    mask-size:
+      auto,
+      25px 25px,
+      25px 25px,
+      0 0,
+      0 0,
+      0 0,
+      0 0;
+  }
+  45% {
+    mask-size:
+      auto,
+      25px 25px,
+      25px 25px,
+      25px 25px,
+      0 0,
+      0 0,
+      0 0;
+  }
+  60% {
+    mask-size:
+      auto,
+      25px 25px,
+      25px 25px,
+      25px 25px,
+      25px 25px,
+      0 0,
+      0 0;
+  }
+  75% {
+    mask-size:
+      auto,
+      25px 25px,
+      25px 25px,
+      25px 25px,
+      25px 25px,
+      25px 25px,
+      0 0;
+  }
+  90%,
+  100% {
+    mask-size:
+      auto,
+      25px 25px,
+      25px 25px,
+      25px 25px,
+      25px 25px,
+      25px 25px,
+      25px 25px;
+  }
+}

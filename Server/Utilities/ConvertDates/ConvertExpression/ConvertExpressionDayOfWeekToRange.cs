@@ -10,10 +10,12 @@ internal class ConvertExpressionDayOfWeekToRange : IConvertExpressionToRange {
 
     foreach (var (start, end) in convert.Ranges) {
       var last = end ?? start;
+      var startDay = (int)start.DayOfWeek;
+      var lenghtToDay = startDay > id ? (7 - startDay) + id : id - startDay;
 
-      result.AddRange(new DateOnlyRange(start, last)
-        .GetDates()
-        .Select(date => new DateOnlyRange(date)));
+      for (var i = start.AddDays(lenghtToDay); i <= end; i = i.AddDays(7)) {
+        result.Add(new(i));
+      }
     }
 
     Ranges = result;

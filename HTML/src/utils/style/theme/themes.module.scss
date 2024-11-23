@@ -1,0 +1,189 @@
+@use './darkColors.module.scss' as *;
+@use './lightColors.module.scss' as *;
+
+$primary: hsla(120, 49%, 26%);
+$font_lato: 'Lato', sans-serif;
+$font_black: 'Archivo Black';
+
+$colors: (
+  scheme: (
+    light: $light_scheme,
+    dark: $dark_scheme
+  ),
+  bg_50: (
+    light: $light_bg_50,
+    dark: $dark_bg_50
+  ),
+  bg_100: (
+    light: $light_bg_100,
+    dark: $dark_bg_100
+  ),
+  bg_200: (
+    light: $light_bg_200,
+    dark: $dark_bg_200
+  ),
+  bg_300: (
+    light: $light_bg_300,
+    dark: $dark_bg_300
+  ),
+  bg_400: (
+    light: $light_bg_400,
+    dark: $dark_bg_400
+  ),
+  bg_500: (
+    light: $light_bg_500,
+    dark: $dark_bg_500
+  ),
+  bg_600: (
+    light: $light_bg_600,
+    dark: $dark_bg_600
+  ),
+  bg_700: (
+    light: $light_bg_700,
+    dark: $dark_bg_700
+  ),
+  bg_800: (
+    light: $light_bg_800,
+    dark: $dark_bg_800
+  ),
+  bg_900: (
+    light: $light_bg_900,
+    dark: $dark_bg_900
+  ),
+  bg_950: (
+    light: $light_bg_950,
+    dark: $dark_bg_950
+  ),
+  pr_50: (
+    light: $light_pr_50,
+    dark: $dark_pr_50
+  ),
+  pr_100: (
+    light: $light_pr_100,
+    dark: $dark_pr_100
+  ),
+  pr_200: (
+    light: $light_pr_200,
+    dark: $dark_pr_200
+  ),
+  pr_300: (
+    light: $light_pr_300,
+    dark: $dark_pr_300
+  ),
+  pr_400: (
+    light: $light_pr_400,
+    dark: $dark_pr_400
+  ),
+  pr_500: (
+    light: $light_pr_500,
+    dark: $dark_pr_500
+  ),
+  pr_600: (
+    light: $light_pr_600,
+    dark: $dark_pr_600
+  ),
+  pr_700: (
+    light: $light_pr_700,
+    dark: $dark_pr_700
+  ),
+  pr_800: (
+    light: $light_pr_800,
+    dark: $dark_pr_800
+  ),
+  pr_900: (
+    light: $light_pr_900,
+    dark: $dark_pr_900
+  ),
+  pr_950: (
+    light: $light_pr_950,
+    dark: $dark_pr_950
+  ),
+  se_50: (
+    light: $light_se_50,
+    dark: $dark_se_50
+  ),
+  se_100: (
+    light: $light_se_100,
+    dark: $dark_se_100
+  ),
+  se_200: (
+    light: $light_se_200,
+    dark: $dark_se_200
+  ),
+  se_300: (
+    light: $light_se_300,
+    dark: $dark_se_300
+  ),
+  se_400: (
+    light: $light_se_400,
+    dark: $dark_se_400
+  ),
+  se_500: (
+    light: $light_se_500,
+    dark: $dark_se_500
+  ),
+  se_600: (
+    light: $light_se_600,
+    dark: $dark_se_600
+  ),
+  se_700: (
+    light: $light_se_700,
+    dark: $dark_se_700
+  ),
+  se_800: (
+    light: $light_se_800,
+    dark: $dark_se_800
+  ),
+  se_900: (
+    light: $light_se_900,
+    dark: $dark_se_900
+  ),
+  se_950: (
+    light: $light_se_950,
+    dark: $dark_se_950
+  ),
+  ac_50: (
+    light: $light_ac_50,
+    dark: $dark_ac_50
+  ),
+  ac_100: (
+    light: $light_ac_100,
+    dark: $dark_ac_100
+  ),
+  ac_200: (
+    light: $light_ac_200,
+    dark: $dark_ac_200
+  ),
+  ac_300: (
+    light: $light_ac_300,
+    dark: $dark_ac_300
+  ),
+  ac_400: (
+    light: $light_ac_400,
+    dark: $dark_ac_400
+  ),
+  ac_500: (
+    light: $light_ac_500,
+    dark: $dark_ac_500
+  ),
+  ac_600: (
+    light: $light_ac_600,
+    dark: $dark_ac_600
+  ),
+  ac_700: (
+    light: $light_ac_700,
+    dark: $dark_ac_700
+  ),
+  ac_800: (
+    light: $light_ac_800,
+    dark: $dark_ac_800
+  ),
+  ac_900: (
+    light: $light_ac_900,
+    dark: $dark_ac_900
+  ),
+  ac_950: (
+    light: $light_ac_950,
+    dark: $dark_ac_950
+  )
+);

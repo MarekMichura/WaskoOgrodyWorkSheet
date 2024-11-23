@@ -1,26 +1,16 @@
 namespace Wasko;
 
 public static class TokenDayOffChange {
-  private static readonly Dictionary<string, MyToken> _tokens = [];
+  private static readonly TokenManager _tokenManager = new();
 
-  public static IChangeToken GetToken(string roleID)
+  public static IChangeToken GetToken(string dayOfID)
   {
-    if (_tokens.TryGetValue(roleID, out var myToken)) {
-      return myToken.Token;
-    }
-    var source = new CancellationTokenSource();
-    var token = new CancellationChangeToken(source.Token);
-    _tokens.Add(roleID, new(source, token));
-    return token;
+    return _tokenManager.GetToken(dayOfID).Token;
   }
 
-  public static void Cancel(string roleID)
+  public static void Cancel(string dayOfID)
   {
-    if (_tokens.TryGetValue(roleID, out var myToken)) {
-      myToken.Source.Cancel();
-      myToken.Source.Dispose();
-      _tokens.Remove(roleID);
-    }
+    _tokenManager.Cancel(dayOfID);
   }
 
   public static void AddExpirationDayOff(this ICacheEntry cache, IEnumerable<ModelDayOff> dayOffs)

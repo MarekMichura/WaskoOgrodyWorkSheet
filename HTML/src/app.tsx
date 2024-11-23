@@ -1,29 +1,36 @@
-import {lazy} from 'react'
-import {ErrorBoundary} from 'react-error-boundary'
-import {ThemeProvider} from 'styled-components'
+import { useEffect } from 'react'
+import { Route, Routes } from 'react-router-dom'
 
-import {Notifications} from '/QueryFn/Notification/tsx'
-import {ITheme} from '/QueryFn/Theme/types/ITheme'
-import {IThemeSwitch} from '/QueryFn/Theme/types/IThemeSwitch'
-import {useTheme} from '/QueryFn/Theme/useTheme'
-import {endPoints, IAdditionalRoute} from '/Router/IRoute'
+import { useProfile } from '/query/profile/useProfile'
+import { useTheme } from '/query/theme/useTheme'
+import { ERoutes } from '/route/eRoutes'
+import { main, login, error404 } from '/route/imports'
+import { route } from '/route/route'
+import { routeComponents } from '/route/routeComponents'
 
-import {SuspendWrapper} from './Common/Suspend'
-import {GlobalStyle} from './GlobalStyle'
+const ECalendar = routeComponents[ERoutes.showCalendar].lazy
+const Login = login.lazy
+const Main = main.lazy
+function App() {
+  const { data: theme } = useTheme(['data'])
+  const { data: profile, isError: profilError } = useProfile(['data'])
 
-const MyRoute = lazy(() => import('/Router/index').then((a) => ({default: a.MyRoute})))
-export function App() {
-  const theme = useTheme()
+  useEffect(() => {
+    if (theme !== undefined) document.documentElement.setAttribute('data-theme', theme)
+    else document.documentElement.removeAttribute('data-theme')
+  }, [theme])
+
+  if (profile === undefined || profile.logout || profilError) return <Login />
+  const perm = profile?.permissions
 
   return (
-    <ThemeProvider theme={IThemeSwitch[theme.data ?? ITheme.THEME_LIGHT]}>
-      <ErrorBoundary FallbackComponent={endPoints[IAdditionalRoute.Error].lazy}>
-        <GlobalStyle />
-        <SuspendWrapper text={'Ładowanie strony'}>
-          <MyRoute />
-        </SuspendWrapper>
-        <Notifications />
-      </ErrorBoundary>
-    </ThemeProvider>
+    <Routes>
+      <Route path="*" Component={Main}>
+        <Route path="*" Component={error404.lazy} />
+        {perm[ERoutes.showCalendar] && <Route path={route[ERoutes.showCalendar]} Component={ECalendar} />}
+      </Route>
+    </Routes>
   )
 }
+
+export default App

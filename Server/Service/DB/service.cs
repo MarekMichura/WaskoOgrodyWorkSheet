@@ -9,9 +9,8 @@ internal class ServiceDatabase : IService {
     connectionStr = connectionStr.Replace("${PASSWORD}", password);
     connectionStr = connectionStr.Replace("${SERVER}", host);
 
-    Console.WriteLine(connectionStr);
-
     builder.Services.AddDbContextFactory<DbContext>(options => {
+      options.LogTo((_) => { }, LogLevel.None);
       options.UseSqlServer(connectionStr, sqlOptions => {
         sqlOptions.EnableRetryOnFailure();
       });

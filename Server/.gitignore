@@ -8,6 +8,7 @@
 Migrations/
 .vs/
 **/database.lock
+*.env
 
 # User-specific files
 *.suo

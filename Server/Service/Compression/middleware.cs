@@ -12,10 +12,7 @@ internal class MiddlewareStaticCompression : IMiddleware {
   public ushort Priority => 65100;
   public void DefineMiddleware(WebApplication app)
   {
-    app.UseStaticFiles(new StaticFileOptions {
-      OnPrepareResponseAsync = async (context) => {
-        await ResponseWithCompressedFiles.InvokeAsync(context.Context);
-      }
-    });
+    app.UseMiddleware<ResponseClientStaticFileMiddleware>();
+    app.UseStaticFiles();
   }
 }

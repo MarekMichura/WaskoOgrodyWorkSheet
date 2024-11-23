@@ -6,7 +6,6 @@ public class RepUser(IHttpContextAccessor context, SignInManager<ModelUser> sim,
   private readonly IMemoryCache _cache = cache;
   private readonly IDbContextFactory<DbContext> _factory = factory;
 
-
   public async Task<bool> Login(string login, string password)
   {
     await _sim.SignOutAsync();
@@ -61,7 +60,7 @@ public class RepUser(IHttpContextAccessor context, SignInManager<ModelUser> sim,
         FirstName = user.Profil!.FirstName,
         LastName = user.Profil.LastName,
         WorkStartDate = user.Profil.WorkStartDate,
-        Roles = user.Roles!.Select(a => a.Name!),
+        Roles = user.Roles!.Select(a => a.Name!).ToArray(),
       };
 
       cache.AddExpirationUserRoles(id);

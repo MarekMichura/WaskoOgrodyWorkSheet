@@ -1,0 +1,101 @@
+.container {
+  min-width: 100%;
+  min-height: 100%;
+  width: min-content;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.content {
+  max-height: max(Calc(100dvh - 100px), 100px);
+  min-width: min(350px, Calc(100% - 20px), Calc(100vw - 20px));
+
+  border-radius: 20px;
+  padding: 20px min(max(calc((100dvw - 350px) / 2), 10px), 20px);
+
+  gap: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  justify-content: space-between;
+
+  @include useColor(background-color, bg_50);
+  @include useTheme(
+    background-image,
+    radial-gradient(circle at top, $dark_bg_100 0, $dark_bg_50 100%),
+    radial-gradient(circle, $light_bg_50 0, $light_bg_100 100%)
+  );
+  @include useTheme(box-shadow, 0 0 5px $dark_pr_200, 0 0 5px $light_bg_950);
+  @include media('max-height: 480px') {
+    max-height: none;
+  }
+  @include media('max-width: 390px') {
+    padding-left: 10px;
+    padding-right: 10px;
+    width: calc(100% - 20px);
+    border-radius: 0;
+  }
+}
+
+.header {
+  display: contents;
+  user-select: none;
+
+  @include media('max-height: 480px') {
+    padding: 0 10px;
+    width: 100%;
+
+    gap: 5px;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.logo {
+  max-height: max-content;
+  max-width: 100%;
+  flex: 1;
+}
+
+.input {
+  margin-bottom: 0;
+}
+
+.title,
+.subTitle {
+  margin: 0;
+
+  text-align: center;
+  font-family: $font_black;
+
+  color: $primary;
+}
+
+.title {
+  font-size: 25pt;
+}
+
+.subTitle {
+  font-size: 20pt;
+}
+
+.button {
+  align-self: end;
+  padding: 15px;
+  border-radius: 30px;
+
+  gap: 5px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+
+  @include useColor('background-color', pr_200);
+  @include useColor('color', bg_800);
+
+  & > svg {
+    height: 100%;
+  }
+}

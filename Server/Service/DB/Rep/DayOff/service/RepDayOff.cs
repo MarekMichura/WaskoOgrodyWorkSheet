@@ -1,4 +1,3 @@
-
 namespace Wasko;
 
 public class RepDayOff(IRepUser user, IMemoryCache cache, IDbContextFactory<DbContext> factory) : IRepDayOff {

@@ -1,0 +1,53 @@
+@use './theme/themes.module.scss' as *;
+@use 'sass:map';
+
+@mixin useColor($property, $color) {
+  $get: map.get($colors, $color);
+  @each $name, $value in $get {
+    @include color($property, $name, $value);
+  }
+}
+
+@mixin useTheme($property, $dark, $light) {
+  #{$property}: #{$light};
+  @include theme('dark') {
+    #{$property}: #{$dark};
+  }
+}
+
+@mixin color($property, $name, $value) {
+  @if ($name == 'light') {
+    #{$property}: #{$value};
+  } @else {
+    @include theme($name) {
+      #{$property}: #{$value};
+    }
+  }
+}
+
+@mixin theme($theme) {
+  [data-theme='#{$theme}'] & {
+    @content;
+  }
+}
+
+@mixin media($property1) {
+  @media screen and (#{$property1}) {
+    @content;
+  }
+}
+
+@mixin media2($property1, $property2) {
+  @media screen and (#{$property1}) and (#{$property2}) {
+    @content;
+  }
+}
+
+@mixin disableScroll() {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

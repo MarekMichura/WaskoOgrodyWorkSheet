@@ -1,26 +1,16 @@
 namespace Wasko;
 
 public static class TokenWorkHourChange {
-  private static readonly Dictionary<string, MyToken> _tokens = [];
+  private static readonly TokenManager _tokenManager = new();
 
-  public static IChangeToken GetToken(string roleID)
+  public static IChangeToken GetToken(string workHoursID)
   {
-    if (_tokens.TryGetValue(roleID, out var myToken)) {
-      return myToken.Token;
-    }
-    var source = new CancellationTokenSource();
-    var token = new CancellationChangeToken(source.Token);
-    _tokens.Add(roleID, new(source, token));
-    return token;
+    return _tokenManager.GetToken(workHoursID).Token;
   }
 
-  public static void Cancel(string roleID)
+  public static void Cancel(string workHoursID)
   {
-    if (_tokens.TryGetValue(roleID, out var myToken)) {
-      myToken.Source.Cancel();
-      myToken.Source.Dispose();
-      _tokens.Remove(roleID);
-    }
+    _tokenManager.Cancel(workHoursID);
   }
 
   public static void AddExpirationWorkHour(this ICacheEntry cache, IEnumerable<ModelWorkHours> workHours)

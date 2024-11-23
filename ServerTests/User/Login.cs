@@ -1,7 +1,8 @@
 namespace Test;
 
 [Collection("WebApp")]
-public class LoginTest(WebApp app) {
+public class LoginTest(WebApp app)
+{
   public static IEnumerable<object[]> Users =>
     StorageUser.users.Select(static user => new object[] { user });
 
@@ -24,7 +25,7 @@ public class LoginTest(WebApp app) {
 
     Assert.True(response.IsSuccessStatusCode);
     Assert.True(data.Authenticated);
-    Assert.Equal(data.Profil?.UserName, user.UserName);
+    Assert.Equal(data.Profile?.UserName, user.UserName);
 
     Assert.NotEmpty(cookies1.Last(static cookie => cookie.Name == ".AspNetCore.Identity.Application").Value);
     Assert.Empty(cookies2.Last(static cookie => cookie.Name == ".AspNetCore.Identity.Application").Value);
@@ -46,7 +47,7 @@ public class LoginTest(WebApp app) {
 
     Assert.True(response.IsSuccessStatusCode);
     Assert.False(data.Authenticated);
-    Assert.Null(data.Profil);
+    Assert.Null(data.Profile);
     Assert.Empty(cookies.Last(static cookie => cookie.Name == ".AspNetCore.Identity.Application").Value);
   }
 }

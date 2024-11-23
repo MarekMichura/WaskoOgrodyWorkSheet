@@ -38,7 +38,8 @@ public class StorageUser(string id, string login, string password, string email,
   public static readonly StorageUser[] users = 
     [AdminUser];
 #endif
-  public readonly static IEnumerable<ModelUser> Users = users.Select(static a => (ModelUser)a);
+  public readonly static ModelUser[] Users =
+    users.Select(static a => (ModelUser)a).ToArray();
 
   public static string Admin => AdminUser.ID;
 #if DEBUG

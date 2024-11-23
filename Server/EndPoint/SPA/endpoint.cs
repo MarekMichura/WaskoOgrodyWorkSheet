@@ -1,7 +1,7 @@
 namespace Wasko;
 
 public class EndPointSpa : IMiddleware {
-  internal const string rootPath = "./wwwroot";
+  internal const string rootPath = "wwwroot/";
   public ushort Priority => 0;
 
   public void DefineMiddleware(WebApplication app)
@@ -12,7 +12,7 @@ public class EndPointSpa : IMiddleware {
     else {
       app.UseSpa(spa => {
         spa.Options.SourcePath = rootPath;
-        spa.ApplicationBuilder.UseStaticFiles(new StaticFileOptions {
+        spa.ApplicationBuilder.UseSpaStaticFiles(new StaticFileOptions {
           FileProvider = new PhysicalFileProvider(Path.Combine(app.Environment.ContentRootPath, rootPath))
         });
       });

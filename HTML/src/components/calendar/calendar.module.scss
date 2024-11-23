@@ -1,0 +1,69 @@
+.content {
+  padding: 15px;
+
+  @include useTheme(
+    background-image,
+    linear-gradient($dark_bg_200 80%, $dark_bg_100),
+    linear-gradient($light_bg_100 80%, $light_bg_200)
+  );
+
+  @include media('max-width: 400px') {
+    padding: 5px;
+  }
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.topNav {
+  display: flex;
+  align-items: center;
+}
+
+.topTitle {
+  padding: 0;
+  margin: 0;
+
+  font-size: 15pt;
+  font-family: $font_black;
+}
+
+.topBtn {
+  width: 30px;
+  height: 30px;
+  aspect-ratio: 1/1;
+
+  border-radius: 100%;
+  overflow: hidden;
+}
+
+.monthsCon {
+  margin: 15px 0;
+
+  gap: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.monthBtm {
+  width: 100%;
+  height: max-content;
+
+  text-align: center;
+
+  &[data-sel='true'] {
+    font-weight: bolder;
+    @include useColor(color, pr_500);
+  }
+}
+
+.data {
+  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+
+  text-align: center;
+}

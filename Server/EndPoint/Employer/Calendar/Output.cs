@@ -2,7 +2,7 @@ namespace Wasko;
 
 public class ModelOutputMapEmployerCalendar {
   public IEnumerable<ModelOutputMapEmployerCalendarDayOff> DayOff { get; set; } = [];
-  public IEnumerable<ModelOutputMapEmployerCalendarWorkHour> WorkHours { get; set; } = [];
+  public IEnumerable<ModelOutputMapEmployerCalendarWorkHour> WorkingHours { get; set; } = [];
 }
 
 public struct ModelOutputMapEmployerCalendarDayOff {

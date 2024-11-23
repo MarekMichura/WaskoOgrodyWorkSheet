@@ -1,0 +1,67 @@
+.container {
+  min-width: 100%;
+  min-height: 100%;
+  width: min-content;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.subTitle,
+.title {
+  margin: 0;
+
+  text-align: center;
+  letter-spacing: 5pt;
+  font-family: $font_black;
+
+  @include useTheme(background-image, url(/Images/skyLight.strong.png), url(/Images/skyDark.strong.png));
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.btn {
+  padding: 15px;
+  border-radius: 30px;
+
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 10px;
+
+  font-family: $font_black;
+  font-size: 12pt;
+
+  @include useColor(background-color, pr_200);
+  @include useColor(color, bg_800);
+}
+
+.icon {
+  align-self: stretch;
+  flex-grow: 1;
+  aspect-ratio: 1/1;
+  height: 100%;
+}
+
+.title {
+  font-size: clamp(20pt, 25vw, 200pt);
+  font-size: clamp(20pt, 30cqw, 200pt);
+}
+
+.subTitle {
+  font-size: clamp(20pt, 10vw, 40pt);
+  font-size: clamp(20pt, 50cqw, 40pt);
+}
+
+.text {
+  text-align: center;
+
+  margin-top: 20px;
+  margin-bottom: 20px;
+}

@@ -1,0 +1,51 @@
+.container {
+  all: unset;
+  position: relative;
+  height: min-content;
+  cursor: pointer;
+  overflow: visible;
+
+  & * {
+    pointer-events: none;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    filter: grayscale(100%);
+    opacity: 0.5;
+  }
+}
+
+@keyframes ripple {
+  0% {
+  }
+  50% {
+    opacity: 0.6;
+    width: 200%;
+  }
+  100% {
+    opacity: 0;
+    width: 200%;
+  }
+}
+
+.ripple {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    aspect-ratio: 1/1;
+    width: 0px;
+    top: var(--top);
+    left: var(--left);
+
+    opacity: 0;
+    @include useColor(background-color, bg_900);
+    transform: translate(-50%, -50%);
+    animation: ripple 500ms linear forwards;
+  }
+}

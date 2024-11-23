@@ -1,14 +1,14 @@
-
 namespace Wasko;
 
 public static partial class MapEmployer {
-  public static async Task<IResult> MapCalendarAsync([AsParameters] ModelInputMapEmployerCalendar model,
-                                    [FromServices] IValidator<ModelInputMapEmployerCalendar> validator,
-                                    [FromServices] IMemoryCache cache,
-                                    [FromServices] IRepUser repUser,
-                                    [FromServices] IRepDayOff repDayOff,
-                                    [FromServices] IRepWorkHour repWorkHour,
-                                    HttpContext context)
+  public static async Task<IResult> MapCalendarAsync(
+      [AsParameters] ModelInputMapEmployerCalendar model,
+      [FromServices] IValidator<ModelInputMapEmployerCalendar> validator,
+      [FromServices] IMemoryCache cache,
+      [FromServices] IRepUser repUser,
+      [FromServices] IRepDayOff repDayOff,
+      [FromServices] IRepWorkHour repWorkHour,
+      HttpContext context)
   {
     var validation = validator.Validate(model);
     if (!validation.IsValid) {
@@ -20,7 +20,7 @@ public static partial class MapEmployer {
     var workHour = repWorkHour.GetUsersWorkHoursAsync(id, start, end);
 
     await Task.WhenAll(dayOff, workHour);
-    var key = $"EmployerCalendar user:{id} start:{model.Start:yyyy-MM-dd} end:{model.End:yyyy-MM-dd}";
+    var key = $"Employer calendar user:{id} start:{model.Start:yyyy-MM-dd} end:{model.End:yyyy-MM-dd}";
     var (result, time) = cache.GetOrCreate(key, (ICacheEntry cache) => {
       cache.SetDefaultOptions();
       var time = DateTime.Now;
@@ -32,13 +32,13 @@ public static partial class MapEmployer {
       foreach (var (key, value) in workHour.Result.Data) {
         var newModel = value.Select(workHours => (ModelOutputMapEmployerCalendarWorkHour)workHours);
         result.TryAdd(key, new());
-        result[key].WorkHours = newModel;
+        result[key].WorkingHours = newModel;
       }
 
       cache.AddExpirationGetUsersDaysOff(id, start, end);
       cache.AddExpirationGetUsersWorkHour(id, start, end);
       return new CacheResult<Dictionary<DateOnly, ModelOutputMapEmployerCalendar>>(result, time);
-    })!;
+    });
 
     if (context.IfModifiedSince(time)) {
       return Results.StatusCode(304);
