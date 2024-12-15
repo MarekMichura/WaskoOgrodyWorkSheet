@@ -11,7 +11,7 @@ const ripple_life_time = 1_000
 const {container, ripple} = styles
 function Button({onClick, children, text, className, ...props}: buttonProps) {
   const [tab, setTab] = useState<rippleProps[]>([])
-  const button = `${container} ${className}`
+  const button = className ? `${container} ${className}` : container
 
   function click(e: React.MouseEvent<HTMLButtonElement>) {
     if (onClick) onClick(e)

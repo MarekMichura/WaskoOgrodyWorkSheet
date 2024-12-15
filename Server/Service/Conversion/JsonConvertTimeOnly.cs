@@ -9,8 +9,5 @@ public class JsonConvertTimeOnly : JsonConverter<TimeOnly> {
     return TimeOnly.ParseExact(value, _format);
   }
 
-  public override void Write(Utf8JsonWriter writer, TimeOnly value, JsonSerializerOptions options)
-  {
-    writer.WriteStringValue(value.ToString(_format));
-  }
+  public override void Write(Utf8JsonWriter writer, TimeOnly value, JsonSerializerOptions options) { writer.WriteStringValue(value.ToString(_format)); }
 }

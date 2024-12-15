@@ -1,8 +1,8 @@
 namespace Wasko;
 
-public class RepWorkHour(IDbContextFactory<DbContext> factory, IMemoryCache cache) : IRepWorkHour {
+public class RepWorkHour(IDbContextFactory<DataBaseContext> factory, IMemoryCache cache) : IRepWorkHour {
   private readonly IMemoryCache _cache = cache;
-  private readonly IDbContextFactory<DbContext> _factory = factory;
+  private readonly IDbContextFactory<DataBaseContext> _factory = factory;
 
   public async Task<CacheResult<DicWorkHours>> GetUsersWorkHoursAsync(string id, DateOnly start, DateOnly end)
   {

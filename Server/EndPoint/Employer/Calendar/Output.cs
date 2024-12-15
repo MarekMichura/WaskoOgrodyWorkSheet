@@ -11,9 +11,9 @@ public struct ModelOutputMapEmployerCalendarDayOff {
   public byte Order { get; set; }
 
   public static implicit operator ModelOutputMapEmployerCalendarDayOff(ModelDayOff model) => new() {
-    Reason = model.Reason,
-    Order = model.Order,
     Off = model.Off,
+    Order = model.Order,
+    Reason = model.Reason,
   };
 }
 
@@ -23,8 +23,8 @@ public struct ModelOutputMapEmployerCalendarWorkHour {
   public required string Location { get; set; }
 
   public static implicit operator ModelOutputMapEmployerCalendarWorkHour(ModelWorkHours model) => new() {
-    WorkStart = model.WorkStart,
     WorkEnd = model.WorkEnd,
+    WorkStart = model.WorkStart,
     Location = model.WorkLocation?.Name ?? throw new NullReferenceException()
   };
 }

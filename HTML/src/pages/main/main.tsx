@@ -1,4 +1,4 @@
-import {useMemo, useState} from 'react'
+import {useMemo, useRef, useState} from 'react'
 import {ErrorBoundary} from 'react-error-boundary'
 import {Outlet, useLocation, useNavigate} from 'react-router-dom'
 
@@ -30,6 +30,7 @@ const {nav, logo, logoText, navElements, navScroll, btn, disBtn, btnIcon, btnTex
 const {header, left, right, iconCon, iconNum, icon} = styles
 const {menu, menuCon, menuBG, menuProfileLine, menuIcon, menuBtn} = styles
 function MainPage() {
+  const ref = useRef<HTMLDivElement>(null)
   const [{open, openMenu}, setState] = useState<mainPageState>({open: false, openMenu: false})
   const {mutateAsync: changeThemeAsync} = useMutationChangeTheme()
   const {mutate: logout} = useMutationLogout()
@@ -61,6 +62,7 @@ function MainPage() {
     setState((state) => ({...state, openMenu: 'notification'}))
   }
   function closeMenu() {
+    ref.current?.scrollTo({top: 0, behavior: 'instant'})
     setState({open: false, openMenu: false})
   }
   function navigateMain() {
@@ -82,7 +84,7 @@ function MainPage() {
           </ErrorBoundary>
         </LoadingSuspense>
       </main>
-      <nav className={nav}>
+      <nav className={nav} ref={ref}>
         <Button className={logo} onClick={() => navigateTo('/')}>
           <LogoIcon />
           <span className={logoText}>Wasko ogrody</span>
@@ -96,12 +98,7 @@ function MainPage() {
               <span className={btnText}>Strona główna</span>
             </Button>
             {links.map(({id, com, Icon, text, path}) => (
-              <Button
-                key={id}
-                data-selected={selected === id}
-                onMouseEnter={com}
-                className={btn}
-                onClick={() => navigateTo(path)}>
+              <Button key={id} data-selected={selected === id} onMouseEnter={com} className={btn} onClick={() => navigateTo(path)}>
                 <div className={btnIcon}>
                   <Icon />
                 </div>

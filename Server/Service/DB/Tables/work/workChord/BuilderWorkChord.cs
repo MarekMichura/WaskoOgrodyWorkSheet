@@ -7,14 +7,17 @@ public class BuilderWorkChord : IBuilder {
       entity.Property(static workChord => workChord.ID)
         .HasDefaultValueSql("NewId()");
 
+      entity.HasIndex(a => new { a.WorkLocationID, a.Date, a.ChordID })
+        .IsUnique();
+
       entity.HasOne(static workChord => workChord.Chord)
         .WithMany(static chord => chord.WorkChords)
         .HasForeignKey(static chord => chord.ChordID)
         .OnDelete(DeleteBehavior.Restrict);
 
-      entity.HasOne(static chord => chord.WorkHour)
-        .WithMany(static workHours => workHours.Chords)
-        .HasForeignKey(static chord => chord.WorkHourID)
+      entity.HasOne(static chord => chord.WorkLocation)
+        .WithMany(static workLocation => workLocation.Chords)
+        .HasForeignKey(static chord => chord.WorkLocationID)
         .OnDelete(DeleteBehavior.Restrict);
 
       entity.HasOne(static chord => chord.Author)

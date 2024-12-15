@@ -5,8 +5,8 @@ internal class ServiceAuthorizationAuthentication : IService {
   {
     builder.Services.AddSession();
     builder.Services.AddIdentity<ModelUser, ModelRole>()
-        .AddDefaultTokenProviders()
-        .AddEntityFrameworkStores<DbContext>();
+      .AddDefaultTokenProviders()
+      .AddEntityFrameworkStores<DataBaseContext>();
 
     builder.Services.ConfigureApplicationCookie(static options => {
       options.Events.OnRedirectToAccessDenied = static context => {

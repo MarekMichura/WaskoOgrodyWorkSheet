@@ -8,6 +8,6 @@ export const routeComponents = {
   [ERoutes.askBonus]: myLazy(() => import('/page/error/error404')),
   [ERoutes.askDayOff]: myLazy(() => import('/page/error/error404')),
   [ERoutes.setChord]: myLazy(() => import('/page/error/error404')),
-  [ERoutes.setWorkingHours]: myLazy(() => import('/page/error/error404')),
-  [ERoutes.showCalendar]: myLazy(() => import('/page/employerCalendar/employerCalendar')),
+  [ERoutes.setWorkingHours]: myLazy(() => import('/page/setHours/setHoursCheck')),
+  [ERoutes.showCalendar]: myLazy(() => import('/page/employerCalendar/employerCalendarCheck')),
 }

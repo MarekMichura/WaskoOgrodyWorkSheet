@@ -9,8 +9,5 @@ public class JsonConvertDateOnly : JsonConverter<DateOnly> {
     return DateOnly.ParseExact(value, _format);
   }
 
-  public override void Write(Utf8JsonWriter writer, DateOnly value, JsonSerializerOptions options)
-  {
-    writer.WriteStringValue(value.ToString(_format));
-  }
+  public override void Write(Utf8JsonWriter writer, DateOnly value, JsonSerializerOptions options) { writer.WriteStringValue(value.ToString(_format)); }
 }

@@ -4,6 +4,7 @@ public readonly struct ModelInputMapEmployerCalendar {
   [SupplyParameterFromQuery(Name = "start")]
   [DefaultValue("2024-01-01")]
   public DateOnly? Start { get; init; }
+
   [SupplyParameterFromQuery(Name = "end")]
   [DefaultValue("2024-12-31")]
   public DateOnly? End { get; init; }

@@ -5,12 +5,20 @@ public class ModelWorkChord {
   [Required]
   [StringLength(36)]
   public string ID { get; set; } = string.Empty;
+
   [Required]
   public required long Quantity { get; set; }
+
   [Required]
-  public DateTime Date { get; set; } = DateTime.Now;
+  [DataType(DataType.Date)]
+  public required DateOnly Date { get; set; }
+
   [Required]
   public bool Active { get; set; } = true;
+
+  [Required]
+  [DataType(DataType.DateTime)]
+  public DateTime AddDate { get; set; } = DateTime.Now;
 
   [Required]
   [StringLength(36)]
@@ -19,8 +27,8 @@ public class ModelWorkChord {
 
   [Required]
   [StringLength(36)]
-  public required string WorkHourID { get; set; }
-  public ModelWorkHours? WorkHour { get; set; }
+  public required string WorkLocationID { get; set; }
+  public ModelWorkLocation? WorkLocation { get; set; }
 
   [Required]
   [StringLength(36)]

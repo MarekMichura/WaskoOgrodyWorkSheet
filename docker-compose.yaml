@@ -26,7 +26,7 @@ services:
     volumes:
       - ./DB/images:/Server/wwwroot/images/
 
-  nginx: 
+  nginx:
     build:
       context: ./nginx
       dockerfile: dockerfile
@@ -34,7 +34,7 @@ services:
     container_name: nginx
     ports:
       - "80:80"
-      - "443:443" 
+      - "443:443"
     networks:
       - app-network
 
@@ -58,13 +58,14 @@ services:
     image: initialize-db-release
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
+      - db=db
       - DB_PASSWORD="${DB_PASSWORD:-zaq1@WSX}"
     depends_on:
       - db
     networks:
       - app-network
     volumes:
-      - ./DB/Migrations/:/Server/Migrations/       
+      - ./DB/Migrations/:/Server/Migrations/
 
   server-development:
     build:
@@ -92,16 +93,16 @@ services:
     networks:
       - app-network
     volumes:
-      - type: bind 
+      - type: bind
         source: ./Server/Server.csproj
         target: /Server/Server.csproj
-      - type: bind 
+      - type: bind
         source: ./Server/Program.cs
         target: /Server/Program.cs
-      - type: bind 
+      - type: bind
         source: ./Server/globals.cs
         target: /Server/globals.cs
-      - type: bind 
+      - type: bind
         source: ./Server/appsettings.json
         target: /Server/appsettings.json
       - ./Server/wwwroot/:/Server/wwwroot
@@ -122,8 +123,8 @@ services:
       - app-network
     volumes:
       - ./HTML/:/html/
-    cpus: '0.25'
-    mem_limit: '2g'
+    cpus: "0.25"
+    mem_limit: "2g"
 
   initialize-db-development:
     build:
@@ -137,6 +138,7 @@ services:
     image: initialize-db-debug
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - db=db
       - DB_PASSWORD="${DB_PASSWORD:-zaq1@WSX}"
     depends_on:
       - db
@@ -173,4 +175,4 @@ services:
     volumes:
       - ./DB/log/:/var/opt/mssql/log
       - ./DB/data/:/var/opt/mssql/data
-      - ./DB/secrets/:/var/opt/mssql/secrets 
+      - ./DB/secrets/:/var/opt/mssql/secrets

@@ -10,12 +10,9 @@ public class EndPointUser : IMiddleware {
       .Produces<ModelOutPutMapAuthenticate>(StatusCodes.Status200OK)
       .Produces(StatusCodes.Status400BadRequest);
 
-    app.MapGet("/api/v1.0/logout", MapUser.MapLogout)
-      .WithTags("User")
-      .WithOpenApi()
-      .Produces(StatusCodes.Status200OK);
+    app.MapGet("/api/v1.0/logout", MapUser.MapLogout).WithTags("User").WithOpenApi().Produces(StatusCodes.Status200OK);
 
-    app.MapGet("/api/v1.0/profile", MapUser.MapProfil)
+    app.MapGet("/api/v1.0/GetProfile", MapUser.MapProfil)
       .RequireAuthorization()
       .WithTags("User")
       .Produces<ModelUserProfil>(StatusCodes.Status200OK)

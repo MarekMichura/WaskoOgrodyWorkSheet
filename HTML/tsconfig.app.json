@@ -23,6 +23,7 @@
     "noUncheckedSideEffectImports": true,
     "paths": {
       "/calendar/*": ["components/calendar/*"],
+      "/time/*": ["components/time/*"],
       "/button/*": ["components/button/*"],
       "/input/*": ["components/input/*"],
       "/router/*": ["components/router/*"],

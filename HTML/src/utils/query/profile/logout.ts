@@ -17,10 +17,7 @@ export function useMutationLogout() {
       })
     },
     onMutate: () => {
-      client.setQueryData(
-        queryKeys.profile,
-        (old: profileQueryDataU): profileQueryDataU => (old ? {...old, logout: true} : undefined)
-      )
+      client.setQueryData(queryKeys.profile, (old: profileQueryDataU): profileQueryDataU => (old ? {...old, logout: true} : undefined))
     },
     onSuccess: () => {
       client.invalidateQueries({queryKey: queryKeys.profile})

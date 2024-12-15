@@ -28,7 +28,7 @@ export function useEmployerCalendar<T = employerCalendarQueryData>(
         const start = toDateOnly(new Date(year, month, 1))
         const end = toDateOnly(new Date(year, month + 1, 0))
 
-        factory(`/api/v1.0/EmployerCalendar?start=${start}&end=${end}`)
+        factory(`/api/v1.0/GetEmployerCalendar?start=${start}&end=${end}`)
           .headers(header)
           .get()
           .error(304, () => resolve(prevData!))

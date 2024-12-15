@@ -1,21 +1,18 @@
 namespace Test;
 
 [Collection("WebApp")]
-public class GetCalendar(WebApp app)
-{
+public class GetCalendar(WebApp app) {
   public WebApplicationFactory<Program> App = app.App;
 
   [Fact]
   public async Task NotEmployerRequestCalendar()
   {
     var Client = App.CreateClient();
-    var loginContent = JsonContent.Create(new ModelInputMapAuthenticate
-    {
+    var loginContent = JsonContent.Create(new ModelInputMapAuthenticate {
       Login = StorageUser.AdminUser.UserName,
       Password = StorageUser.AdminUser.Password
     });
-    var calendarContent = JsonContent.Create(new ModelInputMapEmployerCalendar
-    {
+    var calendarContent = JsonContent.Create(new ModelInputMapEmployerCalendar {
       Start = DateOnly.Parse("2024-01-01"),
       End = DateOnly.Parse("2024-12-31")
     });
@@ -30,13 +27,11 @@ public class GetCalendar(WebApp app)
   public async Task EmployerRequestCalendar()
   {
     var Client = App.CreateClient();
-    var loginContent = JsonContent.Create(new ModelInputMapAuthenticate
-    {
+    var loginContent = JsonContent.Create(new ModelInputMapAuthenticate {
       Login = StorageUser.DimaUser.UserName,
       Password = StorageUser.DimaUser.Password
     });
-    var calendarContent = JsonContent.Create(new ModelInputMapEmployerCalendar
-    {
+    var calendarContent = JsonContent.Create(new ModelInputMapEmployerCalendar {
       Start = DateOnly.Parse("2024-01-01"),
       End = DateOnly.Parse("2024-12-31")
     });
@@ -54,13 +49,11 @@ public class GetCalendar(WebApp app)
   public async Task CalendarResponseDayCount(string start, string end, int days)
   {
     var Client = App.CreateClient();
-    var loginContent = JsonContent.Create(new ModelInputMapAuthenticate
-    {
+    var loginContent = JsonContent.Create(new ModelInputMapAuthenticate {
       Login = StorageUser.DimaUser.UserName,
       Password = StorageUser.DimaUser.Password
     });
-    var calendarContent = JsonContent.Create(new ModelInputMapEmployerCalendar
-    {
+    var calendarContent = JsonContent.Create(new ModelInputMapEmployerCalendar {
       Start = DateOnly.Parse(start),
       End = DateOnly.Parse(end)
     });
@@ -76,13 +69,11 @@ public class GetCalendar(WebApp app)
   public async Task CalendarResponseCheckData()
   {
     var Client = App.CreateClient();
-    var loginContent = JsonContent.Create(new ModelInputMapAuthenticate
-    {
+    var loginContent = JsonContent.Create(new ModelInputMapAuthenticate {
       Login = StorageUser.DimaUser.UserName,
       Password = StorageUser.DimaUser.Password
     });
-    var calendarContent = JsonContent.Create(new ModelInputMapEmployerCalendar
-    {
+    var calendarContent = JsonContent.Create(new ModelInputMapEmployerCalendar {
       Start = DateOnly.Parse("2024-01-01"),
       End = DateOnly.Parse("2024-12-31")
     });
@@ -101,13 +92,11 @@ public class GetCalendar(WebApp app)
   public async Task CalendarWrongDateRange()
   {
     var Client = App.CreateClient();
-    var loginContent = JsonContent.Create(new ModelInputMapAuthenticate
-    {
+    var loginContent = JsonContent.Create(new ModelInputMapAuthenticate {
       Login = StorageUser.DimaUser.UserName,
       Password = StorageUser.DimaUser.Password
     });
-    var calendarContent = JsonContent.Create(new ModelInputMapEmployerCalendar
-    {
+    var calendarContent = JsonContent.Create(new ModelInputMapEmployerCalendar {
       Start = DateOnly.Parse("2023-01-01"),
       End = DateOnly.Parse("2024-12-31")
     });

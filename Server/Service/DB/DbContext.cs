@@ -1,6 +1,6 @@
 namespace Wasko;
 
-public class DbContext(DbContextOptions<DbContext> options) : IdentityDbContext<ModelUser, ModelRole, string>(options) {
+public class DataBaseContext(DbContextOptions<DataBaseContext> options) : IdentityDbContext<ModelUser, ModelRole, string>(options) {
   public required DbSet<ModelBonus> Bonus { get; set; }
   public required DbSet<ModelFound> Founds { get; set; }
 

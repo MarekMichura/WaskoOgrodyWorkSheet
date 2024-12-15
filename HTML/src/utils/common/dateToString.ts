@@ -27,3 +27,11 @@ export function toDateTime(date?: Date): IDateTime {
   const second = date.getSeconds().toString().padStart(2, '0')
   return `${year}-${month}-${day} ${hours}:${minutes}:${second}`
 }
+
+export function toTimeString(str: string) {
+  const time = str.split(':')
+  const hour = Number(time[0])
+  const minute = Number(time[1])
+  if (isNaN(hour) || isNaN(minute)) throw Error('Conversion fail')
+  return {hour, minute}
+}

@@ -7,12 +7,12 @@ import cssnano from 'cssnano'
 import combineDuplicatedSelectors from 'postcss-combine-duplicated-selectors'
 import postCssMerge from 'postcss-merge-rules'
 import postcssMediaQueries from 'postcss-sort-media-queries'
-import { BuildOptions, CSSOptions, defineConfig } from 'vite'
-import { compression } from 'vite-plugin-compression2'
+import {BuildOptions, CSSOptions, defineConfig} from 'vite'
+import {compression} from 'vite-plugin-compression2'
 // import cssInject from 'vite-plugin-css-injected-by-js'
 import viteImagemin from 'vite-plugin-imagemin'
-import { optimizeCssModules } from 'vite-plugin-optimize-css-modules'
-import { VitePWA } from 'vite-plugin-pwa'
+import {optimizeCssModules} from 'vite-plugin-optimize-css-modules'
+import {VitePWA} from 'vite-plugin-pwa'
 
 function components(component: string) {
   return path.resolve(__dirname, `src/components/${component}`)
@@ -28,6 +28,7 @@ function utils(util: string) {
 
 const alias = {
   '/calendar': components('calendar'),
+  '/time': components('time'),
   '/button': components('button'),
   '/input': components('input'),
   '/router': components('router'),
@@ -114,7 +115,7 @@ const css: CSSOptions = {
         preset: [
           'default',
           {
-            discardComments: { removeAll: true },
+            discardComments: {removeAll: true},
             normalizeWhitespace: true,
             discardDuplicates: true,
             mergeRules: true,
@@ -133,7 +134,7 @@ const css: CSSOptions = {
 
 const babel = react({
   babel: {
-    presets: [['@babel/preset-react', { runtime: 'automatic' }], '@babel/preset-typescript'],
+    presets: [['@babel/preset-react', {runtime: 'automatic'}], '@babel/preset-typescript'],
     plugins: [['babel-plugin-react-compiler']],
   },
 })
@@ -179,10 +180,10 @@ const pwa = VitePWA({
     display: 'fullscreen',
     orientation: 'any',
     icons: [
-      { src: 'icons/manifest-icon-512.maskable.png', sizes: '192x192', type: 'image/png', purpose: 'maskable' },
-      { src: 'icons/manifest-icon-512.maskable.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
-      { src: 'icons/manifest-icon-512.maskable.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
-      { src: 'icons/manifest-icon-512.maskable.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+      {src: 'icons/manifest-icon-512.maskable.png', sizes: '192x192', type: 'image/png', purpose: 'maskable'},
+      {src: 'icons/manifest-icon-512.maskable.png', sizes: '512x512', type: 'image/png', purpose: 'maskable'},
+      {src: 'icons/manifest-icon-512.maskable.png', sizes: '192x192', type: 'image/png', purpose: 'any'},
+      {src: 'icons/manifest-icon-512.maskable.png', sizes: '512x512', type: 'image/png', purpose: 'any'},
     ],
   },
   workbox: {
@@ -190,7 +191,7 @@ const pwa = VitePWA({
     navigationPreload: true,
     runtimeCaching: [
       {
-        urlPattern: ({ request }) => request.destination === 'document',
+        urlPattern: ({request}) => request.destination === 'document',
         handler: 'NetworkFirst',
         options: {
           cacheName: 'wasko-document-cache',
@@ -201,7 +202,7 @@ const pwa = VitePWA({
         },
       },
       {
-        urlPattern: ({ request }) =>
+        urlPattern: ({request}) =>
           request.destination === 'script' || //
           request.destination === 'style' ||
           request.destination === 'image',
@@ -307,8 +308,8 @@ export default defineConfig({
   css,
   build,
   server,
-  preview: { port: 3000 },
-  resolve: { alias },
-  optimizeDeps: { include: ['react', 'react-dom'] },
+  preview: {port: 3000},
+  resolve: {alias},
+  optimizeDeps: {include: ['react', 'react-dom']},
   plugins: [pwa, babel, br, gzip, deflate, imageMin, imageMinStrong, optimizeCssModules()],
 })

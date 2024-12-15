@@ -7,7 +7,8 @@ public class EndPointSpa : IMiddleware {
   public void DefineMiddleware(WebApplication app)
   {
     if (app.Environment.IsDevelopment()) {
-      app.UseSpa(spa => spa.UseProxyToSpaDevelopmentServer(Environment.GetEnvironmentVariable("client") ?? throw new NullReferenceException()));
+      var client = Environment.GetEnvironmentVariable("client") ?? throw new NullReferenceException();
+      app.UseSpa(spa => spa.UseProxyToSpaDevelopmentServer(client));
     }
     else {
       app.UseSpa(spa => {

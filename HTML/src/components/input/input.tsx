@@ -6,7 +6,7 @@ import styles from './input.module.scss'
 const {container, icon, info, error, input} = styles
 function Input({Icon, label, className, ...props}: inputProps) {
   const name = props.name
-  const field = `${className} ${input}`
+  const field = className ? `${className} ${input}` : input
 
   return (
     <div className={container}>

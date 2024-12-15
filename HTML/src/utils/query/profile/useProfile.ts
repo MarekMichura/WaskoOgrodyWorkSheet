@@ -1,20 +1,17 @@
-import { NotifyOnChangeProps, useQueryClient, useQuery } from '@tanstack/react-query'
+import {NotifyOnChangeProps, useQueryClient, useQuery} from '@tanstack/react-query'
 import factory from 'wretch'
-import { WretchError } from 'wretch/resolver'
+import {WretchError} from 'wretch/resolver'
 
-import { toDateTime } from '/common/dateToString'
+import {toDateTime} from '/common/dateToString'
 
-import { queryKeys } from '../keys'
+import {queryKeys} from '../keys'
 
-import { calcPermission } from './fun/permission'
-import { removeNeedLoginQuery } from './fun/removeNeedLogin'
-import { profileQueryData, profileQueryDataU } from './types/_profileQuery'
-import { profileResponse } from './types/_profileResponse'
+import {calcPermission} from './fun/permission'
+import {removeNeedLoginQuery} from './fun/removeNeedLogin'
+import {profileQueryData, profileQueryDataU} from './types/_profileQuery'
+import {profileResponse} from './types/_profileResponse'
 
-export function useProfile<T = profileQueryData>(
-  changeProps?: NotifyOnChangeProps,
-  select?: ((data: profileQueryDataU) => T) | undefined
-) {
+export function useProfile<T = profileQueryData>(changeProps?: NotifyOnChangeProps, select?: ((data: profileQueryDataU) => T) | undefined) {
   const client = useQueryClient()
   return useQuery({
     queryKey: queryKeys.profile,
@@ -38,9 +35,9 @@ export function useProfile<T = profileQueryData>(
     queryFn: () =>
       new Promise<profileQueryDataU>((resolve, reject) => {
         const prevData = client.getQueryData<profileQueryDataU>([...queryKeys.profile])
-        const header = prevData ? { 'If-Modified-Since': prevData.lastModification } : {}
+        const header = prevData ? {'If-Modified-Since': prevData.lastModification} : {}
 
-        return factory('/api/v1.0/profile')
+        return factory('/api/v1.0/getProfile')
           .headers(header as Record<string, string>)
           .get()
           .unauthorized((error) => {
@@ -53,7 +50,7 @@ export function useProfile<T = profileQueryData>(
             const workStartDate = new Date(Date.parse(json.workStartDate))
             const permissions = calcPermission(json.roles)
 
-            resolve({ ...json, workStartDate, lastModification, permissions })
+            resolve({...json, workStartDate, lastModification, permissions})
           })
           .catch(reject)
       }),

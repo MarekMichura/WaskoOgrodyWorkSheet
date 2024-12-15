@@ -1,10 +1,11 @@
 namespace Wasko;
 
-public class RepUser(IHttpContextAccessor context, SignInManager<ModelUser> sim, IMemoryCache cache, IDbContextFactory<DbContext> factory) : IRepUser {
+public class RepUser(IHttpContextAccessor context, SignInManager<ModelUser> sim, IMemoryCache cache, IDbContextFactory<DataBaseContext> factory)
+    : IRepUser {
   private readonly IHttpContextAccessor _context = context;
   private readonly SignInManager<ModelUser> _sim = sim;
   private readonly IMemoryCache _cache = cache;
-  private readonly IDbContextFactory<DbContext> _factory = factory;
+  private readonly IDbContextFactory<DataBaseContext> _factory = factory;
 
   public async Task<bool> Login(string login, string password)
   {
@@ -16,15 +17,9 @@ public class RepUser(IHttpContextAccessor context, SignInManager<ModelUser> sim,
     return (await _sim.PasswordSignInAsync(user, password, false, false)).Succeeded;
   }
 
-  public async Task Logout()
-  {
-    await _sim.SignOutAsync();
-  }
+  public async Task Logout() { await _sim.SignOutAsync(); }
 
-  public string? GetCurrentID()
-  {
-    return _context.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier);
-  }
+  public string? GetCurrentID() { return _context.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier); }
 
   public async Task<CacheResult<ModelRole[]>> GetUserRolesAsync(string id)
   {
@@ -33,10 +28,7 @@ public class RepUser(IHttpContextAccessor context, SignInManager<ModelUser> sim,
       var time = DateTime.Now;
 
       using var db = await _factory.CreateDbContextAsync();
-      var roles = await db.Roles
-        .Include(role => role.Users)
-        .Where(role => role.Users!.Any(user => user.Id == id))
-        .ToArrayAsync();
+      var roles = await db.Roles.Include(role => role.Users).Where(role => role.Users!.Any(user => user.Id == id)).ToArrayAsync();
 
       cache.AddExpirationUserRoles(id);
       cache.AddExpirationRole(roles);
@@ -50,10 +42,7 @@ public class RepUser(IHttpContextAccessor context, SignInManager<ModelUser> sim,
       cache.SetDefaultOptions();
       var time = DateTime.Now;
       using var db = await _factory.CreateDbContextAsync();
-      var user = await db.Users
-        .Include(user => user.Profil)
-        .Include(user => user.Roles)
-        .FirstAsync(user => user.Id == id);
+      var user = await db.Users.Include(user => user.Profil).Include(user => user.Roles).FirstAsync(user => user.Id == id);
 
       var profil = new ModelUserProfil {
         UserName = user.UserName!,

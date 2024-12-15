@@ -1,8 +1,7 @@
 namespace Test;
 
 [Collection("WebApp")]
-public class LoginTest(WebApp app)
-{
+public class LoginTest(WebApp app) {
   public static IEnumerable<object[]> Users =>
     StorageUser.users.Select(static user => new object[] { user });
 

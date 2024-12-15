@@ -1,14 +1,9 @@
 .content {
   padding: 15px;
 
-  @include useTheme(
-    background-image,
-    linear-gradient($dark_bg_200 80%, $dark_bg_100),
-    linear-gradient($light_bg_100 80%, $light_bg_200)
-  );
-
   @include media('max-width: 400px') {
     padding: 5px;
+    max-width: calc(100vw - 20px);
   }
 }
 
@@ -41,7 +36,10 @@
 }
 
 .monthsCon {
-  margin: 15px 0;
+  padding: 10px 0;
+  margin: 5px 0;
+  width: 100%;
+  overflow: auto;
 
   gap: 5px;
   display: flex;

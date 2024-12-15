@@ -11,6 +11,7 @@ public class ModelWorkLocation {
   [Required]
   public bool Active { get; set; } = true;
 
+  public virtual ICollection<ModelWorkChord>? Chords { get; set; }
   public virtual ICollection<ModelRole>? Targets { get; set; }
   public virtual ICollection<ModelWorkHours>? WorkHours { get; set; }
   public virtual ICollection<ModelWorkLocationRole>? Roles { get; set; }

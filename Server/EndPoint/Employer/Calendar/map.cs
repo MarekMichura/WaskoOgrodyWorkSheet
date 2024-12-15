@@ -2,13 +2,13 @@ namespace Wasko;
 
 public static partial class MapEmployer {
   public static async Task<IResult> MapCalendarAsync(
-      [AsParameters] ModelInputMapEmployerCalendar model,
-      [FromServices] IValidator<ModelInputMapEmployerCalendar> validator,
-      [FromServices] IMemoryCache cache,
-      [FromServices] IRepUser repUser,
-      [FromServices] IRepDayOff repDayOff,
-      [FromServices] IRepWorkHour repWorkHour,
-      HttpContext context)
+    [AsParameters] ModelInputMapEmployerCalendar model,
+    [FromServices] IValidator<ModelInputMapEmployerCalendar> validator,
+    [FromServices] IMemoryCache cache,
+    [FromServices] IRepUser repUser,
+    [FromServices] IRepDayOff repDayOff,
+    [FromServices] IRepWorkHour repWorkHour,
+    HttpContext context)
   {
     var validation = validator.Validate(model);
     if (!validation.IsValid) {
@@ -31,8 +31,7 @@ public static partial class MapEmployer {
       }
       foreach (var (key, value) in workHour.Result.Data) {
         var newModel = value.Select(workHours => (ModelOutputMapEmployerCalendarWorkHour)workHours);
-        result.TryAdd(key, new());
-        result[key].WorkingHours = newModel;
+        result.TryAdd(key, new() { WorkingHours = newModel });
       }
 
       cache.AddExpirationGetUsersDaysOff(id, start, end);

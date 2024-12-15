@@ -1,4 +1,4 @@
-interface responseDate {
+export interface employerCalendarDayData {
   dayOff: {
     reason: string
     off: boolean
@@ -10,4 +10,4 @@ interface responseDate {
   }[]
 }
 
-export type employerCalendarResponse = {[date: string]: responseDate}
+export type employerCalendarResponse = {[date: string]: employerCalendarDayData}

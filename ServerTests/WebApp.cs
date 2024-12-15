@@ -8,17 +8,17 @@ public class WebApp : IDisposable {
     App = new WebApplicationFactory<Program>().WithWebHostBuilder(static builder => {
       builder.ConfigureServices(static services => {
         var db = services
-          .SingleOrDefault(static service => service.ServiceType == typeof(DbContextOptions<Wasko.DbContext>))
+          .SingleOrDefault(static service => service.ServiceType == typeof(DbContextOptions<Wasko.DataBaseContext>))
           ?? throw new NullReferenceException();
 
         services.Remove(db);
-        services.AddDbContext<Wasko.DbContext>(static options => options.UseInMemoryDatabase("Test"));
+        services.AddDbContext<Wasko.DataBaseContext>(static options => options.UseInMemoryDatabase("Test"));
 
         var provider = services.BuildServiceProvider();
         using var scope = provider.CreateScope();
 
         var dataBase = scope.ServiceProvider
-          .GetRequiredService<Wasko.DbContext>();
+          .GetRequiredService<Wasko.DataBaseContext>();
         dataBase.Database.EnsureCreated();
       });
     });

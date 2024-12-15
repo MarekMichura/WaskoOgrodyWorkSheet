@@ -7,8 +7,8 @@ public class StorageWorkChord {
     Quantity = 40,
     ChordID = StorageChord.Goły,
     AuthorID = StorageUser.Dima,
-    WorkHourID = StorageWorkHour.WorkHours
-      .First(static workHours => workHours.Date == new DateOnly(2024, 06, 3) && workHours.UserID == StorageUser.Dima).ID
+    WorkLocationID = StorageWorkLocations.Pychowicka,
+    Date = new DateOnly(2024, 06, 03),
   };
 
   public static readonly ModelWorkChord WorkChord2 = new() {
@@ -16,8 +16,8 @@ public class StorageWorkChord {
     Quantity = 55,
     ChordID = StorageChord.p9,
     AuthorID = StorageUser.Dima,
-    WorkHourID = StorageWorkHour.WorkHours
-      .First(static workHours => workHours.Date == new DateOnly(2024, 06, 3) && workHours.UserID == StorageUser.Dima).ID
+    WorkLocationID = StorageWorkLocations.Pychowicka,
+    Date = new DateOnly(2024, 06, 03),
   };
 
   public static readonly ModelWorkChord WorkChord3 = new() {
@@ -25,8 +25,8 @@ public class StorageWorkChord {
     Quantity = 143,
     ChordID = StorageChord.C2,
     AuthorID = StorageUser.Loszka,
-    WorkHourID = StorageWorkHour.WorkHours
-      .First(static workHours => workHours.Date == new DateOnly(2024, 06, 6) && workHours.UserID == StorageUser.Loszka).ID
+    WorkLocationID = StorageWorkLocations.Wizjonerów,
+    Date = new DateOnly(2024, 06, 06),
   };
 
   public static readonly ModelWorkChord WorkChord4 = new() {
@@ -34,8 +34,8 @@ public class StorageWorkChord {
     Quantity = 84,
     ChordID = StorageChord.C2,
     AuthorID = StorageUser.Loszka,
-    WorkHourID = StorageWorkHour.WorkHours
-      .First(static workHours => workHours.Date == new DateOnly(2024, 06, 14) && workHours.UserID == StorageUser.Loszka).ID
+    WorkLocationID = StorageWorkLocations.Pychowicka,
+    Date = new DateOnly(2024, 06, 14),
   };
 
   public static readonly ModelWorkChord WorkChord5 = new() {
@@ -43,8 +43,8 @@ public class StorageWorkChord {
     Quantity = 52,
     ChordID = StorageChord.p9,
     AuthorID = StorageUser.Loszka,
-    WorkHourID = StorageWorkHour.WorkHours
-      .First(static workHours => workHours.Date == new DateOnly(2024, 06, 14) && workHours.UserID == StorageUser.Loszka).ID
+    WorkLocationID = StorageWorkLocations.Pychowicka,
+    Date = new DateOnly(2024, 06, 14),
   };
 
   public static readonly ModelWorkChord WorkChord6 = new() {
@@ -52,8 +52,8 @@ public class StorageWorkChord {
     Quantity = 41,
     ChordID = StorageChord.C5,
     AuthorID = StorageUser.Loszka,
-    WorkHourID = StorageWorkHour.WorkHours
-      .First(static workHours => workHours.Date == new DateOnly(2024, 06, 14) && workHours.UserID == StorageUser.Loszka).ID
+    WorkLocationID = StorageWorkLocations.Pychowicka,
+    Date = new DateOnly(2024, 06, 14),
   };
 
   public static readonly ModelWorkChord WorkChord7 = new() {
@@ -61,12 +61,19 @@ public class StorageWorkChord {
     Quantity = 39,
     ChordID = StorageChord.C2,
     AuthorID = StorageUser.Loszka,
-    WorkHourID = StorageWorkHour.WorkHours
-      .First(static workHours => workHours.Date == new DateOnly(2024, 06, 1) && workHours.UserID == StorageUser.Loszka).ID
+    WorkLocationID = StorageWorkLocations.Wizjonerów,
+    Date = new DateOnly(2024, 06, 01),
   };
 
-  public static readonly ModelWorkChord[] WorkChords =
-    [WorkChord1, WorkChord2, WorkChord3, WorkChord4, WorkChord5, WorkChord6, WorkChord7];
+  public static readonly ModelWorkChord[] WorkChords = [
+    WorkChord1,
+    WorkChord2,
+    WorkChord3,
+    WorkChord4,
+    WorkChord5,
+    WorkChord6,
+    WorkChord7,
+  ];
 }
 
 #endif
