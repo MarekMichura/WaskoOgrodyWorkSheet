@@ -1,0 +1,72 @@
+@use '@/utils/style/colors.scss' as *;
+@use '@/utils/style/mixin.scss' as *;
+
+.btn {
+  position: relative;
+  height: min-content;
+
+  display: block;
+
+  background-color: $transparent;
+  text-decoration: none;
+  color: inherit;
+  border: none;
+  cursor: pointer;
+
+  @include transition((transform, filter), 200ms, ease);
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    filter: grayscale(100%);
+  }
+
+  &:not(:disabled):hover {
+    filter: contrast(200%);
+  }
+}
+
+@keyframes ripple {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+
+  70% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(2);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(2);
+  }
+}
+
+.ripple {
+  position: absolute;
+  inset: 0;
+
+  border-radius: inherit;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    min-width: 100%;
+    min-height: 100%;
+
+    aspect-ratio: 1/1;
+    top: var(--top);
+    left: var(--left);
+    background-color: var(--rippleColor, $slate-900);
+    border-radius: 100%;
+    overflow: hidden;
+    animation: ripple 800ms linear forwards;
+    will-change: transform opacity;
+
+    @include dark {
+      background-color: var(--rippleColor, $stone-100);
+    }
+  }
+}

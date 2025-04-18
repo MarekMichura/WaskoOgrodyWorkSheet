@@ -21,7 +21,7 @@ public static partial class MapEmployer {
 
     await Task.WhenAll(dayOff, workHour);
     var key = $"Employer calendar user:{id} start:{model.Start:yyyy-MM-dd} end:{model.End:yyyy-MM-dd}";
-    var (result, time) = cache.GetOrCreate(key, (ICacheEntry cache) => {
+    var (result, time) = cache.GetOrCreate(key, cache => {
       cache.SetDefaultOptions();
       var time = DateTime.Now;
 

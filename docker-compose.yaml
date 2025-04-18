@@ -15,36 +15,39 @@ services:
     image: server-release
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - DB_PASSWORD="${DB_PASSWORD:-zaq1@WSX}"
+      - DB_PASSWORD=${DB_PASSWORD:-zaq1@WSX}
+      - client=${client:-http://html-release:3000}
       - db=db
+    ports:
+      - 8080:8080
     depends_on:
       - db
-      - nginx
       - html-release
     networks:
       - app-network
     volumes:
       - ./DB/images:/Server/wwwroot/images/
-
-  nginx:
-    build:
-      context: ./nginx
-      dockerfile: dockerfile
-      target: nginx-base
-    container_name: nginx
-    ports:
-      - "80:80"
-      - "443:443"
-    networks:
-      - app-network
+      - ./DB/keys/:/home/app/.aspnet/DataProtection-Keys
 
   html-release:
     build:
       context: ./HTML
       dockerfile: dockerfile
       target: html-release
+      args:
+        - API=http://server-release:8080
+        - NEXT_PUBLIC_API=${NEXT_PUBLIC_API:-http://localhost:8080}
+        - NODE_ENV=production
+        - HOST=0.0.0.0
+    environment:
+      - API=http://server-release:8080
+      - NEXT_PUBLIC_API=${NEXT_PUBLIC_API:-http://localhost:8080}
+      - NODE_ENV=production
+      - HOST=0.0.0.0
     container_name: html-release
     image: html-release
+    networks:
+      - app-network
 
   initialize-db-release:
     build:
@@ -59,7 +62,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - db=db
-      - DB_PASSWORD="${DB_PASSWORD:-zaq1@WSX}"
+      - DB_PASSWORD=${DB_PASSWORD:-zaq1@WSX}
     depends_on:
       - db
     networks:
@@ -81,15 +84,13 @@ services:
     image: server-development
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - client=http://html-development:3000
       - db=db
-      - DB_PASSWORD="${DB_PASSWORD:-zaq1@WSX}"
+      - DB_PASSWORD=${DB_PASSWORD:-zaq1@WSX}
     depends_on:
       - db
       - html-development
     ports:
-      - "80:8080"
-      - "443:8081"
+      - 8080:8080
     networks:
       - app-network
     volumes:
@@ -117,14 +118,13 @@ services:
       target: html-development
     container_name: html-development
     image: html-development
-    ports:
-      - "3000:3000"
+    environment:
+      - API=http://server-development:8080
+      - NEXT_PUBLIC_API=${NEXT_PUBLIC_API:-http://localhost:8080}
     networks:
       - app-network
     volumes:
       - ./HTML/:/html/
-    cpus: "0.25"
-    mem_limit: "2g"
 
   initialize-db-development:
     build:
@@ -139,7 +139,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - db=db
-      - DB_PASSWORD="${DB_PASSWORD:-zaq1@WSX}"
+      - DB_PASSWORD=${DB_PASSWORD:-zaq1@WSX}
     depends_on:
       - db
     networks:
@@ -155,21 +155,21 @@ services:
     container_name: db
     image: db
     environment:
-      ACCEPT_EULA: "Y"
-      SA_PASSWORD: "${DB_PASSWORD:-zaq1@WSX}"
-      MSSQL_PID: "Express"
-      MSSQL_MEMORY_LIMIT_MB: "4096"
-      MSSQL_MIN_MEMORY_MB: "2048"
-      MSSQL_MAXDOP: "4"
-      MSSQL_WORKER_THREADS: "64"
-      MSSQL_TCP_PORT: "1433"
-      MSSQL_BACKUP_DIR: "/var/opt/mssql/backup"
-      MSSQL_AUTO_UPDATE_STATISTICS_ASYNC: "ON"
-      MSSQL_QUERY_OPTIMIZER_HOTFIXES: "ON"
-      MSSQL_TRACEFLAGS: "4199"
-    user: "10001:10001"
+      ACCEPT_EULA: Y
+      SA_PASSWORD: ${DB_PASSWORD:-zaq1@WSX}
+      MSSQL_PID: Express
+      MSSQL_MEMORY_LIMIT_MB: 4096
+      MSSQL_MIN_MEMORY_MB: 2048
+      MSSQL_MAXDOP: 4
+      MSSQL_WORKER_THREADS: 64
+      MSSQL_TCP_PORT: 1433
+      MSSQL_BACKUP_DIR: /var/opt/mssql/backup
+      MSSQL_AUTO_UPDATE_STATISTICS_ASYNC: ON
+      MSSQL_QUERY_OPTIMIZER_HOTFIXES: ON
+      MSSQL_TRACEFLAGS: 4199
+    user: 10001:10001
     ports:
-      - "1433:1433"
+      - 1433:1433
     networks:
       - app-network
     volumes:

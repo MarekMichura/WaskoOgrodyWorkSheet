@@ -1,15 +1,32 @@
 FROM node:latest AS html
 RUN apt-get update && apt-get install -y --no-install-recommends build-essential autoconf libtool pkg-config && apt-get clean
 
-FROM html AS html-release
+FROM html AS html-build
 WORKDIR /html
-RUN mkdir build
-COPY package*.json ./
-RUN yarn install
+ARG API
+ENV API=${API}
+ARG NEXT_PUBLIC_API
+ENV NEXT_PUBLIC_API=${NEXT_PUBLIC_API}
+ARG NODE_ENV
+ENV NODE_ENV=${NODE_ENV}
+ARG HOST
+ENV HOST=${HOST}
+
+RUN mkdir build 
+COPY package.json ./
+RUN yarn install --production=false
 COPY . .
 RUN yarn run build
+RUN yarn run postcss
+
+FROM html AS html-release
+WORKDIR /html
+COPY --from=html-build /html/build/standalone ./
+COPY --from=html-build /html/build/static ./build/static
+COPY --from=html-build /html/public ./public
+CMD ["node", "server.js"]
 
 FROM html AS html-development
 WORKDIR /html
 EXPOSE 3000
-CMD ["yarn", "start", "--host"]
+CMD ["yarn", "dev"]

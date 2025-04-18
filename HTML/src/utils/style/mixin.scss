@@ -1,0 +1,27 @@
+@mixin transition($properties, $duration: 200ms, $fun: 'ease') {
+  $props: '';
+  @each $property in $properties {
+    $props:
+      #{$props},
+      #{$property} #{$duration} #{$fun};
+  }
+  transition: $props;
+}
+
+@mixin media($property: max-width, $size: 30rem) {
+  @media screen and (#{$property}: #{$size}) {
+    @content;
+  }
+}
+
+@mixin motion() {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}
+
+@mixin dark {
+  [data-theme='dark'] & {
+    @content;
+  }
+}

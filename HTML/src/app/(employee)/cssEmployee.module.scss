@@ -1,0 +1,262 @@
+@use '@/utils/style/colors.scss' as *;
+@use '@/utils/style/mixin.scss' as *;
+
+.container {
+  width: 100dvw;
+  height: 100dvh;
+
+  display: flex;
+  overflow: hidden;
+  flex-direction: row-reverse;
+
+  @include media {
+    flex-direction: column-reverse;
+  }
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-around;
+
+  overflow: auto;
+  scrollbar-width: none;
+
+  & > * {
+    flex-shrink: 0;
+    margin: auto;
+    padding: 1rem;
+  }
+}
+
+.header {
+  display: none;
+  height: 6rem;
+  background-color: $neutral-900;
+  box-shadow: 0 0 1rem 0 $black;
+
+  @include media {
+    display: block;
+  }
+}
+
+//==================================================
+
+.nav {
+  position: relative;
+
+  padding: 1.5rem 1rem;
+  height: 100%;
+  width: 5.5rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  color: $white;
+  background-color: $neutral-900;
+  background-image: linear-gradient($neutral-900 6rem, $neutral-900 6rem, $neutral-950);
+  box-shadow: 0 0 1rem 0 $black;
+
+  overflow-x: hidden;
+  @include transition((width), 400ms);
+
+  --opacity: 0;
+
+  &:has(input:checked) {
+    width: 18rem;
+    --opacity: 1;
+
+    & .sidebarAccount {
+      background-color: $white;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &,
+    & * {
+      transition: none !important;
+    }
+  }
+
+  @include media {
+    position: absolute;
+    width: 18rem;
+    overflow: visible;
+    transform: translateX(-100%);
+    @include transition((transform), 400ms);
+
+    &:has(input:checked) {
+      transform: translateX(0);
+
+      & .sidebarHeader {
+        transform: translateX(0);
+      }
+    }
+
+    & .sidebarHeader {
+      transform: translateX(calc(100% + 2rem));
+    }
+
+    & .sidebarAccount {
+      background-color: $white;
+    }
+  }
+}
+
+.sidebarHeader {
+  cursor: pointer;
+  @include transition((transform), 400ms);
+
+  @include media {
+    h1 {
+      opacity: 1;
+    }
+  }
+}
+
+.sidebarHeader,
+.sidebarAccount {
+  position: relative;
+
+  display: flex;
+  justify-content: left;
+  gap: 0.75rem;
+
+  font-family: $font_black;
+  align-items: center;
+
+  img {
+    width: 3.5rem;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background-color: $white;
+    border: 0.25rem solid $black;
+  }
+
+  h1 {
+    min-width: max-content;
+
+    font-family: $font_black;
+    font-size: 1rem;
+    font-weight: 600;
+    font-size: 1.5rem;
+    opacity: var(--opacity);
+    @include transition((opacity), 400ms);
+  }
+}
+
+.sidebarInput {
+  position: absolute;
+  all: unset;
+  height: 100%;
+  width: 100%;
+  background-color: $transparent;
+}
+
+.sidebarLinks {
+  flex: 1;
+  margin: 1rem 0;
+
+  font-size: 1rem;
+  font-weight: bolder;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow-y: auto;
+  scrollbar-width: none;
+  white-space: nowrap;
+  list-style: none;
+}
+
+.sidebarSeparator {
+  position: relative;
+  margin: 0.5rem 0;
+
+  &:not(:has(.sidebarSeparatorSpan)) .sidebarSeparatorDiv {
+    opacity: 1;
+  }
+}
+
+.sidebarSeparatorSpan {
+  font-size: 1.25rem;
+  font-family: $font_black;
+  text-transform: uppercase;
+
+  opacity: var(--opacity);
+  @include transition((opacity), 200ms);
+  transition-delay: calc(var(--opacity) * 300ms);
+}
+
+.sidebarSeparatorDiv {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 0.25rem;
+
+  background-color: $neutral-700;
+  opacity: calc(1 - var(--opacity));
+
+  transform: translateY(-50%);
+  @include transition((opacity), 200ms);
+  transition-delay: calc((1 - var(--opacity)) * 300ms);
+}
+
+.sidebarLink {
+  all: unset;
+  position: relative;
+  padding: 0.5rem 0.5rem;
+  width: calc(100% - 1rem);
+
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 0.5rem;
+
+  color: $white;
+  --rippleColor: #{$white};
+  @include transition((background-color));
+  cursor: pointer;
+
+  &:hover {
+    color: $black;
+    background-color: $white;
+    --rippleColor: #{$black};
+
+    & svg {
+      fill: $black !important;
+    }
+  }
+
+  & svg {
+    fill: $white !important;
+    flex-shrink: 0;
+    max-width: 2.5rem;
+    height: auto;
+
+    @include transition((fill));
+  }
+
+  & .sidebarLinkContent {
+    flex-shrink: 0;
+    width: 10.25rem;
+    white-space: wrap;
+  }
+}
+
+.sidebarAccount {
+  margin: -0.5rem;
+  padding: 0.5rem;
+
+  cursor: pointer;
+  color: $black;
+  background-color: $transparent;
+  @include transition((background-color), 500ms);
+
+  &:hover {
+    background-color: $white;
+  }
+}

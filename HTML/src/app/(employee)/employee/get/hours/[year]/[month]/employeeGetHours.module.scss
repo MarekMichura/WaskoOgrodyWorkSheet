@@ -1,0 +1,17 @@
+@use '@/utils/style/colors.scss' as *;
+@use '@/utils/style/mixin.scss' as *;
+
+.btn {
+  &[data-outside='true'] {
+    opacity: 0.2 !important;
+  }
+  &[data-dayoff='true'] {
+    opacity: 0.5;
+  }
+  &[data-work='future'] {
+    opacity: 0.5;
+  }
+  &[data-work='unSet'] {
+    color: red;
+  }
+}
