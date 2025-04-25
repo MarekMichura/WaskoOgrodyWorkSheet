@@ -1,3 +1,4 @@
+'use client'
 // eslint-disable-next-line no-restricted-imports
 import {useLocale as useIntlLocale} from 'next-intl'
 

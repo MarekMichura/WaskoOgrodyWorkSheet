@@ -7,7 +7,14 @@ import {type IResponseGetProfile} from '@/utils/action/user/_type/IResponseGetPr
 import {getProfile} from '@/utils/action/user/getProfil'
 import {EQueries} from '@/utils/type/EQueries'
 
-export const defProfilData = {firstName: '', lastName: '', userName: '', workStartDate: '', roles: [], image: ''}
+export const defProfilData: IResponseGetProfile = {
+  firstName: '',
+  lastName: '',
+  userName: '',
+  workStartDate: '',
+  image: '',
+  roles: ['Gardener'],
+}
 export function useProfil(opt?: DefinedInitialDataOptions<IResponseGetProfile>) {
   const router = useRouter()
 

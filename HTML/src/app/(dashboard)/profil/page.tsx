@@ -7,10 +7,7 @@ import s from './css.module.scss'
 
 export async function generateMetadata() {
   const t = await getTranslations('profil')
-
-  return {
-    title: t('title'),
-  }
+  return {title: t('title')}
 }
 
 function ProfilPage() {

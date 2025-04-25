@@ -11,7 +11,7 @@ function ProfilData() {
   const {profil} = useProfil()
 
   return (
-    <>
+    <div style={{display: 'contents'}}>
       <h1 className={s.title}>{t('details')}</h1>
       <div className={s.separator} />
       <FormInput className={s.noMargin} disabled={true} label={t('name')} value={profil.firstName} name="firstName" />
@@ -25,7 +25,7 @@ function ProfilData() {
           ))}
         </ul>
       </div>
-    </>
+    </div>
   )
 }
 

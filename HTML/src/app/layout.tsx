@@ -4,7 +4,6 @@ import {dehydrate, HydrationBoundary} from '@tanstack/react-query'
 import dynamic from 'next/dynamic'
 import {NextIntlClientProvider} from 'next-intl'
 
-import JsAwareSuspense from '@/components/suspense/jsAwareSuspense'
 import {serverGetTheme} from '@/utils/action/theme/serverGetTheme'
 import {getLocale} from '@/utils/locale/_help/getLocale'
 import {getQueryClient} from '@/utils/query/qetQueryClient'
@@ -17,7 +16,6 @@ import {bricolage, lato} from './_data/font'
 import {metadata as _metadata} from './_data/metadata'
 import {viewport as _viewport} from './_data/viewport'
 
-const MelonLoading = dynamic(() => import('@/components/suspense/melonLoading'))
 const CustomToaster = dynamic(() => import('./_com/toaster/customToaster'))
 const ReactQueryDevtools =
   process.env.NODE_ENV === 'development' ? dynamic(() => import('@tanstack/react-query-devtools').then((a) => a.ReactQueryDevtools)) : () => null
@@ -40,9 +38,7 @@ async function RootLayout({children}: IChildren) {
         <QueryProvider>
           <NextIntlClientProvider>
             <JsCheckerCookie />
-            <HydrationBoundary state={dehydrate(queryClient)}>
-              <JsAwareSuspense fallback={<MelonLoading />}>{children}</JsAwareSuspense>
-            </HydrationBoundary>
+            <HydrationBoundary state={dehydrate(queryClient)}>{children}</HydrationBoundary>
             <ReactQueryDevtools />
             <CustomToaster />
           </NextIntlClientProvider>

@@ -8,12 +8,12 @@ function ProfilName() {
   const {profil} = useProfil()
 
   return (
-    <>
+    <div>
       <h1 className={s.title}>
         {profil.firstName} {profil.lastName}
       </h1>
       <h2 className={s.title}>{profil.roles[0]}</h2>
-    </>
+    </div>
   )
 }
 

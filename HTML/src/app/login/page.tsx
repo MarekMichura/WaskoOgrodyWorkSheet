@@ -5,7 +5,7 @@ import {redirect} from 'next/navigation'
 import ChangeThemeBtn from '@/components/form/btn/_changeTheme/changeThemeBtn'
 import logoFull from '@/components/image/png/logoFull.png'
 import logoText from '@/components/image/png/logoText.png'
-import {getProfileServer} from '@/utils/action/user/getProfileServer'
+import {serverGetProfile} from '@/utils/action/user/serverGetProfile'
 import {getLocale} from '@/utils/locale/_help/getLocale'
 import {getTranslations} from '@/utils/locale/_help/getTranslations'
 import {ECookies} from '@/utils/type/ECookies'
@@ -22,16 +22,14 @@ const textLogo = getImageProps({...logoImgProps, src: logoText})
 export async function generateMetadata() {
   const t = await getTranslations('login')
 
-  return {
-    title: t('pageTitle'),
-  }
+  return {title: t('pageTitle')}
 }
 
 async function LoginPage({searchParams}: ILoginPageProps) {
   const [params, cookieStore, locale, t] = await Promise.all([searchParams, cookies(), getLocale(), getTranslations('login')])
   const [query, profile] = await Promise.all([
     validateLoginPageQuery.safeParseAsync({redirect: params.redirect, error: params.error, userName: params.userName}),
-    getProfileServer(cookieStore.get(ECookies.identity)?.value),
+    serverGetProfile(cookieStore.get(ECookies.identity)?.value),
   ])
 
   const path = ERoutes[locale]
