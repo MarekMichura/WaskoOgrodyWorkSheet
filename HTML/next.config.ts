@@ -1,7 +1,8 @@
 import fs from 'fs'
 import path from 'path'
 
-import type {NextConfig} from 'next'
+import {type NextConfig} from 'next'
+import createNextIntlPlugin from 'next-intl/plugin'
 
 const urlPath = path.join(__dirname, '/build/cache/my/')
 const filePath = urlPath + 'cssData.json'
@@ -18,16 +19,14 @@ function loadMap() {
     const fileData = JSON.parse(fs.readFileSync(filePath, 'utf8'))
     map = new Map(Object.entries(fileData.map))
     count = fileData.count
-    console.log('loaded: ' + count + ' elements')
   }
 }
+loadMap()
 
 function saveMapAsync(time: number) {
   clearTimeout(timeout)
   timeout = setTimeout(() => {
     if (!fs.existsSync(urlPath)) fs.mkdirSync(urlPath)
-    console.log('clear save')
-    console.log(map.size)
     fs.writeFileSync(filePath, JSON.stringify({map: Object.fromEntries(map), count}, null, 2), 'utf8')
   }, time)
 }
@@ -53,7 +52,6 @@ function generateName(className: string) {
   return result
 }
 
-loadMap()
 let nextConfig: NextConfig = {
   experimental: {
     reactCompiler: true,
@@ -61,6 +59,7 @@ let nextConfig: NextConfig = {
   distDir: 'build',
   output: 'standalone',
   reactStrictMode: true,
+  images: {},
   webpack: (config) => {
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
@@ -93,8 +92,9 @@ if (process.env.ANALYZE === 'true') {
     })
     nextConfig = withBundleAnalyzer(nextConfig)
   } catch {
-    console.warn('⚠️  Bundle analyzer is enabled, but @next/bundle-analyzer is not installed.')
+    console.warn('Bundle analyzer is enabled, but @next/bundle-analyzer is not installed.')
   }
 }
 
-export default nextConfig
+const withNextIntl = createNextIntlPlugin('./src/utils/locale/request.ts')
+export default withNextIntl(nextConfig)

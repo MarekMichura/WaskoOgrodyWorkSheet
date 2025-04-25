@@ -1,0 +1,157 @@
+@use '@/utils/style/mixin.scss' as *;
+@use '@/utils/style/data.scss' as *;
+
+@mixin toast {
+  position: relative;
+  width: 20rem;
+  width: min(calc(100vw - 0.5rem), 20rem);
+  min-height: 5rem;
+
+  display: flex;
+  opacity: 0.8;
+
+  overflow: auto;
+  @include transition((background-color, color, border, opacity), 500ms);
+
+  .svgCon {
+    @include transition((background-color), 500ms);
+  }
+
+  .svg {
+    @include transition((fill, stroke), 500ms);
+  }
+
+  &:hover {
+    opacity: 1;
+  }
+  &:hover .close {
+    opacity: 0.8;
+  }
+}
+
+.loading {
+  @include toast;
+
+  border-color: $purple-800;
+  background-color: $purple-200;
+  color: $purple-800;
+
+  .svgCon {
+    background-color: $purple-300;
+  }
+  .svg {
+    fill: $purple-900;
+  }
+}
+
+.error {
+  @include toast;
+
+  border-color: $red-800;
+  background-color: $red-200;
+  color: $red-800;
+
+  .svgCon {
+    background-color: $red-300;
+  }
+  .svg {
+    fill: $red-900;
+  }
+}
+
+.info {
+  @include toast;
+
+  border-color: $blue-800;
+  background-color: $blue-200;
+  color: $blue-800;
+
+  .svgCon {
+    background-color: $blue-300;
+  }
+  .svg {
+    fill: $blue-900;
+  }
+}
+
+.success {
+  @include toast;
+
+  border-color: $green-800;
+  background-color: $green-200;
+  color: $green-800;
+
+  .svgCon {
+    background-color: $green-300;
+  }
+  .svg {
+    fill: $green-900;
+  }
+}
+
+.warn {
+  @include toast;
+
+  border-color: $yellow-800;
+  background-color: $yellow-200;
+  color: $yellow-800;
+
+  .svgCon {
+    background-color: $yellow-300;
+  }
+  .svg {
+    fill: $yellow-900;
+    stroke: $yellow-900;
+  }
+}
+
+.content {
+  padding: 0.5rem;
+  flex: 1;
+}
+
+.title {
+  margin: 0;
+
+  text-transform: uppercase;
+  font-family: $font_black;
+}
+
+.text {
+  display: block;
+  text-align: justify;
+}
+
+.svgCon {
+  width: 5rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.svg {
+  height: initial;
+  width: 3rem;
+  padding: 1rem;
+}
+
+.close {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  width: 1rem;
+  height: 1rem;
+
+  opacity: 0;
+  outline: none;
+  border: none;
+  cursor: pointer;
+
+  fill: $black !important;
+  stroke: $black !important;
+
+  background-color: transparent;
+  @include transition((opacity));
+}

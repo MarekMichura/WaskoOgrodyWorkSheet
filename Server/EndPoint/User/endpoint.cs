@@ -14,12 +14,14 @@ public class EndPointUser : IMiddleware {
       .WithTags("User")
       .WithOpenApi()
       .Produces<ModelOutPutMapAuthenticate>(StatusCodes.Status200OK)
-      .Produces(StatusCodes.Status400BadRequest);
+      .Produces(StatusCodes.Status400BadRequest)
+      .DisableAntiforgery();
 
-    app.MapPost("/api/v1.0/logout", MapUser.MapLogout)
+    app.MapPost("/api/v1.0/logout", MapUser.MapLogoutForm)
       .WithTags("User")
       .WithOpenApi()
-      .Produces(StatusCodes.Status200OK);
+      .Produces(StatusCodes.Status200OK)
+      .Accepts<object>("application/x-www-form-urlencoded");
 
     app.MapPost("/api/v1.0/logout", MapUser.MapLogout)
       .WithTags("User")

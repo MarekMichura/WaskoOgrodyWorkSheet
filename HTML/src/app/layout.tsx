@@ -1,48 +1,55 @@
-import '@/utils/style/globals.scss'
+import './global.scss'
 
 import {dehydrate, HydrationBoundary} from '@tanstack/react-query'
-import {Metadata, Viewport} from 'next'
 import dynamic from 'next/dynamic'
+import {NextIntlClientProvider} from 'next-intl'
 
-import {bricolage, lato} from '@/utils/style/font'
-import {getThemeServer} from '@/utils/theme/server/getTheme'
+import JsAwareSuspense from '@/components/suspense/jsAwareSuspense'
+import {serverGetTheme} from '@/utils/action/theme/serverGetTheme'
+import {getLocale} from '@/utils/locale/_help/getLocale'
+import {getQueryClient} from '@/utils/query/qetQueryClient'
+import {EQueries} from '@/utils/type/EQueries'
+import {type IChildren} from '@/utils/type/props/IChildren'
 
-import {metadata as rootMetadata} from './metadata'
-import QueryProvider from './query'
-import {getQueryClient} from './queryClient'
-import {viewport as rootViewPort} from './viewport'
+import JsCheckerCookie from './_com/jsChecker'
+import QueryProvider from './_com/queryProvider'
+import {bricolage, lato} from './_data/font'
+import {metadata as _metadata} from './_data/metadata'
+import {viewport as _viewport} from './_data/viewport'
 
-const JsChecker = dynamic(() => import('@/components/loading/controlJS'))
-const MySuspense = dynamic(() => import('@/components/loading/mySuspense'))
-const SuspenseLoading = dynamic(() => import('@/components/loading/suspenseLoading'))
-const Toaster = dynamic(() => import('react-hot-toast').then((mod) => mod.Toaster))
+const MelonLoading = dynamic(() => import('@/components/suspense/melonLoading'))
+const CustomToaster = dynamic(() => import('./_com/toaster/customToaster'))
 const ReactQueryDevtools =
-  process.env.NODE_ENV === 'development' ? dynamic(() => import('@tanstack/react-query-devtools').then((mod) => mod.ReactQueryDevtools)) : () => null
+  process.env.NODE_ENV === 'development' ? dynamic(() => import('@tanstack/react-query-devtools').then((a) => a.ReactQueryDevtools)) : () => null
 
-export const metadata: Metadata = {...rootMetadata}
-export const viewport: Viewport = {...rootViewPort}
+export const metadata = {..._metadata}
+export const viewport = {..._viewport}
 
-export default async function RootLayout({children}: Readonly<{children: React.ReactNode}>) {
-  const {theme} = await getThemeServer()
+async function RootLayout({children}: IChildren) {
+  const theme = await serverGetTheme()
+  const lang = await getLocale()
   const queryClient = getQueryClient()
-
   await queryClient.prefetchQuery({
-    queryKey: ['theme'],
+    queryKey: EQueries.theme,
     initialData: theme,
   })
 
   return (
-    <html lang="pl" data-theme={theme}>
-      <body className={`${lato.className} ${bricolage.className}`}>
-        <JsChecker />
+    <html lang={lang} data-theme={theme}>
+      <body className={`${bricolage.className} ${lato.className}`}>
         <QueryProvider>
-          <HydrationBoundary state={dehydrate(queryClient)}>
-            <MySuspense fallback={<SuspenseLoading />}>{children}</MySuspense>
-          </HydrationBoundary>
-          <ReactQueryDevtools />
-          <Toaster position="bottom-right" toastOptions={{duration: 3000}} />
+          <NextIntlClientProvider>
+            <JsCheckerCookie />
+            <HydrationBoundary state={dehydrate(queryClient)}>
+              <JsAwareSuspense fallback={<MelonLoading />}>{children}</JsAwareSuspense>
+            </HydrationBoundary>
+            <ReactQueryDevtools />
+            <CustomToaster />
+          </NextIntlClientProvider>
         </QueryProvider>
       </body>
     </html>
   )
 }
+
+export default RootLayout

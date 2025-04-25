@@ -1,0 +1,73 @@
+@use '@/utils/style/mixin.scss' as *;
+@use '@/utils/style/data.scss' as *;
+
+.container {
+  padding: 1rem;
+
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+
+  background-color: $stone-800;
+  box-shadow: 0 0 1rem 0 $black;
+}
+
+.top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & h1 {
+    font-size: 2rem;
+  }
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+
+  & h1 {
+    margin: 0;
+    padding: 0;
+  }
+
+  & svg {
+    width: 3rem;
+    height: 3rem;
+    aspect-ratio: 1/1;
+  }
+}
+
+.months {
+  position: relative;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 0.25rem;
+}
+
+.days {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto 1fr 1fr 1fr 1fr 1fr;
+}
+
+.week {
+  text-align: center;
+}
+
+.weekIndicator {
+  margin: -0.25rem -0.5rem;
+  height: 0.25rem;
+  grid-column: 0/10;
+  background-color: $stone-950;
+}
+
+.day {
+  aspect-ratio: 1/1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

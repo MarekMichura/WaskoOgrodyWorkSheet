@@ -1,11 +1,24 @@
-@mixin transition($properties, $duration: 200ms, $fun: 'ease') {
-  $props: '';
+@use 'sass:list';
+@use 'sass:string';
+
+@mixin transition($properties, $duration: 200ms, $fun: ease, $disable: false) {
+  $transition-props: ();
+  $will-change-props: ();
+
   @each $property in $properties {
-    $props:
-      #{$props},
-      #{$property} #{$duration} #{$fun};
+    $transition-props: list.append(
+      $transition-props,
+      string.unquote('#{$property} #{$duration} #{$fun}'),
+      $separator: comma
+    );
+    $will-change-props: list.append($will-change-props, $property, $separator: comma);
   }
-  transition: $props;
+
+  will-change: $will-change-props;
+
+  @if not $disable {
+    transition: $transition-props;
+  }
 }
 
 @mixin media($property: max-width, $size: 30rem) {
@@ -21,7 +34,7 @@
 }
 
 @mixin dark {
-  [data-theme='dark'] & {
+  [data-theme='D'] & {
     @content;
   }
 }

@@ -33,6 +33,7 @@ const eslintConfig = [
 
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-req': 'off',
+      '@typescript-eslint/consistent-type-imports': ['error', {prefer: 'type-imports', fixStyle: 'inline-type-imports', disallowTypeAnnotations: false}],
       'import/order': [
         'error',
         {
@@ -52,6 +53,29 @@ const eslintConfig = [
             order: 'asc',
             caseInsensitive: true,
           },
+        },
+      ],
+      'no-restricted-imports': [
+        'error',
+        {
+          name: 'next-intl',
+          message: 'please use custom import from @/utils/locale/_help/useTranslation',
+          importNames: ['useTranslations'],
+        },
+        {
+          name: 'next-intl/server',
+          message: 'please use custom import from @/utils/locale/_help/getTranslations',
+          importNames: ['getTranslations'],
+        },
+        {
+          name: 'next-intl',
+          message: 'please use custom import from @/utils/locale/_help/useLocale',
+          importNames: ['useLocale'],
+        },
+        {
+          name: 'next-intl/server',
+          message: 'please use custom import from @/utils/locale/_help/getLocale',
+          importNames: ['getLocale'],
         },
       ],
     },

@@ -1,8 +1,12 @@
-import s from './cssFormInput.module.scss'
-import {IFormInputProps} from './IFormInputProps'
+'use client'
 
-function FormInput({Icon, label, error, className, ...props}: IFormInputProps) {
-  const container = s.container + (className ? ' ' + className : '')
+import {useMemo} from 'react'
+
+import {type IFormInputProps} from './_type/IFormInputProps'
+import s from './css.module.scss'
+
+function FormInput({className, Icon, label, error, ...props}: IFormInputProps) {
+  const container = useMemo(() => s.container + (className ? ` ${className}` : ''), [className])
 
   return (
     <div className={container}>

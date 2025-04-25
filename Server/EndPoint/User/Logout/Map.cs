@@ -1,18 +1,23 @@
 namespace Wasko;
 
 public static partial class MapUser {
-  public static async Task<IResult> MapLogoutForm(IRepUser rep, HttpRequest request)
+  public static async Task<IResult> MapLogoutForm(IRepUser rep, HttpRequest request, IWebHostEnvironment environment)
   {
-    var result = await MapLogout(rep);
-    if (result is Ok<ModelOutPutMapAuthenticate> okResult && okResult.Value.Authenticated) {
-      return Results.Redirect("/login");
+    var result = await MapLogout(rep, environment);
+
+    if (result is Ok) {
+      var referer = request.GetRefererPath("/profil");
+      return Results.Redirect($"/login?redirect={referer}");
     }
 
-    return Results.Redirect(request.Headers.Referer.ToString());
+    return Results.Redirect(request.GetRefererPath("/login"));
   }
 
-  public static async Task<IResult> MapLogout(IRepUser rep)
+  public static async Task<IResult> MapLogout(IRepUser rep, IWebHostEnvironment environment)
   {
+    if (environment.IsDevelopment())
+      Thread.Sleep(5000);
+
     await rep.Logout();
     return Results.Ok();
   }
