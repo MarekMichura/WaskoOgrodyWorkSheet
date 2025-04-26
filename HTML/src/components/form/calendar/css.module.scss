@@ -19,7 +19,10 @@
   align-items: center;
 
   & h1 {
+    width: min-content;
+    text-align: center;
     font-size: 2rem;
+    white-space: wrap;
   }
 }
 
@@ -47,13 +50,18 @@
   gap: 0.25rem;
 }
 
-.days {
+.weekDays {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.week {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: auto 1fr 1fr 1fr 1fr 1fr;
 }
 
-.week {
+.weekDay {
   text-align: center;
 }
 
@@ -64,7 +72,7 @@
   background-color: $stone-950;
 }
 
-.day {
+.days > * {
   aspect-ratio: 1/1;
 
   display: flex;

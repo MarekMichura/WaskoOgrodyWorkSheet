@@ -1,6 +1,13 @@
+import {EDayPL} from '@/utils/type/EDay'
+import {EMonthPL} from '@/utils/type/EMonth'
+import {ERoutesPL} from '@/utils/type/ERoutes'
+
 import {type ILocalization} from './en'
 
 const pl: ILocalization = {
+  route: ERoutesPL,
+  months: EMonthPL,
+  day: EDayPL,
   nav: {
     date: 'Godziny pracy',
     getWorkingHours: 'Przeglądaj godziny pracy',

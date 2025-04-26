@@ -25,8 +25,7 @@ public static partial class MapUser {
 
   public static async Task<IResult> MapAuthenticate(ModelInputMapAuthenticate model, IRepUser rep, IWebHostEnvironment environment)
   {
-    if (environment.IsDevelopment())
-      Thread.Sleep(5000);
+    if (environment.IsDevelopment()) Thread.Sleep(1000);
 
     if (await rep.Login(model.UserName, model.Password)) {
       var id = rep.GetCurrentID() ?? throw new NullReferenceException();

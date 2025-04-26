@@ -10,11 +10,10 @@ import {EHeaders} from '@/utils/type/EHeaders'
 export async function actionChangeLang(a: FormData) {
   const [cookieStore, header] = await Promise.all([cookies(), headers()])
   const newLocale = a.get('Language')?.toString()
-  
+
   if (isLocale(newLocale) && cookieStore.get(ECookies.locale)?.value !== newLocale) {
     cookieStore.set(ECookies.locale, newLocale)
 
-    const path = header.get(EHeaders.X_URL)
-    redirect(path ?? '/')
+    redirect(header.get(EHeaders.X_URL) ?? '/')
   }
 }

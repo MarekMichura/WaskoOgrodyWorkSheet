@@ -10,10 +10,8 @@ import {EHeaders} from '@/utils/type/EHeaders'
 
 export async function actionChangeTheme() {
   const [theme, cookieStore, header] = await Promise.all([serverGetTheme(), cookies(), headers()])
-
-  const path = header.get(EHeaders.X_URL)
   const newTheme = switchTheme(theme)
 
   cookieStore.set(ECookies.theme, newTheme)
-  redirect(path ?? '/')
+  redirect(header.get(EHeaders.X_URL) ?? '/')
 }

@@ -1,7 +1,7 @@
 import {type Metadata} from 'next'
 
 export const metadata: Metadata = {
-  title: 'Profesjonalne tereny zielone dla firm | Kraków i Limanowa',
+  // title: 'Profesjonalne tereny zielone dla firm | Kraków i Limanowa',
   description: 'Projektowanie, zakładanie i pielęgnacja terenów zielonych dla firm. Tworzymy ogrody, podwórka i przestrzenie zielone w Krakowie i Limanowej.',
 
   keywords: [
@@ -24,14 +24,14 @@ export const metadata: Metadata = {
       'Specjalizujemy się w projektowaniu i pielęgnacji ogrodów oraz terenów zielonych dla firm. Tworzymy piękne, zielone przestrzenie w Krakowie i Limanowej!',
     url: 'https://wawelgarden.pl',
     siteName: 'WawelGarden',
-    images: [
-      {
-        url: 'https://wawelgarden.pl/og-image.jpg', // TODO: (do uzupełnienia) - grafika podglądowa
-        width: 1200,
-        height: 630,
-        alt: 'Projektowanie terenów zielonych',
-      },
-    ],
+    // images: [
+    // {
+    // url: 'https://wawelgarden.pl/og-image.jpg', // TODO: (do uzupełnienia) - grafika podglądowa
+    // width: 1200,
+    // height: 630,
+    // alt: 'Projektowanie terenów zielonych',
+    // },
+    // ],
     locale: 'pl_PL',
     type: 'website',
   },
@@ -40,13 +40,13 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Profesjonalne ogrody i tereny zielone | Kraków i Limanowa',
     description: 'Projektujemy i pielęgnujemy ogrody oraz tereny zielone dla firm. Sprawdź naszą ofertę w Krakowie i Limanowej!',
-    images: ['https://wawelgarden.pl//twitter-image.jpg'], // TODO: Obrazek dla twittera
+    // images: ['https://wawelgarden.pl//twitter-image.jpg'], // TODO: Obrazek dla twittera
   },
 
   icons: {
-    icon: '/icons/favicon.ico',
-    shortcut: '/icons/shortcut-icon.png',
-    apple: '/icons/apple-touch-icon.png',
+    // icon: '/icons/favicon.ico',
+    // shortcut: '/icons/shortcut-icon.png',
+    // apple: '/icons/apple-touch-icon.png',
   },
 
   referrer: 'strict-origin-when-cross-origin',

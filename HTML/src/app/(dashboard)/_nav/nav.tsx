@@ -15,7 +15,6 @@ import ThemeModeIcon from '@/components/image/svg/themeMode'
 import UmbrellaIcon from '@/components/image/svg/umbrella'
 import {getLocale} from '@/utils/locale/_help/getLocale'
 import {getTranslations} from '@/utils/locale/_help/getTranslations'
-import {ERoutes} from '@/utils/type/ERoutes'
 
 import s from '../css.module.scss'
 
@@ -25,8 +24,7 @@ import NavMenu from './navMenu'
 import NavProfil from './navProfil'
 
 async function EmployerLayoutNav() {
-  const [locale, t] = await Promise.all([getLocale(), getTranslations('nav')])
-  const path = ERoutes[locale]
+  const [locale, t, route] = await Promise.all([getLocale(), getTranslations('nav'), getTranslations('route')])
 
   return (
     <aside className={s.nav}>
@@ -41,7 +39,7 @@ async function EmployerLayoutNav() {
           <span className={s.sidebarSeparatorSpan}>{t('date')}</span>
           <div className={s.sidebarSeparatorDiv} />
         </div>
-        <NavLink href={path.viewWorkingHours} text={t('getWorkingHours')} Icon={CalendarIcon} />
+        <NavLink href={route('viewWorkingHours')} text={t('getWorkingHours')} Icon={CalendarIcon} />
         <NavLink href={'#'} text={t('setWorkingHours')} Icon={HourGlassIcon} />
         <NavLink href={'#'} text={t('askDayOff')} Icon={UmbrellaIcon} />
         <div className={s.sidebarSeparator}>

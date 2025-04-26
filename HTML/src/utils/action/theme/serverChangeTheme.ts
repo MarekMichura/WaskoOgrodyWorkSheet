@@ -12,9 +12,8 @@ import {serverGetTheme} from './serverGetTheme'
 export async function serverChangeTheme() {
   const [theme, header, cookieStore] = await Promise.all([serverGetTheme(), headers(), cookies()])
 
-  const path = header.get(EHeaders.X_URL)
   const newTheme = switchTheme(theme)
 
   cookieStore.set(ECookies.theme, newTheme)
-  redirect(path ?? '/')
+  redirect(header.get(EHeaders.X_URL) ?? '/')
 }

@@ -1,5 +1,3 @@
-import {type ILocale} from '@/utils/locale/locales'
-
 export const EMonthEN = [
   'JANUARY', //
   'FEBRUARY',
@@ -16,7 +14,7 @@ export const EMonthEN = [
 ] as const
 
 export const EMonthPL = [
-  'STYCZEŃ',
+  'STYCZEŃ', //
   'LUTY',
   'MARZEC',
   'KWIECIEŃ',
@@ -30,10 +28,5 @@ export const EMonthPL = [
   'GRUDZIEŃ',
 ] as const
 
-export const EMonth: Record<ILocale, Readonly<string[]>> = {
-  en: EMonthEN,
-  pl: EMonthPL,
-}
-
-export type EDayKey = keyof typeof EMonthEN
-export type EDayValue = (typeof EMonthEN)[EDayKey] | (typeof EMonthPL)[EDayKey]
+export type EMonthKey = keyof typeof EMonthEN
+export type EMonthValue = (typeof EMonthEN)[EMonthKey] | (typeof EMonthPL)[EMonthKey]

@@ -9,6 +9,8 @@ export function useTranslations<T extends ILocalizationKeys>(localization: T) {
   const _translations = useIntlTranslations(localization as string)
 
   return <K extends ILocalizationSecondKeys<T>>(key: K) => {
-    return _translations(key as string) as (typeof en)[T][K]
+    return typeof key === 'number' //
+      ? (_translations(key.toString()) as (typeof en)[T][K])
+      : (_translations(key as string) as (typeof en)[T][K])
   }
 }

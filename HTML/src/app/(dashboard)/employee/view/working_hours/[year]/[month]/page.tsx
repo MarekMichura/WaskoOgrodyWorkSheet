@@ -1,8 +1,6 @@
 import {redirect} from 'next/navigation'
 
-import {getLocale} from '@/utils/locale/_help/getLocale'
 import {getTranslations} from '@/utils/locale/_help/getTranslations'
-import {ERoutes} from '@/utils/type/ERoutes'
 import {type IProps} from '@/utils/type/props/IProps'
 
 import EmployerViewWorkingHoursCalendar from '../../_com/showCalendar'
@@ -17,10 +15,10 @@ export async function generateMetadata() {
 }
 
 async function EmployerViewWorkingHoursDynamicPage({params}: IProps<IWorkingHoursPrams>) {
-  const [locale, p] = await Promise.all([getLocale(), params])
+  const [route, p] = await Promise.all([getTranslations('route'), params])
   const validate = await workingHoursParamsValidate.safeParseAsync(p)
-  if (!validate.success) redirect(ERoutes[locale].viewWorkingHours)
-
+  if (!validate.success) redirect(route('viewWorkingHours'))
+    
   return <EmployerViewWorkingHoursCalendar year={validate.data.year} month={validate.data.month.index} />
 }
 

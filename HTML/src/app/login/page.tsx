@@ -1,4 +1,3 @@
-import {cookies} from 'next/headers'
 import Image, {getImageProps} from 'next/image'
 import {redirect} from 'next/navigation'
 
@@ -6,10 +5,7 @@ import ChangeThemeBtn from '@/components/form/btn/_changeTheme/changeThemeBtn'
 import logoFull from '@/components/image/png/logoFull.png'
 import logoText from '@/components/image/png/logoText.png'
 import {serverGetProfile} from '@/utils/action/user/serverGetProfile'
-import {getLocale} from '@/utils/locale/_help/getLocale'
 import {getTranslations} from '@/utils/locale/_help/getTranslations'
-import {ECookies} from '@/utils/type/ECookies'
-import {ERoutes} from '@/utils/type/ERoutes'
 
 import LoginPageClientForm from './_com/clientForm'
 import {type ILoginPageProps} from './_type/ILoginPageProps'
@@ -26,19 +22,15 @@ export async function generateMetadata() {
 }
 
 async function LoginPage({searchParams}: ILoginPageProps) {
-  const [params, cookieStore, locale, t] = await Promise.all([searchParams, cookies(), getLocale(), getTranslations('login')])
-  const [query, profile] = await Promise.all([
-    validateLoginPageQuery.safeParseAsync({redirect: params.redirect, error: params.error, userName: params.userName}),
-    serverGetProfile(cookieStore.get(ECookies.identity)?.value),
-  ])
+  const [params, path, t, {body: profile}] = await Promise.all([searchParams, getTranslations('route'), getTranslations('login'), serverGetProfile()])
+  const query = await validateLoginPageQuery.safeParseAsync({redirect: params.redirect, error: params.error, userName: params.userName})
 
-  const path = ERoutes[locale]
-  if (!query.success) redirect(path.login) // redirect if query data not valid
-  const url = query.data.redirect ?? path.profil
+  if (!query.success) redirect(path('login')) // redirect if query data not valid
+  const url = query.data.redirect ?? path('profil')
   const error = query.data?.error ? 'errorAuth' : undefined
   const userName = query.data?.userName
 
-  if (profile.response?.ok && profile.body) redirect(url)
+  if (profile) redirect(url)
 
   return (
     <div className={s.container}>

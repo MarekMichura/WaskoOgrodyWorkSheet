@@ -1,4 +1,11 @@
+import {EDayEN} from '@/utils/type/EDay'
+import {EMonthEN} from '@/utils/type/EMonth'
+import {ERoutesEN} from '@/utils/type/ERoutes'
+
 const en = {
+  route: ERoutesEN,
+  months: EMonthEN,
+  day: EDayEN,
   nav: {
     date: 'Work Hours',
     getWorkingHours: 'View working hours',

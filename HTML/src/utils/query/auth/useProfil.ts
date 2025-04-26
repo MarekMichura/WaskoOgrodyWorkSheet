@@ -15,7 +15,7 @@ export const defProfilData: IResponseGetProfile = {
   image: '',
   roles: ['Gardener'],
 }
-export function useProfil(opt?: DefinedInitialDataOptions<IResponseGetProfile>) {
+export function useProfil(opt?: Partial<DefinedInitialDataOptions<IResponseGetProfile>>) {
   const router = useRouter()
 
   const query = useSuspenseQuery<IResponseGetProfile>({

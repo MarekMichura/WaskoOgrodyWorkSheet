@@ -3,10 +3,10 @@
 import {cookies, headers} from 'next/headers'
 import {cache} from 'react'
 
-import {isInPrimitiveArray} from '@/utils/type/helpTypes/_isPrimitiveArray'
 import {ECookies} from '@/utils/type/ECookies'
 import {EHeaders} from '@/utils/type/EHeaders'
 import {EThemes, type EThemeValues} from '@/utils/type/EThemes'
+import {isInPrimitiveArray} from '@/utils/type/helpTypes/_isPrimitiveArray'
 
 export const serverGetTheme = cache(async (): Promise<EThemeValues> => {
   const [cookieStore, header] = await Promise.all([cookies(), headers()])

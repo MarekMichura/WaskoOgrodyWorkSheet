@@ -4,20 +4,18 @@ import Image from 'next/image'
 
 import FormLink from '@/components/form/btn/formLink'
 import LetterAvatar from '@/components/letterAvatar/letterAvatar'
-import {useLocale} from '@/utils/locale/_help/useLocale'
+import {useTranslations} from '@/utils/locale/_help/useTranslations'
 import {useProfil} from '@/utils/query/auth/useProfil'
-import {ERoutes} from '@/utils/type/ERoutes'
 
 import s from '../css.module.scss'
 
 function NavProfil() {
-  const locale = useLocale()
-  const path = ERoutes[locale]
+  const route = useTranslations('route')
 
   const {profil} = useProfil()
 
   return (
-    <FormLink className={s.sidebarAccount} href={path.profil} prefetch={true}>
+    <FormLink className={s.sidebarAccount} href={route('profil')}>
       {!profil.image || profil.image == '' ? ( //
         <LetterAvatar />
       ) : (

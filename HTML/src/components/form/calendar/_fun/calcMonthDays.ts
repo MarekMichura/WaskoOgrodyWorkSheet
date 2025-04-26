@@ -7,7 +7,7 @@ const daysPrev = [6, 0, 1, 2, 3, 4, 5]
 export function calcCalendarDates(year: number, month: number) {
   const date = new Date(year, month, 1)
   const lastDay = new Date(year, month + 1, 0)
-  const nextMonth = new Date(year, month, 1)
+  const nextMonth = new Date(year, month + 1, 1)
 
   //calc first day
   const dayOfWeek = date.getDay()

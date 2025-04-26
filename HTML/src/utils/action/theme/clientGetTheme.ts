@@ -1,9 +1,9 @@
 'use client'
 
 import {getCookieClient} from '@/utils/cookie/clientGetCookie'
-import {isInPrimitiveArray} from '@/utils/type/helpTypes/_isPrimitiveArray'
 import {ECookies} from '@/utils/type/ECookies'
 import {EThemes, type EThemeValues} from '@/utils/type/EThemes'
+import {isInPrimitiveArray} from '@/utils/type/helpTypes/_isPrimitiveArray'
 
 export function clientGetTheme(): EThemeValues {
   const currentTheme = getCookieClient(ECookies.theme)

@@ -1,30 +1,26 @@
 import {dehydrate, HydrationBoundary} from '@tanstack/react-query'
-import {cookies, headers} from 'next/headers'
+import {headers} from 'next/headers'
 import {redirect} from 'next/navigation'
 
 import {type ILoginQuery} from '@/app/login/_type/ILoginPageProps'
 import {serverGetProfile} from '@/utils/action/user/serverGetProfile'
-import {getLocale} from '@/utils/locale/_help/getLocale'
+import {getTranslations} from '@/utils/locale/_help/getTranslations'
 import {getQueryClient} from '@/utils/query/qetQueryClient'
-import {ECookies} from '@/utils/type/ECookies'
 import {EHeaders} from '@/utils/type/EHeaders'
 import {EQueries} from '@/utils/type/EQueries'
-import {ERoutes} from '@/utils/type/ERoutes'
 import {type IChildren} from '@/utils/type/props/IChildren'
 
 import Nav from './_nav/nav'
 import s from './css.module.scss'
 
 async function DashboardSiteLayout({children}: IChildren) {
-  const [cookieStore, header, locale] = await Promise.all([cookies(), headers(), getLocale()])
-  const {response, body} = await serverGetProfile(cookieStore.get(ECookies.identity)?.value)
+  const [header, route, {body}] = await Promise.all([headers(), getTranslations('route'), serverGetProfile()])
   const queryClient = getQueryClient()
-  const path = ERoutes[locale]
 
-  if (!response?.ok || body === undefined) {
-    const url = path.login
+  if (body === undefined) {
+    const url = route('login')
     const query = 'redirect' as keyof ILoginQuery
-    const currPath = header.get(EHeaders.X_URL) ?? path.login
+    const currPath = header.get(EHeaders.X_URL) ?? route('profil')
 
     redirect(`${url}?${query}=${currPath}`)
   }
