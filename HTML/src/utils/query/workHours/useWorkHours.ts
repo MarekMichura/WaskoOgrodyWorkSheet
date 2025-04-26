@@ -3,9 +3,9 @@
 import {useSuspenseQuery, type DefinedInitialDataOptions} from '@tanstack/react-query'
 import {useRouter} from 'next/navigation'
 
-import {EQueries} from '@/utils/type/EQueries'
+import {type IResponseWorkingHours} from '@/utils/action/workingHours/_type/IResponseWorkingHours'
 import {getWorkingHours} from '@/utils/action/workingHours/getWorkingHours'
-import {IResponseWorkingHours} from '@/utils/action/workingHours/_type/IResponseWorkingHours'
+import {EQueries} from '@/utils/type/EQueries'
 
 export const defProfilData: IResponseWorkingHours = {}
 export function useWorkHours(start?: string, end?: string, opt?: Partial<DefinedInitialDataOptions<IResponseWorkingHours>>) {

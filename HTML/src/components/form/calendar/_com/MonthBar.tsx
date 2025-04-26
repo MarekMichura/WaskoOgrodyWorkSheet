@@ -8,14 +8,13 @@ import s from '../css.module.scss'
 
 export function MonthBar({length, year, url, disable}: IFormCalendarMonthBarProps) {
   const EMonth = useTranslations('months')
-  const route = useTranslations('route')
 
   const data = useMemo(() => {
     return disable.map((disable, i) => {
       const month = EMonth(i)
       return {disable, month: month, href: `${url}/${year}/${EMonth(i)}/`}
     })
-  }, [EMonth, disable, route, year])
+  }, [EMonth, disable, url, year])
 
   return data.map((ele, i) => (
     <FormLink href={ele.href} key={i} className={s.month} disabled={ele.disable}>
