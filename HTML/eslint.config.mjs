@@ -23,8 +23,8 @@ const eslintConfig = [
     },
     plugins: {
       '@tanstack/query': query,
-      import: imports,
       'react-hooks': reactHooks,
+      import: imports,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
@@ -33,7 +33,10 @@ const eslintConfig = [
 
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-req': 'off',
-      '@typescript-eslint/consistent-type-imports': ['error', {prefer: 'type-imports', fixStyle: 'inline-type-imports', disallowTypeAnnotations: false}],
+      '@typescript-eslint/consistent-type-imports': [
+        'error',
+        {prefer: 'type-imports', fixStyle: 'inline-type-imports', disallowTypeAnnotations: false},
+      ],
       'import/order': [
         'error',
         {
@@ -58,24 +61,14 @@ const eslintConfig = [
       'no-restricted-imports': [
         'error',
         {
-          name: 'next-intl',
-          message: 'please use custom import from @/utils/locale/_help/useTranslation',
-          importNames: ['useTranslations'],
+          name: 'next/link',
+          message: 'please use custom import from @/locale/navigation',
+          importNames: ['default', 'redirect'],
         },
         {
-          name: 'next-intl/server',
-          message: 'please use custom import from @/utils/locale/_help/getTranslations',
-          importNames: ['getTranslations'],
-        },
-        {
-          name: 'next-intl',
-          message: 'please use custom import from @/utils/locale/_help/useLocale',
-          importNames: ['useLocale'],
-        },
-        {
-          name: 'next-intl/server',
-          message: 'please use custom import from @/utils/locale/_help/getLocale',
-          importNames: ['getLocale'],
+          name: 'next/navigation',
+          message: 'please use custom import from @/locale/navigation',
+          importNames: ['redirect', 'usePathname', 'useRouter'],
         },
       ],
     },

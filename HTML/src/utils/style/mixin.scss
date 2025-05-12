@@ -1,7 +1,8 @@
 @use 'sass:list';
 @use 'sass:string';
+@use '@/utils/style/data.scss';
 
-@mixin transition($properties, $duration: 200ms, $fun: ease, $disable: false) {
+@mixin transition($properties, $duration: 500ms, $fun: ease, $disable: false) {
   $transition-props: ();
   $will-change-props: ();
 
@@ -21,20 +22,44 @@
   }
 }
 
+@mixin fontBlack {
+  font-family: 'Bricolage Grotesque', 'Bricolage Grotesque Fallback';
+  font-style: normal;
+  font-weight: 800;
+}
+
 @mixin media($property: max-width, $size: 30rem) {
   @media screen and (#{$property}: #{$size}) {
     @content;
   }
 }
 
-@mixin motion() {
-  @media (prefers-reduced-motion: reduce) {
+@mixin mediaLarge() {
+  @include media($size: 75rem) {
+    @content;
+  }
+}
+
+@mixin mediaMedium() {
+  @include media($size: 50rem) {
+    @content;
+  }
+}
+
+@mixin mediaSmall() {
+  @include media($size: 40.5rem) {
+    @content;
+  }
+}
+
+@mixin mediaSmallest() {
+  @include media($size: 25rem) {
     @content;
   }
 }
 
 @mixin dark {
-  [data-theme='D'] & {
+  [data-theme='d'] & {
     @content;
   }
 }

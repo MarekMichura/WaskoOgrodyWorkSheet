@@ -1,0 +1,33 @@
+{
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**.sln": true,
+    "**/bin": true,
+    "**/obj": true,
+    "build": true,
+    "node_modules": true,
+    "yarn.lock": true,
+    "next-env.d.ts": true,
+    ".gitignore": true,
+    ".prettierrc": true,
+    "dockerfile": true
+  },
+  "hide-files.files": [
+    "build",
+    "node_modules",
+    "yarn.lock",
+    "next-env.d.ts",
+    ".gitignore",
+    ".prettierrc",
+    "dockerfile"
+  ],
+  "cSpell.words": ["lottiefiles", "Nuqs", "Plaiceholder"],
+  "stylelint.validate": ["scss", "css"],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.stylelint": "always"
+  }
+}

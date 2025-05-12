@@ -1,0 +1,48 @@
+@use '@/utils/style/mixin.scss' as *;
+@use '@/utils/style/data.scss' as *;
+
+.section {
+  position: relative;
+
+  width: 100%;
+  min-height: 100vh;
+
+  overflow: hidden;
+}
+
+.video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  min-width: 100%;
+  min-height: 100%;
+
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+}
+
+.container {
+  position: relative;
+
+  margin: 0 auto;
+
+  width: 75rem;
+  min-height: inherit;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  will-change: transform;
+
+  @include media($size: 80rem) {
+    width: auto;
+
+    justify-content: center;
+  }
+}
+
+.content {
+  position: relative;
+}

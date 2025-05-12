@@ -1,0 +1,35 @@
+.html {
+  &[data-theme='L'] {
+    color-scheme: light;
+  }
+
+  &[data-theme='D'] {
+    color-scheme: dark;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.body {
+  position: relative;
+
+  min-width: 100%;
+  min-height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
+
+  font-size: 1rem;
+
+  color: $stone-950;
+  background-color: $stone-200;
+  scroll-behavior: smooth;
+
+  @include dark {
+    color: $stone-50;
+    background-color: $stone-800;
+  }
+}

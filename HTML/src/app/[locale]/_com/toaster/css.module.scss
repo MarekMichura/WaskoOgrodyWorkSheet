@@ -1,0 +1,16 @@
+@use '@/utils/style/mixin.scss' as *;
+@use '@/utils/style/data.scss' as *;
+
+.container {
+  position: fixed;
+  right: 0.25rem;
+  bottom: 0.25rem;
+}
+
+.toast {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
+  @include transition((opacity, transform));
+}

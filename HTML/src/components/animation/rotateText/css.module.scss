@@ -1,0 +1,31 @@
+.con {
+  position: relative;
+
+  overflow: hidden;
+}
+
+.letter {
+  display: block;
+
+  white-space: nowrap;
+}
+
+.ele,
+.abs1,
+.abs2 {
+  display: flex;
+
+  white-space: nowrap;
+}
+
+.abs1,
+.abs2 {
+  position: absolute;
+}
+
+.abs1 {
+  top: 100%;
+}
+.abs2 {
+  top: 200%;
+}

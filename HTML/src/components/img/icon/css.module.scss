@@ -1,0 +1,43 @@
+.svgColors {
+  position: relative;
+
+  width: auto;
+  height: inherit;
+
+  display: block;
+
+  & svg {
+    width: auto;
+    height: inherit;
+  }
+
+  & * {
+    &[stroke='rgb(255,255,255)'] {
+      stroke: $gray-800;
+    }
+    &[fill='rgb(255,255,255)'] {
+      fill: $gray-800;
+    }
+    &[stroke='rgb(0,0,0)'] {
+      stroke: $green-600;
+    }
+    &[fill='rgb(0,0,0)'] {
+      fill: $green-600;
+    }
+
+    @include dark {
+      &[stroke='rgb(255,255,255)'] {
+        stroke: $gray-200;
+      }
+      &[fill='rgb(255,255,255)'] {
+        fill: $gray-200;
+      }
+      &[stroke='rgb(0,0,0)'] {
+        stroke: $green-500;
+      }
+      &[fill='rgb(0,0,0)'] {
+        fill: $green-500;
+      }
+    }
+  }
+}
