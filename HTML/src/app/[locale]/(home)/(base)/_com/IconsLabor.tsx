@@ -23,7 +23,7 @@ function HomeIconsLabor() {
     <>
       <span ref={sectionRef} className={s.anchor} />
       <IconsDescription
-        title="Sprawdz w czym możemy pomóc"
+        title={t('title')}
         className={s.card1}
         ref={stickyRef}
         style={{top}}

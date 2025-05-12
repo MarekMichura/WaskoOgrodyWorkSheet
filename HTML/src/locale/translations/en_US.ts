@@ -22,6 +22,7 @@ const en = {
     heroImg: 'Top',
     meet: 'Meet us',
     service: 'Our Services',
+    trusteed: 'They Trusted us',
   },
 
   home: {
@@ -57,6 +58,11 @@ const en = {
       projectsTitle: 'Design and Planning',
       projectsDest:
         'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis vel exercitationem asperiores ducimus optio minima nostrum enim! Dolor iure accusamus libero quasi aperiam, quas harum iste deleniti maiores fugit pariatur!',
+    },
+
+    trusteed: {
+      title: 'Our Partners',
+      subTitle: 'Trusted by industry leaders',
     },
   },
 } as const

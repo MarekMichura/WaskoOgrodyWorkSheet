@@ -133,14 +133,11 @@
   margin: 0 auto;
 
   width: 100%;
+  max-width: 12rem;
   aspect-ratio: 1/1;
 
   @include mediaSmall {
     margin: 0 auto;
-  }
-
-  @include mediaSmallest {
-    max-width: 12rem;
   }
 }
 

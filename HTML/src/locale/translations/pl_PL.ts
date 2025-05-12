@@ -22,6 +22,7 @@ const pl: ILocalization = {
     heroImg: 'Góra',
     meet: 'Poznaj nas',
     service: 'Nasze usługi',
+    trusteed: 'Oni nam zaufali',
   },
 
   home: {
@@ -57,6 +58,11 @@ const pl: ILocalization = {
       projectsTitle: 'Projektowanie',
       projectsDest:
         'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis vel exercitationem asperiores ducimus optio minima nostrum enim! Dolor iure accusamus libero quasi aperiam, quas harum iste deleniti maiores fugit pariatur!',
+    },
+
+    trusteed: {
+      title: 'Zaufali nam',
+      subTitle: 'Dołącz do tej listy',
     },
   },
 } as const

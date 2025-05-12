@@ -20,33 +20,33 @@
   }
 }
 
-.cards {
-  position: relative;
+// .cards {
+//   position: relative;
 
-  & span {
-    & section {
-      position: sticky;
+//   & span {
+//     & section {
+//       position: sticky;
 
-      box-shadow: 0 -0.25rem 0.25rem $black;
-    }
+//       box-shadow: 0 -0.25rem 0.25rem $black;
+//     }
 
-    &:nth-child(1) section {
-      background-color: $emerald-200;
-    }
-    &:nth-child(2) section {
-      background-color: $green-200;
-    }
+//     &:nth-child(1) section {
+//       background-color: $emerald-200;
+//     }
+//     &:nth-child(2) section {
+//       background-color: $green-200;
+//     }
 
-    @include dark {
-      &:nth-child(1) section {
-        background-color: $emerald-900;
-      }
-      &:nth-child(2) section {
-        background-color: $green-900;
-      }
-    }
-  }
-}
+//     @include dark {
+//       &:nth-child(1) section {
+//         background-color: $emerald-900;
+//       }
+//       &:nth-child(2) section {
+//         background-color: $green-900;
+//       }
+//     }
+//   }
+// }
 
 .anchor {
   display: block;
