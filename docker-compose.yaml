@@ -44,6 +44,8 @@ services:
       - NEXT_PUBLIC_API=${NEXT_PUBLIC_API:-http://localhost:8080}
       - NODE_ENV=production
       - HOST=0.0.0.0
+    ports:
+      - 3000:3000
     container_name: html-release
     image: html-release
     networks:
