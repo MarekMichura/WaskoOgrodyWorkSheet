@@ -12,8 +12,8 @@ import {EHref} from '@/utils/enums/EHref'
 
 import s from './css.module.scss'
 import FooterLink from './footerLink'
+import FooterLinkMultiple from './footerLinkMultiple'
 import FooterLinkOutside from './footerLinkOutside'
-import FooterLinkPhone from './footerLinkPhone'
 
 const PhoneIcon = dynamic(() => import('@/components/img/icon/phone/phone'), {ssr: false, loading: LoadPhoneIcon})
 const MailIcon = dynamic(() => import('@/components/img/icon/mail/mail'), {ssr: false, loading: LoadMailIcon})
@@ -48,16 +48,23 @@ function HomeFooter() {
               />
             </li>
             <li>
-              <FooterLinkPhone
+              <FooterLinkMultiple
                 data={[
-                  {href: 'tel:+48509808277', text: 'Maciek Waśko: +48 509 808 277 '},
-                  {href: 'tel:+48730888972', text: 'Adam Michalik: +48 730 888 972 '},
+                  {href: 'tel:+48509808277', text: 'Maciej Waśko: +48 509 808 277'},
+                  {href: 'tel:+48730888972', text: 'Adam Michalik: +48 730 888 972'},
                 ]}
                 icon={<PhoneIcon />}
               />
             </li>
             <li>
-              <FooterLinkOutside href="biuro@wawelgarden.pl" text="biuro@wawelgarden.pl" icon={<MailIcon />} />
+              <FooterLinkMultiple
+                data={[
+                  {href: 'mailto:biuro@wawelgarden.pl', text: 'biuro@wawelgarden.pl'},
+                  {href: 'mailto:michalik@wawelgarden.pl', text: 'michalik@wawelgarden.pl'},
+                  {href: 'mailto:wasko@wawelgarden.pl', text: 'wasko@wawelgarden.pl'},
+                ]}
+                icon={<MailIcon />}
+              />
             </li>
           </ul>
         </div>

@@ -54,12 +54,15 @@ export default function nextConfigShorterNamesWebpack(config: any) {
     ...(config.resolve.alias || {}),
     '@': path.resolve(__dirname, 'src'),
   }
-  
+
   config.module.rules // all rules
     .find((rule: any) => typeof rule.oneOf === 'object') // load file rules
     .oneOf.filter((rule: any) => Array.isArray(rule.use)) // check if rule has loader
     .flatMap((rule: any) => rule.use) // need only this table
-    .filter((moduleLoader: any) => moduleLoader.loader?.includes('css-loader') && !moduleLoader.loader?.includes('postcss-loader')) // limit only to styles loaders
+    .filter(
+      (moduleLoader: any) =>
+        moduleLoader.loader?.includes('css-loader') && !moduleLoader.loader?.includes('postcss-loader')
+    ) // limit only to styles loaders
     .filter((moduleLoader: any) => moduleLoader.options.modules)
     .map((moduleLoader: any) => moduleLoader.options.modules)
     .forEach((module: any) => {

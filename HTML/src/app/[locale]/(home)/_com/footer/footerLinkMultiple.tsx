@@ -6,7 +6,7 @@ import {MotionRippleHref} from '@/components/form/ripple/rippleHref'
 
 import s from './css.module.scss'
 
-interface IFooterLinkPhone {
+interface IFooterLinkMultipleToImageProps {
   data: {
     href: string
     text: string
@@ -16,7 +16,7 @@ interface IFooterLinkPhone {
 
 type IAnimationRef = Promise<any> | null
 
-function FooterLinkPhone({icon, data}: IFooterLinkPhone) {
+function FooterLinkMultiple({icon, data}: IFooterLinkMultipleToImageProps) {
   const animate = useAnimation()
 
   const refAnimation = useRef<IAnimationRef[]>([])
@@ -84,35 +84,37 @@ function FooterLinkPhone({icon, data}: IFooterLinkPhone) {
   )
 
   return (
-    <div className={s.menIconPhone}>
+    <div className={s.menIcon}>
       <div className={s.iconCon}>{icon}</div>
-      {data.map(({href, text}, i) => (
-        <MotionRippleHref
-          key={i}
-          href={href}
-          onHoverEnd={leave(i)}
-          onHoverStart={hover(i)}
-          onClick={click(i)}
-          animate={animate}>
-          <AnimatedRotateText text={text} open={`open${i}`} close={`close${i}`} />
-          <motion.span
-            className={s.rippleBottom}
-            variants={{
-              [`open${i}`]: {left: 0},
-              [`close${i}`]: {left: '50%'},
-            }}
-          />
-          <motion.span
-            className={s.rippleBottom}
-            variants={{
-              [`open${i}`]: {right: 0},
-              [`close${i}`]: {right: '50%'},
-            }}
-          />
-        </MotionRippleHref>
-      ))}
+      <div className={s.menIconMultipleLink}>
+        {data.map(({href, text}, i) => (
+          <MotionRippleHref
+            key={i}
+            href={href}
+            onHoverEnd={leave(i)}
+            onHoverStart={hover(i)}
+            onClick={click(i)}
+            animate={animate}>
+            <AnimatedRotateText text={text} open={`open${i}`} close={`close${i}`} />
+            <motion.span
+              className={s.rippleBottom}
+              variants={{
+                [`open${i}`]: {left: 0},
+                [`close${i}`]: {left: '50%'},
+              }}
+            />
+            <motion.span
+              className={s.rippleBottom}
+              variants={{
+                [`open${i}`]: {right: 0},
+                [`close${i}`]: {right: '50%'},
+              }}
+            />
+          </MotionRippleHref>
+        ))}
+      </div>
     </div>
   )
 }
 
-export default FooterLinkPhone
+export default FooterLinkMultiple

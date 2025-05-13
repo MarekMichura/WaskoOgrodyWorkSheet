@@ -6,12 +6,12 @@ import s from './css.module.scss'
 import IconDescription from './iconDes'
 
 const IconsDescription = forwardRef<HTMLElement, IIconsDescriptionProps>((p, ref) => {
-  const {title,  className, icon1, icon2, icon3, ...props} = p
+  const {title, className, icon1, icon2, icon3, ...props} = p
 
   return (
     <section className={clsx(s.section, className)} {...props} ref={ref}>
       <div className={s.content}>
-        <h1 className={s.title} >
+        <h1 className={s.title}>
           <span>{title}</span>
         </h1>
         <div className={s.icons}>
