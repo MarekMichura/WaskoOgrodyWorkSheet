@@ -86,6 +86,8 @@
   margin: 0 auto;
 
   display: grid;
+  justify-content: center;
+  align-items: center;
   gap: 0 3rem;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto auto auto;
@@ -130,14 +132,14 @@
 }
 
 .icon {
-  margin: 0 auto;
-
   width: 100%;
-  max-width: 12rem;
-  aspect-ratio: 1/1;
 
-  @include mediaSmall {
-    margin: 0 auto;
+  display: flex;
+  justify-content: center;
+
+  & > * {
+    max-width: 12rem;
+    aspect-ratio: 1/1;
   }
 }
 
@@ -162,7 +164,7 @@
 }
 
 .iconDes {
-  margin-top: 1rem;
+  padding-top: 1rem;
 
   text-align: justify;
 }
