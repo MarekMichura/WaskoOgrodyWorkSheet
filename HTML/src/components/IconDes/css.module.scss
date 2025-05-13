@@ -39,7 +39,9 @@
   text-transform: uppercase;
 
   background-color: inherit;
+
   @include fontBlack;
+  overflow-wrap: break-word;
 
   & span {
     position: relative;

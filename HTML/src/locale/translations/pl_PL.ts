@@ -31,7 +31,7 @@ const pl: ILocalization = {
     meet: {
       title: 'Poznaj Nasze Mocne Strony',
 
-      greenLandTitle: 'Spożytkowanie terenów zieleni',
+      greenLandTitle: 'Zagospodarowanie terenów zieleni',
       greenLandDest:
         'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis vel exercitationem asperiores ducimus optio minima nostrum enim! Dolor iure accusamus libero quasi aperiam, quas harum iste deleniti maiores fugit pariatur!',
 
