@@ -96,9 +96,10 @@
 
 .list {
   display: flex;
-  gap: 0.25rem;
+  gap: 0.5rem;
 
   list-style-type: none;
+  text-transform: uppercase;
 
   @include mediaMedium {
     height: 100%;

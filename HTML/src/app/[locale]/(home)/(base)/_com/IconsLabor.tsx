@@ -9,9 +9,9 @@ import useStickyCard from '@/utils/hooks/useStickyCard'
 
 import s from '../css.module.scss'
 
-const DiggerIcon = dynamic(() => import('@/components/img/icon/digger/digger'), {ssr: false})
+const CutterIcon = dynamic(() => import('@/components/img/icon/cutter/cutter'), {ssr: false})
+const ParkIcon = dynamic(() => import('@/components/img/icon/park/park'), {ssr: false})
 const BluePrintIcon = dynamic(() => import('@/components/img/icon/blueprint/blueprint'), {ssr: false})
-const PlantingIcon = dynamic(() => import('@/components/img/icon/planting/planting'), {ssr: false})
 
 function HomeIconsLabor() {
   const [stickyRef, top] = useStickyCard()
@@ -30,17 +30,17 @@ function HomeIconsLabor() {
         icon1={{
           title: t('architectureTitle'),
           description: t('architectureDest'),
-          icon: <BluePrintIcon />,
+          icon: <ParkIcon />,
         }}
         icon2={{
-          title: t('plantingsTitle'),
-          description: t('plantingsDest'),
-          icon: <PlantingIcon />,
+          title: t('greenMaintenanceTitle'),
+          description: t('greenMaintenanceDest'),
+          icon: <CutterIcon />,
         }}
         icon3={{
           title: t('projectsTitle'),
           description: t('projectsDest'),
-          icon: <DiggerIcon />,
+          icon: <BluePrintIcon />,
         }}
       />
     </>

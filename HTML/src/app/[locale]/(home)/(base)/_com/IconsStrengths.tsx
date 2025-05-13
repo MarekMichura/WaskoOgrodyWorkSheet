@@ -7,9 +7,9 @@ import IconsDescription from '@/components/IconDes/IconsDes'
 import useSection from '@/utils/hooks/useSection'
 import useStickyCard from '@/utils/hooks/useStickyCard'
 
-const ParkIcon = dynamic(() => import('@/components/img/icon/park/park'), {ssr: false})
+const DiggerIcon = dynamic(() => import('@/components/img/icon/digger/digger'), {ssr: false})
+const PlantingIcon = dynamic(() => import('@/components/img/icon/planting/planting'), {ssr: false})
 const SoilIcon = dynamic(() => import('@/components/img/icon/soil/soil'), {ssr: false})
-const CutterIcon = dynamic(() => import('@/components/img/icon/cutter/cutter'), {ssr: false})
 
 import s from '../css.module.scss'
 
@@ -30,7 +30,7 @@ function HomeIconStrengths() {
         icon1={{
           title: t('greenLandTitle'),
           description: t('greenLandDest'),
-          icon: <ParkIcon />,
+          icon: <DiggerIcon />,
         }}
         icon2={{
           title: t('greenRoofTitle'),
@@ -38,9 +38,9 @@ function HomeIconStrengths() {
           icon: <SoilIcon />,
         }}
         icon3={{
-          title: t('greenMaintenanceTitle'),
-          description: t('greenMaintenanceDest'),
-          icon: <CutterIcon />,
+          title: t('plantingsTitle'),
+          description: t('plantingsDest'),
+          icon: <PlantingIcon />,
         }}
       />
     </>

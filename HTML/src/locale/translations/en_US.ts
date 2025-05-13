@@ -39,20 +39,20 @@ const en = {
       greenRoofDest:
         'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis vel exercitationem asperiores ducimus optio minima nostrum enim! Dolor iure accusamus libero quasi aperiam, quas harum iste deleniti maiores fugit pariatur!',
 
-      greenMaintenanceTitle: 'Maintenance of Green Spaces',
-      greenMaintenanceDest:
+      plantingsTitle: 'Plantings',
+      plantingsDest:
         'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis vel exercitationem asperiores ducimus optio minima nostrum enim! Dolor iure accusamus libero quasi aperiam, quas harum iste deleniti maiores fugit pariatur!',
     },
 
     service: {
       title: 'Our Services',
 
-      architectureTitle: 'Paving and Small Architecture',
-      architectureDest:
+      greenMaintenanceTitle: 'Maintenance of Green Spaces',
+      greenMaintenanceDest:
         'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis vel exercitationem asperiores ducimus optio minima nostrum enim! Dolor iure accusamus libero quasi aperiam, quas harum iste deleniti maiores fugit pariatur!',
 
-      plantingsTitle: 'Plantings',
-      plantingsDest:
+      architectureTitle: 'Paving and Small Architecture',
+      architectureDest:
         'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis vel exercitationem asperiores ducimus optio minima nostrum enim! Dolor iure accusamus libero quasi aperiam, quas harum iste deleniti maiores fugit pariatur!',
 
       projectsTitle: 'Design and Planning',

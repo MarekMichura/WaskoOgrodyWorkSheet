@@ -71,9 +71,18 @@
   gap: 0.5rem;
 }
 
+.menIconPhone {
+  width: fit-content;
+  align-items: center;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 0.75rem 0.5rem;
+}
+
 .iconCon {
   margin-left: -0.5rem;
 
+  grid-row: 1/3;
   width: 2.5rem;
   height: 2.5rem;
 }

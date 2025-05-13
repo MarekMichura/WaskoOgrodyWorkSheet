@@ -39,8 +39,8 @@ const pl: ILocalization = {
       greenRoofDest:
         'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis vel exercitationem asperiores ducimus optio minima nostrum enim! Dolor iure accusamus libero quasi aperiam, quas harum iste deleniti maiores fugit pariatur!',
 
-      greenMaintenanceTitle: 'Utrzymanie zieleni',
-      greenMaintenanceDest:
+      plantingsTitle: 'Nasadzenia',
+      plantingsDest:
         'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis vel exercitationem asperiores ducimus optio minima nostrum enim! Dolor iure accusamus libero quasi aperiam, quas harum iste deleniti maiores fugit pariatur!',
     },
 
@@ -51,8 +51,8 @@ const pl: ILocalization = {
       architectureDest:
         'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis vel exercitationem asperiores ducimus optio minima nostrum enim! Dolor iure accusamus libero quasi aperiam, quas harum iste deleniti maiores fugit pariatur!',
 
-      plantingsTitle: 'Nasadzenia',
-      plantingsDest:
+      greenMaintenanceTitle: 'Utrzymanie zieleni',
+      greenMaintenanceDest:
         'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis vel exercitationem asperiores ducimus optio minima nostrum enim! Dolor iure accusamus libero quasi aperiam, quas harum iste deleniti maiores fugit pariatur!',
 
       projectsTitle: 'Projektowanie',
