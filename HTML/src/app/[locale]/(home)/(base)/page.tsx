@@ -14,7 +14,7 @@ async function HomePage() {
   const imgHero = await getPublicBase64(HERO_IMG)
 
   return (
-    <main>
+    <>
       <HeroVideo img={imgHero} video={{mp4: HERO_MP4, webm: HERO_WEBM}} sectionName="heroImg">
         <Image src={LogoFull} alt="Logo" className={s.heroLogo} priority />
       </HeroVideo>
@@ -23,7 +23,7 @@ async function HomePage() {
         <HomeIconsLabor />
         <CarouselTrustedUs />
       </section>
-    </main>
+    </>
   )
 }
 

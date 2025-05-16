@@ -1,9 +1,9 @@
 'use client'
 
 import {motion, useScroll, useSpring, useTransform} from 'framer-motion'
-import {useRef, useState} from 'react'
+import {useCallback, useRef, useState} from 'react'
 
-import useWindowsSize from '@/utils/hooks/useWindowSize'
+import useWindowsSize from '@/utils/hooks/useWindowsSize'
 import {type IChildren} from '@/utils/types/IChildren'
 
 import s from './css.module.scss'
@@ -15,11 +15,12 @@ function HeroVideoContent({children}: IChildren) {
 
   const roundedProgress = useTransform(scrollYProgress, (value) => Math.round(value * 100) / 100)
   const scale = useSpring(useTransform(roundedProgress, [0.5, 1], [1, 0]))
-  const translateY = useSpring(useTransform(roundedProgress, [0.5, 1], [0, size]))
+  const y = useSpring(useTransform(roundedProgress, [0.5, 1], [0, size]))
 
-  useWindowsSize(() => {
+  const resizeEvent = useCallback(() => {
     setSize(window.outerHeight / 2)
-  })
+  }, [])
+  useWindowsSize(resizeEvent)
 
   return (
     <motion.div
@@ -27,7 +28,7 @@ function HeroVideoContent({children}: IChildren) {
       className={s.container}
       initial={{opacity: 0}}
       animate={{opacity: 1}}
-      style={{translateY, scale, opacity: scale, willChange: 'transform, opacity'}}>
+      style={{y, scale, opacity: scale, willChange: 'transform, opacity'}}>
       <div className={s.content}>{children}</div>
     </motion.div>
   )

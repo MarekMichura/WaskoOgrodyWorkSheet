@@ -1,6 +1,6 @@
 import {type RefObject, useCallback, useRef, useState} from 'react'
 
-import useWindowsSize from './useWindowSize'
+import useWindowsSize from './useWindowsSize'
 
 export default function useStickyCard<T extends HTMLElement>(): [RefObject<T | null>, number] {
   const ref = useRef<T>(null)

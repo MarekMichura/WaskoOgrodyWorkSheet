@@ -1,3 +1,4 @@
+import PageAnimatePresence from '@/components/animation/changePage/mainMotion'
 import HomeLayoutContext from '@/utils/context/homeLayoutContext/context'
 import {type IChildren} from '@/utils/types/IChildren'
 
@@ -8,7 +9,7 @@ function HomeLayout({children}: IChildren) {
   return (
     <HomeLayoutContext>
       <HomeHeader />
-      {children}
+      <PageAnimatePresence>{children}</PageAnimatePresence>
       <HomeFooter />
     </HomeLayoutContext>
   )

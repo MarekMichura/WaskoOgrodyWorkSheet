@@ -24,7 +24,7 @@ function Ripple({left, top}: IRipple) {
       className={s.ripple}
       animate={animate}
       style={{top, left}}
-      initial={{translateX: '-50%', translateY: '-50%', scale: '0', opacity: 0}}
+      initial={{x: '-50%', y: '-50%', scale: '0', opacity: 0}}
       variants={{
         ripple: {scale: 2, opacity: 0.25, transition: {duration: 0.4}},
         hide: {scale: 0, opacity: 0},

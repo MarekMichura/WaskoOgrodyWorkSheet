@@ -22,7 +22,7 @@ const RippleLink = forwardRef<HTMLAnchorElement, IRippleLinkProps>((p, ref) => {
   )
 
   return (
-    <Link {...props} ref={ref} className={clsx(className, s.btn)} onClick={click}>
+    <Link {...props} ref={ref} scroll={false} className={clsx(className, s.btn)} onClick={click}>
       {children}
       <div className={s.rippleCon}>
         {ripples.map(({key, left, top}) => (

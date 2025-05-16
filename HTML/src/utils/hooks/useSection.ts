@@ -6,7 +6,7 @@ import {EHomeLayoutAction} from '../context/homeLayoutContext/_type/IAction'
 import homeLayoutContext from '../context/homeLayoutContext/default'
 
 import {useScrollRefPast} from './useScrollRef'
-import useWindowsSize from './useWindowSize'
+import useWindowsSize from './useWindowsSize'
 
 export default function useSection<T extends HTMLElement>(name: ILocalizationSecondKeys<'sections'>) {
   const [ref, {past, y}] = useScrollRefPast<T>()

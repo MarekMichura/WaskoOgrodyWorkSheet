@@ -10,7 +10,6 @@ function IconDescription({icon, description, title, nr}: IIconDescriptionProps) 
   const [hovered, setHovered] = useState(false)
 
   const hover = useCallback(() => {
-    console.log('123')
     setHovered(true)
   }, [])
 

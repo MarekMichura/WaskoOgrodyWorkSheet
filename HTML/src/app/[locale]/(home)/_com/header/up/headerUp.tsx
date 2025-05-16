@@ -16,7 +16,7 @@ import Logo from '@/components/img/logo/logoFull.png'
 import {usePathname} from '@/locale/navigation'
 import {EHref} from '@/utils/enums/EHref'
 import useMenu, {EMenuState} from '@/utils/hooks/useMenu'
-import useWindowsSize from '@/utils/hooks/useWindowSize'
+import useWindowsSize from '@/utils/hooks/useWindowsSize'
 import {useMutateChangeTheme} from '@/utils/query/theme/mutateSwitchTheme'
 
 import {navVariations, langVariations, backVariations} from '../_data/upVariations'

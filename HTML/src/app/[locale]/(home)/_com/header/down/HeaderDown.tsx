@@ -5,7 +5,7 @@ import {forwardRef, useCallback, useContext, useEffect, useRef, useState} from '
 import RippleBtn from '@/components/form/ripple/rippleBtn'
 import homeLayoutContext from '@/utils/context/homeLayoutContext/default'
 import useMenu, {EMenuState} from '@/utils/hooks/useMenu'
-import useWindowsSize from '@/utils/hooks/useWindowSize'
+import useWindowsSize from '@/utils/hooks/useWindowsSize'
 
 import {backVariations, navVariations} from '../_data/downVariations'
 import {type IStateHeaderDownBuble} from '../_type/IStateHeaderDownBuble'

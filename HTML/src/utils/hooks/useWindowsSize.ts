@@ -7,3 +7,5 @@ export default function useWindowsSize(fun: () => void) {
     return () => window.removeEventListener('resize', fun)
   }, [fun])
 }
+
+

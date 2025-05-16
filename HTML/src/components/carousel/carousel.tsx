@@ -26,17 +26,16 @@ const Carousel = forwardRef<HTMLElement, ICarouselProps>((p, forwardRef) => {
   const [width, setWidth] = useState(0)
   // prettier-ignore
   useRefSize(refCards, useCallback((ele) => {
-    console.log('resize carousel')
     setWidth(ele.clientWidth + 8)
   }, []))
 
-  const translateX = useMotionValue(0)
+  const x = useMotionValue(0)
   useEffect(() => {
     if (!isInView) return
 
-    const pos = translateX.get()
+    const pos = x.get()
     const control = mustFinish
-      ? animate(translateX, [pos, width], {
+      ? animate(x, [pos, width], {
           ease: 'linear',
           duration: (width - pos) / speed,
           repeatDelay: 0,
@@ -44,7 +43,7 @@ const Carousel = forwardRef<HTMLElement, ICarouselProps>((p, forwardRef) => {
             setMustFinish(false)
           },
         })
-      : animate(translateX, [0, width], {
+      : animate(x, [0, width], {
           ease: 'linear',
           duration: width / speed,
           repeat: Infinity,
@@ -54,7 +53,7 @@ const Carousel = forwardRef<HTMLElement, ICarouselProps>((p, forwardRef) => {
     return () => {
       control.stop()
     }
-  }, [mustFinish, speed, translateX, width, isInView])
+  }, [mustFinish, speed, x, width, isInView])
 
   const slow = useCallback(() => {
     setSpeed(SLOW_SPEED)
@@ -72,7 +71,7 @@ const Carousel = forwardRef<HTMLElement, ICarouselProps>((p, forwardRef) => {
           {title}
           <span className={s.titleSpan}>{subTitle}</span>
         </h1>
-        <motion.div className={s.cards} style={{translateX}} onMouseEnter={slow} onMouseLeave={fast}>
+        <motion.div className={s.cards} style={{x}} onMouseEnter={slow} onMouseLeave={fast}>
           <div className={s.transport} ref={refCards}>
             {cards.map((ele, i) => (
               <CarouselCard {...ele} key={i} />

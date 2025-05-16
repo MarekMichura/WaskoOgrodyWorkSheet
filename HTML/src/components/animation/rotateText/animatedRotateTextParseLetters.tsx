@@ -9,14 +9,14 @@ function AnimatedRotateTextParseLetters({text, open, close}: IAnimatedRotateText
       <motion.span
         key={i}
         className={s.letter}
-        initial={{transform: 'translateY(0%)'}}
+        initial={{y: '0'}}
         variants={{
           [open ?? 'open']: {
-            transform: 'translateY(-200%)',
+            y: '-200%',
             transition: {delay: i / 50, duration: 0.8},
           },
           [close ?? 'close']: {
-            transform: 'translateY(0)',
+            y: '0',
             transition: {delay: i / 50, duration: 0.8},
           },
         }}>

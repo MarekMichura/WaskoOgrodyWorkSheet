@@ -9,7 +9,7 @@ import HeaderDown from './down/HeaderDown'
 import HeaderUp from './up/headerUp'
 
 function HomeHeader() {
-  const [position, setPosition] = useState<IHeaderPosition>('hide')
+  const [position, setPosition] = useState<IHeaderPosition>('down')
   const lastScrollY = useRef(0)
   const ticking = useRef(false)
 
@@ -21,7 +21,7 @@ function HomeHeader() {
       if (!ticking.current) {
         requestAnimationFrame(() => {
           const newPosition: IHeaderPosition =
-            currentY < window.innerHeight ? 'hide' : delta > 10 ? 'up' : delta < -10 ? 'down' : position
+            currentY < window.innerHeight ? 'down' : delta > 10 ? 'up' : delta < -10 ? 'down' : position
 
           if (newPosition !== position) {
             setPosition(newPosition)
@@ -42,8 +42,8 @@ function HomeHeader() {
 
   return (
     <header className={s.header}>
-      <HeaderUp initial="hide" animate={position} variants={headerUpVariations} />
-      <HeaderDown initial="hide" animate={position} variants={headerDownVariations} />
+      <HeaderUp animate={position} variants={headerUpVariations} />
+      <HeaderDown animate={position} variants={headerDownVariations} />
     </header>
   )
 }
