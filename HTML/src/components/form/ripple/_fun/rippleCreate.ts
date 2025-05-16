@@ -18,7 +18,14 @@ export function createRipple<T extends HTMLElement>(
 
   if (onClick) onClick(e)
   const key = generateUID()
-  const rect = (e.currentTarget as HTMLElement).getBoundingClientRect()
+
+  let rectCon = e.currentTarget as HTMLElement
+  while (rectCon && getComputedStyle(rectCon).position !== 'relative') {
+    if (!rectCon.parentElement) break
+    rectCon = rectCon.parentElement
+  }
+
+  const rect = rectCon.getBoundingClientRect()
   const ripple: IRipple = {left: `${e.clientX - rect.left}px`, top: `${e.clientY - rect.top}px`, key}
 
   requestAnimationFrame(() => {

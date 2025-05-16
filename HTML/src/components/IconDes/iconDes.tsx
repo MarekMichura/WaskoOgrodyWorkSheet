@@ -18,7 +18,7 @@ function IconDescription({icon, description, title, nr}: IIconDescriptionProps) 
   }, [])
 
   return (
-    <RippleLink href="/" onMouseEnter={hover} onMouseLeave={leave}>
+    <RippleLink href="/" scroll={false} onMouseEnter={hover} onMouseLeave={leave} className={s.link}>
       <motion.div
         style={{gridArea: `icon${nr}`}}
         variants={{open: {scale: 1.3, transition: {duration: 0.5}}, close: {scale: 1}}}

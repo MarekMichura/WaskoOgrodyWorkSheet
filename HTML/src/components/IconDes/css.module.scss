@@ -1,4 +1,6 @@
 .section {
+  position: relative;
+
   margin: 0 auto;
   padding: 6rem 3rem;
 
@@ -83,6 +85,8 @@
 }
 
 .icons {
+  position: relative;
+
   margin: 0 auto;
 
   display: grid;
@@ -144,17 +148,20 @@
 }
 
 .iconTitle {
+  height: 100%;
+
   display: flex;
   justify-content: center;
   align-items: end;
 
-  @include fontBlack;
   text-align: center;
 
   color: $emerald-600;
 
   border-bottom: 0.25rem solid $emerald-800;
   text-wrap: balance;
+
+  @include fontBlack;
 
   @include dark {
     color: $green-50;
@@ -167,4 +174,10 @@
   padding-top: 1rem;
 
   text-align: justify;
+}
+
+.link.link {
+  position: static;
+
+  display: contents;
 }

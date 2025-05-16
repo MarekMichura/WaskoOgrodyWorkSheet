@@ -34,7 +34,7 @@ function HomeTemplate({children}: IChildren) {
 
   return (
     <>
-      <motion.main transition={{duration: 0.6}} exit={{opacity: 0.9}} style={{minHeight: '100dvh'}}>
+      <motion.main transition={{duration: 0.3}} exit={{opacity: 0.9}} style={{minHeight: '100dvh'}}>
         {children}
       </motion.main>
 
@@ -44,7 +44,7 @@ function HomeTemplate({children}: IChildren) {
             close: {opacity: 1, '--radius': `0px`, '--posX': `${pos.x}px`, '--posY': `${pos.y}px`},
             open: {opacity: 0, '--radius': `${winSize}px`, '--posX': '', '--posY': ''},
           }}
-          transition={{duration: 0.5}}
+          transition={{duration: 0.2}}
           initial={'close'}
           className={s.black}
           exit={'close'}

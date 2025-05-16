@@ -26,8 +26,8 @@ function Ripple({left, top}: IRipple) {
       style={{top, left}}
       initial={{x: '-50%', y: '-50%', scale: '0', opacity: 0}}
       variants={{
-        ripple: {scale: 2, opacity: 0.25, transition: {duration: 0.4}},
-        hide: {scale: 0, opacity: 0},
+        ripple: {x: '-50%', y: '-50%', scale: 2, opacity: 0.25, transition: {duration: 0.4}},
+        hide: {x: '-50%', y: '-50%', scale: 0, opacity: 0},
       }}
     />
   )
