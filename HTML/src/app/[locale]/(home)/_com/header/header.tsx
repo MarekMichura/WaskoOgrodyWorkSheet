@@ -42,8 +42,8 @@ function HomeHeader() {
 
   return (
     <header className={s.header}>
-      <HeaderUp animate={position} variants={headerUpVariations} />
-      <HeaderDown animate={position} variants={headerDownVariations} />
+      <HeaderUp initial={'hide'} animate={position} variants={headerUpVariations} />
+      <HeaderDown initial={'hide'} animate={position} variants={headerDownVariations} />
     </header>
   )
 }

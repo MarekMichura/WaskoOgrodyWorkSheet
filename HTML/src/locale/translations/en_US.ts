@@ -65,6 +65,21 @@ const en = {
       subTitle: 'Trusted by industry leaders',
     },
   },
+
+  project: {
+    May3: {
+      path: 'May3',
+    },
+    Grzegorzecka: {
+      path: 'Grzegórzecka',
+    },
+    Pychowicka1: {
+      path: 'Pychowicka1',
+    },
+    Wizjonerow: {
+      path: 'Wizjonerów',
+    },
+  },
 } as const
 
 export type ILocalization = Stringify<typeof en>

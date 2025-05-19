@@ -25,7 +25,7 @@
     ".prettierrc",
     "dockerfile"
   ],
-  "cSpell.words": ["lottiefiles", "Nuqs", "Plaiceholder"],
+  "cSpell.words": ["defaulticon", "lottiefiles", "Nuqs", "Plaiceholder", "Pychowicka"],
   "stylelint.validate": ["scss", "css"],
   "editor.codeActionsOnSave": {
     "source.fixAll.stylelint": "always"

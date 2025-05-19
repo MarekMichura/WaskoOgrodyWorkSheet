@@ -65,6 +65,21 @@ const pl: ILocalization = {
       subTitle: 'Dołącz do tej listy',
     },
   },
+
+  project: {
+    May3: {
+      path: 'TrzeciegoMaja',
+    },
+    Grzegorzecka: {
+      path: 'Grzegórzecka',
+    },
+    Pychowicka1: {
+      path: 'Pychowicka1',
+    },
+    Wizjonerow: {
+      path: 'Wizjonerów',
+    },
+  },
 } as const
 
 export default pl

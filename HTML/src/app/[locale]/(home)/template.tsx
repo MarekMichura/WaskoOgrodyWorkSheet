@@ -34,7 +34,7 @@ function HomeTemplate({children}: IChildren) {
 
   return (
     <>
-      <motion.main transition={{duration: 0.3}} exit={{opacity: 0.9}} style={{minHeight: '100dvh'}}>
+      <motion.main className={s.main} transition={{duration: 0.3}} exit={{opacity: 0.9}}>
         {children}
       </motion.main>
 
@@ -42,7 +42,7 @@ function HomeTemplate({children}: IChildren) {
         <motion.div
           variants={{
             close: {opacity: 1, '--radius': `0px`, '--posX': `${pos.x}px`, '--posY': `${pos.y}px`},
-            open: {opacity: 0, '--radius': `${winSize}px`, '--posX': '', '--posY': ''},
+            open: {opacity: 0, '--radius': `${winSize}px`, '--posX': '', '--posY': '', transition: {duration: 0.4}},
           }}
           transition={{duration: 0.2}}
           initial={'close'}

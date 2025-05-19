@@ -57,7 +57,7 @@ const HeaderUp = forwardRef<HTMLElement>(({}, ref) => {
   return (
     <section ref={ref} className={s.section}>
       <div className={s.logoHolder}>
-        <Image alt="Logo" src={Logo} className={s.logo} placeholder="blur" priority />
+        <Image alt="Logo" src={Logo} className={s.logo} priority />
       </div>
 
       <RippleBtn className={s.navOpener} onClick={navMenuChange}>
