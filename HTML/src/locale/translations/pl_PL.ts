@@ -28,36 +28,32 @@ const pl: ILocalization = {
   home: {
     title: 'Wawel Garden',
 
-    meet: {
+    icons: {
       title: 'Poznaj Nasze Mocne Strony',
+      desc: 'Poznaj Nasze Mocne Strony',
 
-      greenLandTitle: 'Zagospodarowanie terenów zieleni',
+      greenLandTitle: 'Zmieniamy przestrzeń w zielone doświadczenie',
       greenLandDest:
-        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis vel exercitationem asperiores ducimus optio minima nostrum enim! Dolor iure accusamus libero quasi aperiam, quas harum iste deleniti maiores fugit pariatur!',
+        'Zespół naszych projektantów i wykonawców to ludzie z pasją, doświadczeniem i wyczuciem stylu. Wiemy, jak połączyć zieleń z architekturą, technologią i komfortem użytkowania.',
 
       greenRoofTitle: 'Zielone dachy',
-      greenRoofDest:
-        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis vel exercitationem asperiores ducimus optio minima nostrum enim! Dolor iure accusamus libero quasi aperiam, quas harum iste deleniti maiores fugit pariatur!',
+      greenRoofDest: `Zielony dach to coś więcej niż modny trend – to świadomy wybór estetyki, ekologii i komfortu. Tworzymy dachy, które nie tylko cieszą oko, ale realnie poprawiają jakość życia i przestrzeni wokół. Chcesz, żeby dach Twojego budynku pracował na Twoją korzyść? Z nami to możliwe. Projektujemy i wykonujemy dachy zielone – intensywne i ekstensywne – dopasowane do architektury, warunków technicznych i Twoich oczekiwań.`,
 
       plantingsTitle: 'Nasadzenia',
       plantingsDest:
-        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis vel exercitationem asperiores ducimus optio minima nostrum enim! Dolor iure accusamus libero quasi aperiam, quas harum iste deleniti maiores fugit pariatur!',
-    },
-
-    service: {
-      title: 'Sprawdz W Czym Możemy Pomóc',
+        'Tworzymy zielone układy, które rosną razem z otoczeniem – naturalnie, harmonijnie i z efektem „wow” przez cały rok.',
 
       architectureTitle: 'Bruki i mała architektura',
       architectureDest:
-        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis vel exercitationem asperiores ducimus optio minima nostrum enim! Dolor iure accusamus libero quasi aperiam, quas harum iste deleniti maiores fugit pariatur!',
+        'Projektujemy i wykonujemy nawierzchnie oraz elementy małej architektury, które nie tylko są trwałe, ale też perfekcyjnie wpisują się w otoczenie. Od alejek i podjazdów, przez tarasy i murki oporowe, aż po designerskie donice, pergole i oświetlenie – każdy detal ma znaczenie.',
 
-      greenMaintenanceTitle: 'Utrzymanie zieleni',
+      greenMaintenanceTitle: 'Pielęgnacja zieleni',
       greenMaintenanceDest:
-        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis vel exercitationem asperiores ducimus optio minima nostrum enim! Dolor iure accusamus libero quasi aperiam, quas harum iste deleniti maiores fugit pariatur!',
+        'Nie działamy „z doskoku”. Tworzymy harmonogramy, monitorujemy kondycję roślin i reagujemy zanim problem się pojawi. Nasz serwis to więcej niż koszenie – to prawdziwa opieka nad krajobrazem.',
 
       projectsTitle: 'Projektowanie',
       projectsDest:
-        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis vel exercitationem asperiores ducimus optio minima nostrum enim! Dolor iure accusamus libero quasi aperiam, quas harum iste deleniti maiores fugit pariatur!',
+        'Tworzymy projekty zieleni, które łączą estetykę z praktyką. Myślimy o świetle, widokach, proporcjach, materiałach – i przede wszystkim o Tobie. Każdy projekt to indywidualna historia, opowiedziana roślinami, linią ścieżki i detalem architektonicznym.',
     },
 
     trusteed: {

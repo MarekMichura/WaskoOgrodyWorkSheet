@@ -1,44 +1,91 @@
-import {FlatCompat} from '@eslint/eslintrc'
-import query from '@tanstack/eslint-plugin-query'
-import imports from 'eslint-plugin-import'
-import reactHooks from 'eslint-plugin-react-hooks'
-import globals from 'globals'
+import js from '@eslint/js'
+import parser from '@typescript-eslint/parser'
 import {dirname} from 'path'
 import {fileURLToPath} from 'url'
+import {FlatCompat} from '@eslint/eslintrc'
+
+import react from 'eslint-plugin-react'
+import reactHooks from 'eslint-plugin-react-hooks'
+import jsxA11y from 'eslint-plugin-jsx-a11y'
+import importPlugin from 'eslint-plugin-import'
+import promise from 'eslint-plugin-promise'
+import security from 'eslint-plugin-security'
+import unusedImports from 'eslint-plugin-unused-imports'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-})
+const compat = new FlatCompat({baseDirectory: __dirname})
 
 const eslintConfig = [
+  js.configs.recommended,
   ...compat.extends('next/core-web-vitals', 'next/typescript'),
   {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
+      parser: parser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+        ecmaFeatures: {jsx: true},
+        project: './tsconfig.json',
+      },
     },
     plugins: {
-      '@tanstack/query': query,
+      react,
+      // '@tanstack/query': query,
       'react-hooks': reactHooks,
-      import: imports,
+      'jsx-a11y': jsxA11y,
+      import: importPlugin,
+      promise,
+      security,
+      'unused-imports': unusedImports,
     },
     rules: {
-      ...reactHooks.configs.recommended.rules,
-      ...imports.configs.recommended.rules,
-      ...query.configs.recommended.rules,
-
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-req': 'off',
+      // ts
+      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-unused-vars': 'warn',
       '@typescript-eslint/consistent-type-imports': [
-        'error',
-        {prefer: 'type-imports', fixStyle: 'inline-type-imports', disallowTypeAnnotations: false},
+        'warn',
+        {
+          prefer: 'type-imports',
+          fixStyle: 'inline-type-imports',
+          disallowTypeAnnotations: false,
+        },
       ],
-      'import/order': [
+
+      // React
+      'react/react-in-jsx-scope': 'off',
+      'react/jsx-uses-react': 'off',
+      'react-hooks/rules-of-hooks': 'error',
+      'react-hooks/exhaustive-deps': 'warn',
+
+      // locale imports
+      'no-restricted-imports': [
         'error',
+        {
+          name: 'next/link',
+          message: 'please use custom import from @/locale/navigation',
+          importNames: ['default', 'redirect'],
+        },
+        {
+          name: 'next/navigation',
+          message: 'please use custom import from @/locale/navigation',
+          importNames: ['redirect', 'usePathname', 'useRouter'],
+        },
+        {
+          name: 'react-redux',
+          message: 'please use custom import from @/components/redux',
+          importNames: ['useDispatch', 'useSelector'],
+        },
+      ],
+
+      // JSX A11y
+      'jsx-a11y/anchor-is-valid': 'warn',
+      'jsx-a11y/alt-text': 'warn',
+
+      // Imports
+      'import/order': [
+        'warn',
         {
           'newlines-between': 'always',
           pathGroups: [
@@ -58,19 +105,30 @@ const eslintConfig = [
           },
         },
       ],
-      'no-restricted-imports': [
-        'error',
+      'import/no-unresolved': 'error',
+
+      // Unused imports
+      'unused-imports/no-unused-imports': 'warn',
+      'unused-imports/no-unused-vars': [
+        'warn',
         {
-          name: 'next/link',
-          message: 'please use custom import from @/locale/navigation',
-          importNames: ['default', 'redirect'],
-        },
-        {
-          name: 'next/navigation',
-          message: 'please use custom import from @/locale/navigation',
-          importNames: ['redirect', 'usePathname', 'useRouter'],
+          vars: 'all',
+          varsIgnorePattern: '^_',
+          args: 'after-used',
+          argsIgnorePattern: '^_',
         },
       ],
+
+      // General
+      'no-console': 'warn',
+      'no-debugger': 'error',
+
+      // Promise
+      'promise/no-return-wrap': 'warn',
+      'promise/param-names': 'warn',
+
+      // Security
+      'security/detect-non-literal-fs-filename': 'warn',
     },
   },
 ]

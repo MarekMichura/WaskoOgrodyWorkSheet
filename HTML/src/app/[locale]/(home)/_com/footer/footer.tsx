@@ -3,23 +3,18 @@
 import dynamic from 'next/dynamic'
 import {useTranslations} from 'next-intl'
 
-import LoadFbIcon from '@/components/img/icon/fb/LoadFbIcon'
-import LoadIGIcon from '@/components/img/icon/IG/loadIGIcon'
-import LoadLocPinIcon from '@/components/img/icon/locPin/locPinLoading'
-import LoadMailIcon from '@/components/img/icon/mail/loadMail'
-import LoadPhoneIcon from '@/components/img/icon/phone/loadPhone'
-import {EHref} from '@/utils/enums/EHref'
+import {EHref} from '@/utils/enum/EHref'
 
 import s from './css.module.scss'
-import FooterLink from './footerLink'
-import FooterLinkMultiple from './footerLinkMultiple'
-import FooterLinkOutside from './footerLinkOutside'
+import FooterHref from './href'
+import FooterIconBox from './iconBox'
+import FooterLink from './link'
 
-const PhoneIcon = dynamic(() => import('@/components/img/icon/phone/phone'), {ssr: false, loading: LoadPhoneIcon})
-const MailIcon = dynamic(() => import('@/components/img/icon/mail/mail'), {ssr: false, loading: LoadMailIcon})
-const FbIcon = dynamic(() => import('@/components/img/icon/fb/fb'), {ssr: false, loading: LoadFbIcon})
-const IgIcon = dynamic(() => import('@/components/img/icon/IG/ig'), {ssr: false, loading: LoadIGIcon})
-const LocPinIcon = dynamic(() => import('@/components/img/icon/locPin/locPin'), {ssr: false, loading: LoadLocPinIcon})
+const PinIcon = dynamic(() => import('@/components/icon/pin/pin'), {ssr: false})
+const PhoneIcon = dynamic(() => import('@/components/icon/phone/phone'), {ssr: false})
+const MailIcon = dynamic(() => import('@/components/icon/mail/mail'), {ssr: false})
+const FbIcon = dynamic(() => import('@/components/icon/fb/fb'), {ssr: false})
+const IgIcon = dynamic(() => import('@/components/icon/ig/ig'), {ssr: false})
 
 function HomeFooter() {
   const t = useTranslations('nav')
@@ -41,30 +36,25 @@ function HomeFooter() {
           <h1 className={s.columnTitle}>{t('communication')}</h1>
           <ul className={s.list}>
             <li>
-              <FooterLinkOutside
-                href="https://www.google.com/maps/place/50.09605179017402,19.924549787417213"
-                text="Adama Vetulaniego 5b, 31-226 Kraków"
-                icon={<LocPinIcon />}
-              />
+              <FooterIconBox Icon={PinIcon}>
+                <FooterHref
+                  href="https://www.google.com/maps/place/50.09605179017402,19.924549787417213"
+                  text="Adama Vetulaniego 5b, 31-226 Kraków"
+                />
+              </FooterIconBox>
             </li>
             <li>
-              <FooterLinkMultiple
-                data={[
-                  {href: 'tel:+48509808277', text: 'Maciej Waśko: +48 509 808 277'},
-                  {href: 'tel:+48730888972', text: 'Adam Michalik: +48 730 888 972'},
-                ]}
-                icon={<PhoneIcon />}
-              />
+              <FooterIconBox Icon={PhoneIcon}>
+                <FooterHref href="tel:+48509808277" text="Maciej Waśko: +48 509 808 277" />
+                <FooterHref href="tel:+48730888972" text="Adam Michalik: +48 730 888 972" />
+              </FooterIconBox>
             </li>
             <li>
-              <FooterLinkMultiple
-                data={[
-                  {href: 'mailto:biuro@wawelgarden.pl', text: 'biuro@wawelgarden.pl'},
-                  {href: 'mailto:michalik@wawelgarden.pl', text: 'michalik@wawelgarden.pl'},
-                  {href: 'mailto:wasko@wawelgarden.pl', text: 'wasko@wawelgarden.pl'},
-                ]}
-                icon={<MailIcon />}
-              />
+              <FooterIconBox Icon={MailIcon}>
+                <FooterHref href="mailto:biuro@wawelgarden.pl" text="biuro@wawelgarden.pl" />
+                <FooterHref href="mailto:michalik@wawelgarden.pl" text="michalik@wawelgarden.pl" />
+                <FooterHref href="mailto:wasko@wawelgarden.pl" text="wasko@wawelgarden.pl" />
+              </FooterIconBox>
             </li>
           </ul>
         </div>
@@ -72,10 +62,14 @@ function HomeFooter() {
           <h1 className={s.columnTitle}>{t('follow')}</h1>
           <ul className={s.list}>
             <li>
-              <FooterLinkOutside href="tel:+48509808277" text="Facebook" icon={<FbIcon />} />
+              <FooterIconBox Icon={FbIcon}>
+                <FooterHref href="#" text="Facebook" />
+              </FooterIconBox>
             </li>
             <li>
-              <FooterLinkOutside href="tel:+48509808277" text="Instagram" icon={<IgIcon />} />
+              <FooterIconBox Icon={IgIcon}>
+                <FooterHref href="#" text="Instagram" />
+              </FooterIconBox>
             </li>
           </ul>
         </div>

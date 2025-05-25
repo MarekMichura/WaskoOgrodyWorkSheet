@@ -1,35 +1,48 @@
 import {type Metadata} from 'next'
+import {NextIntlClientProvider} from 'next-intl'
 import {getMessages, setRequestLocale} from 'next-intl/server'
+import {NuqsAdapter} from 'nuqs/adapters/next'
 
+import ClientProvider from '@/components/redux'
 import {routing} from '@/locale/routing'
-import {type ILocaleParam} from '@/utils/types/ILocaleParam'
+import {type IChildren} from '@/utils/type/IChildren'
 
-import RootLayoutContent from './_com/layoutContent'
-import {metadata} from './_data/metadata/metadata'
-import {type IRootLayoutProps} from './_type/IRootLayoutProps'
+import RootLayout from './_com/rootLayout'
+import {metadata, metadataLang} from './_data/metadata'
+import {type IParamsLocale} from './_type/IParamsLocale'
 
 export const dynamic = 'force-static'
 export const dynamicParams = false
 export function generateStaticParams() {
-  const locales = routing.locales
-  return locales.map((locale) => ({locale}))
+  return routing.locales.map((locale) => ({locale}))
 }
 
-export async function generateMetadata({params}: ILocaleParam): Promise<Metadata> {
+export async function generateMetadata({params}: IParamsLocale): Promise<Metadata> {
   const {locale} = await params
-  return metadata[locale]
+  const metadataLocale = metadataLang[locale]
+
+  return {
+    ...metadata,
+    ...metadataLocale,
+    openGraph: {...metadata.openGraph, ...metadataLocale.openGraph},
+    twitter: {...metadata.twitter, ...metadataLocale.twitter},
+  }
 }
 
-async function RootLayout({params, children}: IRootLayoutProps) {
-  const locale = (await params).locale
-  const messages = await getMessages({locale: locale})
+async function LocaleLayout({children, params}: IChildren & IParamsLocale) {
+  const {locale} = await params
+  const messages = await getMessages({locale})
   setRequestLocale(locale)
 
   return (
-    <RootLayoutContent lang={locale} messages={messages}>
-      {children}
-    </RootLayoutContent>
+    <ClientProvider>
+      <NextIntlClientProvider locale={locale} messages={messages}>
+        <NuqsAdapter>
+          <RootLayout>{children}</RootLayout>
+        </NuqsAdapter>
+      </NextIntlClientProvider>
+    </ClientProvider>
   )
 }
 
-export default RootLayout
+export default LocaleLayout

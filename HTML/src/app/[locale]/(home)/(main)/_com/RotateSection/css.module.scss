@@ -1,0 +1,50 @@
+.sec {
+  position: relative;
+
+  overflow: hidden;
+
+  pointer-events: none;
+}
+
+.element {
+  position: absolute;
+  top: 0;
+  left: 50%;
+
+  margin: 0 auto;
+
+  width: 100dvw;
+  height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  transform: translateX(-50%);
+
+  pointer-events: all;
+}
+
+.content {
+  max-width: 24rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.elementIcon {
+  max-width: 14rem;
+  max-height: 14rem;
+}
+
+.elementTitle {
+  margin-bottom: 2rem;
+
+  text-align: center;
+}
+
+.elementText {
+  text-align: center;
+}

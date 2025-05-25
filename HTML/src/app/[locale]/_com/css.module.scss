@@ -1,0 +1,30 @@
+.html {
+  width: 100dvw;
+
+  overflow-x: hidden;
+
+  * {
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+  }
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+
+  color: $stone-950;
+  background-color: $stone-200;
+
+  color-scheme: light;
+
+  @include dark {
+    color: $stone-50;
+    background-color: $stone-800;
+    color-scheme: dark;
+  }
+}

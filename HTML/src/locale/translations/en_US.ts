@@ -1,4 +1,4 @@
-import {type Stringify} from '../../utils/types/Stringify'
+import {type IStringify} from '@/utils/type/IStringify'
 
 const en = {
   nav: {
@@ -28,8 +28,9 @@ const en = {
   home: {
     title: 'Wawel Garden',
 
-    meet: {
+    icons: {
       title: 'Our Expertise',
+      desc: 'Poznaj Nasze Mocne Strony',
 
       greenLandTitle: 'Landscaping of Green Areas',
       greenLandDest:
@@ -42,10 +43,6 @@ const en = {
       plantingsTitle: 'Plantings',
       plantingsDest:
         'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nobis vel exercitationem asperiores ducimus optio minima nostrum enim! Dolor iure accusamus libero quasi aperiam, quas harum iste deleniti maiores fugit pariatur!',
-    },
-
-    service: {
-      title: 'Our Services',
 
       greenMaintenanceTitle: 'Maintenance of Green Spaces',
       greenMaintenanceDest:
@@ -82,8 +79,5 @@ const en = {
   },
 } as const
 
-export type ILocalization = Stringify<typeof en>
-export type ILocalizationSecondKeys<T extends keyof typeof en> = keyof (typeof en)[T]
-
-// export type ILocalizationSectionKeys<T extends keyof typeof en> = keyof (typeof en)[T]['sections']
+export type ILocalization = IStringify<typeof en>
 export default en

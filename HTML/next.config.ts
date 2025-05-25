@@ -1,14 +1,14 @@
 import withPlaiceholder from '@plaiceholder/next'
+import {type NextConfig} from 'next'
 import createNextIntlPlugin from 'next-intl/plugin'
 
 import nextConfigShorterNamesWebpack from './next.config.cssNames'
-
-import type {NextConfig} from 'next'
 
 const nextConfig: NextConfig = {
   distDir: 'build',
   output: 'standalone',
   reactStrictMode: true,
+
 
   sassOptions: {
     additionalData: `@use '@/utils/style/data.scss' as *;\n@use '@/utils/style/mixin.scss' as *;\n@use 'sass:color';`,

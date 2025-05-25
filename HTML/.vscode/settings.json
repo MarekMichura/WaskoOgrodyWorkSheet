@@ -8,26 +8,22 @@
     "**.sln": true,
     "**/bin": true,
     "**/obj": true,
-    "build": true,
-    "node_modules": true,
-    "yarn.lock": true,
     "next-env.d.ts": true,
-    ".gitignore": true,
-    ".prettierrc": true,
-    "dockerfile": true
+    "yarn.lock": true,
+    "node_modules": true,
+    "build": true
   },
-  "hide-files.files": [
-    "build",
-    "node_modules",
-    "yarn.lock",
-    "next-env.d.ts",
-    ".gitignore",
-    ".prettierrc",
-    "dockerfile"
-  ],
-  "cSpell.words": ["defaulticon", "lottiefiles", "Nuqs", "Plaiceholder", "Pychowicka"],
+  "hide-files.files": ["next-env.d.ts", "yarn.lock", "node_modules", "build"],
   "stylelint.validate": ["scss", "css"],
+  "cSpell.words": ["GSAP", "Nuqs", "Plaiceholder", "Pychowicka", "turbopack", "Tweens"],
   "editor.codeActionsOnSave": {
     "source.fixAll.stylelint": "always"
-  }
+  },
+  "todohighlight.keywords": [
+    {
+      "text": "SECT:",
+      "isWholeLine": true,
+      "backgroundColor": "#28242c"
+    }
+  ]
 }

@@ -1,0 +1,59 @@
+.container {
+  z-index: 1;
+  position: relative;
+
+  color: inherit;
+
+  &:before {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    top: var(--posY, 0);
+    left: var(--posX, 0);
+
+    min-width: 150%;
+    min-height: 150%;
+    aspect-ratio: 1/1;
+
+    display: block;
+
+    background-color: var(--bg, #{$stone-900});
+
+    border-radius: 100%;
+
+    transform: translate(-50%, -50%) scale(var(--scale, 0));
+    opacity: 0.9;
+  }
+
+  &:disabled {
+    &::before {
+      visibility: hidden;
+    }
+  }
+
+  @include dark {
+    --bg: #{$stone-100};
+  }
+}
+
+.ripple {
+  position: absolute;
+
+  min-width: 100%;
+  min-height: 100%;
+  aspect-ratio: 1/1;
+
+  display: block;
+
+  background-color: var(--ripple, #{$stone-900});
+
+  border-radius: 100%;
+
+  transform: translate(-50%, -50%);
+
+  pointer-events: none;
+
+  @include dark {
+    --ripple: #{$stone-100};
+  }
+}

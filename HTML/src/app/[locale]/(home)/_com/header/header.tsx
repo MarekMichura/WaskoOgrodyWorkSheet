@@ -1,49 +1,87 @@
 'use client'
 
-import {useEffect, useRef, useState} from 'react'
+import {useGSAP} from '@gsap/react'
+import gsap from 'gsap'
+import {ScrollTrigger} from 'gsap/ScrollTrigger'
+import {useCallback, useEffect, useRef, useState} from 'react'
+import {shallowEqual} from 'react-redux'
 
-import {headerDownVariations, headerUpVariations} from './_data/headerVariations'
-import {type IHeaderPosition} from './_type/IHeaderPosition'
+import {useSelector} from '@/components/redux'
+
+import {bottomHeader} from './_data/bottomHeader'
+import {topHeader} from './_data/topHeader'
+import {EHeaderPosition} from './_enum/EHeaderPosition'
+import HeaderBottom from './bottom/bottom'
 import s from './css.module.scss'
-import HeaderDown from './down/HeaderDown'
-import HeaderUp from './up/headerUp'
+import HeaderTop from './top/top'
 
 function HomeHeader() {
-  const [position, setPosition] = useState<IHeaderPosition>('down')
-  const lastScrollY = useRef(0)
-  const ticking = useRef(false)
+  const [{scroll, position}, setState] = useState({scroll: true, position: EHeaderPosition.down})
 
+  const mmRef = useRef<gsap.MatchMedia>(null)
+  const sectionTopRef = useRef(null)
+  const sectionBottomRef = useRef(null)
+
+  // get data from redux
+  const {forcePos, opacity} = useSelector(({section}) => {
+    if (section.current === undefined) return {}
+    if (section.current >= section.sections.length || section.current < 0) return {}
+    const element = section.sections[section.current]
+    const forcePos = element.navbar?.status
+    const opacity = element.navbar?.opacity
+
+    return {forcePos, opacity}
+  }, shallowEqual)
+
+  // create match media
   useEffect(() => {
-    function handleScroll() {
-      const currentY = window.scrollY
-      const delta = currentY - lastScrollY.current
+    const mm = gsap.matchMedia()
+    mmRef.current = mm
 
-      if (!ticking.current) {
-        requestAnimationFrame(() => {
-          const newPosition: IHeaderPosition =
-            currentY < window.innerHeight ? 'down' : delta > 10 ? 'up' : delta < -10 ? 'down' : position
+    return () => mm.revert()
+  }, [])
 
-          if (newPosition !== position) {
-            setPosition(newPosition)
-          }
+  // set position from section
+  useEffect(() => {
+    if (forcePos === undefined) return
 
-          lastScrollY.current = currentY
-          ticking.current = false
-        })
-        ticking.current = true
-      }
-    }
+    setState({scroll: false, position: forcePos})
+    return () => setState((prev) => ({scroll: true, position: prev.position}))
+  }, [forcePos])
 
-    window.addEventListener('scroll', handleScroll, {passive: true})
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [position])
+  // event function scroll
+  const scrollUpdate = useCallback((trigger: ScrollTrigger) => {
+    const direction = trigger.direction
+
+    setState((prev) => {
+      if (!prev.scroll) return prev
+      if (direction > 0) return {scroll: true, position: EHeaderPosition.up}
+      if (direction < 0) return {scroll: true, position: EHeaderPosition.down}
+      else return prev
+    })
+  }, [])
+
+  // create scroll event
+  useGSAP(() => {
+    if (!scroll) return
+    const trigger = ScrollTrigger.create({id: 'headerScroll', start: 0, end: 'max', onUpdate: scrollUpdate})
+
+    return () => trigger.kill()
+  }, [scroll])
+
+  // animate header position
+  useGSAP(() => {
+    mmRef.current?.add('(prefers-reduced-motion: no-preference)', () => {
+      gsap.to([sectionTopRef.current, sectionBottomRef.current], {opacity: opacity})
+      gsap.to(sectionBottomRef.current, bottomHeader[position])
+      gsap.to(sectionTopRef.current, topHeader[position])
+    })
+  }, [position, opacity])
 
   return (
     <header className={s.header}>
-      <HeaderUp initial={'hide'} animate={position} variants={headerUpVariations} />
-      <HeaderDown initial={'hide'} animate={position} variants={headerDownVariations} />
+      <HeaderTop ref={sectionTopRef} />
+      <HeaderBottom ref={sectionBottomRef} />
     </header>
   )
 }

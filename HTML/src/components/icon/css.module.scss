@@ -1,0 +1,14 @@
+.svg {
+  position: relative;
+
+  width: auto;
+  height: inherit;
+  aspect-ratio: 1/1;
+
+  display: block;
+
+  svg {
+    width: auto;
+    height: inherit;
+  }
+}

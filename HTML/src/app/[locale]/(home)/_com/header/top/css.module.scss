@@ -1,0 +1,311 @@
+.container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+
+  padding: 0 1rem;
+
+  height: 6rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+
+  background-color: $stone-100;
+
+  @include dark {
+    background-color: $stone-900;
+  }
+}
+
+.holder {
+  position: relative;
+
+  width: fit-content;
+  height: calc(100% - 1rem);
+  aspect-ratio: 1080/725;
+}
+
+.logo {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  visibility: hidden;
+
+  filter: contrast(var(--contrast)) brightness(var(--brightness))
+    drop-shadow(calc(-1 * var(--size)) calc(-1 * var(--size)) 0 var(--shadow)) //
+    drop-shadow(calc(-1 * var(--size)) var(--size) 0 var(--shadow)) //
+    drop-shadow(var(--size) calc(-1 * var(--size)) 0 var(--shadow)) //
+    drop-shadow(var(--size) var(--size) 0 var(--shadow));
+  object-fit: contain;
+
+  --size: 0px;
+  --contrast: 1;
+  --brightness: 1;
+  --brightness: 0.75;
+  --shadow: #{$gray-700};
+  @include dark {
+    --brightness: 1;
+    --shadow: #{$white};
+  }
+}
+
+.nav {
+  @include mediaMedium {
+    z-index: 1;
+    position: fixed;
+    top: 6rem;
+    right: 0rem;
+
+    min-width: 12rem;
+    max-width: calc(100vw - 2rem);
+    height: calc(100vh - 6rem);
+
+    display: flex;
+    flex-direction: column;
+
+    background-color: $stone-100;
+
+    opacity: 0;
+    overflow: auto;
+
+    pointer-events: none;
+
+    @include dark {
+      background-color: $stone-900;
+    }
+  }
+}
+
+.elements {
+  display: flex;
+  gap: clamp(0px, calc(100vw - 830px), 0.5rem);
+
+  @include fontBlack;
+  text-transform: uppercase;
+  list-style: none;
+
+  @include mediaMedium {
+    padding: 1rem;
+
+    height: auto;
+    min-height: calc(100% - 2rem);
+
+    flex-direction: column;
+
+    gap: 0.75rem;
+  }
+}
+
+.element {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.elementLast {
+  display: none;
+
+  @include mediaMedium {
+    min-height: 2rem;
+
+    display: block;
+  }
+}
+
+.langBtn,
+.menu,
+.btn,
+.link {
+  font-family: inherit;
+  font-size: inherit;
+  text-decoration: none;
+
+  box-shadow: 0.0625rem 0.0625rem 0.125rem var(--shadow, #{$gray-300});
+
+  overflow: hidden;
+
+  --color: #{$stone-300};
+  @include transition((box-shadow), 100ms);
+
+  &:active {
+    box-shadow: 0 0 0.125rem var(--shadow, #{$gray-300});
+  }
+
+  @include dark {
+    --shadow: #{$gray-800};
+    --color: #{$stone-700};
+  }
+
+  @include mediaMedium {
+    box-shadow: 0.125rem 0.125rem 1px 0.125rem var(--shadow, #{$gray-950});
+
+    &:active {
+      box-shadow: 0 0 1px 0.125rem var(--shadow, #{$gray-950});
+    }
+
+    @include dark {
+      --shadow: #{$gray-950};
+    }
+  }
+}
+
+.menu,
+.btn {
+  padding: 0;
+
+  width: fit-content;
+
+  background-color: $transparent;
+
+  border: none;
+  border-radius: 1rem;
+}
+
+.btn {
+  height: 3.25rem;
+
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 0.5rem;
+
+  & > p {
+    display: none;
+  }
+
+  @include mediaMedium {
+    width: 100%;
+
+    & > p {
+      display: block;
+    }
+  }
+}
+
+.btnLang {
+  @include mediaMedium {
+    cursor: auto;
+    --color: inherit !important;
+
+    &:active {
+      box-shadow: 0.125rem 0.125rem 1px 0.125rem var(--shadow, #{$gray-950});
+    }
+
+    &::before {
+      display: none;
+    }
+
+    & > span {
+      display: none;
+    }
+  }
+}
+
+.menu {
+  position: absolute;
+
+  height: 5rem;
+
+  opacity: 0;
+
+  @include mediaMedium {
+    position: relative;
+
+    opacity: 1;
+  }
+}
+
+.langBtn {
+  padding: 0.5rem;
+
+  height: 4rem;
+
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  gap: 0.5rem;
+
+  background-color: $transparent;
+
+  border: none;
+  border-radius: 1rem;
+
+  &[data-disabled='true'] {
+    opacity: 0.5;
+
+    cursor: not-allowed;
+    filter: grayscale(75%);
+  }
+
+  & svg {
+    height: 3rem;
+  }
+}
+
+.link {
+  padding: 0.5rem;
+
+  text-align: center;
+
+  border-radius: 1rem;
+
+  @include mediaMedium {
+    width: 100%;
+
+    font-size: 1.5rem;
+  }
+}
+
+.langs {
+  position: absolute;
+  top: 6rem;
+  right: 0;
+
+  padding: 0.5rem;
+
+  width: fit-content;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  background-color: $stone-100;
+  box-shadow: 0.0625rem 0.0625rem 0.125rem var(--shadow, #{$gray-300});
+
+  border-radius: 0.5rem;
+
+  opacity: 0;
+
+  pointer-events: none;
+  list-style: none;
+
+  @include dark {
+    --shadow: #{$gray-800};
+    background-color: $stone-900;
+  }
+
+  @include mediaMedium {
+    position: static;
+
+    margin-top: 0.5rem;
+    margin-left: auto;
+    padding: 0;
+
+    width: 80%;
+
+    box-shadow: none;
+
+    opacity: 1;
+
+    pointer-events: all;
+  }
+}

@@ -1,0 +1,23 @@
+.hero {
+  position: relative;
+
+  min-height: 100dvh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.video {
+  width: 100dvw;
+  height: 100dvh;
+
+  object-fit: cover;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}

@@ -1,0 +1,45 @@
+.heroLogo {
+  position: absolute;
+  top: 7rem;
+  right: 1rem;
+  bottom: 1rem;
+  left: 50%;
+
+  padding: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  --shadow: #{$white};
+
+  & > h1,
+  & > p {
+    text-shadow:
+      1px 1px 1px var(--shadow),
+      1px -1px 1px var(--shadow),
+      -1px 1px 1px var(--shadow),
+      -1px -1px 1px var(--shadow);
+  }
+
+  & > h1 {
+    font-size: clamp(2rem, 5vw, 10rem);
+    text-align: center;
+  }
+  & > p {
+    font-size: clamp(1rem, 2vw, 5rem);
+    text-align: justify;
+  }
+  background-color: color.change($white, $alpha: 0.5);
+
+  @include dark {
+    background-color: color.change($slate-900, $alpha: 0.5);
+    --shadow: #{$black};
+  }
+
+  @include mediaSmall {
+    left: 1rem;
+  }
+}
