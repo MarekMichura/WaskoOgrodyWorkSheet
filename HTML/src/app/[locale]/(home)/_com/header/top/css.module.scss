@@ -120,6 +120,7 @@
   }
 }
 
+.btnLink,
 .langBtn,
 .menu,
 .btn,
@@ -127,6 +128,8 @@
   font-family: inherit;
   font-size: inherit;
   text-decoration: none;
+
+  white-space: nowrap;
 
   box-shadow: 0.0625rem 0.0625rem 0.125rem var(--shadow, #{$gray-300});
 
@@ -145,6 +148,8 @@
   }
 
   @include mediaMedium {
+    white-space: inherit;
+
     box-shadow: 0.125rem 0.125rem 1px 0.125rem var(--shadow, #{$gray-950});
 
     &:active {
@@ -251,6 +256,12 @@
   }
 }
 
+.btnLink {
+  background-color: $transparent;
+
+  border: none;
+}
+
 .link {
   padding: 0.5rem;
 
@@ -287,6 +298,10 @@
 
   pointer-events: none;
   list-style: none;
+
+  & .link {
+    width: 100%;
+  }
 
   @include dark {
     --shadow: #{$gray-800};

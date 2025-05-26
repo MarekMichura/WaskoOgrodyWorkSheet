@@ -8,7 +8,7 @@ export interface IHref {
 
 export const EHref: IHref[] = [
   {href: '/', text: 'mainPage'},
-  // {href: '/greenRoofs', text: 'greenRoof'},
+  {href: '/greenRoofs', text: 'greenRoof'},
   {href: '/projects', text: 'projects'},
   // {href: '/contact', text: 'contact'},
 ] as const

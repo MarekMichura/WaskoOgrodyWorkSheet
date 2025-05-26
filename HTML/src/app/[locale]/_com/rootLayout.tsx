@@ -8,14 +8,11 @@ import {ScrollToPlugin} from 'gsap/ScrollToPlugin'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
 import TextPlugin from 'gsap/TextPlugin'
 import {useLocale} from 'next-intl'
-import {useEffect, useLayoutEffect} from 'react'
 
 import {useDispatch} from '@/components/redux'
 import {ChangeCurrentSection} from '@/components/redux/sliceSection'
-import {initTheme} from '@/components/redux/sliceTheme'
 import {ELang} from '@/utils/enum/ELang'
 import {clsx} from '@/utils/func/clsx'
-import {themeLoadStrScript} from '@/utils/func/theme/themeLoad'
 import {useWindowEvent} from '@/utils/hook/useWindowEvent'
 import {type IChildren} from '@/utils/type/IChildren'
 
@@ -24,7 +21,7 @@ import {bricolage, lato} from '../_data/font'
 import s from './css.module.scss'
 
 if (typeof window !== 'undefined') {
-  console.log('event')
+  // console.log('event')
   gsap.registerPlugin(ScrollTrigger, ScrollSmoother, ScrollToPlugin, Flip, CSSPlugin, TextPlugin)
 }
 
@@ -32,18 +29,16 @@ function RootLayout({children}: IChildren) {
   const lang = useLocale()
 
   const dispatch = useDispatch()
-  useLayoutEffect(() => {
-    dispatch(initTheme())
-  }, [dispatch])
+  // useLayoutEffect(() => {
+  //   dispatch(initTheme())
+  // }, [dispatch])
   useWindowEvent('scroll', () => dispatch(ChangeCurrentSection()))
-
-  useEffect(() => {}, [])
 
   return (
     <html lang={ELang[lang]} className={clsx(s.html, bricolage.className)} suppressHydrationWarning>
-      <head>
+      {/* <head>
         <script dangerouslySetInnerHTML={{__html: themeLoadStrScript}} />
-      </head>
+      </head> */}
       <body className={clsx(s.body, lato.className)}>{children}</body>
     </html>
   )
