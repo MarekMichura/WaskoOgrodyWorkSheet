@@ -263,13 +263,13 @@ const HeaderTop = forwardRef<HTMLElement>((_, ref) => {
   }, [])
 
   useEffect(() => {
-    if (!menuNav && !menuLang) return
+    if (!menuNav && !menuLang && !menuProj) return
     dispatch(addBlurAction(closeAll))
 
     return () => {
       dispatch(removeBlurAction(closeAll))
     }
-  }, [menuNav, menuLang, dispatch, closeAll])
+  }, [menuNav, menuLang, menuProj, dispatch, closeAll])
 
   useEffect(() => {
     menuAnimationFun.current?.(menuProj)
@@ -312,7 +312,7 @@ const HeaderTop = forwardRef<HTMLElement>((_, ref) => {
     navEleRefs.current.push(ref)
   }, [])
 
-  const [mainMenu, ...rest] = EHref
+  const [mainMenu, contact, ...rest] = EHref
 
   return (
     <section className={s.container} ref={ref}>
@@ -346,6 +346,10 @@ const HeaderTop = forwardRef<HTMLElement>((_, ref) => {
                 </li>
               ))}
             </ul>
+          </li>
+
+          <li className={s.element} ref={addNavRefs}>
+            <HeaderNavLink href={contact.href} text={contact.text} />
           </li>
 
           {/* {EHref.map(({href, text}, i) => (

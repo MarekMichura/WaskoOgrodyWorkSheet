@@ -1,6 +1,8 @@
 import {type IPaths} from '@/locale/routing'
 import {type ILocalization} from '@/locale/translations/en_US'
 
+import {EProjects} from './EProject'
+
 export interface IHref {
   href: IPaths
   text: keyof ILocalization['nav']
@@ -8,7 +10,12 @@ export interface IHref {
 
 export const EHref: IHref[] = [
   {href: '/', text: 'mainPage'},
-  {href: '/greenRoofs', text: 'greenRoof'},
-  {href: '/projects', text: 'projects'},
-  // {href: '/contact', text: 'contact'},
+  {href: '/contact', text: 'contact'},
+
+  {href: EProjects.architecture, text: 'architecture'},
+  {href: EProjects.greenLand, text: 'greenLand'},
+  {href: EProjects.greenMaintenance, text: 'greenMaintenance'},
+  {href: EProjects.greenRoof, text: 'greenRoof'},
+  {href: EProjects.plantings, text: 'plantings'},
+  {href: EProjects.projects, text: 'projects'},
 ] as const

@@ -1,11 +1,18 @@
+import {EProjects} from '@/utils/enum/EProject'
 import {type IStringify} from '@/utils/type/IStringify'
 
 const en = {
   nav: {
     mainPage: 'Main page',
-    greenRoof: 'Green roofs',
-    projects: 'Completed projects',
     contact: 'Contact',
+
+    architecture: '',
+    greenLand: '',
+    greenMaintenance: '',
+    greenRoof: '',
+    plantings: '',
+    projects: '',
+
     close: 'Close',
     open: 'Open',
     setLang: 'Select language',
@@ -64,18 +71,12 @@ const en = {
   },
 
   project: {
-    May3: {
-      path: 'May3',
-    },
-    Grzegorzecka: {
-      path: 'Grzegórzecka',
-    },
-    Pychowicka1: {
-      path: 'Pychowicka1',
-    },
-    Wizjonerow: {
-      path: 'Wizjonerów',
-    },
+    [EProjects.architecture]: {link: '/aa'},
+    [EProjects.greenLand]: {link: '/bb'},
+    [EProjects.greenMaintenance]: {link: '/cc'},
+    [EProjects.greenRoof]: {link: '/dd'},
+    [EProjects.plantings]: {link: '/ee'},
+    [EProjects.projects]: {link: '/ff'},
   },
 } as const
 

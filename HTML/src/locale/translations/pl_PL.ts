@@ -1,11 +1,19 @@
+import {EProjects} from '@/utils/enum/EProject'
+
 import {type ILocalization} from './en_US'
 
 const pl: ILocalization = {
   nav: {
     mainPage: 'Strona główna',
-    greenRoof: 'Zielone dachy',
-    projects: 'Realizacje',
     contact: 'Kontakt',
+
+    architecture: 'Planowanie',
+    greenLand: 'przestrzenie',
+    greenMaintenance: 'Zagospodarowanie',
+    greenRoof: 'Zielone dachy',
+    plantings: 'Nasiewanie',
+    projects: 'Realizacje',
+
     close: 'Zamknij',
     open: 'Otwórz',
     setLang: 'Wybierz język',
@@ -63,18 +71,12 @@ const pl: ILocalization = {
   },
 
   project: {
-    May3: {
-      path: 'TrzeciegoMaja',
-    },
-    Grzegorzecka: {
-      path: 'Grzegórzecka',
-    },
-    Pychowicka1: {
-      path: 'Pychowicka1',
-    },
-    Wizjonerow: {
-      path: 'Wizjonerów',
-    },
+    [EProjects.architecture]: {link: '/Planowanie'},
+    [EProjects.greenLand]: {link: '/Przestrzenie'},
+    [EProjects.greenMaintenance]: {link: '/Zagospodarowanie'},
+    [EProjects.greenRoof]: {link: '/Dachy'},
+    [EProjects.plantings]: {link: '/Nasiewanie'},
+    [EProjects.projects]: {link: '/Realizacje'},
   },
 } as const
 

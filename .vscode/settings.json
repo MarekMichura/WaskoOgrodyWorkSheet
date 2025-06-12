@@ -1,5 +1,11 @@
 {
   "cSpell.words": [
+    "GSAP",
+    "Nuqs",
+    "Plaiceholder",
+    "Pychowicka",
+    "turbopack",
+    "Tweens",
     "Antiforgery",
     "Archivo",
     "ASPNETCORE",
@@ -31,8 +37,9 @@
     "wwwroot",
     "Xunit"
   ],
+  "stylelint.validate": ["scss", "css"],
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
+    "source.fixAll.stylelint": "always"
   },
   "eslint.validate": ["javascript"],
   "files.exclude": {
@@ -51,5 +58,13 @@
   "lldb.showDisassembly": "auto",
   "lldb.dereferencePointers": true,
   "lldb.consoleMode": "commands",
-  "hide-files.files": []
+
+  "hide-files.files": ["next-env.d.ts", "yarn.lock", "node_modules", "build"],
+  "todohighlight.keywords": [
+    {
+      "text": "SECT:",
+      "isWholeLine": true,
+      "backgroundColor": "#28242c"
+    }
+  ]
 }

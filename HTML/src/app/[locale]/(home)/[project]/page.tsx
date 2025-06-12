@@ -1,12 +1,18 @@
 import {getPublicBase64, getPublicBase64s} from '@/components/img/placeHolder/getBase64'
+import {EProjects} from '@/utils/enum/EProject'
 
 import ProjectElement from './_com/element/element'
 import ProjectHeroImg from './_com/heroImg/hero'
 import ProjectMapDynamicImport from './_com/map/dynamic'
 
-async function Projects() {
-  const hero = await getPublicBase64('/project/output.jpeg')
+export const dynamic = 'force-static'
+export const dynamicParams = false
+export function generateStaticParams() {
+  return Object.values(EProjects).map((project) => ({project: project.slice(1)}))
+}
 
+async function ProjectPage() {
+  const hero = await getPublicBase64('/project/output.jpeg')
   const images = await getPublicBase64s([
     '/project/3maj/19535e00-7cb3-4a27-b8c8-694be8e0aefa.jpg',
     '/project/3maj/2408845b-22ff-4ee4-bb46-b7d3cc357c8f.jpg',
@@ -20,7 +26,6 @@ async function Projects() {
     '/project/3maj/d7db3277-9e4d-4ee3-8407-837458c78dfa.jpg',
     '/project/3maj/f453d462-c4f7-4f67-b48e-37188db40b1d.jpg',
   ])
-
   return (
     <>
       <ProjectHeroImg placeHolder={{...hero, alt: 'HeroImg'}} />
@@ -30,4 +35,4 @@ async function Projects() {
   )
 }
 
-export default Projects
+export default ProjectPage
