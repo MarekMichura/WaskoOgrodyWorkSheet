@@ -117,6 +117,7 @@ const pl: ILocalization = {
     password: 'Hasło',
     send: 'Zaloguj się',
 
+    errorLoginFail: 'Niepoprawny login lub hasło',
     errorInvalidLogin: 'Niepoprawny login',
     errorInvalidPassword: 'Niepoprawne hasło',
   },

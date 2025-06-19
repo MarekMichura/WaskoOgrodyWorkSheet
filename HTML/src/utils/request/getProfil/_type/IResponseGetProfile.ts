@@ -1,4 +1,4 @@
-import {type EPermissionValues} from '@/utils/enum/EPermissions'
+import {type EPermissions} from '@/utils/enum/EPermissions'
 
 export interface IResponseGetProfile {
   firstName: string
@@ -6,6 +6,6 @@ export interface IResponseGetProfile {
   userName: string
 
   image: string
-  roles: EPermissionValues[]
+  roles: EPermissions[]
   workStartDate: string
 }

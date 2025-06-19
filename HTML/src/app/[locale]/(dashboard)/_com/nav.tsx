@@ -4,7 +4,7 @@ import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
 import Image from 'next/image'
 import {useLocale, useTranslations} from 'next-intl'
-import {useCallback, useEffect, useRef, useState} from 'react'
+import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
 import ArrowVerticalIcon from '@/components/icon/arrowVertical'
 import CalendarIcon from '@/components/icon/calendar'
@@ -20,6 +20,7 @@ import FlagPolishIcon from '@/components/lottie/flag/flagPolish'
 import LangLoadIcon from '@/components/lottie/lang/langLoad'
 import Ripple from '@/components/ripple/ripple'
 import {Link, usePathname, useRouter} from '@/locale/navigation'
+import {EPermissions} from '@/utils/enum/EPermissions'
 import {clsx} from '@/utils/func/clsx'
 import useProfil from '@/utils/query/profil/useProfil'
 import {logout} from '@/utils/request/logout/logout'
@@ -44,6 +45,23 @@ function DashboardNav({children}: IChildren) {
   const t = useTranslations('dashboard.nav')
   const locale = useLocale()
   const path = usePathname()
+
+  const {canAskForBonus, canAskForDayOff, canAskForRefound, isEmployer, isGardener} = useMemo(() => {
+    const isEmployer = role.includes(EPermissions.employer)
+    const canAskForDayOff = isEmployer && !role.includes(EPermissions.blockAskingForDayOff)
+    const canAskForRefound = isEmployer && !role.includes(EPermissions.blockAskingForRefound)
+    const canAskForBonus = isEmployer && !role.includes(EPermissions.blockAskingForBonus)
+
+    const isGardener = role.includes(EPermissions.gardener)
+
+    return {
+      isEmployer,
+      isGardener,
+      canAskForBonus,
+      canAskForDayOff,
+      canAskForRefound,
+    }
+  }, [role])
 
   useGSAP(() => {
     const mm = gsap
@@ -103,19 +121,27 @@ function DashboardNav({children}: IChildren) {
         </Ripple>
 
         <nav className={s.nav}>
-          <NavSeparator text={t('work')} open={aside} />
-          <NavLink href={'/getWorkHours'} text={t('getWorkHours')} Icon={<CalendarIcon />} />
-          <NavLink href={'/setWorkHours'} text={t('setWorkHours')} Icon={<HourGlassIcon />} />
-          <NavLink href={'/dayOff'} text={t('dayOff')} Icon={<UmbrellaIcon />} />
+          {isEmployer && (
+            <>
+              <NavSeparator text={t('work')} open={aside} />
+              <NavLink href={'/getWorkHours'} text={t('getWorkHours')} Icon={<CalendarIcon />} />
+              <NavLink href={'/setWorkHours'} text={t('setWorkHours')} Icon={<HourGlassIcon />} />
+              {canAskForDayOff && <NavLink href={'/dayOff'} text={t('dayOff')} Icon={<UmbrellaIcon />} />}
 
-          <NavSeparator text={t('money')} open={aside} />
-          <NavLink href={'/askBonus'} text={t('askBonus')} Icon={<HourGlassIcon />} />
-          <NavLink href={'/reimburse'} text={t('reimburse')} Icon={<PaymentIcon />} />
+              {(canAskForRefound || canAskForBonus) && <NavSeparator text={t('money')} open={aside} />}
+              {canAskForBonus && <NavLink href={'/askBonus'} text={t('askBonus')} Icon={<HourGlassIcon />} />}
+              {canAskForRefound && <NavLink href={'/reimburse'} text={t('reimburse')} Icon={<PaymentIcon />} />}
+            </>
+          )}
 
-          <NavSeparator text={t('gardener')} open={aside} />
-          <NavLink href={'/chords'} text={t('chords')} Icon={<GardenCardIcon />} />
+          {isGardener && (
+            <>
+              <NavSeparator text={t('gardener')} open={aside} />
+              <NavLink href={'/chords'} text={t('chords')} Icon={<GardenCardIcon />} />
+            </>
+          )}
 
-          <NavSeparator text={t('account')} open={aside} />
+          <NavSeparator text={t('account')} open={aside} className={s.margin} />
           <NavMenu text={t('locale')} className={s.lang} Icon={<LangLoadIcon />} open={aside}>
             <NavLink href={path} locale="pl-PL" text="Polski" Icon={<FlagPolishIcon />} disabled={locale === 'pl-PL'} />
             <NavLink
@@ -129,7 +155,7 @@ function DashboardNav({children}: IChildren) {
           <NavLink href={'/comment'} text={t('comment')} Icon={<CommentIcon />} />
           <NavBtn text={t('logout')} Icon={<ArrowVerticalIcon />} click={() => logOut()} />
 
-          <NavSeparator text={''} open={false} className={s.margin} />
+          <NavSeparator text={''} open={false} />
           <Ripple as={Link} className={s.profil} href={'/profil'}>
             {!profil.image || profil.image == '' ? (
               <LetterAvatar className={s.logo} />

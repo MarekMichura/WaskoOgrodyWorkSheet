@@ -30,7 +30,7 @@ function LoginPageClientForm({error, redirect, userName}: ILoginPageClientFormPr
   const locale = useLocale()
   const path = usePathname()
 
-  const {handleSubmit, register, formState, resetField, trigger} = useForm<ILoginFormData>({
+  const {handleSubmit, register, formState, resetField, setError, trigger} = useForm<ILoginFormData>({
     resolver: zodResolver(loginFormValidate),
     mode: 'onBlur',
     reValidateMode: 'onChange',
@@ -49,7 +49,8 @@ function LoginPageClientForm({error, redirect, userName}: ILoginPageClientFormPr
   const submit = async (form: ILoginFormData) => {
     const response = await auth(form.userName, form.password)
     if (!response.authenticated) {
-      resetField('password')
+      // resetField('password')
+      setError('userName', {message: 'errorLoginFail'})
       return
     }
 

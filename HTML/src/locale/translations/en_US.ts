@@ -117,6 +117,7 @@ const en = {
     password: '',
     send: '',
 
+    errorLoginFail: '',
     errorInvalidLogin: '',
     errorInvalidPassword: '',
   },

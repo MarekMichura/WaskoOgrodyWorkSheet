@@ -1,7 +1,8 @@
-export const EPermissions = {
-  GARDENER: 'Gardener',
-  Employer: 'Employer',
-} as const
+export enum EPermissions {
+  gardener = 'Gardener',
+  employer = 'Employer',
 
-export type EPermissionsKey = keyof typeof EPermissions
-export type EPermissionValues = (typeof EPermissions)[EPermissionsKey]
+  blockAskingForDayOff = 'Block_employer_day_off',
+  blockAskingForBonus = 'Block_employer_bonus',
+  blockAskingForRefound = 'Block_employer_found',
+}
