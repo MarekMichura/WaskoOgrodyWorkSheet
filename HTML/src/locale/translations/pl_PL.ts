@@ -78,6 +78,48 @@ const pl: ILocalization = {
     [EProjects.plantings]: {link: '/Nasiewanie'},
     [EProjects.projects]: {link: '/Realizacje'},
   },
+
+  dashboard: {
+    nav: {
+      work: 'Praca',
+      getWorkHours: 'Pokaż godziny pracy',
+      setWorkHours: 'Ustaw godziny pracy',
+      dayOff: 'Poproś o dzień wolny',
+
+      money: 'Finanse',
+      askBonus: 'Poproś o bonus',
+      reimburse: 'Poproś o zwrot poniesionych kosztów',
+
+      gardener: 'Ogrodnictwo',
+      chords: 'Wprowadz akordy',
+
+      account: 'Konto',
+      locale: 'Ustaw język',
+      comment: 'Zamieść komentarz',
+      logout: 'Wyloguj się',
+    },
+
+    profil: {
+      role: 'Role użytkownika:',
+      details: 'Szczegóły profilu',
+      title: 'Profil użytkownika | Wawel garden',
+      name: 'Imię',
+      lastName: 'Nazwisko',
+      date: 'Data zatrudnienia',
+    },
+  },
+
+  login: {
+    pageTitle: 'Zaloguj się',
+    title: 'Zaloguj się',
+
+    userName: 'Nazwa użytkownika',
+    password: 'Hasło',
+    send: 'Zaloguj się',
+
+    errorInvalidLogin: 'Niepoprawny login',
+    errorInvalidPassword: 'Niepoprawne hasło',
+  },
 } as const
 
 export default pl

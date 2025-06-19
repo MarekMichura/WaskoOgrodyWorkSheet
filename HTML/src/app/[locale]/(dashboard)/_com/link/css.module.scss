@@ -1,0 +1,43 @@
+.link {
+  position: relative;
+
+  padding: 0.25rem;
+
+  width: 16rem;
+
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 1.25rem;
+
+  text-decoration: none;
+
+  color: $stone-50;
+  background-color: $transparent;
+
+  border: none;
+
+  cursor: pointer;
+
+  --bg: #{$stone-200};
+  --color: #{$stone-900};
+
+  & > svg {
+    width: 3rem;
+    height: 3rem;
+    fill: currentColor;
+    object-fit: cover;
+  }
+}
+
+.text {
+  display: block;
+
+  flex: 1;
+
+  font-family: $font_black;
+  font-size: 1.25rem;
+  font-weight: 600;
+
+  text-align: left;
+}

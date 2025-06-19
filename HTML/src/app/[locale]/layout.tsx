@@ -7,9 +7,10 @@ import ClientProvider from '@/components/redux'
 import {routing} from '@/locale/routing'
 import {type IChildren} from '@/utils/type/IChildren'
 
+import {type IParamsLocale} from '../../utils/enum/IParamsLocale'
+
 import RootLayout from './_com/rootLayout'
 import {metadata, metadataLang} from './_data/metadata'
-import {type IParamsLocale} from './_type/IParamsLocale'
 
 export const dynamic = 'force-static'
 export const dynamicParams = false

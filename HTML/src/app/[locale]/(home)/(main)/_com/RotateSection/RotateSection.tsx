@@ -10,12 +10,12 @@ import {useCallback, useRef} from 'react'
 import s from './css.module.scss'
 import SectionElement from './element'
 
-const diggerIcon = dynamic(() => import('@/components/icon/digger/digger'), {ssr: false})
-const SoilIcon = dynamic(() => import('@/components/icon/soil/soil'), {ssr: false})
-const PlantIcon = dynamic(() => import('@/components/icon/plant/plant'), {ssr: false})
-const ParkIcon = dynamic(() => import('@/components/icon/park/park'), {ssr: false})
-const CutterIcon = dynamic(() => import('@/components/icon/cutter/cutter'), {ssr: false})
-const BluePrintIcon = dynamic(() => import('@/components/icon/bluePrint/bluePrint'), {ssr: false})
+const diggerIcon = dynamic(() => import('@/components/lottie/digger/digger'), {ssr: false})
+const SoilIcon = dynamic(() => import('@/components/lottie/soil/soil'), {ssr: false})
+const PlantIcon = dynamic(() => import('@/components/lottie/plant/plant'), {ssr: false})
+const ParkIcon = dynamic(() => import('@/components/lottie/park/park'), {ssr: false})
+const CutterIcon = dynamic(() => import('@/components/lottie/cutter/cutter'), {ssr: false})
+const BluePrintIcon = dynamic(() => import('@/components/lottie/bluePrint/bluePrint'), {ssr: false})
 
 function HomeRotateSection() {
   const t = useTranslations('home.icons')

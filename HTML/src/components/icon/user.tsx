@@ -1,0 +1,11 @@
+import s from '../lottie/css.module.scss'
+
+function UserIcon() {
+  return (
+    <svg className={s.svg} viewBox="0 -960 960 960" xmlns="http://www.w3.org/2000/svg">
+      <path d="M480.16-502Q395-502 336.5-561T278-704.5q0-84.5 58.34-142.5t143.5-58q85.16 0 143.66 57.89T682-704q0 84-58.34 143t-143.5 59ZM114-86v-159q0-46.77 23.79-84.47Q161.58-367.16 201-387q66-34 136.17-51 70.18-17 142.55-17Q554-455 624-438t135 50q39.42 19.69 63.21 57.11T846-245.05V-86H114Z" />
+    </svg>
+  )
+}
+
+export default UserIcon

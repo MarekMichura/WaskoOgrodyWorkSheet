@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 import {createRoot} from 'react-dom/client'
 import {MapContainer, TileLayer, Marker, Popup} from 'react-leaflet'
 
-const PinIcon = dynamic(() => import('@/components/icon/pin/pin'), {ssr: false})
+const PinIcon = dynamic(() => import('@/components/lottie/pin/pin'), {ssr: false})
 
 const container = document.createElement('div')
 createRoot(container).render(<PinIcon status={false} />)

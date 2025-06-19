@@ -36,6 +36,25 @@ export const routing = defineRouting({
       'pl-PL': '/Realizacje',
       'en-US': 'af',
     },
+
+    '/login': {'pl-PL': '/ZalogujSie', 'en-US': '/Login'},
+    '/profil': {'pl-PL': '/Profil', 'en-US': '/Profile'},
+    '/work': {},
+    '/getWorkHours': {},
+    '/setWorkHours': {},
+    '/dayOff': {},
+
+    '/money': {},
+    '/askBonus': {},
+    '/reimburse': {},
+
+    '/gardener': {},
+    '/chords': {},
+
+    '/account': {},
+    '/locale': {},
+    '/comment': {},
+    '/logout': {},
   },
 })
 

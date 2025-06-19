@@ -5,11 +5,11 @@ import Image from 'next/image'
 import {useLocale, useTranslations} from 'next-intl'
 import {forwardRef, useCallback, useEffect, useRef, useState} from 'react'
 
-import FlagEnglishIcon from '@/components/icon/flag/flagEnglish'
-import FlagPolishIcon from '@/components/icon/flag/flagPolish'
-import LangLoadIcon from '@/components/icon/lang/langLoad'
-import MenuLoadIcon from '@/components/icon/menu/menuLoad'
 import Logo from '@/components/img/logo/logoFull.png'
+import FlagEnglishIcon from '@/components/lottie/flag/flagEnglish'
+import FlagPolishIcon from '@/components/lottie/flag/flagPolish'
+import LangLoadIcon from '@/components/lottie/lang/langLoad'
+import MenuLoadIcon from '@/components/lottie/menu/menuLoad'
 import {useDispatch} from '@/components/redux'
 import {addBlurAction, removeBlurAction} from '@/components/redux/sliceBackBlur'
 // import {changeTheme} from '@/components/redux/sliceTheme'
@@ -21,8 +21,8 @@ import {clsx} from '@/utils/func/clsx'
 import s from './css.module.scss'
 import HeaderNavLink from './link/link'
 
-const MenuIcon = dynamic(() => import('@/components/icon/menu/menu'), {ssr: false, loading: MenuLoadIcon})
-const LangIcon = dynamic(() => import('@/components/icon/lang/lang'), {ssr: false, loading: LangLoadIcon})
+const MenuIcon = dynamic(() => import('@/components/lottie/menu/menu'), {ssr: false, loading: MenuLoadIcon})
+const LangIcon = dynamic(() => import('@/components/lottie/lang/lang'), {ssr: false, loading: LangLoadIcon})
 // const ThemeIcon = dynamic(() => import('@/components/icon/theme/theme'), {ssr: false, loading: ThemeLoadIcon})
 
 const HeaderTop = forwardRef<HTMLElement>((_, ref) => {

@@ -21,7 +21,6 @@ import {bricolage, lato} from '../_data/font'
 import s from './css.module.scss'
 
 if (typeof window !== 'undefined') {
-  // console.log('event')
   gsap.registerPlugin(ScrollTrigger, ScrollSmoother, ScrollToPlugin, Flip, CSSPlugin, TextPlugin)
 }
 

@@ -10,11 +10,11 @@ import FooterHref from './href'
 import FooterIconBox from './iconBox'
 import FooterLink from './link'
 
-const PinIcon = dynamic(() => import('@/components/icon/pin/pin'), {ssr: false})
-const PhoneIcon = dynamic(() => import('@/components/icon/phone/phone'), {ssr: false})
-const MailIcon = dynamic(() => import('@/components/icon/mail/mail'), {ssr: false})
-const FbIcon = dynamic(() => import('@/components/icon/fb/fb'), {ssr: false})
-const IgIcon = dynamic(() => import('@/components/icon/ig/ig'), {ssr: false})
+const PinIcon = dynamic(() => import('@/components/lottie/pin/pin'), {ssr: false})
+const PhoneIcon = dynamic(() => import('@/components/lottie/phone/phone'), {ssr: false})
+const MailIcon = dynamic(() => import('@/components/lottie/mail/mail'), {ssr: false})
+const FbIcon = dynamic(() => import('@/components/lottie/fb/fb'), {ssr: false})
+const IgIcon = dynamic(() => import('@/components/lottie/ig/ig'), {ssr: false})
 
 function HomeFooter() {
   const t = useTranslations('nav')

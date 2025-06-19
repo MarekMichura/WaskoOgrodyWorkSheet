@@ -502,6 +502,13 @@
   resolved "https://registry.yarnpkg.com/@gsap/react/-/react-2.1.2.tgz#bfc055a41b402e8d1dc56839e9d077407027b0a0"
   integrity sha512-JqliybO1837UcgH2hVOM4VO+38APk3ECNrsuSM4MuXp+rbf+/2IG2K1YJiqfTcXQHH7XlA0m3ykniFYstfq0Iw==
 
+"@hookform/resolvers@^5.0.1":
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-5.1.1.tgz#91074ba4fb749cc74e6465e75d38256146b0c4ab"
+  integrity sha512-J/NVING3LMAEvexJkyTLjruSm7aOFx7QX21pzkiJfMoNG0wl5aFEjLTl7ay7IQb9EWY6AkrBy7tHL2Alijpdcg==
+  dependencies:
+    "@standard-schema/utils" "^0.3.0"
+
 "@humanfs/core@^0.19.1":
   version "0.19.1"
   resolved "https://registry.yarnpkg.com/@humanfs/core/-/core-0.19.1.tgz#17c55ca7d426733fe3c561906b8173c336b40a77"
@@ -894,6 +901,30 @@
   integrity sha512-JQ5TuMi45Owi4/BIMAJBoSQoOJu12oOk/gADqlcUL9JEdHB8vyjUSsxqeNXnmXHjYKMi2WcYtezGEEhqUI/E2g==
   dependencies:
     tslib "^2.8.0"
+
+"@tanstack/query-core@5.80.7":
+  version "5.80.7"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.80.7.tgz#e029b26cad02fc5fe64116ac245aad0c3e5f83b4"
+  integrity sha512-s09l5zeUKC8q7DCCCIkVSns8zZrK4ZDT6ryEjxNBFi68G4z2EBobBS7rdOY3r6W1WbUDpc1fe5oY+YO/+2UVUg==
+
+"@tanstack/query-devtools@5.80.0":
+  version "5.80.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-devtools/-/query-devtools-5.80.0.tgz#7fc7d0e3d935a0f163e06e9477bbf11b3c20fad5"
+  integrity sha512-D6gH4asyjaoXrCOt5vG5Og/YSj0D/TxwNQgtLJIgWbhbWCC/emu2E92EFoVHh4ppVWg1qT2gKHvKyQBEFZhCuA==
+
+"@tanstack/react-query-devtools@^5.74.4":
+  version "5.80.7"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query-devtools/-/react-query-devtools-5.80.7.tgz#6e07b1d5b8c3bea189cac9ec68c1aab35cf104ca"
+  integrity sha512-7Dz/19fVo0i+jgLVBabV5vfGOlLyN5L1w8w1/ogFhe6ItNNsNA+ZgNTbtiKpbR3CcX2WDRRTInz1uMSmHzTsoQ==
+  dependencies:
+    "@tanstack/query-devtools" "5.80.0"
+
+"@tanstack/react-query@^5.74.4":
+  version "5.80.7"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-5.80.7.tgz#664f62f42d9ae892c07543fc64f53898aad57afa"
+  integrity sha512-u2F0VK6+anItoEvB3+rfvTO9GEh2vb00Je05OwlUe/A0lkJBgW1HckiY3f9YZa+jx6IOe4dHPh10dyp9aY3iRQ==
+  dependencies:
+    "@tanstack/query-core" "5.80.7"
 
 "@tybys/wasm-util@^0.9.0":
   version "0.9.0"
@@ -3666,6 +3697,11 @@ react-dom@^19.0.0:
   dependencies:
     scheduler "^0.26.0"
 
+react-hook-form@^7.56.1:
+  version "7.58.0"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.58.0.tgz#4d23308b587d637effe4e581f410e1ca8c434bef"
+  integrity sha512-zGijmEed35oNfOfy7ub99jfjkiLhHwA3dl5AgyKdWC6QQzhnc7tkWewSa+T+A2EpLrc6wo5DUoZctS9kufWJjA==
+
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
@@ -4504,6 +4540,11 @@ wrap-ansi@^7.0.0:
     string-width "^4.1.0"
     strip-ansi "^6.0.0"
 
+wretch@^2.11.0:
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/wretch/-/wretch-2.11.0.tgz#cf48a1c3eb0a29c4eb9aa241cd06da95b06fedab"
+  integrity sha512-zbFW4PnPSS5RFQabHRkCAcMQjmFGrEQLcJwYe4YGXL9KWXneu03Dtaz2JUeqEkOwNDMjdfHEHPL+AIZJwE+y1g==
+
 write-file-atomic@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/write-file-atomic/-/write-file-atomic-5.0.1.tgz#68df4717c55c6fa4281a7860b4c2ba0a6d2b11e7"
@@ -4544,3 +4585,8 @@ yocto-queue@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
+
+zod@^3.25.64:
+  version "3.25.64"
+  resolved "https://registry.yarnpkg.com/zod/-/zod-3.25.64.tgz#57b5c7e76dd64e447f7e710285fcdb396b32f803"
+  integrity sha512-hbP9FpSZf7pkS7hRVUrOjhwKJNyampPgtXKc3AN6DsWtoHsg2Sb4SQaS4Tcay380zSwd2VPo9G9180emBACp5g==

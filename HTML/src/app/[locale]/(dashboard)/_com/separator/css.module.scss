@@ -1,0 +1,24 @@
+.con {
+  position: relative;
+}
+
+.text {
+  font-family: $font_black;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+
+  opacity: 0;
+}
+
+.line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+
+  width: 100%;
+  height: 0.25rem;
+
+  background-color: $stone-50;
+
+  transform: translateY(-50%);
+}

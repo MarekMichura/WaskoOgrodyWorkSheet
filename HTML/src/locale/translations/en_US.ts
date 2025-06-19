@@ -78,6 +78,48 @@ const en = {
     [EProjects.plantings]: {link: '/ee'},
     [EProjects.projects]: {link: '/ff'},
   },
+
+  dashboard: {
+    nav: {
+      work: '',
+      getWorkHours: '',
+      setWorkHours: '',
+      dayOff: '',
+
+      money: '',
+      askBonus: '',
+      reimburse: '',
+
+      gardener: '',
+      chords: '',
+
+      account: '',
+      locale: '',
+      comment: '',
+      logout: '',
+    },
+
+    profil: {
+      role: 'User roles:',
+      details: 'User profile details',
+      title: 'User profil | Wawel garden',
+      name: 'First Name',
+      lastName: 'Last Name',
+      date: 'Employment Start Date',
+    },
+  },
+
+  login: {
+    pageTitle: '',
+    title: '',
+
+    userName: '',
+    password: '',
+    send: '',
+
+    errorInvalidLogin: '',
+    errorInvalidPassword: '',
+  },
 } as const
 
 export type ILocalization = IStringify<typeof en>

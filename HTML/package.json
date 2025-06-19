@@ -12,8 +12,10 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
+    "@hookform/resolvers": "^5.0.1",
     "@plaiceholder/next": "^3.0.0",
     "@reduxjs/toolkit": "^2.8.2",
+    "@tanstack/react-query": "^5.74.4",
     "gsap": "^3.13.0",
     "leaflet": "^1.9.4",
     "lottie-web": "^5.12.2",
@@ -23,12 +25,16 @@
     "plaiceholder": "^3.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hook-form": "^7.56.1",
     "react-leaflet": "^5.0.0",
-    "react-redux": "^9.2.0"
+    "react-redux": "^9.2.0",
+    "wretch": "^2.11.0",
+    "zod": "^3.25.64"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@eslint/js": "^9.27.0",
+    "@tanstack/react-query-devtools": "^5.74.4",
     "@types/leaflet": "^1.9.18",
     "@types/node": "^20",
     "@types/react": "^19",
