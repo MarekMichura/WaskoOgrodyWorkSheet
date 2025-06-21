@@ -1,6 +1,6 @@
 import type {ComponentProps, JSX} from 'react'
 
-export interface IInput extends ComponentProps<'input'> {
+export interface IInputProps extends ComponentProps<'input'> {
   label?: string
   error?: string
 

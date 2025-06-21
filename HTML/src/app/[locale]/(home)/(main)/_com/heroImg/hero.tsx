@@ -6,7 +6,8 @@ import {ScrollSmoother} from 'gsap/ScrollSmoother'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
 import {useEffect, useRef} from 'react'
 
-import HeroSection, {type IHeroSection} from '@/components/hero/heroSection'
+import HeroSection from '@/components/hero/heroSection'
+import {type IHeroSection} from '@/components/hero/_type/IHeroSection'
 import {useSection} from '@/utils/hook/useSection'
 
 import {EHeaderPosition} from '../../../_com/header/_enum/EHeaderPosition'

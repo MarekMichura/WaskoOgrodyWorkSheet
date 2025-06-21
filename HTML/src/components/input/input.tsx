@@ -15,10 +15,10 @@ import {
 
 import {clsx} from '@/utils/func/clsx'
 
-import {type IInput} from './_type/IInput'
+import {type IInputProps} from './_type/IInput'
 import s from './css.module.scss'
 
-const Input = forwardRef<HTMLInputElement, IInput>(({label, error, icon, ...p}, ref) => {
+const Input = forwardRef<HTMLInputElement, IInputProps>(({label, error, icon, ...p}, ref) => {
   const [{empty, focus}, setState] = useState({focus: false, empty: p.value && p.value.toString().length > 0})
 
   const bottom1Ref = useRef(null)
@@ -74,7 +74,7 @@ const Input = forwardRef<HTMLInputElement, IInput>(({label, error, icon, ...p}, 
       gsap.to(inputRef.current, {paddingBottom: '1rem'})
       return
     }
-    gsap.to(inputRef.current, {paddingBottom: '0'})
+    gsap.to(inputRef.current, {paddingBottom: '0.25rem'})
   }, [error])
 
   useEffect(() => {

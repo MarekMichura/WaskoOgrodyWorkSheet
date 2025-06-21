@@ -6,11 +6,11 @@ import Image from 'next/image'
 import {useLocale, useTranslations} from 'next-intl'
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
-import ArrowVerticalIcon from '@/components/icon/arrowVertical'
 import CalendarIcon from '@/components/icon/calendar'
 import CommentIcon from '@/components/icon/comment'
 import GardenCardIcon from '@/components/icon/gardenCard'
 import HourGlassIcon from '@/components/icon/hourGlass'
+import LogOutIcon from '@/components/icon/logOut'
 import PaymentIcon from '@/components/icon/payment'
 import UmbrellaIcon from '@/components/icon/umbrella'
 import Logo from '@/components/img/logo/logoIcon.png'
@@ -153,7 +153,7 @@ function DashboardNav({children}: IChildren) {
             />
           </NavMenu>
           <NavLink href={'/comment'} text={t('comment')} Icon={<CommentIcon />} />
-          <NavBtn text={t('logout')} Icon={<ArrowVerticalIcon />} click={() => logOut()} />
+          <NavBtn text={t('logout')} Icon={<LogOutIcon />} click={() => logOut()} />
 
           <NavSeparator text={''} open={false} />
           <Ripple as={Link} className={s.profil} href={'/profil'}>

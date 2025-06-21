@@ -7,17 +7,17 @@ function ProfilPage() {
   return (
     <div className={s.container}>
       <div className={s.sec}>
-        <div className={s.image}>
+        <section className={s.image}>
           <ProfilImage />
-        </div>
+        </section>
         <div className={s.separator} />
-        <div>
+        <section>
           <ProfilName />
-        </div>
+        </section>
       </div>
-      <div className={s.sec}>
+      <section className={s.sec}>
         <ProfilData />
-      </div>
+      </section>
     </div>
   )
 }

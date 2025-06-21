@@ -26,26 +26,23 @@
 }
 
 .image {
-  padding: 0.25rem;
+  position: relative;
 
   display: flex;
   flex: 1;
   justify-content: center;
+  align-items: center;
 
   & img {
-    width: 100%;
-    max-width: 33dvh;
-    height: 100%;
-    max-height: 33dvh;
-    aspect-ratio: 1/1;
-
-    display: block;
-
-    box-shadow: 0 0 1rem 0 $black;
+    width: 16rem;
+    height: 16rem;
+    aspect-ratio: 1;
 
     border-radius: 100%;
 
     overflow: hidden;
+
+    object-fit: cover;
   }
 }
 

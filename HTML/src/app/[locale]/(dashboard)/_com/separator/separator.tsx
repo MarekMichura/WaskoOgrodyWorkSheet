@@ -5,12 +5,7 @@ import {useEffect, useRef} from 'react'
 import {clsx} from '@/utils/func/clsx'
 
 import s from './css.module.scss'
-
-interface INavSeparator {
-  text: string
-  open: boolean
-  className?: string
-}
+import {type INavSeparator} from './_type/INavSeparator'
 
 function NavSeparator({text, open, className}: INavSeparator) {
   const animationRef = useRef<gsap.core.Tween | gsap.core.Timeline>(null)

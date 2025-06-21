@@ -1,12 +1,9 @@
 import lottie from 'lottie-web'
-import {type RefObject, useEffect} from 'react'
+import {useEffect} from 'react'
 
-interface IUseLottieLoop {
-  ref: RefObject<HTMLElement | null>
-  data: object
-}
+import {type IUseLottieLoopProps} from './_type/IUseLottieLoopProps'
 
-export function useLottieLoop({ref, data}: IUseLottieLoop) {
+export function useLottieLoop({ref, data}: IUseLottieLoopProps) {
   useEffect(() => {
     if (ref.current === null) return
 

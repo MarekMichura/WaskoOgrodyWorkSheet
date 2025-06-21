@@ -1,21 +1,6 @@
 import {createSlice, type PayloadAction} from '@reduxjs/toolkit'
 
-import {type EHeaderPosition} from '@/app/[locale]/(home)/_com/header/_enum/EHeaderPosition'
-import {type ILocalization} from '@/locale/translations/en_US'
-
-type IReducerSectionName = keyof ILocalization['sections']
-export interface IReducerSection {
-  name: IReducerSectionName
-  y: number
-
-  navbar?: {
-    bg?: string
-    color?: string
-    status?: EHeaderPosition
-    opacity?: number
-  }
-}
-type IReducerSectionUpdata = Partial<IReducerSection> & {name: IReducerSectionName}
+import {type IReducerSectionName, type IReducerSection, type IReducerSectionUpdata} from './_type/IReducerSection'
 
 export const sectionSlice = createSlice({
   name: 'section',

@@ -23,7 +23,7 @@ function LetterAvatar(props: ILetterAvatarProps) {
     return url.toString()
   }, [profil.firstName, profil.lastName])
 
-  return <Image width={100} height={100} src={url} alt="Avatar" unoptimized {...props} />
+  return <Image width={128} height={128} src={url} alt="Avatar" unoptimized {...props} />
 }
 
 export default LetterAvatar

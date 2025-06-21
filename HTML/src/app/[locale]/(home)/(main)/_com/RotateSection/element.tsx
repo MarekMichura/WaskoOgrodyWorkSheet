@@ -1,15 +1,9 @@
-import {type ComponentType, forwardRef, useCallback, useState} from 'react'
+import {forwardRef, useCallback, useState} from 'react'
 
 import {clsx} from '@/utils/func/clsx'
 
 import s from './css.module.scss'
-
-interface ISectionElementProps {
-  className?: string
-  Icon: ComponentType<{status: boolean}>
-  title: string
-  text: string
-}
+import {type ISectionElementProps} from './_type/ISectionElementProps'
 
 const SectionElement = forwardRef<HTMLElement, ISectionElementProps>(({Icon, text, title, className}, ref) => {
   const [state, setState] = useState(false)

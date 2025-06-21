@@ -1,11 +1,7 @@
 import lottie, {type AnimationItem} from 'lottie-web'
-import {type RefObject, useEffect, useRef} from 'react'
+import {useEffect, useRef} from 'react'
 
-interface IUseLottieBackToBackProps {
-  ref: RefObject<HTMLElement | null>
-  data: object
-  status: boolean
-}
+import {type IUseLottieBackToBackProps} from './_type/IUseLottieBackToBackProps'
 
 export function useLottieBackToBackProps({ref, data, status}: IUseLottieBackToBackProps) {
   const animationRef = useRef<AnimationItem>(null)

@@ -1,21 +1,13 @@
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
-import {useCallback, useEffect, useRef, useState, type JSX} from 'react'
-
-import {type IChildren} from '@/utils/type/IChildren'
+import {useCallback, useEffect, useRef, useState} from 'react'
 
 import NavBtn from '../link/btn'
 
+import {type INavMenuProps} from './_type/INavMenuProps'
 import s from './css.module.scss'
 
-interface INavMenu extends IChildren {
-  text: string
-  Icon: JSX.Element
-  open: boolean
-  className?: string
-}
-
-function NavMenu({text, Icon, className, children, open}: INavMenu) {
+function NavMenu({text, Icon, className, children, open}: INavMenuProps) {
   const [state, setState] = useState(false)
 
   const animationRef = useRef<gsap.core.Tween | gsap.core.Timeline>(null)

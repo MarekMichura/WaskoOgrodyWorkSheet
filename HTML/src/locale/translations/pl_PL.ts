@@ -107,6 +107,11 @@ const pl: ILocalization = {
       lastName: 'Nazwisko',
       date: 'Data zatrudnienia',
     },
+
+    getWorkHours: {
+      dayOff: 'Wolne',
+      work: 'Przepracowano',
+    },
   },
 
   login: {
@@ -120,6 +125,28 @@ const pl: ILocalization = {
     errorLoginFail: 'Niepoprawny login lub hasło',
     errorInvalidLogin: 'Niepoprawny login',
     errorInvalidPassword: 'Niepoprawne hasło',
+  },
+
+  calendar: {
+    year: 'Rok',
+    month: 'Miesiąc',
+    day: 'Dzień',
+
+    days: ['Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota', 'Niedziela'],
+    months: [
+      'Styczeń',
+      'Luty',
+      'Marzec',
+      'Kwiecień',
+      'Maj',
+      'Czerwiec',
+      'Lipiec',
+      'Sierpień',
+      'Wrzesień',
+      'Październik',
+      'Listopad',
+      'Grudzień',
+    ],
   },
 } as const
 

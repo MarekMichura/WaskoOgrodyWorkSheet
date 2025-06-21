@@ -1,19 +1,8 @@
 import Image from 'next/image'
 import {forwardRef, useEffect, useRef, useState} from 'react'
 
-import {type IChildren} from '@/utils/type/IChildren'
-
-import {type IGetPublicBase64Result} from '../img/placeHolder/_type/IGetPublicBase64Result'
-
+import {type IHeroSection} from './_type/IHeroSection'
 import s from './css.module.scss'
-
-export interface IHeroSection extends IChildren {
-  placeHolder?: IGetPublicBase64Result & {alt: string}
-  video?: {
-    src: string
-    type: string
-  }[]
-}
 
 const HeroSection = forwardRef<HTMLElement, IHeroSection>(({video, placeHolder, children}, ref) => {
   const refVideo = useRef<HTMLVideoElement>(null)

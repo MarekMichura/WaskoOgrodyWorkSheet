@@ -30,6 +30,12 @@ function ProfilData() {
           {profil.roles.map((role, i) => (
             <li key={i}>{role}</li>
           ))}
+          {profil.roles.map((role, i) => (
+            <li key={i}>{role}</li>
+          ))}
+          {profil.roles.map((role, i) => (
+            <li key={i}>{role}</li>
+          ))}
         </ul>
       </div>
     </div>

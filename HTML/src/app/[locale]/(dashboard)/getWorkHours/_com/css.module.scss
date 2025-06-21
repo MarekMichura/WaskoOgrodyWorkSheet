@@ -1,0 +1,24 @@
+.sec {
+  overflow: hidden;
+}
+
+.con {
+  width: 16rem;
+  height: 100%;
+
+  display: flex;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  text-align: center;
+
+  background-color: $stone-100;
+
+  @include mediaMedium {
+    width: 100%;
+    height: auto;
+    min-height: 6rem;
+  }
+}

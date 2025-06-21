@@ -3,13 +3,8 @@
 import Image from 'next/image'
 import {useState} from 'react'
 
-import {type IGetPublicBase64Result} from '@/components/img/placeHolder/_type/IGetPublicBase64Result'
-
+import {type IProjectElementProps} from './_type/IProjectElementProps'
 import s from './css.module.scss'
-
-interface IProjectElementProps {
-  images: IGetPublicBase64Result[]
-}
 
 function ProjectElement({images}: IProjectElementProps) {
   const [currImgID, setCurrImgID] = useState(0)
