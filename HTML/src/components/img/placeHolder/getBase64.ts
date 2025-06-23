@@ -21,6 +21,6 @@ export async function getPublicBase64(src: string): Promise<IGetPublicBase64Resu
   return {base64, width, height, src}
 }
 
-export async function getPublicBase64s(src: string[]) {
+export async function getPublicBase64s(src: readonly string[]) {
   return await Promise.all(src.map((path) => getPublicBase64(path)))
 }

@@ -6,14 +6,14 @@ import {useState} from 'react'
 import {type IProjectElementProps} from './_type/IProjectElementProps'
 import s from './css.module.scss'
 
-function ProjectElement({images}: IProjectElementProps) {
+function ProjectElement({images, title}: IProjectElementProps) {
   const [currImgID, setCurrImgID] = useState(0)
   const currImg = images[currImgID]
 
   return (
     <section className={s.con}>
       <div className={s.titleCon}>
-        <h1>Tytuł Inwestycji</h1>
+        <h1>{title}</h1>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur aspernatur commodi omnis nostrum quis
           tempora, odit exercitationem eligendi, ab, voluptate nisi modi dicta? Autem fuga maxime illo est in laborum.

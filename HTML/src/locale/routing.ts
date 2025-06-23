@@ -1,7 +1,7 @@
 import {defineRouting} from 'next-intl/routing'
 
 import {ECookie} from '@/utils/enum/ECookies'
-import {EProjects} from '@/utils/enum/EProject'
+import {EProjectsLink} from '@/utils/enum/EProject'
 
 export const routing = defineRouting({
   locales: ['en-US', 'pl-PL'],
@@ -12,27 +12,27 @@ export const routing = defineRouting({
     '/': {'pl-PL': '/', 'en-US': '/main-page'},
     '/contact': {'pl-PL': '/kontakt', 'en-US': '/contact'},
 
-    [EProjects.architecture]: {
+    [EProjectsLink.architecture]: {
       'pl-PL': '/Planowanie',
       'en-US': 'aa',
     },
-    [EProjects.greenLand]: {
+    [EProjectsLink.greenLand]: {
       'pl-PL': '/Przestrzenie',
       'en-US': 'ab',
     },
-    [EProjects.greenMaintenance]: {
+    [EProjectsLink.greenMaintenance]: {
       'pl-PL': '/Zagospodarowanie',
       'en-US': 'ac',
     },
-    [EProjects.greenRoof]: {
+    [EProjectsLink.greenRoof]: {
       'pl-PL': '/Dachy',
       'en-US': 'ad',
     },
-    [EProjects.plantings]: {
+    [EProjectsLink.plantings]: {
       'pl-PL': '/Nasiewanie',
       'en-US': 'ae',
     },
-    [EProjects.projects]: {
+    [EProjectsLink.projects]: {
       'pl-PL': '/Realizacje',
       'en-US': 'af',
     },
