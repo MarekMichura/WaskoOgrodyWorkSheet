@@ -8,7 +8,7 @@ import s from './css.module.scss'
 
 function ProjectElement({images, title}: IProjectElementProps) {
   const [currImgID, setCurrImgID] = useState(0)
-  const currImg = images[currImgID]
+  // const currImg = images[currImgID]
 
   return (
     <section className={s.con}>
@@ -21,7 +21,18 @@ function ProjectElement({images, title}: IProjectElementProps) {
       </div>
       <div className={s.image}>
         <div>
-          <Image src={currImg.src} fill blurDataURL={currImg.base64} placeholder="blur" alt="" />
+          {images.map((ele, i) => (
+            <Image
+              src={ele.src}
+              fill
+              blurDataURL={ele.base64}
+              placeholder="blur"
+              alt=""
+              key={i}
+              priority={i === 0}
+              data-show={i === currImgID}
+            />
+          ))}
         </div>
         <div>
           {Array.from({length: images.length}).map((_, i) => (

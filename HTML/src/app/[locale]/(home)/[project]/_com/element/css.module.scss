@@ -7,10 +7,12 @@
   display: grid;
 
   gap: 3rem;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
 
   background-color: $blue-200;
+  grid-template-areas: 'title img img' 'title img img' 'stats s s';
+
   @include dark {
     background-color: $blue-800;
   }
@@ -19,6 +21,9 @@
     padding: 3rem;
 
     gap: 2rem;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: none;
   }
 
   @include mediaMedium {
@@ -37,6 +42,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  grid-area: title;
 
   & > h1 {
     @include fontBlack;
@@ -52,6 +58,10 @@
     opacity: 0.5;
   }
 
+  @include mediaLarge {
+    grid-area: auto;
+  }
+
   @include mediaMedium {
     width: auto;
   }
@@ -62,6 +72,11 @@
   flex-direction: column;
   justify-content: end;
   align-items: start;
+  grid-area: stats;
+
+  @include mediaLarge {
+    grid-area: auto;
+  }
 
   @include mediaSmall {
     grid-row: 4/5;
@@ -72,6 +87,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  grid-area: s;
 
   & > div {
     display: flex;
@@ -97,6 +113,10 @@
       border-top: 1px solid $black;
     }
   }
+
+  @include mediaLarge {
+    grid-area: auto;
+  }
 }
 
 .image {
@@ -105,6 +125,15 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  grid-area: img;
+
+  & img {
+    visibility: hidden;
+
+    &[data-show='true'] {
+      visibility: visible;
+    }
+  }
 
   & > div:first-child {
     position: relative;
@@ -137,5 +166,9 @@
 
       cursor: pointer;
     }
+  }
+
+  @include mediaLarge {
+    grid-area: auto;
   }
 }

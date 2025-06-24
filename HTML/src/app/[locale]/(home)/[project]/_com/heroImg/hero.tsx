@@ -1,7 +1,7 @@
 'use client'
 
-import HeroSection from '@/components/hero/heroSection'
 import {type IHeroSection} from '@/components/hero/_type/IHeroSection'
+import HeroSection from '@/components/hero/heroSection'
 
 import s from './css.module.scss'
 
