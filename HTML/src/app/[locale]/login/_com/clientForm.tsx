@@ -49,7 +49,7 @@ function LoginPageClientForm({error, redirect, userName}: ILoginPageClientFormPr
   const submit = async (form: ILoginFormData) => {
     const response = await auth(form.userName, form.password)
     if (!response.authenticated) {
-      // resetField('password')
+      resetField('password')
       setError('userName', {message: 'errorLoginFail'})
       return
     }

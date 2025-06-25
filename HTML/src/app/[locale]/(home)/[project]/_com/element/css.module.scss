@@ -127,23 +127,10 @@
   gap: 0.5rem;
   grid-area: img;
 
-  & img {
-    visibility: hidden;
-
-    &[data-show='true'] {
-      visibility: visible;
-    }
-  }
-
   & > div:first-child {
     position: relative;
 
     height: 100%;
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: fill;
-    }
   }
   & > div:last-child {
     height: 1rem;
@@ -170,5 +157,20 @@
 
   @include mediaLarge {
     grid-area: auto;
+  }
+}
+.bigImg {
+  img {
+    width: 100%;
+    height: 100%;
+
+    visibility: hidden;
+
+    pointer-events: none;
+    object-fit: cover;
+
+    &[data-show='true'] {
+      visibility: visible;
+    }
   }
 }

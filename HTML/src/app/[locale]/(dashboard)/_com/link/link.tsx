@@ -1,8 +1,8 @@
 import Ripple from '@/components/ripple/ripple'
 import {Link} from '@/locale/navigation'
 
-import s from './css.module.scss'
 import {type INavLinkProps} from './_type/INavLinkProps'
+import s from './css.module.scss'
 
 function NavLink({text, href, Icon, locale, disabled}: INavLinkProps) {
   if (disabled) return

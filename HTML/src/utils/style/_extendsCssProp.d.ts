@@ -5,7 +5,7 @@ declare module 'react' {
     [key: `--${string}`]: string | number
   }
 
-  interface HTMLAttributes<T> {
+  interface HTMLAttributes {
     [key: `data-${string}`]: string | number | boolean | undefined
   }
 }

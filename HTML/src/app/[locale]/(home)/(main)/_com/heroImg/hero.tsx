@@ -1,13 +1,14 @@
 'use client'
 
+import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
 import {Flip} from 'gsap/Flip'
 import {ScrollSmoother} from 'gsap/ScrollSmoother'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
-import {useEffect, useRef} from 'react'
+import {useRef} from 'react'
 
-import HeroSection from '@/components/hero/heroSection'
 import {type IHeroSection} from '@/components/hero/_type/IHeroSection'
+import HeroSection from '@/components/hero/heroSection'
 import {useSection} from '@/utils/hook/useSection'
 
 import {EHeaderPosition} from '../../../_com/header/_enum/EHeaderPosition'
@@ -19,7 +20,7 @@ function HomeHeroImg(props: Omit<IHeroSection, 'children'>) {
   const imgRef = useRef<HTMLDivElement>(null)
   const conRef = useRef(null)
 
-  useEffect(() => {
+  useGSAP(() => {
     let triggerAnim: ScrollTrigger | null = null
     let tweenOpacity: gsap.core.Tween | null = null
     let tl: gsap.core.Timeline | null = null
@@ -80,7 +81,7 @@ function HomeHeroImg(props: Omit<IHeroSection, 'children'>) {
       tweenOpacity?.kill()
       resizeObserver.disconnect()
     }
-  }, [])
+  })
 
   return (
     <>

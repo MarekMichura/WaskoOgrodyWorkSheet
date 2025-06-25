@@ -28,7 +28,7 @@ function HomeBackBlur() {
     }
   }, [blur])
 
-  return <div onClick={click} ref={ref} className={s.blur} />
+  return <div onClick={click} ref={ref} className={s.blur} id="Blur" />
 }
 
 export default HomeBackBlur
