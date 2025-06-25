@@ -1,7 +1,8 @@
 import {useCallback, useLayoutEffect, useRef} from 'react'
 
 import {useDispatch} from '@/components/redux'
-import {addSection, removeSection, updateSection, type IReducerSection} from '@/components/redux/sliceSection'
+import {type IReducerSection} from '@/components/redux/_type/IReducerSection'
+import {addSection, removeSection, updateSection} from '@/components/redux/sliceSection'
 import {type ILocalization} from '@/locale/translations/en_US'
 
 import {useWindowEvent} from './useWindowEvent'
