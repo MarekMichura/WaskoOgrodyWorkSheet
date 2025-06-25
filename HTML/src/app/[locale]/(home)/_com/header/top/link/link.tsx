@@ -6,11 +6,15 @@ import {type IHref} from '@/utils/enum/EHref'
 
 import s from '../css.module.scss'
 
-function HeaderNavLink({href, text}: IHref) {
+interface HeaderNavLink extends IHref {
+  click?: () => void
+}
+
+function HeaderNavLink({href, text, click}: HeaderNavLink) {
   const t = useTranslations('nav')
 
   return (
-    <Ripple as={Link} href={href} className={s.link}>
+    <Ripple as={Link} href={href} className={s.link} onClick={click}>
       {t(text)}
     </Ripple>
   )

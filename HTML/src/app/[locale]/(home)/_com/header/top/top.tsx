@@ -342,7 +342,7 @@ const HeaderTop = forwardRef<HTMLElement>((_, ref) => {
             <ul className={s.langs} ref={menuConRef}>
               {rest.map(({href, text}, i) => (
                 <li className={s.element} key={i} ref={addMenuRefs}>
-                  <HeaderNavLink href={href} text={text} />
+                  <HeaderNavLink href={href} text={text} click={closeAll} />
                 </li>
               ))}
             </ul>

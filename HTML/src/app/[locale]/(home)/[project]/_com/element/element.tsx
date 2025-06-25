@@ -65,7 +65,6 @@ function ProjectElement({images, title}: IProjectElementProps) {
                 blurDataURL={ele.base64}
                 placeholder="blur"
                 alt=""
-                priority={i === 0}
                 data-show={i === currImgID}
               />
             </div>
@@ -77,12 +76,7 @@ function ProjectElement({images, title}: IProjectElementProps) {
           ))}
         </div>
       </div>
-      <div className={s.data}>
-        <h2>
-          Profit z inwestycji:
-          <br /> 200k
-        </h2>
-      </div>
+
       <div className={s.statistic}>
         <div>
           <div>Statystyki biznesowe</div>

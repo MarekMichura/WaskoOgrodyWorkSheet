@@ -11,7 +11,7 @@
   grid-template-rows: 1fr 1fr 1fr;
 
   background-color: $blue-200;
-  grid-template-areas: 'title img img' 'title img img' 'stats s s';
+  grid-template-areas: 'title img img' 'title img img' 's img img' 'stats img img';
 
   @include dark {
     background-color: $blue-800;
@@ -167,7 +167,7 @@
     visibility: hidden;
 
     pointer-events: none;
-    object-fit: cover;
+    object-fit: contain;
 
     &[data-show='true'] {
       visibility: visible;

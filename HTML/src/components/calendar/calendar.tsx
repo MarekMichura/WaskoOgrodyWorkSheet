@@ -26,7 +26,6 @@ function Calendar({month, year, changeMonth, changeYear, dayClick, updateCalenda
   const dayData = useMemo(() => calcDays(year, month), [month, year])
 
   const mixedData = useMemo(() => {
-    console.log('siema')
     return dayData.map(({year, month, day}) => ({year, month, day, ...data[`${year}-${month}-${day}`]}))
   }, [data, dayData])
 

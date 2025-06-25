@@ -7,12 +7,12 @@ const pl: ILocalization = {
     mainPage: 'Strona główna',
     contact: 'Kontakt',
 
-    architecture: 'Planowanie',
+    architecture: 'Bruki i mała architektura',
     greenLand: 'przestrzenie',
-    greenMaintenance: 'Zagospodarowanie',
+    greenMaintenance: 'Pielęgnacja zieleni',
     greenRoof: 'Zielone dachy',
-    plantings: 'Nasiewanie',
-    projects: 'Realizacje',
+    plantings: 'Nasadzenia',
+    projects: 'Projektowanie',
 
     close: 'Zamknij',
     open: 'Otwórz',
