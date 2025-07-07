@@ -1,0 +1,84 @@
+.con {
+  padding-top: 12rem;
+  padding-right: 6rem;
+  padding-bottom: 6rem;
+  padding-left: 6rem;
+
+  min-height: 100dvh;
+
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr;
+
+  @include mediaMedium {
+    padding-top: 7rem;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+
+    grid-template-columns: 1fr;
+  }
+}
+
+.left {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  & h2 {
+    margin-top: 1rem;
+  }
+  & span {
+    margin-left: 1rem;
+  }
+
+  @include mediaMedium {
+    margin-bottom: 3rem;
+  }
+}
+
+.map {
+  position: relative;
+
+  min-height: 12rem;
+
+  flex: 1;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+
+  & label {
+    font-size: 1.25rem;
+  }
+}
+
+.area {
+  min-height: 18rem;
+
+  font-size: 1.5rem;
+  resize: none;
+}
+
+.btn {
+  margin-left: auto;
+  padding: 0.5rem;
+
+  width: fit-content;
+
+  font-size: 2rem;
+
+  background-color: $transparent;
+  box-shadow: 0.0625rem 0.0625rem 0.125rem $gray-900;
+
+  border: 0;
+  border-radius: 1rem;
+  &:active {
+    box-shadow: 0.125rem 0.125rem 1px 0.125rem $gray-950;
+  }
+}
