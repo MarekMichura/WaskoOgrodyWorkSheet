@@ -1,4 +1,4 @@
-import {type EHeaderPosition} from '@/app/[locale]/(home)/_com/header/_enum/EHeaderPosition'
+import {type EHeaderPosition} from '@/app/[locale]/_(home)_prev/_com/header/_enum/EHeaderPosition'
 import {type ILocalization} from '@/locale/translations/en_US'
 
 export type IReducerSectionName = keyof ILocalization['sections']
