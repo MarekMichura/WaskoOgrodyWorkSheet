@@ -1,0 +1,139 @@
+.con {
+  position: relative;
+
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  box-shadow: 0 0 0.5rem $black;
+}
+
+.img {
+  z-index: -1;
+  object-fit: cover;
+}
+
+.center {
+  margin: auto;
+
+  width: 100%;
+  max-width: 75rem;
+
+  display: flex;
+  flex: 1;
+  justify-content: right;
+  align-items: center;
+
+  @include mediaSmall {
+    justify-content: center;
+  }
+}
+
+.content {
+  margin: 1rem;
+  padding: 1rem;
+
+  width: 100%;
+  max-width: 40rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  background-color: color.adjust($stone-50, $alpha: -0.5);
+
+  @include mediaMedium {
+    max-width: 30rem;
+  }
+
+  @include mediaSmall {
+    max-width: 25rem;
+  }
+
+  @include mediaSmallest {
+    max-width: calc(100% - 1rem);
+  }
+}
+
+.logoCon {
+  position: relative;
+
+  width: 20rem;
+  max-width: 100%;
+  aspect-ratio: 1080/725;
+
+  --color: rgba(0, 0, 0, 0.25);
+  filter: contrast(3) //
+    drop-shadow(1px 1px var(--color)) //
+    drop-shadow(-1px 1px var(--color)) //
+    drop-shadow(1px -1px var(--color)) //
+    drop-shadow(-1px -1px var(--color));
+
+  @include media('max-height', '40rem') {
+    display: none;
+  }
+}
+
+.logo {
+  object-fit: contain;
+}
+
+.title {
+  font-family: $font_black;
+  font-size: 2rem;
+  text-align: center;
+
+  @include mediaMedium {
+    font-size: 1.75rem;
+  }
+
+  @include mediaSmall {
+    font-size: 1.5rem;
+  }
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  text-align: center;
+
+  @include mediaMedium {
+    font-size: 1.25rem;
+  }
+  @include mediaSmall {
+    font-size: 1rem;
+  }
+}
+
+.btns {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn {
+  padding: 0.5rem;
+
+  font-family: inherit;
+  font-size: 1.5rem;
+
+  color: $black;
+
+  background-color: $green-400;
+
+  border: none;
+
+  cursor: pointer;
+  outline: none;
+  --color: #{$white};
+
+  @include mediaMedium {
+    font-size: 1.25rem;
+  }
+  @include mediaSmall {
+    font-size: 1rem;
+  }
+}

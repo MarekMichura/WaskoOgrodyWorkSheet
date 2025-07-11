@@ -1,12 +1,12 @@
-import {Lato, Bricolage_Grotesque} from 'next/font/google'
+import {Nunito, Playfair_Display} from 'next/font/google'
 
-export const lato = Lato({
-  weight: ['400'],
+export const nunito = Nunito({
+  weight: ['400', '700'],
   style: ['normal'],
   subsets: ['latin-ext'],
 })
 
-export const bricolage = Bricolage_Grotesque({
+export const playfair = Playfair_Display({
   weight: ['800'],
   style: ['normal'],
   subsets: ['latin-ext'],

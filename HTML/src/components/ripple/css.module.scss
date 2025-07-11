@@ -59,3 +59,16 @@
     --ripple: #{$stone-100};
   }
 }
+
+.defClass {
+  font-family: inherit;
+  font-size: inherit;
+
+  color: inherit;
+  background-color: $transparent;
+
+  border: none;
+
+  cursor: pointer;
+  outline: none;
+}

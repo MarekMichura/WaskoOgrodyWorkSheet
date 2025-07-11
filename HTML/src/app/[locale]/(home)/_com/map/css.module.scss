@@ -1,0 +1,24 @@
+.sec {
+  position: relative;
+
+  margin: 1rem 0;
+
+  min-width: 100%;
+  min-height: 100vh;
+
+  box-shadow: 0 0 1rem $black;
+}
+
+.icon {
+  display: contents;
+}
+
+.ele {
+  width: 100%;
+  height: 100%;
+
+  filter: contrast(3) drop-shadow(1px 1px var(--color)) drop-shadow(-1px 1px var(--color))
+    drop-shadow(1px -1px var(--color)) drop-shadow(-1px -1px var(--color));
+
+  --color: #{$black};
+}

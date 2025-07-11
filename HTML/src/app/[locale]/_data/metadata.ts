@@ -104,7 +104,7 @@ export const metadataEN: Metadata = {
   },
 }
 
-export const metadataLang: Record<ILocale, Metadata> = {
+export const metadataLang: Record<ILocale | 'en-US', Metadata> = {
   'en-US': metadataEN,
   'pl-PL': metadataPL,
 } as const

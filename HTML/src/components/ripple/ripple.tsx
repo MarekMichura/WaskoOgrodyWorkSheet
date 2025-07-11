@@ -10,16 +10,16 @@ import {generateUID} from '@/utils/func/UID/generateUID'
 import {removeUID} from '@/utils/func/UID/removeUID'
 import {type TGsapQuickSetter} from '@/utils/type/TGsap'
 
-import {useSelector} from '../redux'
+// import {useSelector} from '../redux'
 
 import {type IRippleData} from './_type/IRippleData'
 import {type IRippleProps} from './_type/IRippleProps'
 import s from './css.module.scss'
 import RippleElement from './rippleElement'
 
-function Ripple<T extends ElementType = 'button'>({as, children, disabled, ...props}: IRippleProps<T>) {
+function Ripple<T extends ElementType = 'button'>({as, children, disabled, defClass, ...props}: IRippleProps<T>) {
   const [ripples, setRipples] = useState<IRippleData[]>([])
-  const theme = useSelector(({theme}) => theme)
+  // const theme = useSelector(({theme}) => theme)
 
   const scaleChange = useRef<gsap.core.Tween>(null)
   const colorChange = useRef<gsap.core.Tween>(null)
@@ -58,7 +58,7 @@ function Ripple<T extends ElementType = 'button'>({as, children, disabled, ...pr
         .pause()
     })
     return () => mm.revert()
-  }, [theme, disabled])
+  }, [disabled])
 
   const removeID = useCallback((id: string) => {
     setRipples((prev) => removeUID(prev, id, 'id'))
@@ -120,7 +120,7 @@ function Ripple<T extends ElementType = 'button'>({as, children, disabled, ...pr
       onClick={click}
       disabled={disabled}
       data-disabled={disabled}
-      className={clsx(s.container, props.className)}
+      className={clsx(s.container, props.className, defClass && s.defClass)}
       ref={containerRef}
     >
       {children}

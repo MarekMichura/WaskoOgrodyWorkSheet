@@ -1,5 +1,5 @@
 import {type ILocale} from '@/locale/routing'
-import {type ILocalization} from '@/locale/translations/en_US'
+import {type ILocalization} from '@/locale/translations/pl_PL'
 
 declare module 'use-intl/core' {
   interface AppConfig {

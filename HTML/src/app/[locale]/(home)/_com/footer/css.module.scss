@@ -1,0 +1,103 @@
+.footer {
+  background-color: $emerald-200;
+  box-shadow: 0 0 0.5rem $black;
+}
+
+.con {
+  margin: auto;
+
+  max-width: 75rem;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.title {
+  margin-bottom: 1rem;
+
+  font-family: $font_black;
+}
+
+.logoCon {
+  position: relative;
+
+  margin: 0 auto;
+
+  max-width: 23rem;
+  max-height: 15.5rem;
+
+  aspect-ratio: 1080/725;
+
+  flex: 1;
+}
+
+.logo {
+  filter: contrast(3);
+
+  object-fit: contain;
+}
+
+.copyright {
+  margin-top: 0.5rem;
+
+  font-size: 1rem;
+  text-align: center;
+}
+
+.column {
+  padding: 1rem;
+
+  &:last-child {
+    flex-grow: 1;
+  }
+}
+
+.icon {
+  width: 3.5rem;
+  height: 3.5rem;
+
+  flex-shrink: 0;
+}
+
+.links {
+  flex: 1;
+}
+
+.btn {
+  padding: 0.25rem;
+
+  display: block;
+
+  text-align: left;
+
+  color: $black;
+  --color: #{$white};
+
+  @include mediaMedium {
+    width: min-content;
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.center {
+  min-height: 15.5rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,56 @@
+.con {
+  background-color: color.adjust($stone-50, $alpha: -0.25);
+}
+
+.center {
+  margin: 0 auto;
+  padding: 0.5rem 1rem;
+
+  max-width: 75rem;
+  height: 6rem;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  position: relative;
+
+  width: fit-content;
+  aspect-ratio: 1080/725;
+}
+
+.logoImg {
+  filter: contrast(3);
+
+  object-fit: contain;
+}
+
+.nav {
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+
+  @include mediaSmall {
+    display: none;
+  }
+}
+
+.navList {
+  display: flex;
+  gap: 0.5rem;
+
+  list-style: none;
+}
+
+.btn {
+  padding: 0.5rem;
+
+  font-size: 1.25rem;
+
+  color: $black;
+
+  border-radius: 100rem;
+  --color: #{$white};
+}

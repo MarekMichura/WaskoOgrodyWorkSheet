@@ -1,10 +1,12 @@
-import {useSelector} from '@/components/redux'
 import {ETheme} from '@/utils/enum/ETheme'
 
 import s from '../css.module.scss'
 
+// import {useSelector} from '@/components/redux'
+
 function ThemeLoadIcon() {
-  const theme = useSelector((context) => context.theme)
+  // const theme = useSelector((context) => context.theme)
+  const theme = ETheme.dark as ETheme
 
   if (theme === ETheme.loading)
     return <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 430" className={s.svg} />
