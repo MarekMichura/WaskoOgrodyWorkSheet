@@ -4,7 +4,7 @@ import {ECookie} from '@/utils/enum/ECookies'
 import {EProjectsLink} from '@/utils/enum/EProject'
 
 export const routing = defineRouting({
-  locales: ['pl-PL', 'en-US'],
+  locales: ['pl-PL'],
   defaultLocale: 'pl-PL',
   localeCookie: {name: ECookie.locale},
   localePrefix: 'never',

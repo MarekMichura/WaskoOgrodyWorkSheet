@@ -4,6 +4,9 @@ const en = {
   home: {
     nav: {
       contact: 'Contact',
+      info: 'About us',
+      map: 'Maps',
+      projects: 'Completed` projects',
     },
 
     footer: {
@@ -31,7 +34,7 @@ const en = {
         text: [
           {
             type: 'p',
-            text: 'Plants are not just decoration - they are the foundation of every thoughtful space. That\'s why we approach planting like architectural design: considering composition, seasonality, function, and site conditions.',
+            text: "Plants are not just decoration - they are the foundation of every thoughtful space. That's why we approach planting like architectural design: considering composition, seasonality, function, and site conditions.",
           },
           {
             type: 'p',
@@ -63,7 +66,7 @@ const en = {
         text: [
           {
             type: 'p',
-            text: 'Beautiful greenery needs an equally good setting. That\'s where we come in - with paving, detail, and architecture that gives character to the space.',
+            text: "Beautiful greenery needs an equally good setting. That's where we come in - with paving, detail, and architecture that gives character to the space.",
           },
           {
             type: 'p',
@@ -99,7 +102,7 @@ const en = {
           },
           {
             type: 'p',
-            text: 'We don\'t do quick fixes. We create schedules, monitor plant health, and act before problems arise. Our service is more than mowing - it\'s real landscape care.',
+            text: "We don't do quick fixes. We create schedules, monitor plant health, and act before problems arise. Our service is more than mowing - it's real landscape care.",
           },
           {
             type: 'list',
@@ -116,7 +119,7 @@ const en = {
           },
           {
             type: 'p',
-            text: 'Your garden doesn\'t need to ask for attention - with us, it\'s always in shape.',
+            text: "Your garden doesn't need to ask for attention - with us, it's always in shape.",
           },
         ],
       },
@@ -148,7 +151,7 @@ const en = {
           },
           {
             type: 'p',
-            text: 'Let\'s design greenery that makes sense - and has style.',
+            text: "Let's design greenery that makes sense - and has style.",
           },
           {
             type: 'p',
@@ -163,7 +166,7 @@ const en = {
         text: [
           {
             type: 'p',
-            text: 'A green roof is more than a trendy idea - it\'s a conscious choice of aesthetics, ecology, and comfort. We create roofs that not only please the eye but genuinely improve the quality of life and surrounding space.',
+            text: "A green roof is more than a trendy idea - it's a conscious choice of aesthetics, ecology, and comfort. We create roofs that not only please the eye but genuinely improve the quality of life and surrounding space.",
           },
           {
             type: 'p',
@@ -171,7 +174,7 @@ const en = {
           },
           {
             type: 'p',
-            text: 'Want your building\'s roof to work in your favor? With us, it\'s possible. We design and install green roofs - intensive and extensive - tailored to architecture, technical conditions, and your expectations.',
+            text: "Want your building's roof to work in your favor? With us, it's possible. We design and install green roofs - intensive and extensive - tailored to architecture, technical conditions, and your expectations.",
           },
           {
             type: 'list',
@@ -184,7 +187,7 @@ const en = {
           },
           {
             type: 'p',
-            text: 'Whether you\'re planning a modern garden, a leisure area, or a green cover for an office building - we take care of every detail: from drainage layers to plant selection.',
+            text: "Whether you're planning a modern garden, a leisure area, or a green cover for an office building - we take care of every detail: from drainage layers to plant selection.",
           },
           {
             type: 'p',
@@ -222,7 +225,7 @@ const en = {
     },
 
     map: {
-      pin: 'You haven\'t provided object positions and their descriptions, so this is empty.',
+      pin: "You haven't provided object positions and their descriptions, so this is empty.",
       btn: 'go to construction',
     },
   },
