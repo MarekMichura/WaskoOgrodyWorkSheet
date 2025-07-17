@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
+import {useMemo} from 'react'
 import {useTranslations} from 'use-intl'
 
 import logoImg from '@/components/img/logo/logoFull.png'
@@ -19,6 +20,9 @@ const IgIcon = dynamic(() => import('@/components/lottie/ig/ig'), {ssr: false})
 
 function HomeFooter() {
   const t_footer = useTranslations('home.footer')
+  const mobile = useMemo(() => {
+    return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
+  }, [])
 
   return (
     <footer className={s.footer}>
@@ -28,28 +32,33 @@ function HomeFooter() {
           <nav>
             <ul className={s.list}>
               <HomeFooterLink Icon={PinIcon}>
-                <Ripple defClass className={s.btn}>
+                <Ripple
+                  defClass
+                  className={s.btn}
+                  as="a"
+                  href="https://www.google.com/maps/place/50.09605179017402,19.924549787417213"
+                >
                   Adama&nbsp;Vetulaniego 5b, 31-226&nbsp;Kraków
                 </Ripple>
               </HomeFooterLink>
 
               <HomeFooterLink Icon={PhoneIcon}>
-                <Ripple defClass className={s.btn}>
+                <Ripple defClass className={s.btn} as={mobile ? 'a' : 'button'} href="tel:+48509808277">
                   Maciej&nbsp;Waśko: +48&nbsp;509&nbsp;808&nbsp;277
                 </Ripple>
-                <Ripple defClass className={s.btn}>
+                <Ripple defClass className={s.btn} as={mobile ? 'a' : 'button'} href="tel:+48730888972">
                   Adam&nbsp;Michalik: +48&nbsp;730&nbsp;888&nbsp;972
                 </Ripple>
               </HomeFooterLink>
 
               <HomeFooterLink Icon={MailIcon}>
-                <Ripple defClass className={s.btn}>
+                <Ripple defClass className={s.btn} as="a" href="mailto:biuro@wawelgarden.pl">
                   biuro@wawelgarden.pl
                 </Ripple>
-                <Ripple defClass className={s.btn}>
+                <Ripple defClass className={s.btn} as="a" href="michalik@wawelgarden.pl">
                   michalik@wawelgarden.pl
                 </Ripple>
-                <Ripple defClass className={s.btn}>
+                <Ripple defClass className={s.btn} as="a" href="wasko@wawelgarden.pl">
                   wasko@wawelgarden.pl
                 </Ripple>
               </HomeFooterLink>
@@ -61,13 +70,13 @@ function HomeFooter() {
           <nav>
             <ul className={s.list}>
               <HomeFooterLink Icon={FbIcon}>
-                <Ripple defClass className={s.btn}>
+                <Ripple defClass className={s.btn} as="a" href="#">
                   {t_footer('fb')}
                 </Ripple>
               </HomeFooterLink>
 
               <HomeFooterLink Icon={IgIcon}>
-                <Ripple defClass className={s.btn}>
+                <Ripple defClass className={s.btn} as="a" href="#">
                   {t_footer('ig')}
                 </Ripple>
               </HomeFooterLink>

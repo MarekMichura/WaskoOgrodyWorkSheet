@@ -4,6 +4,9 @@ const pl = {
   home: {
     nav: {
       contact: 'Kontakt',
+      info: 'Opis',
+      map: 'Nasze budowy',
+      projects: 'Zrealizowane projekty',
     },
 
     footer: {
@@ -222,7 +225,7 @@ const pl = {
       btn: 'przejdz do budowy',
     },
   },
-  
+
   calendar: {
     year: 'Rok',
     month: 'Miesiąc',

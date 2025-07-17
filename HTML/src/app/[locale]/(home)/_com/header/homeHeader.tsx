@@ -5,6 +5,9 @@ import {useTranslations} from 'next-intl'
 import logoImg from '@/components/img/logo/logoFull.png'
 import Ripple from '@/components/ripple/ripple'
 
+import {EHomeParts} from '../../_goto/EHomeParts'
+import {gotoID} from '../../_goto/gotoFun'
+
 import s from './css.module.scss'
 
 function HomeHeader() {
@@ -19,22 +22,22 @@ function HomeHeader() {
         <nav className={s.nav}>
           <ul className={s.navList}>
             <li className={s.navItem}>
-              <Ripple className={s.btn} defClass>
-                {t_nav('contact')}
+              <Ripple className={s.btn} defClass onClick={() => gotoID(EHomeParts.info)}>
+                {t_nav('info')}
               </Ripple>
             </li>
-            <li>
-              <Ripple className={s.btn} defClass>
-                {t_nav('contact')}
+            <li className={s.navItem}>
+              <Ripple className={s.btn} defClass onClick={() => gotoID(EHomeParts.map)}>
+                {t_nav('map')}
               </Ripple>
             </li>
-            <li>
-              <Ripple className={s.btn} defClass>
-                {t_nav('contact')}
+            <li className={s.navItem}>
+              <Ripple className={s.btn} defClass onClick={() => gotoID(EHomeParts.projects)}>
+                {t_nav('projects')}
               </Ripple>
             </li>
-            <li>
-              <Ripple className={s.btn} defClass>
+            <li className={s.navItem}>
+              <Ripple className={s.btn} defClass onClick={() => gotoID(EHomeParts.contact)}>
                 {t_nav('contact')}
               </Ripple>
             </li>

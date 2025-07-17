@@ -16,6 +16,7 @@ interface IHomeConstructionProps {
 function HomeConstruction({title, img}: IHomeConstructionProps) {
   const [open, setOpen] = useState(false)
   const [currImgID, setCurrImgID] = useState(0)
+  const nextImg = currImgID + 1 >= img.length ? 0 : currImgID + 1
 
   const panelRef = useRef(null)
   useGSAP(() => {
@@ -29,6 +30,43 @@ function HomeConstruction({title, img}: IHomeConstructionProps) {
       backdropFilter: open ? 'blur(10px)' : 'blur(0)',
     })
   }, [open])
+
+  const containerRef = useRef(null)
+  const timerRef = useRef(null)
+  const timelineRef = useRef<gsap.core.Timeline>(null)
+
+  const imgLoadStart = useCallback(() => {
+    timelineRef.current?.pause()
+  }, [])
+  const imgLoadComplete = useCallback(() => {
+    timelineRef.current?.progress(0)
+  }, [])
+  useGSAP(() => {
+    const timer = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: 'top+=32 bottom',
+        end: 'bottom+=32 top',
+        toggleActions: 'play pause resume pause',
+      },
+    })
+    timelineRef.current = timer
+    timer.fromTo(
+      timerRef.current!,
+      {'--scale': '0%'},
+      {
+        '--scale': '100%',
+        duration: 10,
+        onComplete: () => {
+          setCurrImgID((prev) => {
+            const nev = prev + 1
+            if (nev >= img.length) return 0
+            return nev
+          })
+        },
+      }
+    )
+  })
 
   const clickID = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
     const id = Number(e.currentTarget.dataset.id)
@@ -66,11 +104,26 @@ function HomeConstruction({title, img}: IHomeConstructionProps) {
 
       <div className={s.imageCon}>
         <div className={s.image} onClick={openPanel}>
-          <div className={s.bigImg}>
-            <Image src={img[currImgID]} key={currImgID} placeholder="blur" fill alt="" />
-          </div>
+          <Image
+            src={img[currImgID]}
+            key={currImgID}
+            placeholder="blur"
+            fill
+            alt=""
+            onLoadStart={imgLoadStart}
+            onLoadingComplete={imgLoadComplete}
+          />
+          <Image
+            src={img[nextImg]}
+            key={nextImg}
+            placeholder="blur"
+            fill
+            alt=""
+            onLoadingComplete={imgLoadComplete}
+            style={{visibility: 'hidden'}}
+          />
         </div>
-        <div className={s.paginator}>
+        <div className={s.paginator} ref={containerRef}>
           {Array.from({length: img.length}).map((_, i) => (
             <button
               key={i}
@@ -80,6 +133,7 @@ function HomeConstruction({title, img}: IHomeConstructionProps) {
               className={s.btn}
             />
           ))}
+          <div className={s.time} ref={timerRef} />
         </div>
       </div>
       <div ref={panelRef} className={s.panel} onClick={closePanel}>

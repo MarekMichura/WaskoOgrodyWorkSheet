@@ -12,6 +12,8 @@ import {type ILocalization} from '@/locale/translations/pl_PL'
 import {type IRawTranslationText} from '@/utils/type/translationText/IRawTranslationText'
 import useRawTranslationText from '@/utils/type/translationText/useRawTranslationText'
 
+import {EHomeParts} from '../../_goto/EHomeParts'
+
 import s from './css.module.scss'
 
 const diggerIcon = dynamic(() => import('@/components/lottie/digger/digger'), {ssr: false})
@@ -91,7 +93,7 @@ function HomeSectElement({Icon, theme}: IHomeSectElementProps) {
 
 function HomeSect() {
   return (
-    <section className={s.con}>
+    <section className={s.con} id={EHomeParts.info}>
       <HomeSectElement theme="Landscaping" Icon={diggerIcon} />
       <HomeSectElement theme="Roof" Icon={SoilIcon} />
       <HomeSectElement theme="Planting" Icon={PlantIcon} />

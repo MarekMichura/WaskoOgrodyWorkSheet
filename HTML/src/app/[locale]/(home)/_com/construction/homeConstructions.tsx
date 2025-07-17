@@ -1,3 +1,5 @@
+import {EHomeParts} from '../../_goto/EHomeParts'
+
 import f01 from './_img/francuzem/0e733676-8486-44d7-923a-e5f13abd5cbf.Garden.jpg'
 import f02 from './_img/francuzem/10aad04e-dd7b-47d3-8ee6-027d15187d38.Garden.jpg'
 import f03 from './_img/francuzem/1a16a55e-5679-44b0-8162-e410998c0858.Garden.jpg'
@@ -55,7 +57,7 @@ import HomeConstruction from './homeConstruction'
 
 function HomeConstructions() {
   return (
-    <div className={s.con}>
+    <div className={s.con} id={EHomeParts.projects}>
       <HomeConstruction title="Ogrody glogera" img={[g01, g02, g03, g04, g05, g06, g07, g08, g09, g10, g11, g12]} />
       <hr />
       <HomeConstruction title="Pod francuzem" img={[f01, f02, f03, f04, f05, f06, f07, f08, f09, f10, f11, f12, f13]} />
