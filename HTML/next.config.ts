@@ -9,7 +9,6 @@ const nextConfig: NextConfig = {
   output: 'standalone',
   reactStrictMode: true,
 
-
   sassOptions: {
     additionalData: `@use '@/utils/style/data.scss' as *;\n@use '@/utils/style/mixin.scss' as *;\n@use 'sass:color';`,
   },

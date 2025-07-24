@@ -11,7 +11,7 @@
 
   display: grid;
   gap: 1rem;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: auto 1fr;
   grid-template-areas: 'title img' 'con img';
 
@@ -25,6 +25,7 @@
 
 .imageCon {
   display: flex;
+  flex-grow: 0;
   flex-direction: column;
   gap: 0.5rem;
   grid-area: img;
@@ -107,4 +108,10 @@
 
   --scale: 10%;
   border-radius: 100%;
+}
+
+.img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
 }

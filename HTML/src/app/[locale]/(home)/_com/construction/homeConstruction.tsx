@@ -3,14 +3,20 @@
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
 import {ScrollSmoother} from 'gsap/ScrollSmoother'
-import Image, {type StaticImageData} from 'next/image'
 import {useCallback, useRef, useState} from 'react'
+
+import {type sharpImg} from '@/components/img/sharp'
+import SharpImage from '@/components/img/sharpImg'
 
 import s from './css.module.scss'
 
 interface IHomeConstructionProps {
   title: string
-  img: StaticImageData[]
+  img: {
+    h: number
+    w: number
+    img: sharpImg
+  }[]
 }
 
 function HomeConstruction({title, img}: IHomeConstructionProps) {
@@ -104,23 +110,14 @@ function HomeConstruction({title, img}: IHomeConstructionProps) {
 
       <div className={s.imageCon}>
         <div className={s.image} onClick={openPanel}>
-          <Image
-            src={img[currImgID]}
-            key={currImgID}
-            placeholder="blur"
-            fill
+          <SharpImage
+            sharp={img[currImgID].img}
+            w={img[currImgID].w}
+            h={img[currImgID].h}
+            className={s.img}
             alt=""
             onLoadStart={imgLoadStart}
-            onLoadingComplete={imgLoadComplete}
-          />
-          <Image
-            src={img[nextImg]}
-            key={nextImg}
-            placeholder="blur"
-            fill
-            alt=""
-            onLoadingComplete={imgLoadComplete}
-            style={{visibility: 'hidden'}}
+            onLoad={imgLoadComplete}
           />
         </div>
         <div className={s.paginator} ref={containerRef}>
@@ -137,7 +134,14 @@ function HomeConstruction({title, img}: IHomeConstructionProps) {
         </div>
       </div>
       <div ref={panelRef} className={s.panel} onClick={closePanel}>
-        <Image src={img[currImgID]} placeholder="blur" alt="" key={currImgID} />
+        <SharpImage
+          sharp={img[currImgID].img}
+          w={img[currImgID].w}
+          h={img[currImgID].h}
+          alt=""
+          onLoadStart={imgLoadStart}
+          onLoad={imgLoadComplete}
+        />
       </div>
     </section>
   )

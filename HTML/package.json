@@ -2,11 +2,13 @@
   "name": "wasko-ogrody",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "next build",
     "dev": "next dev --turbopack",
     "lint": "eslint ./src/",
     "lint:styles": "stylelint '**/*.scss' --fix",
+    "generate-images": "node ./sharp/sharpInit.ts",
     "postcss": "postcss ./build/static/css/*.css -d ./build/static/css/",
     "start": "next start"
   },
@@ -62,6 +64,7 @@
     "postcss-sort-media-queries": "^5.2.0",
     "prettier": "^3.5.3",
     "sass": "^1.89.0",
+    "sharp": "^0.34.3",
     "stylelint": "^16.19.1",
     "stylelint-order": "^7.0.0",
     "stylelint-scss": "^6.12.0",

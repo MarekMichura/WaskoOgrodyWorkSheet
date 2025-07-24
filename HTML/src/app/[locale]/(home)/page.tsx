@@ -1,9 +1,11 @@
 import HomeConstructions from './_com/construction/homeConstructions'
-import HomeContact from './_com/contact/contact'
 import HomeFooter from './_com/footer/homeFooter'
 import HomeHero from './_com/hero/homeHero'
 import HomeMap from './_com/map/homeMap'
 import HomeSect from './_com/sect/homeSect'
+
+export const dynamic = 'force-static'
+export const dynamicParams = false
 
 function HomePage() {
   return (
@@ -12,7 +14,7 @@ function HomePage() {
       <HomeSect />
       <HomeMap />
       <HomeConstructions />
-      <HomeContact />
+      {/* <HomeContact /> */}
       <HomeFooter />
     </>
   )
