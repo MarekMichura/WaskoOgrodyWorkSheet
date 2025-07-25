@@ -15,8 +15,9 @@ ENV HOST=${HOST}
 RUN mkdir build 
 COPY package.json ./
 RUN yarn install --production=false
-COPY . .
+COPY sharp .
 RUN yarn run generate-images
+COPY . .
 RUN yarn run build
 RUN yarn run postcss
 
