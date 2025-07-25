@@ -1,8 +1,11 @@
 import {type CSSProperties, type SyntheticEvent, useCallback, useEffect, useMemo, useRef, useState} from 'react'
 
+import {clsx} from '@/utils/func/clsx'
+
+import s from './css.module.scss'
 import {type SharpImageProps} from './sharp'
 
-function SharpImage({w, h, sharp, alt, sizes, ...p}: SharpImageProps) {
+function SharpImage({w, h, sharp, alt, sizes, style, conClass, ...p}: SharpImageProps) {
   const [loaded, setLoaded] = useState(false)
 
   const imgRef = useRef<HTMLImageElement>(null)
@@ -46,9 +49,9 @@ function SharpImage({w, h, sharp, alt, sizes, ...p}: SharpImageProps) {
     }
   }, [sizes, sharp])
 
-  const style = useMemo(() => {
-    return {aspectRatio: `${w} / ${h}`, position: 'relative'} as CSSProperties
-  }, [w, h])
+  const aspectRatioStyle = useMemo(() => {
+    return {aspectRatio: `${w} / ${h}`, ...style} as CSSProperties
+  }, [w, h, style])
 
   // prettier-ignore
   const load = useCallback((e: SyntheticEvent<HTMLImageElement, Event>) => {
@@ -57,17 +60,18 @@ function SharpImage({w, h, sharp, alt, sizes, ...p}: SharpImageProps) {
   }, [p])
 
   return (
-    <div style={style}>
+    <div className={clsx(s.con, conClass)}>
       {!loaded && (
         <picture>
           <source type="image/avif" srcSet={mini.avif} sizes={size} />
           <source type="image/webp" src={mini.webp} sizes={size} />
           <img
             {...p}
+            className={clsx(p.className, s.mini)}
             src={mini.jpg}
             alt={`${alt} placeholder`}
             sizes={size}
-            style={{position: 'absolute', width: '100%', height: '100%'}}
+            style={{...aspectRatioStyle}}
           />
         </picture>
       )}
@@ -82,7 +86,7 @@ function SharpImage({w, h, sharp, alt, sizes, ...p}: SharpImageProps) {
           src={src}
           sizes={size}
           srcSet={jpg}
-          style={{visibility: loaded ? 'visible' : 'hidden'}}
+          style={{...aspectRatioStyle, visibility: loaded ? 'visible' : 'hidden'}}
         />
       </picture>
     </div>

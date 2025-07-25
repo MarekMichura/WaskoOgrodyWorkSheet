@@ -1,4 +1,4 @@
-import {type sharpImg} from '@/components/img/sharp'
+import {type sharpImg} from '@/components/img/sharp/sharp'
 
 export const CONSTRUCTION_IMG = {
   francuzem: [

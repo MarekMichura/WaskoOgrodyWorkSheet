@@ -3,10 +3,10 @@
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
 import {ScrollSmoother} from 'gsap/ScrollSmoother'
-import {useCallback, useRef, useState} from 'react'
+import {useCallback, useEffect, useRef, useState} from 'react'
 
-import {type sharpImg} from '@/components/img/sharp'
-import SharpImage from '@/components/img/sharpImg'
+import {type sharpImg} from '@/components/img/sharp/sharp'
+import SharpImage from '@/components/img/sharp/sharpImg'
 
 import s from './css.module.scss'
 
@@ -22,7 +22,7 @@ interface IHomeConstructionProps {
 function HomeConstruction({title, img}: IHomeConstructionProps) {
   const [open, setOpen] = useState(false)
   const [currImgID, setCurrImgID] = useState(0)
-  const nextImg = currImgID + 1 >= img.length ? 0 : currImgID + 1
+  // const nextImg = currImgID + 1 >= img.length ? 0 : currImgID + 1
 
   const panelRef = useRef(null)
   useGSAP(() => {
@@ -74,12 +74,45 @@ function HomeConstruction({title, img}: IHomeConstructionProps) {
     )
   })
 
+  useEffect(() => {
+    if (!open) return
+    if (!timelineRef.current?.isActive) return
+
+    timelineRef.current?.pause()
+    return () => {
+      timelineRef.current?.resume()
+    }
+  }, [open])
+
   const clickID = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
     const id = Number(e.currentTarget.dataset.id)
     setCurrImgID(id)
   }, [])
   const openPanel = useCallback(() => setOpen(true), [])
   const closePanel = useCallback(() => setOpen(false), [])
+
+  const holderRef = useRef(null)
+  const animRef = useRef<GSAPTween>(null)
+
+  useGSAP(() => {
+    animRef.current?.kill()
+    const prevX = gsap.getProperty(holderRef.current, 'xPercent') as number
+    const distance = Math.abs(-currImgID * 100 - prevX)
+    const duration = distance / 100
+
+    const isActive = timelineRef.current?.isActive
+    animRef.current = gsap.to(holderRef.current, {
+      xPercent: -currImgID * 100,
+      y: 0,
+      duration,
+      onStart: () => {
+        timelineRef.current?.pause()
+      },
+      onComplete: () => {
+        if (isActive) timelineRef.current?.resume()
+      },
+    })
+  }, [currImgID])
 
   return (
     <section className={s.sec}>
@@ -110,18 +143,24 @@ function HomeConstruction({title, img}: IHomeConstructionProps) {
 
       <div className={s.imageCon}>
         <div className={s.image} onClick={openPanel}>
-          <SharpImage
-            sharp={img[currImgID].img}
-            w={img[currImgID].w}
-            h={img[currImgID].h}
-            className={s.img}
-            alt=""
-            onLoadStart={imgLoadStart}
-            onLoad={imgLoadComplete}
-          />
+          <div className={s.holder} ref={holderRef}>
+            {img.map(({img, w, h}, i) => (
+              <SharpImage
+                key={i}
+                sharp={img}
+                w={w}
+                h={h}
+                className={s.img}
+                conClass={s.shardCon}
+                alt=""
+                sizes="(min-width: 30rem) 50vw, 100vw"
+                style={{transform: `translateX(${i * 100}%)`}}
+              />
+            ))}
+          </div>
         </div>
         <div className={s.paginator} ref={containerRef}>
-          {Array.from({length: img.length}).map((_, i) => (
+          {img.map((_, i) => (
             <button
               key={i}
               data-id={i}
