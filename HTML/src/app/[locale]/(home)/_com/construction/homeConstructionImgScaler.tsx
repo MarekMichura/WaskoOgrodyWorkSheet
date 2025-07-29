@@ -1,11 +1,11 @@
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
-import {useCallback, useRef, useState} from 'react'
+import {useCallback, useEffect, useRef, useState} from 'react'
 
 import {type ISharpImageProps} from '@/components/img/sharp/sharp'
 import SharpImage from '@/components/img/sharp/sharpImg'
 
-function HomeConstructionImgScale(p: ISharpImageProps) {
+function HomeConstructionImgScale({nr, ...p}: ISharpImageProps & {nr: number}) {
   const [open, setOpen] = useState(false)
   const imgRef = useRef<HTMLImageElement>(null)
 
@@ -22,24 +22,34 @@ function HomeConstructionImgScale(p: ISharpImageProps) {
   // prettier-ignore
   const mouseMove = useCallback((e: React.MouseEvent<HTMLImageElement>) => {
     p.onMouseMove?.(e)
+    const img = imgRef.current
+    if (!img) return
+    
+    const rect = img.getBoundingClientRect()
+    const offsetX = (e.clientX - rect.x) / rect.width - 0.5
+    const offsetY = (e.clientY - rect.y) / rect.height - 0.5
 
-    if (!imgRef.current) return
-
-    const rect = imgRef.current.getBoundingClientRect()
-    const offsetX = (e.clientX - rect.left) / rect.width - 0.5
-    const offsetY = (e.clientY - rect.top) / rect.height - 0.5
-
-    // Przesuwaj max o 20px w każdą stronę
-    gsap.to(imgRef.current, {
+    gsap.to(img, {
       x: offsetX * 500,
       y: offsetY * 500,
     })
   }, [p])
 
+  useEffect(() => {
+    gsap.set(imgRef.current, {
+      xPercent: nr * 100,
+    })
+  }, [nr])
+
   useGSAP(() => {
-    gsap.to(imgRef.current, {scale: open ? 1.5 : 1})
-    if (!open) {
-      gsap.to(imgRef.current, {x: 0, y: 0})
+    const con = imgRef.current
+    const img = con?.querySelector('img')
+    if (!img) return
+    if (open) {
+      gsap.to(img, {scale: 1.5})
+    } else {
+      gsap.to(img, {scale: 1})
+      gsap.to(con, {x: 0, y: 0})
     }
   }, [open])
 

@@ -155,7 +155,7 @@ function HomeConstruction({title, img}: IHomeConstructionProps) {
                 className={s.img}
                 conClass={s.shardCon}
                 alt=""
-                style={{transform: `translateX(${i * 100}%)`}}
+                nr={i}
                 conStyle={{pointerEvents: i === currImgID ? 'all' : 'none'}}
               />
             ))}
