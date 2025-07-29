@@ -9,6 +9,7 @@ import {type sharpImg} from '@/components/img/sharp/sharp'
 import SharpImage from '@/components/img/sharp/sharpImg'
 
 import s from './css.module.scss'
+import HomeConstructionImgScale from './homeConstructionImgScaler'
 
 interface IHomeConstructionProps {
   title: string
@@ -87,6 +88,7 @@ function HomeConstruction({title, img}: IHomeConstructionProps) {
   const clickID = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
     const id = Number(e.currentTarget.dataset.id)
     setCurrImgID(id)
+    timelineRef.current?.progress(0)
   }, [])
   const openPanel = useCallback(() => setOpen(true), [])
   const closePanel = useCallback(() => setOpen(false), [])
@@ -145,7 +147,7 @@ function HomeConstruction({title, img}: IHomeConstructionProps) {
         <div className={s.image} onClick={openPanel}>
           <div className={s.holder} ref={holderRef}>
             {img.map(({img, w, h}, i) => (
-              <SharpImage
+              <HomeConstructionImgScale
                 key={i}
                 sharp={img}
                 w={w}
@@ -153,8 +155,8 @@ function HomeConstruction({title, img}: IHomeConstructionProps) {
                 className={s.img}
                 conClass={s.shardCon}
                 alt=""
-                sizes="(min-width: 30rem) 50vw, 100vw"
                 style={{transform: `translateX(${i * 100}%)`}}
+                conStyle={{pointerEvents: i === currImgID ? 'all' : 'none'}}
               />
             ))}
           </div>

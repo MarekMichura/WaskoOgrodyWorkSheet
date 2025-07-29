@@ -52,8 +52,9 @@ export type sharpImg =
   | 'construction/stawowa/d9407f88-40ed-44b7-92d0-725a9400e52c'
   | 'construction/stawowa/fa9e7b09-f8ce-457a-889d-ac7444ab4df0'
 
-export interface SharpImageProps extends Omit<React.ComponentProps<'img'>, 'src' | 'srcSet'> {
+export interface ISharpImageProps extends Omit<React.ComponentProps<'img'>, 'src' | 'srcSet'> {
   conClass?: string
+  conStyle?: React.CSSProperties
   sharp: sharpImg
   w: number
   h: number
