@@ -10,9 +10,16 @@ import SharpImage from '@/components/img/sharp/sharpImg'
 
 import s from './css.module.scss'
 import HomeConstructionImgScale from './homeConstructionImgScaler'
+import {text} from 'stream/consumers'
 
 interface IHomeConstructionProps {
   title: string
+  subTitle?: string
+  textTop?: string
+  textBottom?: string
+  textBottom2?: string
+  listTitle?: string
+  listElements?: string[]
   img: {
     h: number
     w: number
@@ -20,7 +27,16 @@ interface IHomeConstructionProps {
   }[]
 }
 
-function HomeConstruction({title, img}: IHomeConstructionProps) {
+function HomeConstruction({
+  title,
+  subTitle,
+  textTop,
+  textBottom,
+  textBottom2,
+  listTitle,
+  listElements,
+  img,
+}: IHomeConstructionProps) {
   const [open, setOpen] = useState(false)
   const [currImgID, setCurrImgID] = useState(0)
   // const nextImg = currImgID + 1 >= img.length ? 0 : currImgID + 1
@@ -63,7 +79,7 @@ function HomeConstruction({title, img}: IHomeConstructionProps) {
       {'--scale': '0%'},
       {
         '--scale': '100%',
-        duration: 10,
+        duration: 3,
         onComplete: () => {
           setCurrImgID((prev) => {
             const nev = prev + 1
@@ -118,15 +134,22 @@ function HomeConstruction({title, img}: IHomeConstructionProps) {
 
   return (
     <section className={s.sec}>
-      <div className={s.titleCon}>
-        <h1>{title}</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur aspernatur commodi omnis nostrum quis
-          tempora, odit exercitationem eligendi, ab, voluptate nisi modi dicta? Autem fuga maxime illo est in laborum.
+      <div className={s.titleCon} style={{textAlign: 'justify', fontSize: '1.25rem'}}>
+        <h1 style={{textAlign: 'center', fontSize: '3rem'}}>{title}</h1>
+        <h2 style={{textAlign: 'center', fontSize: '1.75rem', marginBottom: '2rem'}}>{subTitle}</h2>
+
+        <p className={s.topLine} style={{marginBottom: '1rem'}}>
+          {textTop}
         </p>
+        <p>{listTitle}</p>
+        <ul style={{marginBottom: '1rem', marginLeft: '2rem'}}>
+          {listElements?.map((el, i) => <li key={i}>{el}</li>)}
+        </ul>
+        <p style={{marginBottom: '1rem'}}>{textBottom}</p>
+        <p>{textBottom2}</p>
       </div>
 
-      <div className={s.statistic}>
+      {/* <div className={s.statistic}>
         <div>
           <div>Statystyki biznesowe</div>
           <div>
@@ -141,7 +164,7 @@ function HomeConstruction({title, img}: IHomeConstructionProps) {
             <div>Nie wiem jakie inne statystki dać</div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className={s.imageCon}>
         <div className={s.image} onClick={openPanel}>
@@ -153,10 +176,12 @@ function HomeConstruction({title, img}: IHomeConstructionProps) {
                 w={w}
                 h={h}
                 className={s.img}
-                conClass={s.shardCon}
                 alt=""
                 nr={i}
-                conStyle={{pointerEvents: i === currImgID ? 'all' : 'none'}}
+                conProps={{
+                  className: s.shardCon,
+                  style: {pointerEvents: i === currImgID ? 'all' : 'none'},
+                }}
               />
             ))}
           </div>

@@ -4,8 +4,8 @@ const pl = {
   home: {
     nav: {
       contact: 'Kontakt',
-      info: 'Opis',
-      map: 'Nasze budowy',
+      info: 'O nas',
+      map: 'Mapa realizacji',
       projects: 'Zrealizowane projekty',
     },
 
@@ -20,7 +20,7 @@ const pl = {
     hero: {
       title: 'Zmieniamy przestrzeń w zielone doświadczenie',
       subtitle:
-        'Szukasz czegoś więcej niż tylko ładnego ogrodu? My tworzymy zielone przestrzenie z charakterem - funkcjonalne, estetyczne i perfekcyjnie dopasowane do Twoich potrzeb. Od ekskluzywnych ogrodów przy rezydencjach, przez nowoczesne dachy zielone w centrach miast, aż po kompleksowe zagospodarowanie terenów wokół firm i instytucji - działamy tam, gdzie liczy się jakość, detal i profesjonalne podejście.',
+        'Naszą misją jest tworzenie funkcjonalnych i ekologicznych przestrzeni zielonych, które przyczyniają się do poprawy jakości życia oraz wspierają zrównoważony rozwój. Zapewniamy kompleksowe wsparcie na każdym etapie realizacji - począwszy od optymalizacji projektu, poprzez wykonawstwo, aż po utrzymanie i serwis gotowych rozwiązań. WawelGarden wyróżnia indywidualne podejście do każdego klienta, co pozwala nam dostosować ofertę do specyfiki inwestycji oraz oczekiwań odbiorców.',
       explore: 'Przeglądaj nasze projekty',
       contact: 'Skontaktuj się z nami',
     },

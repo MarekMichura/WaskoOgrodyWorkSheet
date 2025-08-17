@@ -7,7 +7,7 @@ import s from './css.module.scss'
 import {type ISharpImageProps} from './sharp'
 
 const SharpImage = forwardRef<HTMLDivElement | null, ISharpImageProps>(
-  ({w, h, sharp, alt, sizes, style, conClass, conStyle, ...p}, ref) => {
+  ({w, h, sharp, alt, sizes, style, conProps, ...p}, ref) => {
     const [loaded, setLoaded] = useState(false)
 
     const imgRef = useRef<HTMLImageElement>(null)
@@ -62,7 +62,7 @@ const SharpImage = forwardRef<HTMLDivElement | null, ISharpImageProps>(
   }, [p])
 
     return (
-      <div className={clsx(s.con, conClass)} style={conStyle} ref={ref}>
+      <div {...conProps} className={clsx(s.con, conProps?.className)} style={conProps?.style} ref={ref}>
         {!loaded && (
           <picture>
             <source type="image/avif" srcSet={mini.avif} sizes={size} />

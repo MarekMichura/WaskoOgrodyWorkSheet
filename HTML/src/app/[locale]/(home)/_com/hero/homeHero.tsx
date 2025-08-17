@@ -20,7 +20,7 @@ function HomeHero() {
     <section className={s.con}>
       <Image src={img} placeholder="blur" alt="" className={s.img} fill />
       <HomeHeader />
-      <div className={s.center}>
+      {/* <div className={s.center}>
         <div className={s.content}>
           <div className={s.logoCon}>
             <Image src={logoImg} alt="Logo" className={s.logo} fill />
@@ -36,7 +36,7 @@ function HomeHero() {
             </Ripple>
           </div>
         </div>
-      </div>
+      </div> */}
     </section>
   )
 }

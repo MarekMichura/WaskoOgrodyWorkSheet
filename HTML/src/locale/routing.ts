@@ -11,6 +11,7 @@ export const routing = defineRouting({
   pathnames: {
     '/': {'pl-PL': '/', 'en-US': '/main-page'},
     '/contact': {'pl-PL': '/kontakt', 'en-US': '/contact'},
+    '/realizations': {'pl-PL': '/realizacje', 'en-US': '/realizations'},
 
     [EProjectsLink.architecture]: {
       'pl-PL': '/Planowanie',

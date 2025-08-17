@@ -10,6 +10,7 @@ import {type IParamsLocale} from '../../utils/enum/IParamsLocale'
 
 import RootLayout from './_com/rootLayout'
 import {metadata, metadataLang} from './_data/metadata'
+import HomeHero from './(home)/_com/hero/homeHero'
 
 // import ClientProvider from '@/components/redux'
 

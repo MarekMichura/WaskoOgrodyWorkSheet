@@ -1,6 +1,17 @@
 import {type sharpImg} from '@/components/img/sharp/sharp'
 
 export const CONSTRUCTION_IMG = {
+  maspex: [
+    {img: 'construction/maspex/87c1f728-f54e-46f5-82f8-d976ff849bb3' as sharpImg, w: 1789, h: 1007},
+    {img: 'construction/maspex/71573506-45f9-4beb-bebd-d2feaed7d75f' as sharpImg, w: 1816, h: 1022},
+    {img: 'construction/maspex/495ccd6e-c530-4d2e-8053-e02214157d2e' as sharpImg, w: 900, h: 1600},
+    {img: 'construction/maspex/dc351a6b-8f69-445f-b494-1f8be3d2af25' as sharpImg, w: 1798, h: 1012},
+    {img: 'construction/maspex/97efaa6e-cb4d-4c0e-85c0-98e0322673c6' as sharpImg, w: 900, h: 1600},
+    {img: 'construction/maspex/6be8a5b8-6304-4202-ac2f-bca335a517c0' as sharpImg, w: 900, h: 1600},
+    {img: 'construction/maspex/d0d5cab9-4e47-47f7-9de1-12a43ac9f7e7' as sharpImg, w: 900, h: 1600},
+    {img: 'construction/maspex/7f6edc56-78b8-4609-a999-972896a100fd' as sharpImg, w: 900, h: 1600},
+    {img: 'construction/maspex/0915a0fe-ea30-448b-8925-38dea3453109' as sharpImg, w: 1811, h: 1019},
+  ],
   francuzem: [
     {img: 'construction/francuzem/0e733676-8486-44d7-923a-e5f13abd5cbf' as sharpImg, w: 3975, h: 5962},
     {img: 'construction/francuzem/10aad04e-dd7b-47d3-8ee6-027d15187d38' as sharpImg, w: 4160, h: 6240},

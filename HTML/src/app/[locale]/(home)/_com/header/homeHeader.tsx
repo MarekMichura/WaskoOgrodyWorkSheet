@@ -9,6 +9,7 @@ import {EHomeParts} from '../../_goto/EHomeParts'
 import {gotoID} from '../../_goto/gotoFun'
 
 import s from './css.module.scss'
+import {Link} from '@/locale/navigation'
 
 function HomeHeader() {
   const t_nav = useTranslations('home.nav')
@@ -27,7 +28,7 @@ function HomeHeader() {
               </Ripple>
             </li>
             <li className={s.navItem}>
-              <Ripple className={s.btn} defClass onClick={() => gotoID(EHomeParts.map)}>
+              <Ripple as={Link} href="/realizations" className={s.btn} defClass>
                 {t_nav('map')}
               </Ripple>
             </li>

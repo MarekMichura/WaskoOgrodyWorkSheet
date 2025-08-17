@@ -12,7 +12,7 @@ function HomePage() {
     <>
       <HomeHero />
       <HomeSect />
-      <HomeMap />
+      {/* <HomeMap /> */}
       <HomeConstructions />
       {/* <HomeContact /> */}
       <HomeFooter />

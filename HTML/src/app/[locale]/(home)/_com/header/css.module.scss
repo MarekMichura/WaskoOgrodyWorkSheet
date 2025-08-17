@@ -45,12 +45,20 @@
 }
 
 .btn {
+  position: relative;
+
   padding: 0.5rem;
 
+  display: block;
+
   font-size: 1.25rem;
+  font-weight: inherit;
+  text-decoration: inherit;
 
   color: $black;
 
   border-radius: 100rem;
+
+  overflow: hidden;
   --color: #{$white};
 }

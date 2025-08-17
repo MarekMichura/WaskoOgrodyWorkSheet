@@ -11,6 +11,7 @@ import {clsx} from '@/utils/func/clsx'
 
 import s from './css.module.scss'
 import HomeFooterLink from './homeFooterLink'
+import {EHomeParts} from '../../_goto/EHomeParts'
 
 const PinIcon = dynamic(() => import('@/components/lottie/pin/pin'), {ssr: false})
 const PhoneIcon = dynamic(() => import('@/components/lottie/phone/phone'), {ssr: false})
@@ -25,7 +26,7 @@ function HomeFooter() {
   }, [])
 
   return (
-    <footer className={s.footer}>
+    <footer className={s.footer} id={EHomeParts.contact}>
       <div className={s.con}>
         <div className={s.column}>
           <h1 className={s.title}>{t_footer('contact')}</h1>
