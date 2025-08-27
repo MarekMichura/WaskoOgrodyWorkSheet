@@ -1,0 +1,39 @@
+@use 'sass:list';
+@use 'sass:string';
+@use '@/utils/style/data.scss';
+
+@mixin media($property: max-width, $size: 30rem) {
+  @media screen and (#{$property}: #{$size}) {
+    @content;
+  }
+}
+
+@mixin mediaLarge() {
+  @include media($size: 75rem) {
+    @content;
+  }
+}
+
+@mixin mediaMedium() {
+  @include media($size: 50rem) {
+    @content;
+  }
+}
+
+@mixin mediaSmall() {
+  @include media($size: 40.5rem) {
+    @content;
+  }
+}
+
+@mixin mediaSmallest() {
+  @include media($size: 25rem) {
+    @content;
+  }
+}
+
+@mixin dark {
+  [data-theme='d'] & {
+    @content;
+  }
+}

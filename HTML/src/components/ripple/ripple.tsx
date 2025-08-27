@@ -2,130 +2,124 @@
 
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
-import {type ElementType, type MouseEvent} from 'react'
-import {useRef, useCallback, useState} from 'react'
+import {useCallback, useRef, useState, type ElementType} from 'react'
 
 import {clsx} from '@/utils/func/clsx'
 import {generateUID} from '@/utils/func/UID/generateUID'
 import {removeUID} from '@/utils/func/UID/removeUID'
-import {type TGsapQuickSetter} from '@/utils/type/TGsap'
 
-// import {useSelector} from '../redux'
-
-import {type IRippleData} from './_type/IRippleData'
-import {type IRippleProps} from './_type/IRippleProps'
 import s from './css.module.scss'
-import RippleElement from './rippleElement'
+import {type IRippleProps} from './IRippleProps'
 
-function Ripple<T extends ElementType = 'button'>({as, children, disabled, defClass, ...props}: IRippleProps<T>) {
-  const [ripples, setRipples] = useState<IRippleData[]>([])
-  // const theme = useSelector(({theme}) => theme)
+function Ripple<T extends ElementType = 'button'>({as, disabled, defClass, defColor, children, ...p}: IRippleProps<T>) {
+  const componentRef = useRef<HTMLElement>(null)
+  const [ripples, setRipples] = useState<{x: number; y: number; id: string}[]>([])
 
-  const scaleChange = useRef<gsap.core.Tween>(null)
-  const colorChange = useRef<gsap.core.Tween>(null)
-
-  const setterPosYRef = useRef<TGsapQuickSetter<number>>(null)
-  const setterPosXRef = useRef<TGsapQuickSetter<number>>(null)
-
-  const containerRef = useRef<HTMLElement>(null)
+  // NOTE: GSAP
+  const color = useRef<gsap.core.Tween>(null)
+  const scale = useRef<gsap.core.Tween>(null)
+  const setX = useRef<(n: number) => void>(null)
+  const setY = useRef<(n: number) => void>(null)
 
   useGSAP(() => {
-    if (disabled) return
     const mm = gsap.matchMedia()
     mm.add('(prefers-reduced-motion: no-preference)', () => {
-      setterPosXRef.current = gsap.quickSetter(containerRef.current, '--posX', 'px') as TGsapQuickSetter<number>
-      setterPosYRef.current = gsap.quickSetter(containerRef.current, '--posY', 'px') as TGsapQuickSetter<number>
-
-      scaleChange.current = gsap
-        .fromTo(
-          containerRef.current, //
-          {'--scale': 0},
-          {'--scale': 1, duration: 0.4}
-        )
-        .pause()
+      setX.current = gsap.quickSetter(componentRef.current!, '--posX', 'px') as (n: number) => void
+      setY.current = gsap.quickSetter(componentRef.current!, '--posY', 'px') as (n: number) => void
+      scale.current = gsap.fromTo(componentRef.current, {'--scale': 0}, {'--scale': 1, duration: 0.4}).pause()
+      color.current = gsap.to(componentRef.current, {color: 'var(--color)'}).pause()
     })
-    return () => mm.revert()
-  }, [disabled])
+  })
 
+  // prettier-ignore
   useGSAP(() => {
-    if (disabled) return
-    const mm = gsap.matchMedia()
-    mm.add('(prefers-reduced-motion: no-preference)', () => {
-      colorChange.current?.revert()
-      containerRef.current!.style.color = ''
-      colorChange.current = gsap //
-        .to(containerRef.current, {color: 'var(--color)', duration: 0.4})
-        .pause()
-    })
-    return () => mm.revert()
-  }, [disabled])
+    const rippleElements = componentRef.current?.querySelectorAll(`.${s.ripple}`)
+    rippleElements?.forEach((el) => {
+      const htmlEl = el as HTMLElement
+      if (!htmlEl.dataset.animated) {
+        gsap
+          .timeline()
+          .from(htmlEl, {opacity: 0, scale: 0, ease: 'linear'})
+          .to(htmlEl, {opacity: 0.75, scale: 1, duration: 0.5, ease: 'linear'}, 0)
+          .to(
+            htmlEl,
+            {
+              opacity: 0,
+              scale: 2,
+              duration: 0.5,
+              ease: 'linear',
+              onComplete: () => setRipples((prev) => removeUID(prev, htmlEl.id, 'id')),
+            },
+            0.5
+          )
 
-  const removeID = useCallback((id: string) => {
-    setRipples((prev) => removeUID(prev, id, 'id'))
-  }, [])
+        htmlEl.dataset.animated = 'true'
+      }
+    })
+  },{dependencies: [ripples], scope: componentRef})
 
   const setPos = useCallback((e: MouseEvent) => {
-    if (containerRef.current === null) return
-    const rect = containerRef.current.getBoundingClientRect()
-
-    const x = `${e.clientX - rect.left}px`
-    const y = `${e.clientY - rect.top}px`
-
-    setterPosXRef.current?.(e.clientX - rect.left)
-    setterPosYRef.current?.(e.clientY - rect.top)
+    if (!componentRef.current) return
+    const rect = componentRef.current.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+    setX.current?.(x)
+    setY.current?.(y)
 
     return {x, y}
   }, [])
 
-  // prettier-ignore
-  const click = useCallback((e: MouseEvent) => {
-    props?.onClick?.(e)
-    const pos = setPos(e)
-
-    if(!pos || disabled) return 
-    const {x, y} = pos
-    const id = generateUID()
-
-    setRipples((prev) => [...prev, {id, x, y}])
-  }, [props, setPos, disabled])
-  // prettier-ignore
-  const enter = useCallback((e: MouseEvent) => {
-    props?.onMouseEnter?.(e)
-    setPos(e)
-
-    scaleChange.current?.play()
-    colorChange.current?.play()
-  }, [props, setPos])
-  // prettier-ignore
-  const leave = useCallback((e: MouseEvent) => {
-    props?.onMouseLeave?.(e)
-    setPos(e)
-
-    scaleChange.current?.reverse()
-    colorChange.current?.reverse()
-  }, [props, setPos])
+  // NOTE: Events
   // prettier-ignore
   const move = useCallback((e: MouseEvent) => {
-    props?.onMouseMove?.(e)
+    p.onMouseMove?.(e)
     setPos(e)
-  }, [props, setPos])
+  }, [p, setPos])
+  // prettier-ignore
+  const enter = useCallback((e: MouseEvent) => {
+    p.onMouseEnter?.(e)
+    setPos(e)
+    scale.current?.play()
+    color.current?.play()
+  }, [p, setPos])
+  // prettier-ignore
+  const leave = useCallback((e: MouseEvent) => {
+    p.onMouseLeave?.(e)
+    setPos(e)
+    scale.current?.reverse()
+    color.current?.reverse()
+  }, [p, setPos])
+  // prettier-ignore
+  const click = useCallback((e: MouseEvent) => {
+    p.onClick?.(e)
+    const {x, y} = setPos(e)!
+    const id = generateUID()
+    
+    setRipples((prev) => [...prev, {x, y, id}])
+  }, [p, setPos])
 
   const Component = as ?? 'button'
   return (
     <Component
-      {...props}
+      {...p}
       onMouseMove={move}
       onMouseEnter={enter}
       onMouseLeave={leave}
       onClick={click}
+      className={clsx(
+        s.con,
+        defClass && s.def,
+        defColor === 'dark' && s.defColorDark,
+        defColor === 'light' && s.defColorLight,
+        p.className
+      )}
       disabled={disabled}
       data-disabled={disabled}
-      className={clsx(s.container, props.className, defClass && s.defClass)}
-      ref={containerRef}
+      ref={componentRef}
     >
       {children}
-      {ripples.map((ripple) => (
-        <RippleElement {...ripple} key={ripple.id} remove={removeID} />
+      {ripples.map(({x, y, id}) => (
+        <span key={id} id={id} style={{top: y, left: x}} className={s.ripple} />
       ))}
     </Component>
   )

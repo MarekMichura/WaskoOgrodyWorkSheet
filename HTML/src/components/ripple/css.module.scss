@@ -1,12 +1,9 @@
-.container {
+.con {
   z-index: 1;
-  position: relative;
-
-  color: inherit;
 
   overflow: hidden;
 
-  &:before {
+  &::before {
     content: '';
     z-index: -1;
     position: absolute;
@@ -26,41 +23,11 @@
     transform: translate(-50%, -50%) scale(var(--scale, 0));
     opacity: 0.9;
   }
-
-  &:disabled {
-    &::before {
-      visibility: hidden;
-    }
-  }
-
-  @include dark {
-    --bg: #{$stone-100};
-  }
 }
 
-.ripple {
-  position: absolute;
+.def {
+  position: relative;
 
-  min-width: 100%;
-  min-height: 100%;
-  aspect-ratio: 1/1;
-
-  display: block;
-
-  background-color: var(--ripple, #{$stone-900});
-
-  border-radius: 100%;
-
-  transform: translate(-50%, -50%);
-
-  pointer-events: none;
-
-  @include dark {
-    --ripple: #{$stone-100};
-  }
-}
-
-.defClass {
   font-family: inherit;
   font-size: inherit;
 
@@ -70,5 +37,36 @@
   border: none;
 
   cursor: pointer;
-  outline: none;
+
+  [data-disabled='true'] & {
+    pointer-events: none;
+    &::before {
+      display: none;
+    }
+  }
+}
+
+.defColorLight {
+  --bg: #{$stone-800};
+  --color: #{$stone-300};
+}
+
+.defColorDark {
+  --bg: #{$stone-800};
+  --color: #{$stone-300};
+}
+
+.ripple {
+  position: absolute;
+
+  min-width: 100%;
+  min-height: 100%;
+  aspect-ratio: 1/1;
+
+  background-color: var(--color);
+
+  border-radius: 100%;
+
+  transform: translate(-50%, -50%);
+  opacity: 0.3;
 }

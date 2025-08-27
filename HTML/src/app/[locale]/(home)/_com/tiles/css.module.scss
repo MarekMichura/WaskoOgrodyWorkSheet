@@ -1,0 +1,82 @@
+.con {
+  margin: 2rem;
+  padding: 2rem;
+}
+
+.title {
+  max-width: 90rem;
+
+  gap: 1rem;
+
+  font-size: 1.75em;
+  text-align: center;
+
+  @include center;
+  @include flexCol;
+}
+
+.content {
+  margin-top: 6rem;
+  padding: 3rem;
+
+  display: grid;
+  gap: 4rem;
+  grid-template-columns: repeat(3, 1fr);
+
+  font-size: 1.25em;
+}
+
+.tile {
+  position: relative;
+
+  padding: 2rem;
+
+  background-color: $stone-300;
+  box-shadow: 1rem 1.5rem 0rem $green-500;
+
+  @include flexCol;
+}
+
+.title {
+  font-size: 3rem;
+}
+
+.subTitle {
+  margin-bottom: 1rem;
+
+  font-size: 2rem;
+}
+
+.title,
+.subTitle {
+  font-weight: bolder;
+  text-align: center;
+}
+
+.img {
+  width: 15rem;
+  aspect-ratio: 1/1;
+  @include center;
+}
+
+.desc {
+  margin-bottom: 2rem;
+
+  text-align: justify;
+}
+
+.btn {
+  margin: auto auto 0 auto;
+  padding: 0.5rem;
+
+  height: 1fr;
+  min-height: 2rem;
+
+  display: block;
+
+  color: $white;
+  --color: #{$black};
+  --bg: #{$white};
+
+  background-color: $green-700;
+}

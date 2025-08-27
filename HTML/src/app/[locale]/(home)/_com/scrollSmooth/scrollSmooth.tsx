@@ -10,13 +10,13 @@ function ScrollSmooth({children}: IChildren) {
   const wrapperRef = useRef(null)
   const contentRef = useRef(null)
 
-  // useGSAP(() => {
-  //   const wrapper = wrapperRef.current
-  //   const content = contentRef.current
-  //   if (wrapper === null || content === null) return
+  useGSAP(() => {
+    const wrapper = wrapperRef.current
+    const content = contentRef.current
+    if (wrapper === null || content === null) return
 
-  //   ScrollSmoother.create({wrapper, content, smooth: 3, effects: true})
-  // })
+    ScrollSmoother.create({wrapper, content, smooth: 3, effects: true})
+  })
 
   return (
     <main ref={wrapperRef}>

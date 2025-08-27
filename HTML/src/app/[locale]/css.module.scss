@@ -1,0 +1,16 @@
+.html {
+  overflow-x: hidden;
+  * {
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+  }
+}
+
+.body {
+  font-size: 1rem;
+
+  color: $stone-950;
+  background-color: $stone-200;
+}
