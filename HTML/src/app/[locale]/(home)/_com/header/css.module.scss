@@ -7,13 +7,39 @@
 
   background: $stone-50;
 
-  overflow: hidden;
-
   @include flexBetween;
 }
 
 .nav {
   font-size: 1.25em;
+
+  @include mediaMedium {
+    z-index: 1000;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100dvw;
+    height: 100dvh;
+
+    display: flex;
+    justify-content: start;
+
+    font-size: 1.5em;
+
+    color: $stone-50;
+
+    background-color: color.adjust($stone-900, $alpha: -0.5);
+
+    opacity: 0;
+
+    cursor: pointer;
+
+    pointer-events: none;
+
+    animation: 0.5s show ease-in;
+    backdrop-filter: blur(5px);
+  }
 }
 
 .list {
@@ -23,10 +49,66 @@
 
   gap: 0.5rem;
   list-style: none;
+
+  @include mediaMedium {
+    position: relative;
+
+    width: 20rem;
+
+    flex-direction: column;
+    justify-content: start;
+    gap: 0;
+
+    background-color: $green-900;
+
+    cursor: default;
+  }
+}
+
+.listLogo img {
+  display: none;
+
+  @include mediaMedium {
+    margin: 0 auto;
+    padding: 1.5rem;
+
+    max-width: 100%;
+
+    display: block;
+
+    align-self: flex-start;
+    filter: brightness(2);
+    object-fit: cover;
+  }
 }
 
 .btn {
   padding: 0.25rem;
 
   border-radius: 100rem;
+
+  @include mediaMedium {
+    padding: 1rem;
+
+    width: 100%;
+
+    border-bottom: 1px solid $white;
+
+    border-radius: 0;
+  }
+}
+
+.menu {
+  position: absolute;
+
+  width: auto;
+  max-height: 100%;
+  aspect-ratio: 1/1;
+
+  visibility: hidden;
+  @include mediaMedium {
+    position: relative;
+
+    visibility: visible;
+  }
 }

@@ -2,7 +2,7 @@
 
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
-import {useCallback, useRef, useState, type ElementType} from 'react'
+import {useCallback, useImperativeHandle, useRef, useState, type ElementType} from 'react'
 
 import {clsx} from '@/utils/func/clsx'
 import {generateUID} from '@/utils/func/UID/generateUID'
@@ -11,8 +11,17 @@ import {removeUID} from '@/utils/func/UID/removeUID'
 import s from './css.module.scss'
 import {type IRippleProps} from './IRippleProps'
 
-function Ripple<T extends ElementType = 'button'>({as, disabled, defClass, defColor, children, ...p}: IRippleProps<T>) {
+function Ripple<T extends ElementType = 'button'>({
+  as,
+  disabled,
+  defClass,
+  defColor,
+  children,
+  ref,
+  ...p
+}: IRippleProps<T>) {
   const componentRef = useRef<HTMLElement>(null)
+  useImperativeHandle(ref, () => componentRef.current as HTMLInputElement)
   const [ripples, setRipples] = useState<{x: number; y: number; id: string}[]>([])
 
   // NOTE: GSAP
@@ -39,24 +48,17 @@ function Ripple<T extends ElementType = 'button'>({as, disabled, defClass, defCo
       if (!htmlEl.dataset.animated) {
         gsap
           .timeline()
-          .from(htmlEl, {opacity: 0, scale: 0, ease: 'linear'})
-          .to(htmlEl, {opacity: 0.75, scale: 1, duration: 0.5, ease: 'linear'}, 0)
-          .to(
-            htmlEl,
-            {
-              opacity: 0,
-              scale: 2,
-              duration: 0.5,
-              ease: 'linear',
-              onComplete: () => setRipples((prev) => removeUID(prev, htmlEl.id, 'id')),
-            },
-            0.5
-          )
+          .from(htmlEl, { opacity: 0, scale: 0, ease: 'linear' })
+          .to(htmlEl, { opacity: 0.75, scale: 1, duration: 0.5, ease: 'linear' }, 0)
+          .to(htmlEl, {
+            opacity: 0, scale: 2, duration: 0.5, ease: 'linear',
+            onComplete: () => setRipples((prev) => removeUID(prev, htmlEl.id, 'id'))
+          }, 0.5)
 
         htmlEl.dataset.animated = 'true'
       }
     })
-  },{dependencies: [ripples], scope: componentRef})
+  }, { dependencies: [ripples], scope: componentRef })
 
   const setPos = useCallback((e: MouseEvent) => {
     if (!componentRef.current) return
@@ -92,10 +94,10 @@ function Ripple<T extends ElementType = 'button'>({as, disabled, defClass, defCo
   // prettier-ignore
   const click = useCallback((e: MouseEvent) => {
     p.onClick?.(e)
-    const {x, y} = setPos(e)!
+    const { x, y } = setPos(e)!
     const id = generateUID()
-    
-    setRipples((prev) => [...prev, {x, y, id}])
+
+    setRipples((prev) => [...prev, { x, y, id }])
   }, [p, setPos])
 
   const Component = as ?? 'button'

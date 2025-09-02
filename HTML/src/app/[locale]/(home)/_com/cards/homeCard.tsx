@@ -1,164 +1,165 @@
+'use client'
+
 import {useGSAP} from '@gsap/react'
 import gsap from 'gsap'
-import {ScrollSmoother} from 'gsap/ScrollSmoother'
+import {ScrollTrigger} from 'gsap/ScrollTrigger'
+import dynamic from 'next/dynamic'
 import {useTranslations} from 'next-intl'
 import {useCallback, useEffect, useRef, useState} from 'react'
 
 import Ripple from '@/components/ripple/ripple'
 import ArrowIcon from '@/images/svg/arrow'
-import {clsx} from '@/utils/func/clsx'
-import {type IChildren} from '@/utils/type/IChildren'
 
 import s from './css.module.scss'
+import HomeCardBigImg from './homeCardBigImg'
 import {type IHomeCardProps} from './IHomeCardProps'
+import {nextPrevImg} from './nextPrevImg'
 
+const PlayIcon = dynamic(() => import('@/lottie/play/play'), {ssr: false})
 function HomeCard({name, title, desc, Img, count}: IHomeCardProps) {
   const t_card = useTranslations('home.cards')
-  const [{moving, img, big, timer}, setImg] = useState({img: 0, moving: false, timer: false, big: false})
-
-  useEffect(() => {
-    if (timer || big) {
-      timelineRef.current?.pause()
-    } else {
-      timelineRef.current?.resume()
-    }
-
-    if (!moving) return
-    const reset = setTimeout(() => {
-      setImg((prev) => ({...prev, moving: false}))
-      timelineRef.current?.progress(0)
-      if (!timer) {
-        timelineRef.current?.resume()
-      }
-    }, 1000)
-    return () => {
-      clearTimeout(reset)
-    }
-  }, [big, moving, timer])
-
-  const containerRef = useRef(null)
-  const loadingRef = useRef(null)
-  const timelineRef = useRef<gsap.core.Timeline>(null)
-  useGSAP(() => {
-    const timer = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: 'top+=32 bottom',
-        end: 'bottom+=32 top',
-        toggleActions: 'play pause resume pause',
-      },
-    })
-    timelineRef.current = timer
-    timer
-      .fromTo(
-        loadingRef.current!,
-        {'--scale': '0%', '--opacity': 1},
-        {
-          '--scale': '100%',
-          duration: 3,
-          onComplete: () => next(),
-        }
-      )
-      .to(loadingRef.current, {'--opacity': 0, duration: 1})
+  const [{current, big, autoPlay, triggered, moving}, setStatus] = useState({
+    big: false,
+    current: 0,
+    autoPlay: true,
+    triggered: false,
+    moving: false,
   })
 
-  const changeTimer = useCallback(() => {
-    setImg(({timer, ...prev}) => ({...prev, timer: !timer}))
+  const triggerRef = useRef<HTMLButtonElement>(null)
+  const loadingRef = useRef<HTMLDivElement>(null)
+  const scrollTriggerRef = useRef<ScrollTrigger>(null)
+  const scaleTimelineRef = useRef<gsap.core.Timeline>(null)
+  const opacityTimelineRef = useRef<gsap.core.Timeline>(null)
+
+  type IChangeCurrent = {num: number; plus?: undefined} | {num?: undefined; plus: boolean}
+  // prettier-ignore
+  const changeCurrent = useCallback(({num, plus}: IChangeCurrent) => {
+    setStatus((prev) => {
+      let current = num ?? plus ? prev.current + 1 : prev.current - 1
+      if (prev.current === num || prev.moving) return prev
+      if (current < 0) current = count - 1
+      if (current >= count) current = 0
+
+      scaleTimelineRef.current?.pause()
+      opacityTimelineRef.current?.play()
+      return {...prev, current, moving: true}
+    })
+  },[count])
+  const enter = useCallback(() => {
+    setStatus((prev) => ({...prev, triggered: true}))
+  }, [])
+  const leave = useCallback(() => {
+    setStatus((prev) => ({...prev, triggered: false}))
+  }, [])
+  const endMoving = useCallback(() => {
+    setStatus((prev) => ({...prev, moving: false}))
+    scaleTimelineRef.current?.progress(0)
+    opacityTimelineRef.current?.pause()
+    opacityTimelineRef.current?.progress(0)
+  }, [])
+  const changeAutoPlay = useCallback(() => {
+    setStatus((prev) => {
+      const autoPlay = !prev.autoPlay
+      if (autoPlay) scaleTimelineRef.current?.play()
+      else scaleTimelineRef.current?.pause()
+
+      return {...prev, autoPlay}
+    })
   }, [])
   const changeBig = useCallback(() => {
-    setImg(({big, ...prev}) => ({big: !big, ...prev}))
+    setStatus((prev) => ({...prev, big: !prev.big}))
   }, [])
-  const next = useCallback(() => {
-    if (moving) return
-    setImg(({moving, img, ...rest}) => {
-      if (moving) return {img, moving, ...rest}
-      const newImg = img + 1
-      if (newImg >= count) return {img: 0, moving: true, ...rest}
-      return {img: newImg, moving: true, ...rest}
-    })
-  }, [moving, count])
-
+  const closeBig = useCallback(() => {
+    setStatus((prev) => ({...prev, big: false}))
+  }, [])
   const prev = useCallback(() => {
-    if (moving) return
-    setImg(({moving, img, ...rest}) => {
-      if (moving) return {img, moving, ...rest}
-      const newImg = img - 1
-      if (newImg < 0) return {img: count - 1, moving: true, ...rest}
-      return {img: newImg, moving: true, ...rest}
-    })
-  }, [moving, count])
+    changeCurrent({plus: false})
+  }, [changeCurrent])
+  const next = useCallback(() => {
+    changeCurrent({plus: true})
+  }, [changeCurrent])
 
-  const nextImg = img + 1
-  const trueNextImg = nextImg >= count ? 0 : nextImg
-  const prevImg = img - 1
-  const truePrevImg = prevImg < 0 ? count - 1 : prevImg
-
-  return (
-    <>
-      <article className={s.card} ref={containerRef}>
-        <div className={s.slider} ref={loadingRef}>
-          <Img id={truePrevImg} key={truePrevImg} props={{style: {left: '-150%'}, onClick: changeBig}} />
-          <Img id={img} key={img} props={{style: {left: '50%'}, priority: true, onClick: changeBig}} />
-          <Img id={trueNextImg} key={trueNextImg} props={{style: {left: '150%'}, onClick: changeBig}} />
-          <Ripple className={s.imgLeft} onClick={() => prev()}>
-            <ArrowIcon />
-          </Ripple>
-          <Ripple defColor="light" className={s.imgRight} onClick={() => next()}>
-            <ArrowIcon />
-          </Ripple>
-          <div className={s.timerBtns}>
-            <Ripple className={clsx(s.timerBtn)} onClick={changeTimer}></Ripple>
-          </div>
-        </div>
-        <div className={s.text}>
-          <div className={s.sect}>
-            <label className={s.label}>{t_card('cardName')}</label>
-            <p>{name}</p>
-          </div>
-          <div className={s.sect}>
-            <label className={s.label}>{t_card('cardTitle')}</label>
-            <p>{title}</p>
-          </div>
-          <div className={s.sect}>
-            <label className={s.label}>{t_card('cardAddress')}</label>
-            <p>{}</p>
-          </div>
-          <div className={s.sect}>
-            <label className={s.label}>{t_card('cardDesc')}</label>
-            <p>{desc}</p>
-          </div>
-        </div>
-      </article>
-      {big && (
-        <BigImg changeBig={changeBig}>
-          <Img id={img} key={img} props={{sizes: '100vw', placeholder: 'blur'}} />
-        </BigImg>
-      )}
-    </>
-  )
-}
-
-interface IBigImgProps extends IChildren {
-  changeBig: () => void
-}
-
-function BigImg({children, changeBig}: IBigImgProps) {
-  const ref = useRef(null)
   useGSAP(() => {
-    const smoother = ScrollSmoother.get()
-    smoother?.paused(true)
+    const loading = loadingRef.current
+    const trigger = triggerRef.current
+    if (loading === null || trigger === null) return
 
-    gsap.set(ref.current, {top: smoother?.scrollTop()})
-
-    return () => {
-      smoother?.paused(false)
-    }
+    scaleTimelineRef.current = gsap
+      .timeline({paused: true})
+      .fromTo(loading, {'--scale': 0}, {'--scale': '100%', duration: 3, onComplete: next})
+    opacityTimelineRef.current = gsap
+      .timeline({paused: true})
+      .fromTo(loading, {'--opacity': 1}, {'--opacity': 0, duration: 1.1, onComplete: endMoving})
+    scrollTriggerRef.current = ScrollTrigger.create({
+      trigger,
+      start: 'top bottom',
+      end: 'bottom top',
+      onEnterBack: enter,
+      onEnter: enter,
+      onLeave: leave,
+    })
   })
 
+  useEffect(() => {
+    function resize() {
+      const trigger = scrollTriggerRef.current
+      trigger?.refresh()
+    }
+
+    window.addEventListener('resize', resize)
+    return () => {
+      window.removeEventListener('resize', resize)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!autoPlay || !triggered) return
+
+    scaleTimelineRef.current?.play()
+  }, [autoPlay, triggered, moving])
+
+  const {nextImg, prevImg} = nextPrevImg(current, count)
   return (
-    <div className={s.big} onClick={changeBig} ref={ref}>
-      {children}
-    </div>
+    <article className={s.card}>
+      <div className={s.slider} ref={loadingRef}>
+        <Img id={prevImg} key={prevImg} props={{style: {left: '-150%'}, onClick: changeBig}} />
+        <Img id={current} key={current} props={{style: {left: '50%'}, priority: true, onClick: changeBig}} />
+        <Img id={nextImg} key={nextImg} props={{style: {left: '150%'}, onClick: changeBig}} />
+        <Ripple defColor="light" className={s.imgLeft} onClick={prev}>
+          <ArrowIcon />
+        </Ripple>
+        <Ripple defColor="light" className={s.imgRight} onClick={next}>
+          <ArrowIcon />
+        </Ripple>
+        <Ripple defColor="dark" className={s.play} onClick={changeAutoPlay} ref={triggerRef}>
+          <PlayIcon status={autoPlay} />
+        </Ripple>
+      </div>
+      <div className={s.text}>
+        <div className={s.sect}>
+          <label className={s.label}>{t_card('cardName')}</label>
+          <p>{name}</p>
+        </div>
+        <div className={s.sect}>
+          <label className={s.label}>{t_card('cardTitle')}</label>
+          <p>{title}</p>
+        </div>
+        <div className={s.sect}>
+          <label className={s.label}>{t_card('cardAddress')}</label>
+          <p>{}</p>
+        </div>
+        <div className={s.sect}>
+          <label className={s.label}>{t_card('cardDesc')}</label>
+          <p>{desc}</p>
+        </div>
+      </div>
+      {big && (
+        <HomeCardBigImg close={closeBig} key={current}>
+          <Img id={current} props={{sizes: '100vw', placeholder: 'blur'}} />
+        </HomeCardBigImg>
+      )}
+    </article>
   )
 }
 

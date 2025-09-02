@@ -10,7 +10,7 @@ import TextPlugin from 'gsap/TextPlugin'
 
 import {type IChildren} from '@/utils/type/IChildren'
 
-if (window && typeof window !== 'undefined') {
+if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger, ScrollSmoother, ScrollToPlugin, Flip, CSSPlugin, TextPlugin)
 }
 

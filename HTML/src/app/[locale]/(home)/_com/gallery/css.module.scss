@@ -154,6 +154,14 @@
 
 .sec {
   padding: 6rem;
+
+  @include mediaMedium {
+    padding: 6rem 3rem;
+  }
+
+  @include mediaSmall {
+    padding: 6rem 1rem;
+  }
 }
 
 @keyframes show {

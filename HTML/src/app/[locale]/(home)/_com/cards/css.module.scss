@@ -7,6 +7,16 @@
 
   font-size: 1.75em;
 
+  @include mediaLarge {
+    padding: 6rem 3rem;
+
+    font-size: 1.25em;
+  }
+
+  @include mediaMedium {
+    padding: 3rem 1rem;
+  }
+
   color: $stone-200;
   background-color: $green-800;
   @include flexCenter;
@@ -25,10 +35,18 @@
     position: absolute;
 
     top: 0;
-    left: 0;
+    left: 50%;
 
-    width: 100%;
+    width: auto;
+    min-width: 100%;
     height: auto;
+    min-height: 200%;
+
+    transform: translateX(-50%);
+  }
+
+  @include mediaLarge {
+    display: none;
   }
 }
 
@@ -41,23 +59,13 @@
 }
 
 .descTitle {
+  position: relative;
+
   margin-bottom: 1.25rem;
 
   display: block;
 
   text-align: center;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 1.3em;
-    left: 0;
-
-    width: 50%;
-    height: 0.5rem;
-
-    background-color: $emerald-200;
-  }
 }
 
 .content {
@@ -68,11 +76,20 @@
 
   gap: 6rem;
   grid-template-columns: 1fr 1fr;
+
+  @include mediaLarge {
+    margin-top: 3rem;
+
+    padding: 1rem;
+
+    grid-template-columns: 1fr;
+  }
 }
 
 .card {
-  position: relative;
+  margin: 0 auto;
 
+  max-width: 30rem;
   min-height: 20rem;
 
   font-size: 1.25em;
@@ -83,7 +100,7 @@
 
   margin-bottom: 2rem;
 
-  height: 30vw;
+  height: max(40vw, 40vh);
 
   overflow: hidden;
 
@@ -138,17 +155,32 @@
   color: $gray-400;
 }
 
+.play {
+  bottom: 1rem;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  & canvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+  }
+}
+
+.play,
 .imgLeft,
 .imgRight {
   position: absolute;
-  top: 50%;
 
-  padding: 1rem;
-
-  width: 8rem;
-  height: 8rem;
+  width: 4rem;
+  height: 4rem;
 
   background-color: $gray-300;
+
+  border: none;
 
   border-radius: 100rem;
 
@@ -166,15 +198,25 @@
     transform: translateX(70px);
   }
 }
+
+.imgLeft,
+.imgRight {
+  top: 50%;
+
+  padding: 1rem;
+
+  transform: translateY(-50%);
+}
+
 .imgLeft {
   left: 0;
 
-  transform: rotate(180deg) translateY(50%);
+  svg {
+    transform: rotate(180deg);
+  }
 }
 .imgRight {
   right: 0;
-
-  transform: translateY(-50%);
 }
 
 @keyframes show {

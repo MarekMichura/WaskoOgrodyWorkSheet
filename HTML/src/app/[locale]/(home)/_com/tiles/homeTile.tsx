@@ -1,11 +1,9 @@
 import {useCallback, useState} from 'react'
 
-import Ripple from '@/components/ripple/ripple'
-
 import s from './css.module.scss'
 import {type IHomeTitleProps} from './IHomeTitleProps'
 
-function HomeTile({Img, desc, subTitle, title, btn}: IHomeTitleProps) {
+function HomeTile({Img, desc, subTitle, title}: IHomeTitleProps) {
   const [status, setStatus] = useState(false)
 
   const enter = useCallback(() => {
@@ -23,9 +21,9 @@ function HomeTile({Img, desc, subTitle, title, btn}: IHomeTitleProps) {
       </div>
       <h2 className={s.subTitle}>{subTitle}</h2>
       <p className={s.desc}>{desc}</p>
-      <Ripple defClass className={s.btn}>
+      {/* <Ripple defClass className={s.btn}>
         {btn}
-      </Ripple>
+      </Ripple> */}
     </article>
   )
 }

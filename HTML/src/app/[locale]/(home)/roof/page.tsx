@@ -8,11 +8,8 @@ import RoofHeroImg from '@/images/homeHero/roofHeroImg'
 import {EImgOrientation} from '@/utils/enum/EImgOrientation'
 
 import HomeCardsHeader from '../_com/cards/homeCardsHeader'
-import HomeFooter from '../_com/footer/footer'
 import HomeGallery from '../_com/gallery/homeGallery'
-import HomeHeader from '../_com/header/header'
 import HomeHero from '../_com/hero/hero'
-import ScrollSmooth from '../_com/scrollSmooth/scrollSmooth'
 import HomeTitlesHeader from '../_com/tiles/HomeTitlesHeader'
 
 import s from './css.module.scss'
@@ -22,8 +19,7 @@ function HomeRoof() {
   const t_cards = useTranslations('roof.cards')
 
   return (
-    <ScrollSmooth>
-      <HomeHeader />
+    <>
       <HomeHero
         title={t_hero('title')}
         subTitle={t_hero('desc')}
@@ -42,9 +38,7 @@ function HomeRoof() {
         />
       </section>
       <HomeGallery Img={RoofWrapper} count={ROOF_COUNT} />
-
-      <HomeFooter />
-    </ScrollSmooth>
+    </>
   )
 }
 

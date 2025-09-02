@@ -5,7 +5,7 @@ import {type IHomeTitlesProps} from './IHomeTitlesProps'
 
 function HomeTiles({titles, ...header}: IHomeTitlesProps) {
   return (
-    <section className={s.con}>
+    <section className={s.con} id="info">
       <HomeTitlesHeader {...header} />
       <div className={s.content}>
         {titles.map((tile, i) => (

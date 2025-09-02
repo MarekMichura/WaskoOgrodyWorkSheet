@@ -3,12 +3,10 @@ import {type IHomeTitleHeaderProps} from './IHomeTitleHeaderProps'
 
 function HomeTitlesHeader({desc, title}: IHomeTitleHeaderProps) {
   return (
-    <>
-      <div className={s.title}>
-        <h1>{title}</h1>
-        <p>{desc}</p>
-      </div>
-    </>
+    <div className={s.header}>
+      <h1>{title}</h1>
+      <p>{desc}</p>
+    </div>
   )
 }
 

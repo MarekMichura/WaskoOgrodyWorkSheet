@@ -15,7 +15,7 @@ function ScrollSmooth({children}: IChildren) {
     const content = contentRef.current
     if (wrapper === null || content === null) return
 
-    ScrollSmoother.create({wrapper, content, smooth: 3, effects: true})
+    ScrollSmoother.create({wrapper, content, smooth: 3, smoothTouch: 1, effects: true})
   })
 
   return (

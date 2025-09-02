@@ -43,7 +43,6 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.stylelint": "always"
   },
-  "eslint.validate": ["javascript"],
   "files.exclude": {
     "**/.git": true,
     "**/.svn": true,
@@ -56,10 +55,6 @@
     "**/node_modules/**": true,
     "**/build/**": true
   },
-  "lldb.displayFormat": "hex",
-  "lldb.showDisassembly": "auto",
-  "lldb.dereferencePointers": true,
-  "lldb.consoleMode": "commands",
 
   "hide-files.files": ["next-env.d.ts", "yarn.lock", "node_modules", "build"],
   "todohighlight.keywords": [

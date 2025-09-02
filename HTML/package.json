@@ -2,10 +2,14 @@
   "name": "wasko",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
+    "build": "next build",
     "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
-    "lint": "eslint",
+    "lint": "eslint ./src/",
+    "lint:styles": "stylelint '**/*.scss' --fix",
+    "generate-images": "node ./sharp/sharpInit.ts",
+    "postcss": "postcss ./build/static/css/*.css -d ./build/static/css/",
     "start": "next start"
   },
   "dependencies": {

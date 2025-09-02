@@ -2,7 +2,6 @@
 
 import dynamic from 'next/dynamic'
 import {useTranslations} from 'next-intl'
-import {useMemo} from 'react'
 
 import Ripple from '@/components/ripple/ripple'
 import LogoFullImg from '@/images/logo/logoFullImg'
@@ -19,12 +18,9 @@ const IgIcon = dynamic(() => import('@/lottie/ig/ig'), {ssr: false})
 
 function HomeFooter() {
   const t_footer = useTranslations('footer')
-  const mobile = useMemo(() => {
-    return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
-  }, [])
 
   return (
-    <footer className={s.footer}>
+    <footer className={s.footer} id="footer">
       <div className={s.con}>
         <div className={s.column}>
           <h1 className={s.title}>{t_footer('contact')}</h1>
@@ -42,10 +38,10 @@ function HomeFooter() {
               </HomeFooterLink>
 
               <HomeFooterLink Icon={PhoneIcon}>
-                <Ripple defClass className={s.btn} as={mobile ? 'a' : 'button'} href="tel:+48509808277">
+                <Ripple defClass className={s.btn} as={'a'} href="tel:+48509808277">
                   Maciej&nbsp;Waśko: +48&nbsp;509&nbsp;808&nbsp;277
                 </Ripple>
-                <Ripple defClass className={s.btn} as={mobile ? 'a' : 'button'} href="tel:+48730888972">
+                <Ripple defClass className={s.btn} as={'a'} href="tel:+48730888972">
                   Adam&nbsp;Michalik: +48&nbsp;730&nbsp;888&nbsp;972
                 </Ripple>
               </HomeFooterLink>

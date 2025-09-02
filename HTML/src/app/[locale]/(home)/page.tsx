@@ -1,4 +1,5 @@
 'use client'
+
 import dynamic from 'next/dynamic'
 import {useTranslations} from 'next-intl'
 
@@ -17,12 +18,9 @@ import HomeHeroImg from '@/images/homeHero/homeHeroImg'
 import {EImgOrientation} from '@/utils/enum/EImgOrientation'
 
 import HomeCards from './_com/cards/homeCards'
-import HomeFooter from './_com/footer/footer'
-import HomeHeader from './_com/header/header'
 import HomeHero from './_com/hero/hero'
 import HomeTiles from './_com/tiles/homeTiles'
 
-const ScrollSmooth = dynamic(() => import('./_com/scrollSmooth/scrollSmooth'), {ssr: false})
 const diggerIcon = dynamic(() => import('@/lottie/digger/digger'), {ssr: false})
 const soilIcon = dynamic(() => import('@/lottie/soil/soil'), {ssr: false})
 const plantIcon = dynamic(() => import('@/lottie/plant/plant'), {ssr: false})
@@ -36,8 +34,7 @@ function HomePage() {
   const t_cards = useTranslations('home.cards')
 
   return (
-    <ScrollSmooth>
-      <HomeHeader />
+    <>
       <HomeHero
         Img={HomeHeroImg}
         title={t_hero('title')}
@@ -142,8 +139,7 @@ function HomePage() {
           },
         ]}
       />
-      <HomeFooter />
-    </ScrollSmooth>
+    </>
   )
 }
 

@@ -7,6 +7,10 @@
 
   overflow: hidden;
   @include flexCenter;
+
+  @include mediaMedium {
+    font-size: 0.75em;
+  }
 }
 
 .heroCon {
@@ -19,16 +23,22 @@
 }
 
 .hero {
-  width: 100%;
-  height: auto;
-  min-height: 125%;
+  position: absolute;
+  left: 50%;
 
-  transform: translateY(0);
+  width: auto;
+  min-width: 100%;
+  height: auto;
+  min-height: 200%;
+
+  transform: translateX(-50%);
   object-fit: cover;
 }
 
 .content {
-  z-index: 2000;
+  z-index: 1;
+
+  padding: 1rem;
 
   max-width: 60rem;
 

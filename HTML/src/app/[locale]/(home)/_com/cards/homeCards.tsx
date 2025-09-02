@@ -7,7 +7,7 @@ import {type IHomeCardsProps} from './IHomeCardsProps'
 
 function HomeCards({cards, ...header}: IHomeCardsProps) {
   return (
-    <section className={s.con}>
+    <section className={s.con} id="projects">
       <HomeCardsHeader {...header} />
       <div className={s.content}>
         {cards.map((card, i) => (
