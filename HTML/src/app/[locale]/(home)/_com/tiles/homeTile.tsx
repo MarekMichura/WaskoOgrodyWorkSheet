@@ -15,12 +15,14 @@ function HomeTile({Img, desc, subTitle, title}: IHomeTitleProps) {
 
   return (
     <article className={s.tile} onMouseEnter={enter} onMouseLeave={leave}>
-      <h1 className={s.title}>{title}</h1>
-      <div className={s.img}>
+      <div className={s.icon}>
         <Img status={status} />
       </div>
-      <h2 className={s.subTitle}>{subTitle}</h2>
-      <p className={s.desc}>{desc}</p>
+      <div className={s.data}>
+        <h1 className={s.title}>{title}</h1>
+        <h2 className={s.subTitle}>{subTitle}</h2>
+        <p className={s.desc}>{desc}</p>
+      </div>
       {/* <Ripple defClass className={s.btn}>
         {btn}
       </Ripple> */}
