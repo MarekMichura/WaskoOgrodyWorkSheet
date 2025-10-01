@@ -255,7 +255,6 @@
 
   animation: 0.5s show ease-in;
   backdrop-filter: blur(5px);
-  @include flexCenter;
 
   img {
     max-width: 100%;
@@ -264,6 +263,7 @@
     animation: 0.75s showImg ease-in;
     object-fit: contain;
   }
+  @include flexCenter;
 }
 
 .timerBtns {
